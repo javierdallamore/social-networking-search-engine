@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchEnginesBase", "SearchEnginesBase\SearchEnginesBase.csproj", "{82E660CC-FF11-4332-8671-B8FC905476A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessRules", "BusinessRules\BusinessRules.csproj", "{D21CC7B4-70C4-4168-82D6-A220B03145FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchEngineMock", "SearchEngineMock\SearchEngineMock.csproj", "{2A63806C-43F8-410B-B884-69BBD2546F81}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{DAA3EE52-3E3C-48D2-9057-FE1736C933BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessRulesTest", "BusinessRulesTest\BusinessRulesTest.csproj", "{F4E38EDA-48F5-401C-B5E5-CDF14F0789FE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A1BDAC26-C7EE-445C-A6D6-9CC5666E1F34}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		SocialNetworkingSearchEngine.vsmdi = SocialNetworkingSearchEngine.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = SocialNetworkingSearchEngine.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{82E660CC-FF11-4332-8671-B8FC905476A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82E660CC-FF11-4332-8671-B8FC905476A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82E660CC-FF11-4332-8671-B8FC905476A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82E660CC-FF11-4332-8671-B8FC905476A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D21CC7B4-70C4-4168-82D6-A220B03145FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D21CC7B4-70C4-4168-82D6-A220B03145FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D21CC7B4-70C4-4168-82D6-A220B03145FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D21CC7B4-70C4-4168-82D6-A220B03145FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A63806C-43F8-410B-B884-69BBD2546F81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A63806C-43F8-410B-B884-69BBD2546F81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A63806C-43F8-410B-B884-69BBD2546F81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A63806C-43F8-410B-B884-69BBD2546F81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4E38EDA-48F5-401C-B5E5-CDF14F0789FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4E38EDA-48F5-401C-B5E5-CDF14F0789FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4E38EDA-48F5-401C-B5E5-CDF14F0789FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4E38EDA-48F5-401C-B5E5-CDF14F0789FE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F4E38EDA-48F5-401C-B5E5-CDF14F0789FE} = {DAA3EE52-3E3C-48D2-9057-FE1736C933BE}
+		{A1BDAC26-C7EE-445C-A6D6-9CC5666E1F34} = {DAA3EE52-3E3C-48D2-9057-FE1736C933BE}
+	EndGlobalSection
+EndGlobal
