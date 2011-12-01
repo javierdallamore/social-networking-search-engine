@@ -20,7 +20,6 @@ namespace SearchEngineMock
                                                    {
                                                        SocialNetworkingName = "P&P social networking"
                                                    };
-            NHSessionManager.CreateDB = true;
             NHSessionManager.Instance.BeginTransaction();
             var daoSocialNetworkingItem = new DAO.DaoSocialNetworkingItem();
             socialNetworkingSearchResult.SocialNetworkingItems.AddRange(daoSocialNetworkingItem.GetAll());

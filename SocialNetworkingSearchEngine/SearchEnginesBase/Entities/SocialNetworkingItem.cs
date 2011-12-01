@@ -6,7 +6,7 @@ namespace SearchEnginesBase.Entities
     {
         public SocialNetworkingItem()
         {
-            
+            Id = Guid.NewGuid();
         }
 
         public virtual Guid Id { get; set; }

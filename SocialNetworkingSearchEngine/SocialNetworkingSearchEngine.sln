@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{050D36FC-6A4F-4229-A4B4-110F8E8FC58F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchEnginesTest", "SearchEnginesTest\SearchEnginesTest.csproj", "{DABD46DB-60A9-46CA-860D-3A19FD56BB23}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = SocialNetworkingSearchEngine.vsmdi
@@ -61,6 +63,10 @@ Global
 		{050D36FC-6A4F-4229-A4B4-110F8E8FC58F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{050D36FC-6A4F-4229-A4B4-110F8E8FC58F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{050D36FC-6A4F-4229-A4B4-110F8E8FC58F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DABD46DB-60A9-46CA-860D-3A19FD56BB23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DABD46DB-60A9-46CA-860D-3A19FD56BB23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DABD46DB-60A9-46CA-860D-3A19FD56BB23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DABD46DB-60A9-46CA-860D-3A19FD56BB23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,5 +74,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F4E38EDA-48F5-401C-B5E5-CDF14F0789FE} = {DAA3EE52-3E3C-48D2-9057-FE1736C933BE}
 		{A1BDAC26-C7EE-445C-A6D6-9CC5666E1F34} = {DAA3EE52-3E3C-48D2-9057-FE1736C933BE}
+		{DABD46DB-60A9-46CA-860D-3A19FD56BB23} = {DAA3EE52-3E3C-48D2-9057-FE1736C933BE}
 	EndGlobalSection
 EndGlobal
