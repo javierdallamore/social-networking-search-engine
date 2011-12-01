@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using BusinessRules;
 
 namespace SocialNetWorkingSearchEngine
 {
@@ -29,6 +30,7 @@ namespace SocialNetWorkingSearchEngine
             AreaRegistration.RegisterAllAreas();
 
             RegisterRoutes(RouteTable.Routes);
+            SearchEngineManager.ConfigureAddins();
         }
     }
 }

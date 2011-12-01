@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using SearchEnginesBase.Entities;
@@ -40,7 +41,11 @@ namespace BusinessRules
         {
             _searchEngines = new List<SearchEngineConfiguration>();
             var dsConfig = new System.Data.DataSet();
-            dsConfig.ReadXml(AppDomain.CurrentDomain.BaseDirectory + "\\SearchEngines.config");
+            var path = AppDomain.CurrentDomain.BaseDirectory + "\\SearchEngines.config";
+            if(!File.Exists(path))
+                path = AppDomain.CurrentDomain.BaseDirectory + "\\bin\\SearchEngines.config";
+
+            dsConfig.ReadXml(path);
             foreach (DataRow row in dsConfig.Tables["searchEngine"].Rows)
             {
                 try

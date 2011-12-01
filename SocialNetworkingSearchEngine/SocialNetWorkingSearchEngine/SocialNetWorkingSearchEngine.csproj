@@ -72,10 +72,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\SearchModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Scripts\search.js" />
+    <Content Include="Views\Home\Search.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -115,6 +118,10 @@
       <Project>{D21CC7B4-70C4-4168-82D6-A220B03145FC}</Project>
       <Name>BusinessRules</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SearchEnginesBase\SearchEnginesBase.csproj">
+      <Project>{82E660CC-FF11-4332-8671-B8FC905476A2}</Project>
+      <Name>SearchEnginesBase</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
@@ -144,4 +151,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>copy $(SolutionDir)SearchEngineMock\bin\Debug\SearchEngineMock.dll $(TargetDir)</PostBuildEvent>
+  </PropertyGroup>
 </Project>
