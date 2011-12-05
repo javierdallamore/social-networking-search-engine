@@ -82,7 +82,7 @@ namespace BusinessRules
 
         public Entity TagEntity(Entity entity, string tagName)
         {
-            var tag = _tagRepository.GetByName(tagName);
+            var tag = _tagRepository.GetByName(tagName) ?? new Tag() { Name = tagName };
             return TagEntity(entity, tag);
         }
 

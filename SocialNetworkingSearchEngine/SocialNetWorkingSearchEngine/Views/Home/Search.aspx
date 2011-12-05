@@ -5,7 +5,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <table>
 <tr><td><input type="text" id="txtParameters" /></td></tr>
-<tr><td><input type="text" id="txtSearchEngines" /></td></tr>
+<tr><td>
+<input type="text" id="txtSearchEngines" /></td></tr>
 <tr><td><input type="button" id="btnSearch" onclick="search();" /></td></tr>
 
 <tr><td><textarea id="txtResult"></textarea></td></tr>
