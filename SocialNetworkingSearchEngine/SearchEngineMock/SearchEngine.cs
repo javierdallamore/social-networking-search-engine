@@ -20,12 +20,10 @@ namespace SearchEngineMock
                                                    {
                                                        SocialNetworkingName = "P&P social networking"
                                                    };
-
-            var socialNetworkingItem = new SocialNetworkingItem();
-            socialNetworkingSearchResult.SocialNetworkingItems.Add(socialNetworkingItem);
-
-            var socialNetworkingItem2 = new SocialNetworkingItem();
-            socialNetworkingSearchResult.SocialNetworkingItems.Add(socialNetworkingItem2);
+            NHSessionManager.Instance.BeginTransaction();
+            var daoSocialNetworkingItem = new DAO.DaoSocialNetworkingItem();
+            socialNetworkingSearchResult.SocialNetworkingItems.AddRange(daoSocialNetworkingItem.GetAll());
+            NHSessionManager.Instance.CommitTransaction();
 
             return socialNetworkingSearchResult;
         }
