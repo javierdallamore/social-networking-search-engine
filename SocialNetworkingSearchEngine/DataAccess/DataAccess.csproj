@@ -57,8 +57,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAO\DaoBase.cs" />
-    <Compile Include="DAO\DaoEntity.cs" />
+    <Compile Include="DAO\ProfileRepository.cs" />
+    <Compile Include="DAO\TagRepository.cs" />
+    <Compile Include="DAO\RepositoryBase.cs" />
+    <Compile Include="DAO\EntityRepository.cs" />
+    <Compile Include="Mapping\ProfileMap.cs" />
+    <Compile Include="Mapping\TagMap.cs" />
     <Compile Include="Mapping\EntityMap.cs" />
     <Compile Include="NHSessionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Core.RepositoryInterfaces;
 using NHibernate;
 
 namespace DataAccess.DAO
 {
-    public abstract class DaoBase<TEntity, TId> : IDaoBase<TEntity, TId>
+    public abstract class RepositoryBase<TEntity, TId> : IRepositoryBase<TEntity, TId>
     {
         private static bool _propiedadesLeidas = false;
         private static PropertyInfo _propertyBaja;
         protected const int CantidadMaximaReg = 5000;
 
-        public DaoBase()
+        public RepositoryBase()
         {
 
         }
@@ -130,9 +131,5 @@ namespace DataAccess.DAO
         }
 
         #endregion
-    }
-
-    public interface IDaoBase<T, T1>
-    {
     }
 }

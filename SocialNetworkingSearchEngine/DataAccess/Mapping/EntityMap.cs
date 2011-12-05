@@ -10,6 +10,8 @@ namespace DataAccess.Mapping
         public EntityMap()
         {
             Id(x => x.Id).GeneratedBy.Assigned();
+            HasManyToMany(x => x.Tags).AsBag().Cascade.All();
+            References(x => x.Profile).Cascade.SaveUpdate();
         }
     }
 }

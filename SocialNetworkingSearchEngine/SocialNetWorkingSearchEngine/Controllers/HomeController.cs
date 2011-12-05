@@ -31,7 +31,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
             return View();
         }
 
-        public JsonResult Searcht(string parameters, string searchEngines)
+        public JsonResult SearchResults(string parameters, string searchEngines)
         {
             var result = new List<SocialNetworkingSearchResult>();
             if (ModelState.IsValid)

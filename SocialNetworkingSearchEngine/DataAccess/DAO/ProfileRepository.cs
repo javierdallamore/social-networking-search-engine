@@ -7,7 +7,7 @@ using Core.RepositoryInterfaces;
 
 namespace DataAccess.DAO
 {
-    public class DaoEntity: DaoBase<Entity,Guid>, IEntityRepository
+    public class ProfileRepository : RepositoryBase<Profile, Guid>, IProfileRepository
     {
     }
 }
