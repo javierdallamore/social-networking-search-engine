@@ -111,7 +111,8 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Scripts\search.js" />
-    <Content Include="Views\Home\Search.aspx" />
+    <Content Include="Views\Home\Explore.aspx" />
+    <Content Include="Views\Home\Index.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -137,7 +138,6 @@
     <Content Include="Views\Account\LogOn.aspx" />
     <Content Include="Views\Account\Register.aspx" />
     <Content Include="Views\Home\About.aspx" />
-    <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Shared\Error.aspx" />
     <Content Include="Views\Shared\LogOnUserControl.ascx" />
     <Content Include="Views\Shared\Site.Master" />
@@ -150,6 +150,10 @@
     <ProjectReference Include="..\BusinessRules\BusinessRules.csproj">
       <Project>{D21CC7B4-70C4-4168-82D6-A220B03145FC}</Project>
       <Name>BusinessRules</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{050D36FC-6A4F-4229-A4B4-110F8E8FC58F}</Project>
+      <Name>Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\SearchEnginesBase\SearchEnginesBase.csproj">
       <Project>{82E660CC-FF11-4332-8671-B8FC905476A2}</Project>
@@ -185,6 +189,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>copy $(SolutionDir)SearchEngineMock\bin\Debug\SearchEngineMock.dll $(TargetDir)</PostBuildEvent>
+    <PostBuildEvent>copy $(SolutionDir)SearchEngineMock\bin\Debug\SearchEngineMock.dll $(TargetDir)
+copy $(SolutionDir)TwitterSearchEngine\bin\Debug\TwitterSearchEngine.dll $(TargetDir)</PostBuildEvent>
   </PropertyGroup>
 </Project>

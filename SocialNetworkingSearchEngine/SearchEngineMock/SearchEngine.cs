@@ -14,7 +14,7 @@ namespace SearchEngineMock
             get { return "SearchEngineMock"; }
         }
 
-        public SocialNetworkingSearchResult Search(string searchParameters)
+        public SocialNetworkingSearchResult Search(string searchParameters, int page)
         {
             var socialNetworkingSearchResult = new SocialNetworkingSearchResult()
                                                    {
