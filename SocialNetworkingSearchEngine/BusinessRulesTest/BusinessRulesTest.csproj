@@ -53,10 +53,17 @@
       <Project>{D21CC7B4-70C4-4168-82D6-A220B03145FC}</Project>
       <Name>BusinessRules</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{913B4C84-F2D2-4A30-9268-201D893D6FFC}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SearchEnginesBase\SearchEnginesBase.csproj">
       <Project>{82E660CC-FF11-4332-8671-B8FC905476A2}</Project>
       <Name>SearchEnginesBase</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
