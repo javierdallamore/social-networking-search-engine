@@ -19,16 +19,14 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
             return View();
         }
-
-        public ActionResult About()
+        
+        public ActionResult Explore()
         {
             return View();
         }
 
-        public ActionResult Search()
+        public ActionResult About()
         {
-            ViewData["Message"] = "Welcome to ASP.NET MVC!";
-
             return View();
         }
 
