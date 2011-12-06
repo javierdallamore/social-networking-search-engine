@@ -23,7 +23,7 @@ namespace BusinessRules
                 {
                     if (searchEngine.Instance != null)
                     {
-                        var socialNetworkingSearchResult = searchEngine.Instance.Search(searchParameters);
+                        var socialNetworkingSearchResult = searchEngine.Instance.Search(searchParameters, 1);
                         if (socialNetworkingSearchResult != null)
                             socialNetworkingSearchResults.Add(socialNetworkingSearchResult);
                     }

@@ -185,6 +185,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>copy $(SolutionDir)SearchEngineMock\bin\Debug\SearchEngineMock.dll $(TargetDir)</PostBuildEvent>
+    <PostBuildEvent>copy $(SolutionDir)SearchEngineMock\bin\Debug\SearchEngineMock.dll $(TargetDir)
+copy $(SolutionDir)TwitterSearchEngine\bin\Debug\TwitterSearchEngine.dll $(TargetDir)</PostBuildEvent>
   </PropertyGroup>
 </Project>

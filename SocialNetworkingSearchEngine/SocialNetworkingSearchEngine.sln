@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchEnginesTest", "SearchEnginesTest\SearchEnginesTest.csproj", "{DABD46DB-60A9-46CA-860D-3A19FD56BB23}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterSearchEngine", "TwitterSearchEngine\TwitterSearchEngine.csproj", "{EAC20A36-B4CF-4012-A25C-DDBC3E244DCF}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = SocialNetworkingSearchEngine.vsmdi
@@ -67,6 +69,10 @@ Global
 		{DABD46DB-60A9-46CA-860D-3A19FD56BB23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DABD46DB-60A9-46CA-860D-3A19FD56BB23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DABD46DB-60A9-46CA-860D-3A19FD56BB23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAC20A36-B4CF-4012-A25C-DDBC3E244DCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAC20A36-B4CF-4012-A25C-DDBC3E244DCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAC20A36-B4CF-4012-A25C-DDBC3E244DCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAC20A36-B4CF-4012-A25C-DDBC3E244DCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

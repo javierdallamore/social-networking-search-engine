@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{82E660CC-FF11-4332-8671-B8FC905476A2}</ProjectGuid>
+    <ProjectGuid>{EAC20A36-B4CF-4012-A25C-DDBC3E244DCF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SearchEnginesBase</RootNamespace>
-    <AssemblyName>SearchEnginesBase</AssemblyName>
+    <RootNamespace>TwitterSearchEngine</RootNamespace>
+    <AssemblyName>TwitterSearchEngine</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
@@ -41,13 +42,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\SocialNetworkingItem.cs" />
-    <Compile Include="Entities\SocialNetworkingSearchResult.cs" />
-    <Compile Include="Interfaces\ISearchEngine.cs" />
+    <Compile Include="ItemSearchResultTwitter.cs" />
+    <Compile Include="SearchResultsTwitter.cs" />
+    <Compile Include="TwitterSearchEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\Utils.cs" />
+    <Compile Include="UserStatus.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SearchEnginesBase\SearchEnginesBase.csproj">
+      <Project>{82E660CC-FF11-4332-8671-B8FC905476A2}</Project>
+      <Name>SearchEnginesBase</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

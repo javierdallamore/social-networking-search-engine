@@ -78,7 +78,7 @@ namespace SearchEnginesTest
             var r = new Random();
             for (int i = 0; i < 100; i++)
             {
-                var entity = new SocialNetworkingItem {Content =  r.NextDouble() + " Something " + r.NextDouble(), Date = DateTime.Now};
+                var entity = new SocialNetworkingItem {Content =  r.NextDouble() + " Something " + r.NextDouble(), StatusDate = DateTime.Now};
                 daoSocialNetworkingItem.SaveOrUpdate(entity);
             }
             NHSessionManager.Instance.CommitTransaction();
