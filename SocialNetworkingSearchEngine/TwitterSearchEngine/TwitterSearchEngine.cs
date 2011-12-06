@@ -10,7 +10,7 @@ namespace TwitterSearchEngine
     {
         public string Name
         {
-            get { return "TwitterSearchEngine"; }
+            get { return "Twitter search engine"; }
         }
 
         public SocialNetworkingSearchResult Search(string searchParameters, int page)
@@ -19,7 +19,7 @@ namespace TwitterSearchEngine
             var jsonResults = Utils.BuildSearchQuery(searchParameters, engineURL, page);
             var entity = Utils.DeserializarJsonTo<SearchResultsTwitter>(jsonResults);
             var list = SocialNetworkingItemList(entity);
-            return new SocialNetworkingSearchResult(){ SocialNetworkingItems = list};
+            return new SocialNetworkingSearchResult() { SocialNetworkingItems = list, SocialNetworkingName = "Twitter using 'Twitter search engine'" };
         }
        
         //Este metodo itera los resultados y crea las entidades de dominio
@@ -38,7 +38,7 @@ namespace TwitterSearchEngine
 
         private string GetEngineUrl()
         {
-            return System.Configuration.ConfigurationManager.AppSettings[Name];
+            return System.Configuration.ConfigurationManager.AppSettings["TwitterSearchEngine"];
         }
     }
 }
