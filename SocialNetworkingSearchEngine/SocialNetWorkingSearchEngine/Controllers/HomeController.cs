@@ -36,7 +36,6 @@ namespace SocialNetWorkingSearchEngine.Controllers
             if (ModelState.IsValid)
             {
                 var searchEngineManager = new SearchEngineManager();
-                searchEngines = "TwitterSearchEngine";
                 result = searchEngineManager.Search(parameters, searchEngines.Split(',').ToList());
             } 
             return Json(result, JsonRequestBehavior.AllowGet);
