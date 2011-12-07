@@ -109,10 +109,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\gitHubList.css" />
+    <Content Include="Content\global.css" />
+    <Content Include="Content\jquery-ui-1.8.16.custom.css" />
+    <Content Include="Content\jquery.taghandler.css" />
+    <Content Include="Content\loader.gif" />
+    <Content Include="Content\tag_remove.cur" />
+    <Content Include="Content\tag_remove.png" />
+    <Content Include="Content\tag_update.png" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\jquery-ui-1.8.16.custom.min.js" />
+    <Content Include="Scripts\jquery.taghandler.js" />
     <Content Include="Scripts\search.js" />
     <Content Include="Views\Home\Explore.aspx" />
     <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Views\Home\Main.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

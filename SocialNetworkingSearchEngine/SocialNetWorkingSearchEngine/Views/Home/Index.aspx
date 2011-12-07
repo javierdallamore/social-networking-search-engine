@@ -4,29 +4,38 @@
     Search
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <table>
-        <tr>
-            <td>
-                <input type="text" id="txtParameters" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="checkbox" name="engine" value="SearchEngineMock" id="chSearchEngineMock" />
-                <label for="chSearchEngineMock">Search engine mock</label>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="checkbox" name="engine" id="chTwitterSearchEngine" value="TwitterSearchEngine" checked="checked" />
-                <label for="chTwitterSearchEngine">Twitter search engine</label>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="button" id="btnSearch" value="Search" />
-            </td>
-        </tr>
-    </table>
-    <ul id="result"></ul>
+    <div id="splash">
+        <div class="search_block">
+            <div id="search">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input id="txtSearchPattern" type="text">
+                            </td>
+                            <td>
+                                <input id="btnSearch" type="button" value="Search">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <div id="sources" class="sources_box clearfix">
+                    <div style="float: left; width: 125px; font-size: 15px;">
+                        <label>
+                            <input type="checkbox" name="src[]" value="FacebookSearchEngine" checked="checked">
+                            facebook</label></div>
+                    <div style="float: left; width: 125px; font-size: 15px;">
+                        <label>
+                            <input type="checkbox" name="src[]" value="TwitterSearchEngine" checked="checked">
+                            twitter</label></div>
+                </div>
+            </div>
+        </div>
+        <div id="container_results">
+            <div id="search_result_header"></div>
+                <ul id="search_result_list"></ul>
+        </div>
+    </div>
 </asp:Content>

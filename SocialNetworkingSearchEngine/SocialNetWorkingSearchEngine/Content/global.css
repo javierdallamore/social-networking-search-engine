@@ -1,0 +1,614 @@
+@charset "utf-8";
+
+html, body {
+	height:100%;
+	width:100%;
+	background-color:#fff;
+}
+
+body {
+	padding:0;
+	margin:0;
+	font-family: helvetica,arial,sans-serif;
+	line-height:normal;
+	min-width:1000px;
+	color:#333;
+	font-size:1em;
+}
+
+img { border:none; }
+
+a, a:link, a:visited, a:hover {
+	color:#0066CC;
+}
+
+/* css clear fixes */
+.clearfix:after{content:".";display:block;clear:both;visibility:hidden;line-height:0;height:0;}.clearfix{display:inline-block;}html[xmlns] .clearfix{display:block;}* html .clearfix{height:1%;}
+
+#splash {
+	width:700px;
+	padding:100px 0 0 0;
+	margin:0 auto 0;
+}
+
+#search {
+	margin-bottom:0px;
+	white-space:nowrap;
+}
+
+.sources_box{
+	padding:5px;
+	margin-bottom:0px;
+	background-color:#ddd;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	-khtml-border-radius:4px;
+	border-radius:4px;
+}
+
+.search_block{
+	padding:10px;
+	margin-bottom:5px;
+	background-color:#eee;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	-khtml-border-radius:10px;
+	border-radius:10px;
+}
+
+dl{margin:0;}
+
+.dropdown dd, .dropdown dt, .dropdown ul { margin:0px; padding:0px;}
+.dropdown dd { position:relative; }
+.dropdown a, .dropdown a:visited { color:#333; text-decoration:none; outline:none;}
+.dropdown a:hover { color:#333;}
+.dropdown dt a:hover { color:#333; border: 1px solid #ABADB3;}
+.dropdown dt a {background:#fff url(arrow.png) no-repeat scroll right center; display:block; padding-right:20px;
+				border:1px solid #ABADB3; width:110px; padding:7px 7px 8px;}
+.dropdown dt a span {cursor:pointer; display:block;}
+.dropdown dd ul { background:#F2F2F2 none repeat scroll 0 0; border:1px solid #ABADB3; color:#333; display:none;
+				  left:0px; padding:0px; position:absolute; top:-1px; width:auto; min-width:124px; list-style:none;border-top:0;}
+.dropdown span.value { display:none;}
+.dropdown dd ul li a { padding:5px 5px 5px 7px; display:block;}
+.dropdown dd ul li a:hover { background-color:#ccc;}
+
+.dropdown img.flag { border:none; vertical-align:middle; margin-left:10px; }
+.flagvisibility { display:none;}
+
+table{
+	display:block;	
+}
+tr, td{
+	display:inline-block;	
+}
+
+/*
+	border:1px solid #ddd;
+	float:left;
+	padding:5px;
+	margin:0 10px 5px 0;
+	max-height:50px;
+	max-width:100px;
+	overflow:hidden;
+	text-align:center;
+*/
+
+
+.orange, a.orange {
+	color:#ff8c00;
+}
+
+.info {
+	font-size: 12px;
+	color:#666666;
+}
+
+em {
+	background-color:#FFFFCC;
+	color:#333;
+	font-style:normal;
+	font-weight:normal;
+	padding:2px 5px;
+}
+
+div .grey_box {
+	background-color:#eee;
+	font-style:normal;
+	font-weight:normal;
+	padding:10px;
+	margin-bottom:15px;
+	color:#fff;
+	font-size:0.9em;
+}
+
+div .orange_box {
+	background-color:#ff8c00;
+	font-style:normal;
+	font-weight:normal;
+	padding:10px;
+	margin-bottom:15px;
+	color:#fff;
+	font-size:1.1em;
+}
+
+div .orange_note {
+	background-color:#ff8c00;
+	font-style:normal;
+	font-weight:normal;
+	padding:10px;
+	margin-bottom:15px;
+	color:#fff;
+	font-size:0.9em;
+}
+
+div .note {
+	background-color:#FFFFCC;
+	font-style:normal;
+	font-weight:normal;
+	padding:5px;
+	margin-bottom:15px;
+}
+
+#footer {
+	clear:both;
+	padding:25px 0;
+	color:#666666;
+	text-align:center;
+	font-size:0.9em;
+}
+
+#footer a {
+	color:#497BB6;
+}
+
+form {
+	padding:0;
+	margin:0;
+}
+input, textarea, select {
+	padding:4px;
+}
+input, select {
+	font-family: arial, helvetica, sans-serif, "trebuchet ms";
+	font-size:18px;
+}
+input[type="text"], select {
+	border:1px solid #abadb3;
+	font-size:22px;
+	background-color:#fff;
+}
+
+#splash select {
+	padding:3px 5px 3px;
+}
+
+#splash input[type="button"] {
+	font-size:18px;
+	background-color:#ff8c00;
+	border:0 none;
+	color:#FFFFFF;
+	font-size:18px;
+	height:36px;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	-khtml-border-radius:6px;
+	border-radius:6px;
+}
+
+/* splash categories */
+
+#vsearchtabs {
+	margin: 0 0 10px 0;
+}
+
+#vsearchtabs ul, #vsearchtabs li {
+margin:0;
+padding:0;
+}
+
+#vsearchtabs ul {
+list-style-image:none;
+list-style-position:outside;
+list-style-type:none;
+position:relative;
+}
+
+#vsearchtabs li {
+color:#0066CC;
+display:inline;
+margin:0 4px 0 0;
+}
+
+#vsearchtabs a {
+font-size:0.8em;
+font-weight:bold;
+text-decoration:none;
+padding:2px 6px 4px;
+background-color:#eee;
+}
+
+#vsearchtabs a:hover {
+text-decoration:underline;
+}
+
+#vsearchtabs li.selected a {
+	background-color:#fff;
+	font-weight:bold;
+	color:#333;
+}
+
+/* headers */
+
+h1, h2 {
+	font-weight:normal;
+	font-size:1.4em;
+	font-family: arial, helvetica, sans-serif, "trebuchet ms";
+}
+
+h2 {
+	font-size:1.2em;
+	font-weight:bold;
+	font-family:arial,sans-serif;
+}
+
+p {
+	display:block;
+	margin:0 0 1em 0;
+	padding:0;
+	line-height:1.5em;
+	font-size:0.9em;
+}
+
+.logo_large {
+}
+
+#search_top {
+	padding:5px 0 0;
+	height:37px;
+}
+
+#container {
+	padding:15px;
+}
+#container .search {
+	padding:10px;
+}
+#container input {
+	font-size:0.8em;
+}
+#container input[type="text"] {
+	font-size:1em;
+}
+
+#container input.add_feed {
+	border:none;
+	font-size:12px;
+	background-color:#fff;
+	margin:10px 0 0 0;
+	color:#666;
+}
+
+#container_results {
+}
+
+#container_results .total {
+	margin: 0 0 10px 0;
+	padding: 4px;
+	color:#fff;
+	background-color:#ccc;
+	font-weight: bold;
+	font-size:0.8em;
+	display:inline;
+}
+
+/* column */
+#column_left {
+	float:left;
+	width:185px;
+	min-height:750px;
+	font-size:0.9em;
+}
+
+#container_results.column_left {
+	margin-left:185px;
+	border-left:1px solid #CCCCCC;
+	padding-left:15px;
+}
+
+#column_right {
+	float:right;
+	width:250px;
+	margin-left:15px;
+	padding-left:10px;
+	border-left:1px solid #CCCCCC;
+	overflow:hidden;
+}
+
+#search_details {
+	font-size:0.9em;
+	margin:0 0 10px 0;
+}
+
+.column_ad {
+	margin:0 0 10px 0;
+}
+
+.column_box {
+	margin:0 0 10px 0;
+	padding:25px;
+}
+
+.column_box.grey {
+	background:#eee none repeat scroll 0 0;
+}
+
+.column_box.yellow {
+	background:#FCF7E3 none repeat scroll 0 0;
+	border:1px solid #FCDF6B;
+}
+
+.column_box.blue {
+background:#F1F5FE none repeat scroll 0 0;
+border:1px solid #C6DCFE;
+}
+
+/* results */
+
+#sort_show {
+	margin-bottom:10px;
+	font-size:0.8em;
+}
+
+#sort_show .show_results {
+	float:left;
+}
+
+
+#sort_show .sort_results {
+	text-align:right;
+}
+
+#sort_show  a {
+	color:#497BB6;
+}
+
+#sort_show a.selected {
+	font-weight:bold;
+	text-decoration:none;
+	color:#666666;
+}
+
+/* search results css */
+
+#results {
+	max-width:36em;
+}
+
+/* full is for images and videos */
+#results.full {
+	max-width:none;
+}
+
+#results.full .result {
+	float:left;
+}
+
+#results.full .result.images {
+	height:225px;
+	width:225px;
+	text-align:center;
+}
+
+.result.images .description img {
+	height:150px;
+}
+
+#results.full .result.videos {
+	height:500px;
+	width:400px;
+}
+
+#results.full .result .description {
+	min-height:180px;
+}
+
+.result .description img.photo {
+	border:1px solid #ddd;
+	padding:5px;
+}
+
+/* standard results css */
+#results .result {
+	margin-bottom:1.1em;
+}
+
+.result .icon {
+	float:left;
+}
+
+.result .body {
+	margin-left:23px;
+}
+
+.result .description img {
+	max-height:150px;
+	max-width:200px;
+	overflow:hidden;
+	text-align:center;
+	margin:10px 0;
+}
+
+.result .description img.thumbnail {
+	border:1px solid #ddd;
+	float:left;
+	padding:5px;
+	margin:0 10px 5px 0;
+	max-height:50px;
+	max-width:100px;
+	overflow:hidden;
+	text-align:center;
+}
+
+.result .description embed {
+}
+
+.result .description {
+	font-size:0.9em;
+	line-height:1.3em;
+	overflow:hidden;
+	margin-top:5px;
+}
+
+.result .info {
+	color:#666;
+	font-size:0.8em;
+	overflow:hidden;
+	white-space:nowrap;
+}
+
+.small {
+	color:#666;
+	font-size:0.8em;
+}
+
+.result .info a {
+	color:#497BB6;
+	text-decoration:none;
+}
+
+.result h3 {
+	display:inline;
+	font-weight:normal;
+	margin:0;
+	font-size:1.1em;
+}
+
+pre {
+	background-color:#F4F6F8;
+	border:1px solid #D3DAE4;
+	font-family:"Monaco","Courier New",Courier,monospace;
+	font-size:0.9em;
+	font-size-adjust:none;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:normal;
+	margin:0.5em 0pt;
+	overflow:auto;
+	padding:0.5em;
+	width:97%;
+	color:#333;
+}
+
+#loader {
+	margin: 0pt 0pt 10px;
+	padding: 10px 10px 10px 45px;
+	font-size: 1.25em;
+	background: #FFF9DD url(/assets/img/loader.gif) no-repeat 10px center;
+}
+
+/* pagination */
+.pagination {
+	clear:both;
+	padding-top:15px;
+	font-size:0.9em;
+	height:28px;
+}
+
+.pagination a {
+	text-decoration:none;
+	color:#0066CC;
+}
+
+.pagination div.page {
+	background-color:#fff;
+	border:1px solid #ccc;
+	float:left;
+	font-weight:bold;
+	margin-right:1px;
+	padding:5px 7px;
+}
+
+.pagination div.selected, .pagination a:hover div.page {
+	background-color:#ccc;
+	color:#fff;
+}
+
+/* //////////////////////////////////////////////
+// CSS Tabs ref: http://unraveled.com/projects/css_tabs/
+// /////////////////////////////////////////// */
+
+#tabs {
+	padding:10px 0 10px;
+	font-size:0.9em; /* Note: For some reason if font is bigger then 14px the spacing is off by 1px in safari */
+}
+
+ul#tabnav { /* general settings */
+	text-align: left; /* set to left, right or center */
+	margin: 5px 0 10px 0; /* set margins as desired */
+	border-bottom: 1px solid #ccc; /* set border COLOR as desired */
+	list-style-type: none;
+	/*padding: 7px 0 4px 0;*/ /* THIRD number must change with respect to padding-top (X) below */
+	padding:0 0 4px 0;
+}
+
+ul#tabnav li { /* do not change */
+	display: inline;
+}
+
+ul#tabnav li.active { /* settings for selected tab */
+	border-bottom: 1px solid #fff; /* set border color to page background color */
+	background-color: #fff; /* set background color to match above border color */
+}
+
+ul#tabnav li.active a { /* settings for selected tab link */
+	background-color: #fff; /* set selected tab background color as desired */
+	color: #333; /* set selected tab link color as desired */
+	font-weight:bold;
+	position: relative;
+	/*top: -2px;*/
+	/*padding-top: 8px;  must change with respect to padding (X) above and below */
+	border: 1px solid #ccc;
+	border-bottom:none;
+	/*padding:7px 1em;*/
+	padding:4px 1em 5px;
+}
+
+ul#tabnav li a { /* settings for all tab links */
+	padding: 4px 1em; /* set padding (tab size) as desired; FIRST number must change with respect to padding-top (X) above */
+	/*border: 1px solid #ccc;  set border COLOR as desired; usually matches border color specified in #tabnav */
+	background-color: #eee; /* set unselected tab background color as desired */
+	color: #0066cc; /* set unselected tab link color as desired */
+	margin-right: 0; /* set additional spacing between tabs as desired */
+	text-decoration: none;
+	border-bottom: none;
+	font-weight:bold;
+}
+
+ul#tabnav a:hover { /* settings for hover effect */
+	background-color:#ccc;
+	color:#fff;
+}
+
+/* splash */
+#splash #tabs {
+	padding:0;
+}
+
+#splash	ul#tabnav {
+	padding-top:0;
+}
+
+#splash #tabs {
+	font-size:0.75em;
+}
+
+#splash ul#tabnav li.active a {
+	padding:4px 1em 5px;
+	top: 0;
+}
+
+#splash ul#tabnav li a {
+	padding: 4px 0.5em;
+}
