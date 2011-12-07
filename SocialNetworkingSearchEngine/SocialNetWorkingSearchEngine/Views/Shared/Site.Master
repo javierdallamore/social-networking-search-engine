@@ -17,7 +17,7 @@
 <body>
     <div class="page">
 
-        <div id="header">
+        <%--<div id="header">
             <div id="title">
                 <h1>Social networking search engine</h1>
             </div>
@@ -35,7 +35,7 @@
                 </ul>
             
             </div>
-        </div>
+        </div>--%>
 
         <div id="main">
             <asp:ContentPlaceHolder ID="MainContent" runat="server" />
