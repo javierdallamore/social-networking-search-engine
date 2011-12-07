@@ -1,12 +1,32 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<SocialNetWorkingSearchEngine.Models.SearchModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    Home Page
+    Search
 </asp:Content>
-
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2><%: ViewData["Message"] %></h2>
-    <p>
-        
-    </p>
+    <table>
+        <tr>
+            <td>
+                <input type="text" id="txtParameters" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="engine" value="SearchEngineMock" id="chSearchEngineMock" />
+                <label for="chSearchEngineMock">Search engine mock</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="checkbox" name="engine" id="chTwitterSearchEngine" value="TwitterSearchEngine" checked="checked" />
+                <label for="chTwitterSearchEngine">Twitter search engine</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" id="btnSearch" value="Search" />
+            </td>
+        </tr>
+    </table>
+    <ul id="result"></ul>
 </asp:Content>

@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using BusinessRules;
+using DataAccess;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BusinessRulesTest
@@ -68,6 +69,14 @@ namespace BusinessRulesTest
             var result =searchEngineManager.Search(string.Empty, new List<string>() {"SearchEngineMock"});
             Assert.AreEqual(result.Count, 1);
             Assert.AreEqual(result[0].SocialNetworkingItems.Count, 2);
+        }
+
+        [TestMethod]
+        public void CreateDataBase()
+        {
+            NHSessionManager.CreateDB = true;
+            NHSessionManager.Instance.BeginTransaction();
+            NHSessionManager.Instance.CommitTransaction();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace SearchEngineMock
     {
         public string Name
         {
-            get { return "SearchEngineMock"; }
+            get { return "P&P social networking"; }
         }
 
         public SocialNetworkingSearchResult Search(string searchParameters, int page)

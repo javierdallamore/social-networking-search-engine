@@ -12,6 +12,6 @@ namespace Core.Domain
 
         public virtual Guid Id { get; set; }
         public virtual List<Tag> Tags { get; set; }
-        public Profile Profile { get; set; }
+        public virtual Profile Profile { get; set; }
     }
 }
