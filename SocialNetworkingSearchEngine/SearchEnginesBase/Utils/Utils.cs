@@ -9,6 +9,7 @@ namespace SearchEnginesBase.Utils
     public static class Utils
     {
         private static string _page;
+        private static string _rpp;
 
         /// <summary>
         /// Este metodo es un generico que deserealiza un JSON en un objeto T
@@ -37,10 +38,9 @@ namespace SearchEnginesBase.Utils
         }
 
         //Este metodo arma la consulta y devuelve un string con el JSON resultante de ejecutar la misma
-        public static string BuildSearchQuery(string query, string url, int page)
+        public static string BuildSearchQuery(string url, string query, string parameters)
         {
-            _page = page == 1 ?string.Empty : "&page=" + page;
-            var getUrl = WebRequest.Create(url + query + _page);
+            var getUrl = WebRequest.Create(url + query + parameters);
             var objStream = getUrl.GetResponse().GetResponseStream();
             var objReader = new StreamReader(objStream);
 

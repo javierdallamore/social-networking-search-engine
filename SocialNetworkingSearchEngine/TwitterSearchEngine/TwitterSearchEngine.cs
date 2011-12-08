@@ -16,10 +16,11 @@ namespace TwitterSearchEngine
         public SocialNetworkingSearchResult Search(string searchParameters, int page)
         {
             var engineURL = GetEngineUrl();
-            var jsonResults = Utils.BuildSearchQuery(searchParameters, engineURL, page);
+            var parameters = GetParameters(page, 100);
+            var jsonResults = Utils.BuildSearchQuery(engineURL, searchParameters, parameters);
             var entity = Utils.DeserializarJsonTo<SearchResultsTwitter>(jsonResults);
             var list = SocialNetworkingItemList(entity);
-            return new SocialNetworkingSearchResult() { SocialNetworkingItems = list, SocialNetworkingName = "Twitter using 'Twitter search engine'", UrlIcon = GetUrlIcon() };
+            return new SocialNetworkingSearchResult() { SocialNetworkingItems = list, SocialNetworkingName = "Twitter using 'Twitter search engine'" };
         }
 
         //Este metodo itera los resultados y crea las entidades de dominio
@@ -31,19 +32,34 @@ namespace TwitterSearchEngine
                                           UserName = u.FromUser,
                                           ProfileImage = u.ProfileImageUrl,
                                           Content = u.Text,
-                                          StatusDate = DateTimeOffset.Parse(u.CreatedAt).UtcDateTime
+                                          StatusDate = DateTimeOffset.Parse(u.CreatedAt).UtcDateTime,
+                                          UrlPost = GetPostUrl(u.FromUser, u.IdString),
+                                          UrlProfile = GetProfileUrl(u.FromUser)
                                       }).ToList();
             return users;
         }
 
         private string GetEngineUrl()
         {
-            return System.Configuration.ConfigurationManager.AppSettings["TwitterSearchEngine"];
+            return "http://search.twitter.com/search.json?q=";
         }
 
-        private string GetUrlIcon()
+        private string GetPostUrl(string fromUser, string idString)
         {
-            return System.Configuration.ConfigurationManager.AppSettings["UrlIcon"];
+            return "http://twitter.com/#!/" + fromUser + "/statuses/" + idString;
+        }
+
+        private string GetProfileUrl(string fromUser)
+        {
+            return "http://twitter.com/#!/" + fromUser;
+        }
+
+        private string GetParameters(int page, int rpp)
+        {            
+            var _page = page == 1 ? string.Empty : "&page=" + page;
+            var _rpp = "&rpp=" + rpp;
+
+            return _page + _rpp;
         }
     }
 }

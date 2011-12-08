@@ -14,5 +14,7 @@ namespace SearchEnginesBase.Entities
         public virtual string ProfileImage { get; set; }
         public virtual DateTime StatusDate { get; set; }
         public virtual string Content { get; set; }
+        public virtual string UrlPost { get; set; }
+        public virtual string UrlProfile { get; set; }
     }
 }

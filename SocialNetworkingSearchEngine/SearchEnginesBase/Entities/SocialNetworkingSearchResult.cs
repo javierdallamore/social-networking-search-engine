@@ -10,7 +10,6 @@ namespace SearchEnginesBase.Entities
         }
 
         public virtual string SocialNetworkingName { get; set; }
-        public virtual string UrlIcon { get; set; }
         public virtual List<SocialNetworkingItem> SocialNetworkingItems { get; set; }
     }
 }
