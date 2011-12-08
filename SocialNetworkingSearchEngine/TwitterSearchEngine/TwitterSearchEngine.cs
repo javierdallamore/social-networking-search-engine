@@ -31,7 +31,8 @@ namespace TwitterSearchEngine
                                           UserName = u.FromUser,
                                           ProfileImage = u.ProfileImageUrl,
                                           Content = u.Text,
-                                          StatusDate = DateTimeOffset.Parse(u.CreatedAt).UtcDateTime
+                                          CreatedAt = DateTimeOffset.Parse(u.CreatedAt).UtcDateTime,
+                                          Source = u.Source
                                       }).ToList();
             return users;
         }
