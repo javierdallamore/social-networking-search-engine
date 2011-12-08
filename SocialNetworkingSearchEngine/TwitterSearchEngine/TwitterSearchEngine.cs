@@ -32,9 +32,10 @@ namespace TwitterSearchEngine
                                           UserName = u.FromUser,
                                           ProfileImage = u.ProfileImageUrl,
                                           Content = u.Text,
-                                          StatusDate = DateTimeOffset.Parse(u.CreatedAt).UtcDateTime,
                                           UrlPost = GetPostUrl(u.FromUser, u.IdString),
-                                          UrlProfile = GetProfileUrl(u.FromUser)
+                                          UrlProfile = GetProfileUrl(u.FromUser),
+                                          CreatedAt = DateTimeOffset.Parse(u.CreatedAt).UtcDateTime,
+                                          Source = u.Source
                                       }).ToList();
             return users;
         }

@@ -114,6 +114,7 @@
     <Content Include="Content\jquery-ui-1.8.16.custom.css" />
     <Content Include="Content\jquery.taghandler.css" />
     <Content Include="Content\loader.gif" />
+    <Content Include="Content\search.css" />
     <Content Include="Content\tag_remove.cur" />
     <Content Include="Content\tag_remove.png" />
     <Content Include="Content\tag_update.png" />

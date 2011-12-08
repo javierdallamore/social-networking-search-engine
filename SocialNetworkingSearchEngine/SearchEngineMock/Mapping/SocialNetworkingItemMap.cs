@@ -13,7 +13,7 @@ namespace SearchEngineMock.Mapping
             Map(x => x.Content);
             Map(x => x.UserName);
             Map(x => x.ProfileImage);
-            Map(x => x.StatusDate);
+            Map(x => x.CreatedAt);
         }
     }
 }

@@ -78,7 +78,7 @@ namespace SearchEnginesTest
             var r = new Random();
             for (int i = 0; i < 100; i++)
             {
-                var entity = new SocialNetworkingItem {Content =  r.NextDouble() + " Something " + r.NextDouble(), StatusDate = DateTime.Now};
+                var entity = new SocialNetworkingItem {Content =  r.NextDouble() + " Something " + r.NextDouble(), CreatedAt = DateTime.Now};
                 daoSocialNetworkingItem.SaveOrUpdate(entity);
             }
             NHSessionManager.Instance.CommitTransaction();
@@ -92,7 +92,7 @@ namespace SearchEnginesTest
             var entity = new SocialNetworkingItem
                              {
                                  Content = "Claro es la mejor empresa de todas",
-                                 StatusDate = DateTime.Now.AddDays(-1).AddHours(-4).AddMinutes(44),
+                                 CreatedAt = DateTime.Now.AddDays(-1).AddHours(-4).AddMinutes(44),
                                  ProfileImage = "https://mail.google.com/mail/c/u/0/photos/public/AIbEiAIAAABECJfvx7_CoPrPgAEiC3ZjYXJkX3Bob3RvKigwZDJlYWFiMWIzNzU1ZTMzOWFiMWVmODFmYjM5MTk2ZGE5NjQzMGYwMAHOOs1kW_PCbQfzch9Clb7gIuw49g?sz=48",
                                  UserName = "diegohi"
                              };
@@ -102,7 +102,7 @@ namespace SearchEnginesTest
             entity = new SocialNetworkingItem
             {
                 Content = "Claro roboteitor salameitor.... q salame como escribe este pichi",
-                StatusDate = DateTime.Now,
+                CreatedAt = DateTime.Now,
                 ProfileImage = "https://mail.google.com/mail/c/u/0/photos/private/AIbEiAIAAABECKH47q3-m9SGsgEiC3ZjYXJkX3Bob3RvKihkOTJmOGUxZmRlYjE2NmRlY2JkYzgxZDVkMDAwMjA5NmZhMDRlMmUyMAEKl_iCLUlSDFJDAem0GChQPSUaHg?sz=96",
                 UserName = "rgmamani"
             };
@@ -111,7 +111,7 @@ namespace SearchEnginesTest
             entity = new SocialNetworkingItem
             {
                 Content = "Claro que el pichi es un cara de pan",
-                StatusDate = DateTime.Now.AddDays(0).AddHours(1).AddMinutes(44),
+                CreatedAt = DateTime.Now.AddDays(0).AddHours(1).AddMinutes(44),
                 ProfileImage = "http://blogs.poz.com/juan/upload/careta.bmp",
                 UserName = "javierdallamore"
             };
