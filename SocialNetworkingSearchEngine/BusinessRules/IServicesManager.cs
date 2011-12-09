@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Core.Domain;
-using SearchEnginesBase.Entities;
 
 namespace BusinessRules
 {
@@ -20,5 +19,7 @@ namespace BusinessRules
         List<Entity> GetAllEntitiesByTag(string tagName);
         List<Entity> GetAllEntitiesByTag(Guid tagId);
         List<Entity> GetAllEntitiesByProfile(Guid profileId);
+
+        void SendMail(string to, string address, string displayName, string subject, string body, string userName, string password, int port, string host);
     }
 }

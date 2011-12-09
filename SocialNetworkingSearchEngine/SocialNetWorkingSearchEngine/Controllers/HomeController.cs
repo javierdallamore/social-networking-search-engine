@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using BusinessRules;
 using Core.Domain;
 using SearchEnginesBase.Entities;
-using SocialNetWorkingSearchEngine.Models;
+using SearchEnginesBase.Utils;
 
 namespace SocialNetWorkingSearchEngine.Controllers
 {
@@ -93,6 +93,18 @@ namespace SocialNetWorkingSearchEngine.Controllers
         {
             var servicesManager = new ServicesManager();
             return Json(servicesManager.TagEntity(entity, tagName), JsonRequestBehavior.AllowGet);
+        }
+
+        public void SendMail(string to, string subject, string body)
+        {
+            var address = ConfigurationManager.AppSettings["address"];
+            var displayName = ConfigurationManager.AppSettings["displayName"]; 
+            var userName = ConfigurationManager.AppSettings["userName"];
+            var password = ConfigurationManager.AppSettings["password"];
+            var port = Convert.ToInt32(ConfigurationManager.AppSettings["port"]);
+            var host = ConfigurationManager.AppSettings["host"];
+
+            Utils.SendMail(to, address, displayName, subject, body, userName, password, port, host);
         }
     }
 }
