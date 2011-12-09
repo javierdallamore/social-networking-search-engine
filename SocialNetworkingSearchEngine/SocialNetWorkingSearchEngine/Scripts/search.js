@@ -16,7 +16,7 @@ $(document).ready(function () {
                 resultHeaderTag.append(result);
 
                 _.each(socialNetworkingSearchResult.SocialNetworkingItems, function (socialNetworkingItems) {
-                    var item_result = "<div class=\"result clearfix\">";	                                                     //result item
+                    var item_result = "<div class=\"result clearfix\">";                                                      //result item
                     item_result += "<div class=\"icon\">";
                     item_result += "<img src=\"" + socialNetworkingItems.SentimentIconPath + "\"" + " class=\"icon sentiment\"\">"; //sentiment icon							                                  //icon
                     item_result += "<img src=\"" + socialNetworkingItems.SocialNetworkIconPath + "\"" + " class=\"icon\"\">";           //social media icon               
@@ -40,11 +40,23 @@ $(document).ready(function () {
                     result_listTag.append(item_result);
                 });
             });
-            var itemTagContainers = $('#search_result_list ul');
-            itemTagContainers.each(function (i, e) {
-                $(e).tagHandler({
-                    autocomplete: true
+
+            var tagArrays = new Array();
+            $.getJSON("Home/GetAllTags", {}, function (json) {
+                _.each(json, function (Tag) {
+                    tagArrays.push(Tag.Name);
                 });
+
+
+                //Creo la lista con tags
+                var itemTagContainers = $('#search_result_list ul');
+                itemTagContainers.each(function (i, e) {
+                    $(e).tagHandler({
+                        availableTags: tagArrays,
+                        autocomplete: true
+                    });
+                });
+
             });
         });
     };
