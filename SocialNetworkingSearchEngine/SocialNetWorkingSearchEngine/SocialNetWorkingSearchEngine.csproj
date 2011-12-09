@@ -202,6 +202,8 @@
   </ProjectExtensions>
   <PropertyGroup>
     <PostBuildEvent>copy $(SolutionDir)SearchEngineMock\bin\Debug\SearchEngineMock.dll $(TargetDir)
-copy $(SolutionDir)TwitterSearchEngine\bin\Debug\TwitterSearchEngine.dll $(TargetDir)</PostBuildEvent>
+copy $(SolutionDir)TwitterSearchEngine\bin\Debug\TwitterSearchEngine.dll $(TargetDir)
+copy $(SolutionDir)FacebookSearchEngine\bin\Debug\FacebookSearchEngine.dll $(TargetDir)
+copy $(SolutionDir)lib\FacebookAPI.dll $(TargetDir)</PostBuildEvent>
   </PropertyGroup>
 </Project>
