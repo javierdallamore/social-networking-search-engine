@@ -5,6 +5,7 @@ using Core.Domain;
 using Core.RepositoryInterfaces;
 using DataAccess;
 using DataAccess.DAO;
+using SearchEnginesBase.Utils;
 
 namespace BusinessRules
 {
@@ -20,13 +21,14 @@ namespace BusinessRules
             _tagRepository = new TagRepository();
             _entityRepository = new EntityRepository();
         }
+
         public Profile SaveProfile(Profile profile)
         {
             bool begin = NHSessionManager.Instance.BeginTransaction();
             try
             {
                 profile = _profileRepository.SaveOrUpdate(profile);
-                if(begin)
+                if (begin)
                     NHSessionManager.Instance.CommitTransaction();
                 return profile;
             }
@@ -137,6 +139,11 @@ namespace BusinessRules
         public List<Entity> GetAllEntitiesByProfile(Guid profileId)
         {
             return _entityRepository.GetAllByProfile(profileId);
+        }
+
+        public void SendMail(string to, string address, string displayName, string subject, string body, string userName, string password, int port, string host)
+        {
+            Utils.SendMail(to, address, displayName, subject, body, userName, password, port, host);
         }
     }
 }
