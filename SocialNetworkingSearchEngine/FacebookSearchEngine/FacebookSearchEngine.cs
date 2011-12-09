@@ -40,8 +40,13 @@ namespace FacebookSearchEngine
                 user = new SocialNetworkingItem();
                 user.UserName = post["from"].Dictionary["name"].String;
                 user.Content = post["message"].String;
-                user.StatusDate = DateTimeOffset.Parse(post["created_time"].String).UtcDateTime;
+                user.CreatedAt = DateTimeOffset.Parse(post["created_time"].String).UtcDateTime;
                 user.ProfileImage = GetProfilePictureUrl().Replace("?", post["from"].Dictionary["id"].String);
+                string postid = post["id"].String;
+                user.UrlPost = "http://www.facebook.com/"+postid.Substring(postid.IndexOf('_'));
+                user.UrlProfile = GetProfileUrl().Replace("?", post["from"].Dictionary["id"].String);
+                // Facebook no me da la fuente del post
+                user.Source = "";
 
                 list.Add(user);
             }
@@ -51,7 +56,12 @@ namespace FacebookSearchEngine
 
         private string GetProfilePictureUrl()
         {
-            return "https://graph.facebook.com/?/picture";
+            return GetProfileUrl()+"/picture";
+        }
+
+        private string GetProfileUrl()
+        {
+            return "https://graph.facebook.com/?";
         }
 
         private string GetEngineUrl()
