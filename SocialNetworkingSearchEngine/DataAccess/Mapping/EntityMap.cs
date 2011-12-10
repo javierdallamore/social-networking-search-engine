@@ -13,7 +13,7 @@ namespace DataAccess.Mapping
             Map(x => x.UserName, "USER_NAME").Length(50);
             Map(x => x.ProfileImage, "PROFILE_IMAGE").Length(100);
             Map(x => x.CreatedAt, "CreatedAt").Length(50);
-            Map(x => x.CreatedAt, "Content").Length(50);
+            Map(x => x.Content, "Content").Length(50);
             Map(x => x.UrlPost, "UrlPost").Length(100);
             Map(x => x.UrlProfile, "UrlProfile").Length(100);
             Map(x => x.Source, "Source").Length(50);
