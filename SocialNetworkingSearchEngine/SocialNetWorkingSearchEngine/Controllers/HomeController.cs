@@ -7,6 +7,7 @@ using BusinessRules;
 using Core.Domain;
 using SearchEnginesBase.Entities;
 using SearchEnginesBase.Utils;
+using SocialNetWorkingSearchEngine.Models;
 
 namespace SocialNetWorkingSearchEngine.Controllers
 {
@@ -30,6 +31,10 @@ namespace SocialNetWorkingSearchEngine.Controllers
             return View();
         }
 
+        private List<string> negativeWords = new List<string>() { "Conchuda", "concha", "boludo", "puto" };
+        private List<string> positiveWords = new List<string>() { "idolo", "exito", "amo", "genio" };
+        private List<string> ignoreList = new List<string>() { ".", "," };
+
         public JsonResult SearchResults(string parameters, string searchEngines)
         {
             var result = new List<SocialNetworkingSearchResult>();
@@ -37,8 +42,66 @@ namespace SocialNetWorkingSearchEngine.Controllers
             {
                 var searchEngineManager = new SearchEngineManager();
                 result = searchEngineManager.Search(parameters, searchEngines.Split(',').ToList());
+                var model = new SearchResultModel();
+                foreach (var socialNetworkingSearchResult in result)
+                {
+                    model.Items.AddRange(socialNetworkingSearchResult.SocialNetworkingItems);
+                }
+                BuildSentimentBox(model);
+                BuildEnginesBox(model);
             } 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        private void BuildEnginesBox(SearchResultModel model)
+        {
+            var builder = new SearchEngineBoxBuilder();
+            builder.BuildBox(model);
+        }
+
+        public void BuildSentimentBox(SearchResultModel model)
+        {
+            var sentimentValuator = new SentimentValuator();
+            sentimentValuator.NegativeWords = negativeWords;
+            sentimentValuator.PositiveWords = positiveWords;
+            sentimentValuator.IgnoreChars = ignoreList;
+            sentimentValuator.ProcessItems(model.Items);
+            var sentimentBox = new StatBox() {Title = "Sentimiento"};
+            model.StatBoxs.Add(sentimentBox);
+            sentimentBox.StatItems.Add(new StatItem()
+                                           {
+                                               Title = "Positivas",
+                                               Link = "#",
+                                               Value = sentimentValuator.PositiveCount
+                                           });
+            sentimentBox.StatItems.Add(new StatItem()
+                                           {
+                                               Title = "Negativas",
+                                               Link = "#",
+                                               Value = sentimentValuator.NegativeCount
+                                           });
+            sentimentBox.StatItems.Add(new StatItem()
+                                           {
+                                               Title = "Neutras",
+                                               Link = "#",
+                                               Value = sentimentValuator.NeutralCount
+                                           });
+            if (model.Items.Count >0)
+            {
+                sentimentBox.StatItems[0].ValueText =
+                    ((decimal)sentimentValuator.PositiveCount / model.Items.Count * 100).ToString("f") + "%";
+                sentimentBox.StatItems[1].ValueText =
+                    ((decimal)sentimentValuator.NegativeCount / model.Items.Count * 100).ToString("f") + "%";
+                sentimentBox.StatItems[2].ValueText =
+                    ((decimal)sentimentValuator.NeutralCount / model.Items.Count * 100).ToString("f") + "%";
+                
+            }
+            else
+            {
+                sentimentBox.StatItems[0].ValueText = "0%";
+                sentimentBox.StatItems[1].ValueText = "0%";
+                sentimentBox.StatItems[2].ValueText = "0%";
+            }
         }
 
         public JsonResult GetAllEntities(string parameters, string searchEngines)

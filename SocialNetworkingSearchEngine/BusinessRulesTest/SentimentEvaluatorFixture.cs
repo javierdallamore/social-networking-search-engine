@@ -3,6 +3,8 @@ using BusinessRules;
 using NUnit.Framework;
 using SearchEnginesBase.Entities;
 using SharpTestsEx;
+using SocialNetWorkingSearchEngine.Controllers;
+using SocialNetWorkingSearchEngine.Models;
 
 namespace BusinessRulesTest
 {
@@ -144,6 +146,49 @@ namespace BusinessRulesTest
             sentimentValuator.PositiveCount.Should().Be.EqualTo(0);
             sentimentValuator.NeutralCount.Should().Be.EqualTo(0);
         }
+
+
+        [Test]
+        public void EvaluateListShouldSetCountsTest()
+        {
+            //arrange
+            var item1 = new SocialNetworkingItem() { Content = "El puto." };
+            var item2 = new SocialNetworkingItem() { Content = "El idolo." };
+            var item3 = new SocialNetworkingItem() { Content = "asd asd as d" };
+            var sentimentValuator = GetSentimentValuator();
+            var list = new List<SocialNetworkingItem>() {item1, item2, item3};
+            //act
+            sentimentValuator.ProcessItems(list);
+            //assert
+            sentimentValuator.NegativeCount.Should().Be.EqualTo(1);
+            sentimentValuator.PositiveCount.Should().Be.EqualTo(1);
+            sentimentValuator.NeutralCount.Should().Be.EqualTo(1);
+        }
+
+        [Test]
+        public void BuildBoxInModelWith3ItemsTest()
+        {
+            //arrange
+            var item1 = new SocialNetworkingItem() { Content = "El puto." };
+            var item2 = new SocialNetworkingItem() { Content = "El idolo." };
+            var item3 = new SocialNetworkingItem() { Content = "asd asd as d" };
+            var model = new SearchResultModel();
+            model.Items.Add(item1);
+            model.Items.Add(item2);
+            model.Items.Add(item3);
+            var controller = new HomeController();
+            //act
+            controller.BuildSentimentBox(model);
+            //assert
+            model.StatBoxs.Count.Should().Be.EqualTo(1);
+            model.StatBoxs[0].StatItems.Count.Should().Be.EqualTo(3);
+            model.StatBoxs[0].Title.Length.Should().Be.GreaterThan(3);
+            foreach (var statItem in model.StatBoxs[0].StatItems)
+            {
+                statItem.ValueText.Should().Be.EqualTo("33,33%");
+            }
+        }
+
 
 
         private SentimentValuator GetSentimentValuator()

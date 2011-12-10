@@ -90,6 +90,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
@@ -97,7 +98,8 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PositiveNegativeItemFixture.cs" />
+    <Compile Include="SearchEngineBoxBuilderFixture.cs" />
+    <Compile Include="SentimentEvaluatorFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchEngineManagerTest.cs" />
   </ItemGroup>
@@ -113,6 +115,10 @@
     <ProjectReference Include="..\SearchEnginesBase\SearchEnginesBase.csproj">
       <Project>{82E660CC-FF11-4332-8671-B8FC905476A2}</Project>
       <Name>SearchEnginesBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SocialNetWorkingSearchEngine\SocialNetWorkingSearchEngine.csproj">
+      <Project>{D91AF331-D19E-41AB-BBDE-0F02ED06F73E}</Project>
+      <Name>SocialNetWorkingSearchEngine</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

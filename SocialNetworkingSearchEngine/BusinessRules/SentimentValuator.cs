@@ -14,6 +14,13 @@ namespace BusinessRules
         public List<string> PositiveWords { get; set; }
         public List<string> IgnoreChars { get; set; }
 
+        public SentimentValuator()
+        {
+            NegativeWords = new List<string>();
+            PositiveWords = new List<string>();
+            IgnoreChars = new List<string>();
+        }
+
         private int _negativeCount;
 
         public int NegativeCount
@@ -64,6 +71,14 @@ namespace BusinessRules
             _positiveCount = 0;
             _negativeCount = 0;
             _neutralCount = 0;
+        }
+
+        public void ProcessItems(List<SocialNetworkingItem> list)
+        {
+            foreach (var item in list)
+            {
+                ProcessItem(item);
+            }
         }
     }
 }
