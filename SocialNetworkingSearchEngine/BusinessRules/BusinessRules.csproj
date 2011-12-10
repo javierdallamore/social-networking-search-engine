@@ -78,6 +78,7 @@
     <Compile Include="SearchEngineConfiguration.cs" />
     <Compile Include="SearchEngineManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SentimentValuator.cs" />
     <Compile Include="ServicesManager.cs" />
   </ItemGroup>
   <ItemGroup>
