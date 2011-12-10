@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SearchEnginesBase.Entities;
+﻿using SearchEnginesBase.Entities;
 using SearchEnginesBase.Interfaces;
 
 namespace SearchEngineMock
@@ -20,9 +16,12 @@ namespace SearchEngineMock
                                                    {
                                                        SocialNetworkingName = "P&P social networking"
                                                    };
+
             NHSessionManager.Instance.BeginTransaction();
-            var daoSocialNetworkingItem = new DAO.DaoSocialNetworkingItem();
-            socialNetworkingSearchResult.SocialNetworkingItems.AddRange(daoSocialNetworkingItem.GetAll());
+                        
+            var list = new DAO.DaoSocialNetworkingItem().GetAll();
+
+            socialNetworkingSearchResult.SocialNetworkingItems.AddRange(list);
             NHSessionManager.Instance.CommitTransaction();
 
             return socialNetworkingSearchResult;

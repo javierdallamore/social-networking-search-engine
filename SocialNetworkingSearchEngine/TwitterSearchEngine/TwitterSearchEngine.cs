@@ -20,7 +20,8 @@ namespace TwitterSearchEngine
             var jsonResults = Utils.BuildSearchQuery(engineURL, searchParameters, parameters);
             var entity = Utils.DeserializarJsonTo<SearchResultsTwitter>(jsonResults);
             var list = SocialNetworkingItemList(entity);
-            return new SocialNetworkingSearchResult() { SocialNetworkingItems = list, SocialNetworkingName = "Twitter using 'Twitter search engine'" };
+            
+            return new SocialNetworkingSearchResult() { SocialNetworkingItems = list, SocialNetworkingName = Name };
         }
 
         //Este metodo itera los resultados y crea las entidades de dominio

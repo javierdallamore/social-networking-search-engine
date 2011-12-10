@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="IServicesManager.cs" />
     <Compile Include="ISearchEngineManager.cs" />
+    <Compile Include="PichersSearchEngine.cs" />
     <Compile Include="SearchEngineConfiguration.cs" />
     <Compile Include="SearchEngineManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

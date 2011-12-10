@@ -13,9 +13,9 @@ namespace BusinessRules
         Entity TagEntity(Entity entity, Guid tagId);
         Entity TagEntity(Entity entity, string tagName);
 
-        List<Entity> GetAllEntities();
         List<Tag> GetAllTags();
         List<Profile> GetAllProfiles();
+        List<Entity> GetAllEntities();               
         List<Entity> GetAllEntitiesByTag(string tagName);
         List<Entity> GetAllEntitiesByTag(Guid tagId);
         List<Entity> GetAllEntitiesByProfile(Guid profileId);

@@ -4,15 +4,9 @@ using NHibernate;
 using NHibernate.Cache;
 using NHibernate.Cfg;
 using System.Runtime.Remoting.Messaging;
-using System;
-using System.Collections.Generic;
-using NHibernate.Type;
 using NHibernate.Tool.hbm2ddl;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
-using NHibernate.Event;
-using NHibernate.ByteCode.Castle;
-
 
 namespace SearchEngineMock
 {
@@ -53,7 +47,7 @@ namespace SearchEngineMock
             ReadDataAccess();
 
             FluentConfiguration fc;
-            
+
             fc = Fluently.Configure()
                 .Database(MsSqlConfiguration.MsSql2008.ConnectionString(connectionString));
             //.ShowSql()
@@ -273,6 +267,7 @@ namespace SearchEngineMock
                 }
             }
         }
+
         private bool IsInWebContext()
         {
             return HttpContext.Current != null;
@@ -282,8 +277,4 @@ namespace SearchEngineMock
         private const string SESSION_KEY = "CONTEXT_SESSION";
         private ISessionFactory sessionFactory;
     }
-
-
-
 }
-
