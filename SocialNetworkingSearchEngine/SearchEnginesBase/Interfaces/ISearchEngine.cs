@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SearchEnginesBase.Entities;
+﻿using SearchEnginesBase.Entities;
 
 namespace SearchEnginesBase.Interfaces
 {
