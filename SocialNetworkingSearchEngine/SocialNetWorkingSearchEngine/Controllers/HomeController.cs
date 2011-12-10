@@ -35,7 +35,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
         private List<string> positiveWords = new List<string>() { "idolo", "exito", "amo", "genio" };
         private List<string> ignoreList = new List<string>() { ".", "," };
 
-        public JsonResult SearchResults(string parameters, string searchEngines)
+        public JsonResult SearchResults(string parameters, string searchEngines, string sentiment)
         {
             var result = new List<SocialNetworkingSearchResult>();
             if (ModelState.IsValid)
@@ -43,11 +43,25 @@ namespace SocialNetWorkingSearchEngine.Controllers
                 var searchEngineManager = new SearchEngineManager();
                 result = searchEngineManager.Search(parameters, searchEngines.Split(',').ToList());
                 var model = new SearchResultModel();
+                
+                var sentimentValuator = new SentimentValuator();
+                sentimentValuator.NegativeWords = negativeWords;
+                sentimentValuator.PositiveWords = positiveWords;
+                sentimentValuator.IgnoreChars = ignoreList;
+
                 foreach (var socialNetworkingSearchResult in result)
                 {
-                    model.Items.AddRange(socialNetworkingSearchResult.SocialNetworkingItems);
+                    foreach (var item in socialNetworkingSearchResult.SocialNetworkingItems)
+                    {
+                        sentimentValuator.ProcessItem(item);
+                        if (string.IsNullOrWhiteSpace(sentiment) || item.Sentiment.ToLower() == sentiment.ToLower())
+                        {
+                            model.Items.Add(item);
+                        }
+                    }
                 }
-                BuildSentimentBox(model);
+                
+                BuildSentimentBox(model, sentimentValuator);
                 BuildEnginesBox(model);
             } 
             return Json(result, JsonRequestBehavior.AllowGet);
@@ -59,13 +73,8 @@ namespace SocialNetWorkingSearchEngine.Controllers
             builder.BuildBox(model);
         }
 
-        public void BuildSentimentBox(SearchResultModel model)
+        public void BuildSentimentBox(SearchResultModel model, SentimentValuator sentimentValuator)
         {
-            var sentimentValuator = new SentimentValuator();
-            sentimentValuator.NegativeWords = negativeWords;
-            sentimentValuator.PositiveWords = positiveWords;
-            sentimentValuator.IgnoreChars = ignoreList;
-            sentimentValuator.ProcessItems(model.Items);
             var sentimentBox = new StatBox() {Title = "Sentimiento"};
             model.StatBoxs.Add(sentimentBox);
             sentimentBox.StatItems.Add(new StatItem()

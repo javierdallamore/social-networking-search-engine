@@ -50,6 +50,7 @@ namespace SocialNetWorkingSearchEngine
 
         public void ProcessItem(SocialNetworkingItem item)
         {
+            if (string.IsNullOrWhiteSpace(item.SocialNetworkName)) return;
             if(!_engines.ContainsKey(item.SocialNetworkName))
             {
                 _engines.Add(item.SocialNetworkName,new Engine(){Name = item.SocialNetworkName});

@@ -44,7 +44,7 @@ namespace BusinessRulesTest
         private List<string> ignoreWords = new List<string>() { ".", "," };
 
         [Test]
-        public void WhenContainConchaDeTuMadreShloudByNegativeTest()
+        public void WhenContainConchaDeTuMadreShouldByNegativeTest()
         {
             //arrange
             var item = new SocialNetworkingItem() {Content = "andate a la concha de tu madre"};
@@ -57,7 +57,7 @@ namespace BusinessRulesTest
         }
 
         [Test]
-        public void WhenContainIdoloShloudByPositiveTest()
+        public void WhenContainIdoloShouldByPositiveTest()
         {
             //arrange
             var item = new SocialNetworkingItem() { Content = "picante pereyra, sos mi idolo." };
@@ -70,7 +70,7 @@ namespace BusinessRulesTest
         }
 
         [Test]
-        public void WhenContainComputoShloudByNeutralTest()
+        public void WhenContainComputoShouldByNeutralTest()
         {
             //arrange
             var item = new SocialNetworkingItem() { Content = "El computo esta mal hecho." };
@@ -83,7 +83,7 @@ namespace BusinessRulesTest
         }
 
         [Test]
-        public void WhenContainPutoAndIdoloShloudByNeutralTest()
+        public void WhenContainPutoAndIdoloShouldByNeutralTest()
         {
             //arrange
             var item = new SocialNetworkingItem() { Content = "El puto es mi idolo" };
@@ -165,6 +165,7 @@ namespace BusinessRulesTest
             sentimentValuator.NeutralCount.Should().Be.EqualTo(1);
         }
 
+
         [Test]
         public void BuildBoxInModelWith3ItemsTest()
         {
@@ -177,8 +178,10 @@ namespace BusinessRulesTest
             model.Items.Add(item2);
             model.Items.Add(item3);
             var controller = new HomeController();
+            var sentimentValuator = GetSentimentValuator();
+            sentimentValuator.ProcessItems(model.Items);
             //act
-            controller.BuildSentimentBox(model);
+            controller.BuildSentimentBox(model, sentimentValuator);
             //assert
             model.StatBoxs.Count.Should().Be.EqualTo(1);
             model.StatBoxs[0].StatItems.Count.Should().Be.EqualTo(3);

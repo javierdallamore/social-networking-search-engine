@@ -18,7 +18,7 @@ namespace BusinessRules
         {
             NegativeWords = new List<string>();
             PositiveWords = new List<string>();
-            IgnoreChars = new List<string>();
+            IgnoreChars= new List<string>();
         }
 
         private int _negativeCount;
