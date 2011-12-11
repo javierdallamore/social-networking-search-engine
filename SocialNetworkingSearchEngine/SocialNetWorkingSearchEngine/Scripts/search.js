@@ -1,6 +1,12 @@
 $(document).ready(function () {
+
+    $.socialNetworkingItemNamespace = {};
+    $.socialNetworkingItemNamespace.searchResultsItemShowed = new Array();
+
+
     $("#btnSearch").click(onClick);
-    // Ejemplo, modificar lo que veas necesario
+
+
     function onClick(e) {
         var values = $(":checked").map(function (value, index) { return index.value; });
         var valuesAsString = _.reduce(values, function (memo, currentItem) { return memo + ',' + currentItem });
@@ -16,36 +22,95 @@ $(document).ready(function () {
                 resultHeaderTag.append(result);
 
                 _.each(socialNetworkingSearchResult.SocialNetworkingItems, function (socialNetworkingItems) {
-                    var item_result = "<div class=\"result clearfix\">";	                                                     //result item
+
+                    $.socialNetworkingItemNamespace.searchResultsItemShowed[socialNetworkingItems.Id] = socialNetworkingItems;
+
+                    var item_result = "<div id=\"" + socialNetworkingItems.Id + "ITEMDIV\"" + " class=\"result clearfix\">";    //result item
                     item_result += "<div class=\"icon\">";
                     item_result += "<img src=\"" + socialNetworkingItems.SentimentIconPath + "\"" + " class=\"icon sentiment\"\">"; //sentiment icon							                                  //icon
-                    item_result += "<img src=\"" + socialNetworkingItems.SocialNetworkIconPath + "\"" + " class=\"icon\"\">";           //social media icon               
+                    item_result += "<img src=\"" + socialNetworkingItems.SocialNetworkIconPath + "\"" + " class=\"icon\"\">";   //social media icon               
                     item_result += "</div>"; 						                                                            //icon
                     item_result += "<div>"; 							                                                        //body
                     item_result += "<h3>"; 							                                                            //result title
-                    item_result += "<a href=\"\" target=\"_blank\">" + socialNetworkingItems.Content + "<\a>"; 		            //link
+                    item_result += "<a href=\"" + socialNetworkingItems.UrlPost + "\" target=\"_blank\">" + socialNetworkingItems.Content + "<\a>"; //link
                     item_result += "</h3>"; 							                                                        //result title
-                    item_result += "<div>"; 							                                                        //result description
-                    item_result += "</div>";                                                                                    //result description
+                    item_result += "<div>"; 							                                                        //save
+                    item_result += "<input id=\"" + socialNetworkingItems.Id + "\" type=\"button\" value=\"Save\">";
+                    item_result += "</div>";                                                                                    //save
                     item_result += "<div class=\"info\"> <p>";                                                                  //Info
                     item_result += "El " + socialNetworkingItems.CreatedAtShort + " por ";
                     item_result += "<img src=\"" + socialNetworkingItems.ProfileImage + "\" class=\"user_image\"\>";
-                    item_result += " " + socialNetworkingItems.UserName;
+                    item_result += " <a href=\"" + socialNetworkingItems.UrlProfile + "\" target=\"_blank\">" + socialNetworkingItems.UserName + "<\a>";
                     item_result += "</p></div>";                                                                                //Info
                     item_result += "<div><p>Tag it:</p>"; 							                                            //result tag seccion
                     item_result += "<ul></ul>";
                     item_result += "</div>"; 						                                                            //result tag seccion
+
+                    item_result += "<form>";
+                    item_result += "Rating: <span id=\"stars-cap\"></span>";
+                    item_result += "<div id=\"stars-wrapper" + socialNetworkingItems.Id + "\">";
+                    item_result += "<select name=\"selrate\">";
+                    item_result += "<option value=\"1\">Very poor</option>";
+                    item_result += "<option value=\"2\">Not that bad</option>";
+                    item_result += "<option value=\"3\">Average</option>";
+                    item_result += "<option value=\"4\" selected=\"selected\">Good</option>";
+                    item_result += "<option value=\"5\">Perfect</option>";
+                    item_result += "</select>";
+                    item_result += "</div>";
+                    item_result += "</form>";
+
                     item_result += "</div>"; 						                                                            //result item
 
                     result_listTag.append(item_result);
                 });
             });
-            var itemTagContainers = $('#search_result_list ul');
-            itemTagContainers.each(function (i, e) {
-                $(e).tagHandler({
-                    autocomplete: true
+
+            _.each($("#search_result_list :input[type=button]"), function (inputElement) {
+                $(inputElement).click(function (e) {
+                    OnSaveItemButtonClick($(inputElement).attr("Id"), e);
                 });
+            });
+
+            var divList = $("div[id^='stars-wrapper']");
+
+            _.each($("#search_result_list"), function () {
+                $("div[id^='stars-wrapper']").each(function (i,e) {
+                    $(e).stars({
+                        inputType: "select"
+                    });
+                });
+            });
+
+            //Obtengo los tags
+            var tagArrays = new Array();
+            $.getJSON("Home/GetAllTags", {}, function (json) {
+                _.each(json, function (Tag) {
+                    tagArrays.push(Tag.Name);
+                });
+
+
+                //Creo la lista con tags
+                var itemTagContainers = $('#search_result_list ul');
+                itemTagContainers.each(function (i, e) {
+                    $(e).tagHandler({
+                        availableTags: tagArrays,
+                        autocomplete: true
+                    });
+                });
+
             });
         });
     };
+
+    function OnSaveItemButtonClick(itemId, e) {
+        var itemDivId = itemId + "ITEMDIV";
+        var tagUl = $("#" + itemDivId.toString() + " li");
+        var itemAssignedTags = $(tagUl).map(function () {
+            return $(this).text();
+        });
+        var item = $.socialNetworkingItemNamespace.searchResultsItemShowed[itemId];
+        item.Tags.push(itemAssignedTags);
+
+    };
+
 });
