@@ -77,13 +77,13 @@ namespace SocialNetWorkingSearchEngine.Controllers
             return Json(servicesManager.SaveEntity(entity), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult SaveEntity(Profile profile)
+        public JsonResult SaveProfile(Profile profile)
         {
             var servicesManager = new ServicesManager();
             return Json(servicesManager.SaveProfile(profile), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult SaveEntity(Tag tag)
+        public JsonResult SaveTag(Tag tag)
         {
             var servicesManager = new ServicesManager();
             return Json(servicesManager.SaveTag(tag), JsonRequestBehavior.AllowGet);
