@@ -43,8 +43,8 @@ namespace FacebookSearchEngine
                 user.CreatedAt = DateTimeOffset.Parse(post["created_time"].String).UtcDateTime;
                 user.ProfileImage = GetProfilePictureUrl().Replace("?", post["from"].Dictionary["id"].String);
                 string postid = post["id"].String;
-                user.UrlPost = "http://www.facebook.com/"+postid.Substring(postid.IndexOf('_'));
-                user.UrlProfile = GetProfileUrl().Replace("?", post["from"].Dictionary["id"].String);
+                user.UrlPost = GetProfileUrl()+postid.Substring(postid.IndexOf('_')+1);
+                user.UrlProfile = GetProfileUrl()+post["from"].Dictionary["id"].String;
                 // Facebook no me da la fuente del post
                 user.Source = "";
 
@@ -56,12 +56,12 @@ namespace FacebookSearchEngine
 
         private string GetProfilePictureUrl()
         {
-            return GetProfileUrl()+"/picture";
+            return "https://graph.facebook.com/?/picture";
         }
 
         private string GetProfileUrl()
         {
-            return "https://graph.facebook.com/?";
+            return "https://www.facebook.com/";
         }
 
         private string GetEngineUrl()
