@@ -7,12 +7,14 @@
     <link href="../../Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/global.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/search.css" rel="stylesheet" type="text/css" />
+    <link href="../../Content/jquery.ui.stars.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css"/>
     <link href="../../Content/jquery.taghandler.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="../../Scripts/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="../../Scripts/underscore-min.js"></script>
     <script type="text/javascript" src="../../Scripts/jquery-ui-1.8.16.custom.min.js"></script>
     <script type="text/javascript" src="../../Scripts/jquery.taghandler.js"></script>
+    <script type="text/javascript" src="../../Scripts/jquery.ui.stars.min.js"></script>
     <script type="text/javascript" src="../../Scripts/search.js"></script>
 </head>
 
