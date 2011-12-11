@@ -32,7 +32,7 @@ $(document).ready(function () {
                     item_result += "</div>"; 						                                                            //icon
                     item_result += "<div>"; 							                                                        //body
                     item_result += "<h3>"; 							                                                            //result title
-                    item_result += "<a href=\"\" target=\"_blank\">" + socialNetworkingItems.Content + "<\a>"; 		            //link
+                    item_result += "<a href=\"" + socialNetworkingItems.UrlPost + "\" target=\"_blank\">" + socialNetworkingItems.Content + "<\a>"; 		            //link
                     item_result += "</h3>"; 							                                                        //result title
                     item_result += "<div>"; 							                                                        //save
                     item_result += "<input id=\"" + socialNetworkingItems.Id + "\" type=\"button\" value=\"Save\">";
@@ -40,7 +40,7 @@ $(document).ready(function () {
                     item_result += "<div class=\"info\"> <p>";                                                                  //Info
                     item_result += "El " + socialNetworkingItems.CreatedAtShort + " por ";
                     item_result += "<img src=\"" + socialNetworkingItems.ProfileImage + "\" class=\"user_image\"\>";
-                    item_result += " " + socialNetworkingItems.UserName;
+                    item_result += " <a href=\"" + socialNetworkingItems.UrlProfile + "\" target=\"_blank\">" + socialNetworkingItems.UserName + "<\a>";
                     item_result += "</p></div>";                                                                                //Info
                     item_result += "<div><p>Tag it:</p>"; 							                                            //result tag seccion
                     item_result += "<ul></ul>";
