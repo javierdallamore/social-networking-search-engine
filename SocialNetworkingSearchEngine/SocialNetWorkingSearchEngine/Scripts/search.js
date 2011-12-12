@@ -3,6 +3,13 @@ $(document).ready(function () {
     $.socialNetworkingItemNamespace = {};
     $.socialNetworkingItemNamespace.searchResultsItemShowed = new Array();
 
+    //Obtengo los tags
+    var tagArrays = new Array();
+    $.getJSON("Home/GetAllTags", {}, function (json) {
+        _.each(json, function (tag) {
+            tagArrays.push(tag.Name);
+        });
+    });
 
     $("#btnSearch").click(onClick);
     $("#imgLoading").hide();
@@ -13,14 +20,6 @@ $(document).ready(function () {
         var valuesAsString = _.reduce(values, function (memo, currentItem) { return memo + ',' + currentItem });
         $("#result").html("");
         $.getJSON("Home/SearchResults", { parameters: $("#txtSearchPattern").val(), searchEngines: valuesAsString }, function (json) {
-
-            //Obtengo los tags
-            var tagArrays = new Array();
-            $.getJSON("Home/GetAllTags", {}, function (json) {
-                _.each(json, function (tag) {
-                    tagArrays.push(tag.Name);
-                });
-            });
 
             var result_listTag = $("#search_result_list");
             result_listTag.html("");
@@ -79,19 +78,21 @@ $(document).ready(function () {
                     $(e).tagHandler({
                         availableTags: tagArrays,
                         autocomplete: true,
+                        allowAdd: false,
                         assignedTags: _.map(socialNetworkingItems.Tags, function (tag) {
                             return tag.Name;
                         })
                     });
                 });
+
+                $("#btnSave" + socialNetworkingItems.Id).click(function (e) {
+                    OnSaveItemButtonClick(socialNetworkingItems.Id, e);
+                });
+                
             });
 
             //Atach Save button click event.
-            _.each($("input[id^='btnSave']"), function (inputElement) {
-                $(inputElement).click(function (e) {
-                    OnSaveItemButtonClick($(inputElement).attr("Id"), e);
-                });
-            });
+            
 
             //Atach send email button click event.
             _.each($("input[id^='btnSendEmail']"), function (inputElement) {

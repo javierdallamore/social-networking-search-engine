@@ -53,17 +53,20 @@ namespace BusinessRules
 
         private List<Post> ConvertFromSocialNetworkingItemToPosts(List<SocialNetworkingItem> entityList)
         {
+            if (entityList == null)
+                return new List<Post>();
+
             List<Post> posts = (from u in entityList
-                                    select new Post
-                                                {
-                                                    UserName = u.UserName,
-                                                    ProfileImage = u.ProfileImage,
-                                                    Content = u.Content,
-                                                    UrlPost = u.UrlPost,
-                                                    UrlProfile = u.UrlProfile,
-                                                    CreatedAt = u.CreatedAt,
-                                                    Source = u.Source
-                                                }).ToList();
+                                select new Post
+                                           {
+                                               UserName = u.UserName,
+                                               ProfileImage = u.ProfileImage,
+                                               Content = u.Content,
+                                               UrlPost = u.UrlPost,
+                                               UrlProfile = u.UrlProfile,
+                                               CreatedAt = u.CreatedAt,
+                                               Source = u.Source
+                                           }).ToList();
             return posts;
         }
 
