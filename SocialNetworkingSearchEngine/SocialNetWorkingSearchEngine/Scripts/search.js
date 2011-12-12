@@ -17,7 +17,7 @@ $(document).ready(function () {
     function onClick(e) {
         $("#imgLoading").show();
         var values = $(":checked").map(function (value, index) { return index.value; });
-        var valuesAsString = _.reduce(values, function (memo, currentItem) { return memo + ',' + currentItem });
+        var valuesAsString = _.reduce(values, function (memo, currentItem) { return memo + ',' + currentItem; });
         $("#result").html("");
         $.getJSON("Home/SearchResults", { parameters: $("#txtSearchPattern").val(), searchEngines: valuesAsString }, function (json) {
 
