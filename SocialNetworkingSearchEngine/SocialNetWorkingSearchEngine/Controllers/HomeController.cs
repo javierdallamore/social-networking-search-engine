@@ -172,7 +172,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
         [HttpPost]
         public void SendMail(string to, string subject, string body)
         {
-            var address = ConfigurationManager.AppSettings["address"];
+            var address = ConfigurationManager.AppSettings["addressFrom"];
             var displayName = ConfigurationManager.AppSettings["displayName"]; 
             var userName = ConfigurationManager.AppSettings["userName"];
             var password = ConfigurationManager.AppSettings["password"];
