@@ -61,8 +61,15 @@ namespace SocialNetWorkingSearchEngine.Controllers
                 
                 BuildSentimentBox(model, sentimentValuator);
                 BuildEnginesBox(model);
+                BuildTopUsersBox(model);
             }
             return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        private void BuildTopUsersBox(SearchResultModel model)
+        {
+            var builder = new TopUsersBoxBuilder();
+            builder.BuildBox(model);
         }
 
         private void BuildEnginesBox(SearchResultModel model)
