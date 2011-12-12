@@ -63,6 +63,13 @@ $(document).ready(function () {
                 item_result += "</div>"; 						                                                            //result item
 
                 result_listTag.append(item_result);
+
+                //Atach send email button click event.
+                _.each($("input[id^='btnSendEmail']"), function (inputElement) {
+                    $(inputElement).click(function (e) {
+                        OnSendEmailItemButtonClick($(inputElement).attr("Id"), e);
+                    });
+                });
             });
 
             //Atach Save button click event.
@@ -72,12 +79,12 @@ $(document).ready(function () {
                 });
             });
 
-            //Atach send email button click event.
-            _.each($("input[id^='btnSendEmail']"), function (inputElement) {
-                $(inputElement).click(function (e) {
-                    OnSendEmailItemButtonClick($(inputElement).attr("Id"), e);
-                });
-            });
+//            //Atach send email button click event.
+//            _.each($("input[id^='btnSendEmail']"), function (inputElement) {
+//                $(inputElement).click(function (e) {
+//                    OnSendEmailItemButtonClick($(inputElement).attr("Id"), e);
+//                });
+//            });
 
 
             //Create the calification control
@@ -116,7 +123,7 @@ $(document).ready(function () {
         //btnSendEmail
         var id = itemId.substr(12);
         var destinataries = $("#txtDestinatary" + id).val();
-        $.post("Home/SendMail", { to: destinataries, subject:, body: },
+        $.post("Home/SendMail", { to: destinataries, subject: null, body:null },
             function callback() {
 
             },
