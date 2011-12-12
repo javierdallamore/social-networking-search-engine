@@ -118,7 +118,7 @@ $(document).ready(function () {
         //btnSendEmail
         var id = itemId.substr(12);
         var destinataries = $("#txtDestinatary" + id).val();
-        $.post("Home/SendMail", { to: destinataries, subject:, body: },
+        $.post("Home/SendMail", { to: destinataries, subject: null, body: null },
             function callback() {
 
             },
