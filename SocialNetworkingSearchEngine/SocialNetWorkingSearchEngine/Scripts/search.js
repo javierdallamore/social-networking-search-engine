@@ -37,8 +37,8 @@ $(document).ready(function () {
                 var itemId = socialNetworkingItems.Id + "ITEMDIV";
                 var item_result = "<div id=\"" + itemId + "\"" + " class=\"result clearfix\">";    //result item
                 item_result += "<div class=\"icon\">";
-                item_result += "<img src=\"" + socialNetworkingItems.SentimentIconPath + "\"" + " class=\"icon sentiment\"\">"; //sentiment icon							                                  //icon
-                item_result += "<img id=\"imgIconFrom" + socialNetworkingItems.Id + "\" src=\"" + socialNetworkingItems.SocialNetworkIconPath + "\"" + " class=\"icon\"\">";   //social media icon               
+                item_result += "<img id=\"imgIconSentiment" + socialNetworkingItems.Id + "\"  class=\"icon sentiment\"\">"; //sentiment icon							                                  //icon
+                item_result += "<img id=\"imgIconFrom" + socialNetworkingItems.Id + "\"  class=\"icon\"\">";   //social media icon               
                 item_result += "</div>"; //icon
                 item_result += "<div>"; //body
                 item_result += "<div>"; //header post
@@ -99,6 +99,38 @@ $(document).ready(function () {
                         })
                     });
                 });
+
+                // sentiment image
+                if (socialNetworkingItems.Sentiment != "undefined" && socialNetworkingItems.Sentiment != null) {
+                    switch (socialNetworkingItems.Sentiment.toLowerCase()) {
+                        case "positivo":
+                            $("#imgIconSentiment" + socialNetworkingItems.Id).attr("src", "../Content/sentiment_positive.png");
+                            break;
+                        case "neutro":
+                            $("#imgIconSentiment" + socialNetworkingItems.Id).attr("src", "../Content/sentiment_neutral.png");
+                        case "negativo":
+                            $("#imgIconSentiment" + socialNetworkingItems.Id).attr("src", "../Content/sentiment_negative.png");
+                            break;
+                        default:
+                            $("#imgIconSentiment" + socialNetworkingItems.Id).attr("src", "");
+                    };
+                };
+
+                // network from image
+                if (socialNetworkingItems.SocialNetworkName != "undefined" && socialNetworkingItems.SocialNetworkName != null) {
+                    switch (socialNetworkingItems.SocialNetworkName.toLowerCase()) {
+                        case "facebook":
+                            $("#imgIconFrom" + socialNetworkingItems.Id).attr("src", "../Content/facebook_icon.ico");
+                            break;
+                        case "twitter":
+                            $("#imgIconFrom" + socialNetworkingItems.Id).attr("src", "../Content/twitter_icon.ico");
+                            break;
+                        default:
+                            $("#imgIconFrom" + socialNetworkingItems.Id).attr("src", "../Content/search_item_icon.gif");
+                    };
+                };
+                
+                
 
                 $("#btnSave" + socialNetworkingItems.Id).click(function (e) {
                     onSaveItemButtonClick(socialNetworkingItems.Id, $(this));
