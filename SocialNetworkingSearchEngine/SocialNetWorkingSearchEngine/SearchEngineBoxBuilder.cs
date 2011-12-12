@@ -25,13 +25,18 @@ namespace SocialNetWorkingSearchEngine
 
         public List<Engine> Engines { get { return _engines.Select(o=>o.Value).ToList(); } }
 
+        public string BoxTitle
+        {
+            get { return "Red Social"; }
+        }
+
         public void BuildBox(SearchResultModel model)
         {
             foreach (var item in model.Items)
             {
                 ProcessItem(item);
             }
-            var box = new StatBox() {Title = "Red Social"};
+            var box = new StatBox() {Title = BoxTitle};
             model.StatBoxs.Add(box);
             foreach (var engine in Engines)
             {

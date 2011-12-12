@@ -13,13 +13,17 @@ namespace BusinessRules
         private readonly IProfileRepository _profileRepository;
         private readonly ITagRepository _tagRepository;
         private readonly IPostRepository _postRepository;
+        private readonly IWordRepository _wordRepository;
 
         public ServicesManager()
         {
             _profileRepository = new ProfileRepository();
             _tagRepository = new TagRepository();
             _postRepository = new PostRepository();
+            _wordRepository = new WordRepository();
         }
+
+        #region IServicesManager Members
 
         public Profile SaveProfile(Profile profile)
         {
@@ -158,5 +162,12 @@ namespace BusinessRules
         {
             Utils.SendMail(to, address, displayName, subject, body, userName, password, port, host);
         }
+       
+        public List<Word> GetAllWords()
+        {
+            return _wordRepository.GetAll();
+        }
+
+        #endregion
     }
 }

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Core.Domain;
-using SearchEnginesBase.Entities;
 
 namespace BusinessRules
 {

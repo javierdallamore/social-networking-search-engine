@@ -19,6 +19,7 @@ namespace BusinessRules
         List<Post> GetAllEntitiesByTag(string tagName);
         List<Post> GetAllEntitiesByTag(Guid tagId);
         List<Post> GetAllEntitiesByProfile(Guid profileId);
+        List<Word> GetAllWords();
 
         void SendMail(string to, string address, string displayName, string subject, string body, string userName, string password, int port, string host);
     }

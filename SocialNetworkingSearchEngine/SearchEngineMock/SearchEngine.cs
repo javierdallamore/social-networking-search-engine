@@ -7,18 +7,15 @@ namespace SearchEngineMock
     {
         public string Name
         {
-            get { return "P&P social networking"; }
+            get { return "Local DB"; }
         }
 
         public SocialNetworkingSearchResult Search(string searchParameters, int page)
         {
-            var socialNetworkingSearchResult = new SocialNetworkingSearchResult()
-                                                   {
-                                                       SocialNetworkingName = "P&P social networking"
-                                                   };
+            var socialNetworkingSearchResult = new SocialNetworkingSearchResult() { };
 
             NHSessionManager.Instance.BeginTransaction();
-                        
+
             var list = new DAO.DaoSocialNetworkingItem().GetAll();
 
             socialNetworkingSearchResult.SocialNetworkingItems.AddRange(list);

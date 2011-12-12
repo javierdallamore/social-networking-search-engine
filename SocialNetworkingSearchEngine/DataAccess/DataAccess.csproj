@@ -61,9 +61,11 @@
     <Compile Include="DAO\TagRepository.cs" />
     <Compile Include="DAO\RepositoryBase.cs" />
     <Compile Include="DAO\PostRepository.cs" />
+    <Compile Include="DAO\WordRepository.cs" />
     <Compile Include="Mapping\ProfileMap.cs" />
     <Compile Include="Mapping\TagMap.cs" />
     <Compile Include="Mapping\PostMap.cs" />
+    <Compile Include="Mapping\WordMap.cs" />
     <Compile Include="NHSessionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

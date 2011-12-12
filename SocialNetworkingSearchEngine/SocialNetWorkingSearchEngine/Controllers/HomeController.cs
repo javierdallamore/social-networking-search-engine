@@ -14,7 +14,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
     {
         public ActionResult Index()
         {
-            ViewData["Message"] = "Welcome to Pichers & Pichers Social Networking Search Engine";
+            ViewData["Message"] = "Welcome to Social Networking Search Engine";
 
             return View();
         }
@@ -29,9 +29,9 @@ namespace SocialNetWorkingSearchEngine.Controllers
             return View();
         }
 
-        private List<string> negativeWords = new List<string>() { "Conchuda", "concha", "boludo", "puto" };
-        private List<string> positiveWords = new List<string>() { "idolo", "exito", "amo", "genio" };
-        private List<string> ignoreList = new List<string>() { ".", "," };
+        private List<string> negativeWords;
+        private List<string> positiveWords;
+        private List<string> ignoreList;
 
         public JsonResult SearchResults(string parameters, string searchEngines, string sentiment)
         {
@@ -42,14 +42,15 @@ namespace SocialNetWorkingSearchEngine.Controllers
             {                
                 var searchEngineManager = new SearchEngineManager();
                 result = searchEngineManager.Search(parameters, searchEngines.Split(',').ToList());
-                
+
+                GetAllWords();
+
                 var sentimentValuator = new SentimentValuator
                                             {
                                                 NegativeWords = negativeWords,
                                                 PositiveWords = positiveWords,
                                                 IgnoreChars = ignoreList
                                             };
-
 
                 foreach (var item in result)
                 {
@@ -61,8 +62,27 @@ namespace SocialNetWorkingSearchEngine.Controllers
                 
                 BuildSentimentBox(model, sentimentValuator);
                 BuildEnginesBox(model);
+                BuildTopUsersBox(model);
             }
             return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        private void GetAllWords()
+        {
+            ignoreList = new List<string>() {".", ","};
+            negativeWords = new List<string>();
+            positiveWords = new List<string>();
+
+            var serviceManager = new ServicesManager();
+
+            negativeWords = serviceManager.GetAllWords().Where(x => x.Sentiment == "Negativo").Select(x => x.Name).ToList();
+            positiveWords = serviceManager.GetAllWords().Where(x => x.Sentiment == "Positivo").Select(x => x.Name).ToList();
+        }
+
+        private void BuildTopUsersBox(SearchResultModel model)
+        {
+            var builder = new TopUsersBoxBuilder();
+            builder.BuildBox(model);
         }
 
         private void BuildEnginesBox(SearchResultModel model)
