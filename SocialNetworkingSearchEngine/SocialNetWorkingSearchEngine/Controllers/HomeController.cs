@@ -29,9 +29,9 @@ namespace SocialNetWorkingSearchEngine.Controllers
             return View();
         }
 
-        private List<string> negativeWords = new List<string>() { "Conchuda", "concha", "boludo", "puto" };
-        private List<string> positiveWords = new List<string>() { "idolo", "exito", "amo", "genio" };
-        private List<string> ignoreList = new List<string>() { ".", "," };
+        private List<string> negativeWords;
+        private List<string> positiveWords;
+        private List<string> ignoreList;
 
         public JsonResult SearchResults(string parameters, string searchEngines, string sentiment)
         {
@@ -42,7 +42,9 @@ namespace SocialNetWorkingSearchEngine.Controllers
             {                
                 var searchEngineManager = new SearchEngineManager();
                 result = searchEngineManager.Search(parameters, searchEngines.Split(',').ToList());
-                
+
+                GetAllWords();
+
                 var sentimentValuator = new SentimentValuator
                                             {
                                                 NegativeWords = negativeWords,
@@ -63,6 +65,18 @@ namespace SocialNetWorkingSearchEngine.Controllers
                 BuildEnginesBox(model);
             }
             return Json(model, JsonRequestBehavior.AllowGet);
+        }
+
+        private void GetAllWords()
+        {
+            ignoreList = new List<string>() {".", ","};
+            negativeWords = new List<string>();
+            positiveWords =  new List<string>();
+
+            var serviceManager = new ServicesManager();
+
+            negativeWords = serviceManager.GetAllWords().Where(x => x.Sentiment == "Negativo").Select(x => x.Name).ToList();
+            positiveWords = serviceManager.GetAllWords().Where(x => x.Sentiment == "Positivo").Select(x => x.Name).ToList();
         }
 
         private void BuildEnginesBox(SearchResultModel model)

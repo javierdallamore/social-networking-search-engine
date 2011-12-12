@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Text;
 using Core.Domain;
 using DataAccess.DAO;
 using SearchEnginesBase.Entities;
@@ -59,6 +58,7 @@ namespace BusinessRules
             List<Post> posts = (from u in entityList
                                 select new Post
                                            {
+                                               SocialNetworkName = u.SocialNetworkName,
                                                UserName = u.UserName,
                                                ProfileImage = u.ProfileImage,
                                                Content = u.Content,

@@ -88,5 +88,24 @@ namespace BusinessRulesTest
             tagRepository.SaveOrUpdate(new Tag() { Name = "tag4" });
             NHSessionManager.Instance.CommitTransaction();
         }
+
+        [TestMethod]
+        public void CreateWords()
+        {
+            NHSessionManager.Instance.BeginTransaction();
+            var wordRepository = new WordRepository();
+
+            wordRepository.SaveOrUpdate(new Word() { Name = "Conchuda", Sentiment = "Negativo"});
+            wordRepository.SaveOrUpdate(new Word() { Name = "concha", Sentiment = "Negativo"});
+            wordRepository.SaveOrUpdate(new Word() { Name = "boludo", Sentiment = "Negativo"});
+            wordRepository.SaveOrUpdate(new Word() { Name = "puto", Sentiment = "Negativo"});
+
+            wordRepository.SaveOrUpdate(new Word() { Name = "idolo", Sentiment = "Positivo"});
+            wordRepository.SaveOrUpdate(new Word() { Name = "exito", Sentiment = "Positivo"});
+            wordRepository.SaveOrUpdate(new Word() { Name = "amo", Sentiment = "Positivo"});
+            wordRepository.SaveOrUpdate(new Word() { Name = "genio", Sentiment = "Positivo"});
+
+            NHSessionManager.Instance.CommitTransaction();
+        }
     }
 }

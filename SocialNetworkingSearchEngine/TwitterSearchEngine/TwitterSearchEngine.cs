@@ -10,7 +10,7 @@ namespace TwitterSearchEngine
     {
         public string Name
         {
-            get { return "Twitter search engine"; }
+            get { return "Twitter"; }
         }
 
         public SocialNetworkingSearchResult Search(string searchParameters, int page)
@@ -20,7 +20,7 @@ namespace TwitterSearchEngine
             var jsonResults = Utils.BuildSearchQuery(engineURL, searchParameters, parameters);
             var entity = Utils.DeserializarJsonTo<SearchResultsTwitter>(jsonResults);
             var list = SocialNetworkingItemList(entity);
-            
+
             return new SocialNetworkingSearchResult() { SocialNetworkingItems = list, SocialNetworkingName = Name };
         }
 
@@ -32,15 +32,16 @@ namespace TwitterSearchEngine
 
             List<SocialNetworkingItem> users = (from u in entity.Results
                                                 select new SocialNetworkingItem
-                                      {
-                                          UserName = u.FromUser,
-                                          ProfileImage = u.ProfileImageUrl,
-                                          Content = u.Text,
-                                          UrlPost = GetPostUrl(u.FromUser, u.IdString),
-                                          UrlProfile = GetProfileUrl(u.FromUser),
-                                          CreatedAt = DateTimeOffset.Parse(u.CreatedAt).UtcDateTime,
-                                          Source = u.Source
-                                      }).ToList();
+                                                           {
+                                                               SocialNetworkName = Name,
+                                                               UserName = u.FromUser,
+                                                               ProfileImage = u.ProfileImageUrl,
+                                                               Content = u.Text,
+                                                               UrlPost = GetPostUrl(u.FromUser, u.IdString),
+                                                               UrlProfile = GetProfileUrl(u.FromUser),
+                                                               CreatedAt = DateTimeOffset.Parse(u.CreatedAt).UtcDateTime,
+                                                               Source = u.Source
+                                                           }).ToList();
             return users;
         }
 
@@ -60,7 +61,7 @@ namespace TwitterSearchEngine
         }
 
         private string GetParameters(int page, int rpp)
-        {            
+        {
             var _page = page == 1 ? string.Empty : "&page=" + page;
             var _rpp = "&rpp=" + rpp;
 

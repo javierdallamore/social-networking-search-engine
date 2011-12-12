@@ -9,7 +9,7 @@ namespace FacebookSearchEngine
     {
         public string Name
         {
-            get { return "Facebook search engine"; }
+            get { return "Facebook"; }
         }
 
         public SocialNetworkingSearchResult Search(string searchParameters, int page)
@@ -36,6 +36,7 @@ namespace FacebookSearchEngine
                 if (!post.ContainsKey("message")) continue;
 
                 user = new SocialNetworkingItem();
+                user.SocialNetworkName = Name;
                 user.UserName = post["from"].Dictionary["name"].String;
                 user.Content = post["message"].String;
                 user.CreatedAt = DateTimeOffset.Parse(post["created_time"].String).UtcDateTime;
