@@ -30,7 +30,7 @@ $(document).ready(function () {
                 item_result += "<a href=\"" + socialNetworkingItems.UrlPost + "\" target=\"_blank\">" + socialNetworkingItems.Content + "<\a>"; //link
                 item_result += "</h3>"; 							                                                        //result title
                 item_result += "<div>"; 							                                                        //save
-                item_result += "<input id=\"" + socialNetworkingItems.Id + "\" type=\"button\" value=\"Save\">";
+                item_result += "<input id=\"btnSave" + socialNetworkingItems.Id + "\" type=\"button\" value=\"Save\">";
                 item_result += "</div>";                                                                                    //save
                 item_result += "<div class=\"info\"> <p>";                                                                  //Info
                 item_result += "El " + socialNetworkingItems.CreatedAtShort + " por ";
@@ -54,19 +54,33 @@ $(document).ready(function () {
                 item_result += "</div>";
                 item_result += "</form>";
 
+                item_result += "<div>";
+                item_result += "<p> Para: </p>";
+                item_result += "<input id=\"txtDestinatary\"" + socialNetworkingItems.Id + " type=\"text\">";
+                item_result += "<input id=\"btnSendEmail\"" + socialNetworkingItems.Id + "type=\"button\" value=\"Send\">";
+                item_result += "</div>";
+
                 item_result += "</div>"; 						                                                            //result item
 
                 result_listTag.append(item_result);
             });
 
-            _.each($("#search_result_list :input[type=button]"), function (inputElement) {
+            //Atach Save button click event.
+            _.each($("input[id^='btnSave']"), function (inputElement) {
                 $(inputElement).click(function (e) {
                     OnSaveItemButtonClick($(inputElement).attr("Id"), e);
                 });
             });
 
-            var divList = $("div[id^='stars-wrapper']");
+            //Atach send email button click event.
+            _.each($("input[id^='btnSendEmail']"), function (inputElement) {
+                $(inputElement).click(function (e) {
+                    OnSendEmailItemButtonClick($(inputElement).attr("Id"), e);
+                });
+            });
 
+
+            //Create the calification control
             _.each($("#search_result_list"), function () {
                 $("div[id^='stars-wrapper']").each(function (i, e) {
                     $(e).stars({
@@ -98,6 +112,19 @@ $(document).ready(function () {
         //$("#imgLoading").hide();
     };
 
+    function OnSendEmailItemButtonClick(itemId, e) {
+        //btnSendEmail
+        var id = itemId.substr(12);
+        var destinataries = $("#txtDestinatary" + id).val();
+        $.post("Home/SendMail", { to: destinataries, subject:, body: },
+            function callback() {
+
+            },
+            function errCallback() {
+
+            });
+    };
+
     function OnSaveItemButtonClick(itemId, e) {
         var itemDivId = itemId + "ITEMDIV";
         var tagUl = $("#" + itemDivId.toString() + " li");
@@ -112,11 +139,5 @@ $(document).ready(function () {
         var ui = $(rankingControl).data("stars");
         var itemCalification = ui.options.value;
         item.Calification = itemCalification;
-
-
-//        $.getJSON("Home/SaveEntity", { Entity: item }, function (result) {
-//            result.toString();
-//        });
     };
-
 });
