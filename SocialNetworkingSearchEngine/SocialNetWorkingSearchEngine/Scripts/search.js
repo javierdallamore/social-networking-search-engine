@@ -66,7 +66,7 @@ $(document).ready(function () {
                 item_result += "<img src=\"" + socialNetworkingItems.ProfileImage + "\" class=\"user_image\"\>";
                 item_result += " <a href=\"" + socialNetworkingItems.UrlProfile + "\" target=\"_blank\">" + socialNetworkingItems.UserName + "<\a>";
                 item_result += "</p></div>";  //Info
-                item_result += "<div><p>Tag it:</p>"; 	//result tag seccion
+                item_result += "<div style=\"float: left\"><p>Tag it:</p></div>"; //result tag seccion
                 item_result += "<ul></ul>";
                 item_result += "</div>"; 				//result tag seccion
 
@@ -129,8 +129,8 @@ $(document).ready(function () {
                             $("#imgIconFrom" + socialNetworkingItems.Id).attr("src", "../Content/search_item_icon.gif");
                     };
                 };
-                
-                
+
+
 
                 $("#btnSave" + socialNetworkingItems.Id).click(function (e) {
                     onSaveItemButtonClick(socialNetworkingItems.Id, $(this));

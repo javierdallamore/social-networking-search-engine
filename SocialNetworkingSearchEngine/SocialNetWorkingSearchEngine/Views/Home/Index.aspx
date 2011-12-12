@@ -6,6 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
     <div id="splash">
+        <%--Search seccion--%>
         <div class="search_block">
             <div id="search">
                 <table>
@@ -39,24 +40,28 @@
                 </div>
             </div>
         </div>
-        <div id="container_results">
-            <div id="boxesContainer">
-                <div id="sentimentBox" class="box">
-                    <h4> Sentiment</h4>
-                        <table class="tableBox">
-                            <tr>
-                                 <td width="90px" style="overflow:hidden;max-width:90px;">
-                                    Positivo
-                                </td>
-                                <td >
-                                <div class="chart_bar" style="width:25px;">&nbsp;</div>
-                                </td>
-                                <td style="text-align:right;">99</td>
-                            </tr>
+
+        <%--Lext Boxes--%>
+        <div id="boxesContainer">
+            <div id="sentimentBox" class="box">
+                <h4> Sentiment</h4>
+                    <table class="tableBox">
+                        <tr>
+                                <td width="90px" style="overflow:hidden;max-width:90px;">
+                                Positivo
+                            </td>
+                            <td >
+                            <div class="chart_bar" style="width:25px;">&nbsp;</div>
+                            </td>
+                            <td style="text-align:right;">99</td>
+                        </tr>
                 
-                        </table>
-                </div>
+                    </table>
             </div>
+        </div>
+
+        <%--Search results--%>
+        <div id="container_results">
             <div id="result_list">
                 <div id="search_result_header"></div>
                     <ul id="search_result_list"></ul>
