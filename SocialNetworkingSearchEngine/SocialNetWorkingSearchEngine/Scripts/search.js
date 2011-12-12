@@ -78,8 +78,8 @@ $(document).ready(function () {
             //Obtengo los tags
             var tagArrays = new Array();
             $.getJSON("Home/GetAllTags", {}, function (json) {
-                _.each(json, function (Tag) {
-                    tagArrays.push(Tag.Name);
+                _.each(json, function (tag) {
+                    tagArrays.push(tag.Name);
                 });
 
 
@@ -100,8 +100,7 @@ $(document).ready(function () {
 
     function OnSaveItemButtonClick(itemId, e) {
         var itemDivId = itemId + "ITEMDIV";
-        var tagUl = $("#" + itemDivId.toString() + " li");
-        var itemAssignedTags = $(tagUl).map(function () {
+        var itemAssignedTags = $("#" + itemDivId.toString() + " li.tagItem").map(function () {
             return $(this).text();
         });
         var item = $.socialNetworkingItemNamespace.searchResultsItemShowed[itemId];
@@ -112,11 +111,12 @@ $(document).ready(function () {
         var ui = $(rankingControl).data("stars");
         var itemCalification = ui.options.value;
         item.Calification = itemCalification;
+        item.Tags = null;
+        item.CurrentTags = _.reduce(itemAssignedTags, function (values, acc) { return acc + "," + values; });
 
-
-//        $.getJSON("Home/SaveEntity", { Entity: item }, function (result) {
-//            result.toString();
-//        });
+        $.post('Home/SavePost', item, function (result) {
+            result.toString();
+        });
     };
 
 });

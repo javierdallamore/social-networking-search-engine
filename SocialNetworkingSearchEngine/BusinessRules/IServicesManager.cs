@@ -7,7 +7,7 @@ namespace BusinessRules
     public interface IServicesManager
     {
         Profile SaveProfile(Profile profile);
-        Post SaveEntity(Post entity);
+        Post SavePost(Post entity);
         Tag SaveTag(Tag tag);
 
         Post TagEntity(Post entity, Guid tagId);
