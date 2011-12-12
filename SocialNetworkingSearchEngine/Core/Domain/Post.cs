@@ -25,6 +25,14 @@ namespace Core.Domain
         public virtual string UrlPost { get; set; }
         public virtual string UrlProfile { get; set; }
         public virtual string Source { get; set; }
+
+        #region No Mapeado
         public virtual string CurrentTags { get; set; } 
+        public virtual string CreatedAtShort
+        {
+            get { return CreatedAt.ToLongDateString() + " " + CreatedAt.ToShortTimeString(); }
+        }
+
+        #endregion
     }
 }
