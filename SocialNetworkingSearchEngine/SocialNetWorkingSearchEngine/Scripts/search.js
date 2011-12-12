@@ -31,7 +31,7 @@ $(document).ready(function () {
 
             buildBoxes(json.StatBoxs);
 
-            _.each(json.Items, function (socialNetworkingItems) {
+            _.each(json, function (socialNetworkingItems) {
 
                 $.socialNetworkingItemNamespace.searchResultsItemShowed[socialNetworkingItems.Id] = socialNetworkingItems;
                 var itemId = socialNetworkingItems.Id + "ITEMDIV";
@@ -57,7 +57,7 @@ $(document).ready(function () {
 
                 item_result += "<div>";
                 item_result += "<h3>"; //result title
-                item_result += "<a href=\"" + socialNetworkingItems.UrlPost + "\" target=\"_blank\">" + socialNetworkingItems.Content + "<\a>"; //link
+                item_result += "<a href=\"" + socialNetworkingItems.UrlPost + "\" target=\"_blank\" title=\"" + socialNetworkingItems.Content + "\">" + socialNetworkingItems.Content.substring(0, 150) + "..." + "<\a>"; //link
                 item_result += "</h3>";
                 item_result += "</div>";
                 item_result += "</div>"; //header post
