@@ -111,6 +111,7 @@
     <Compile Include="SearchEngineBoxBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\facebook.png" />
     <Content Include="Content\gitHubList.css" />
     <Content Include="Content\global.css" />
     <Content Include="Content\jquery-ui-1.8.16.custom.css" />
@@ -123,6 +124,8 @@
     <Content Include="Content\tag_remove.cur" />
     <Content Include="Content\tag_remove.png" />
     <Content Include="Content\tag_update.png" />
+    <Content Include="Content\twitter.png" />
+    <Content Include="Content\twitter_icon.png" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-ui-1.8.16.custom.min.js" />
     <Content Include="Scripts\jquery.taghandler.js" />

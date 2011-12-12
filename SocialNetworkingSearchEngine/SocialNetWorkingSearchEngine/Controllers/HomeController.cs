@@ -14,7 +14,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
     {
         public ActionResult Index()
         {
-            ViewData["Message"] = "Welcome to ASP.NET MVC!";
+            ViewData["Message"] = "Welcome to Pichers & Pichers Social Networking Search Engine";
 
             return View();
         }
@@ -36,12 +36,12 @@ namespace SocialNetWorkingSearchEngine.Controllers
         public JsonResult SearchResults(string parameters, string searchEngines, string sentiment)
         {
             var result = new List<Post>();
+
             if (ModelState.IsValid)
-            {
+            {                
                 var searchEngineManager = new SearchEngineManager();
                 result = searchEngineManager.Search(parameters, searchEngines.Split(',').ToList());
-                var model = new SearchResultModel();
-
+                
                 var sentimentValuator = new SentimentValuator
                                             {
                                                 NegativeWords = negativeWords,
@@ -49,15 +49,15 @@ namespace SocialNetWorkingSearchEngine.Controllers
                                                 IgnoreChars = ignoreList
                                             };
 
+                var model = new SearchResultModel();
+
                 foreach (var item in result)
                 {
                     sentimentValuator.ProcessItem(item);
-                    if (string.IsNullOrWhiteSpace(sentiment) || item.Sentiment.ToLower() == sentiment.ToLower())
-                    {
-                        model.Items.Add(item);
-                    }
-                }
 
+                    if (string.IsNullOrWhiteSpace(sentiment) || item.Sentiment.ToLower() == sentiment.ToLower())
+                        model.Items.Add(item);
+                }
                 
                 BuildSentimentBox(model, sentimentValuator);
                 BuildEnginesBox(model);

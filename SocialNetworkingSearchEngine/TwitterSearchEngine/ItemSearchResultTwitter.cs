@@ -12,16 +12,15 @@ namespace TwitterSearchEngine
         [DataMember(Name = "from_user_id_str", Order = 2)]
         public string FromUserIdString { get; set; }
         [DataMember(Name = "from_user_name", Order = 3)]
-        public string FromUserName { get; set; }
+        public string FromUserName { get; set; }                
         [DataMember(Name = "geo", Order = 4)]
-        public string Geo { get; set; }        
+        public Geo Geo { get; set; }                
         [DataMember(Name = "id_str", Order = 5)]
         public string IdString { get; set; }
         [DataMember(Name = "iso_language_code", Order = 6)]
         public string IsoLanguageCode { get; set; }
-        //"metadata":{"result_type":"recent"},
-        //[DataMember(Name = "metadata", Order = 7)]
-        //public string Metadata { get; set; }
+        [DataMember(Name = "metadata", Order = 7)]
+        public Metadata Metadata { get; set; }
         [DataMember(Name = "profile_image_url", Order = 8)]
         public string ProfileImageUrl { get; set; }
         [DataMember(Name = "source", Order = 9)]
@@ -36,5 +35,21 @@ namespace TwitterSearchEngine
         public string ToUserName { get; set; }
         [DataMember(Name = "in_reply_to_status_id_str", Order = 14)]
         public string InReplyToStatusIdString { get; set; }
+    }
+
+    [DataContract]
+    public class Geo
+    {        
+        [DataMember(Name = "coordinates")]
+        public string Coordinates { get; set; }
+        [DataMember(Name = "type")]
+        public string Type { get; set; }
+    }
+
+    [DataContract]
+    public class Metadata
+    {
+        [DataMember(Name = "result_type")]
+        public string ResultType { get; set; }
     }
 }

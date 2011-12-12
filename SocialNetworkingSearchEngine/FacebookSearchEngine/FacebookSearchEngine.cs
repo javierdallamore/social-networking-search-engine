@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Facebook;
 using SearchEnginesBase.Entities;
-using SearchEnginesBase.Utils;
 
 namespace FacebookSearchEngine
 {
@@ -21,7 +19,7 @@ namespace FacebookSearchEngine
             JSONObject json = api.Get(engineURL + searchParameters + "&type=post&limit=25");
 
             var list = SocialNetworkingItemList(json);
-            return new SocialNetworkingSearchResult() { SocialNetworkingItems = list, SocialNetworkingName = "Twitter using 'Twitter search engine'" };
+            return new SocialNetworkingSearchResult() { SocialNetworkingItems = list, SocialNetworkingName = "Facebook using 'Facebook search engine'" };
         }
        
         //Este metodo itera los resultados y crea las entidades de dominio
