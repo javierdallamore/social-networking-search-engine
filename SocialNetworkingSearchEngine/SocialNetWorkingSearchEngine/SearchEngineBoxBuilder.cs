@@ -40,10 +40,12 @@ namespace SocialNetWorkingSearchEngine
                 if (model.Items.Count > 0)
                 {
                     red.ValueText = ((decimal) engine.Counter/model.Items.Count*100).ToString("f") + "%";
+                    red.ValuePercent = ((decimal) engine.Counter/model.Items.Count*100);
                 }
                 else
                 {
                     red.ValueText = "0%";
+                    red.ValuePercent = 0;
                 }
             }
         }

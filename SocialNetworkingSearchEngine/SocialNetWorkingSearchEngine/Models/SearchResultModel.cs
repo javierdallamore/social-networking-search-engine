@@ -31,6 +31,7 @@ namespace SocialNetWorkingSearchEngine.Models
     {
         public string Title { get; set; }
         public int Value { get; set; }
+        public decimal ValuePercent { get; set; }
         public string ValueText { get; set; }
         public string Link { get; set; }
     }

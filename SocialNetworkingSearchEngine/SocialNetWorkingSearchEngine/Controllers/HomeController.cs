@@ -36,6 +36,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
         public JsonResult SearchResults(string parameters, string searchEngines, string sentiment)
         {
             var result = new List<Post>();
+            var model = new SearchResultModel();
 
             if (ModelState.IsValid)
             {                
@@ -49,7 +50,6 @@ namespace SocialNetWorkingSearchEngine.Controllers
                                                 IgnoreChars = ignoreList
                                             };
 
-                var model = new SearchResultModel();
 
                 foreach (var item in result)
                 {
@@ -61,8 +61,8 @@ namespace SocialNetWorkingSearchEngine.Controllers
                 
                 BuildSentimentBox(model, sentimentValuator);
                 BuildEnginesBox(model);
-            } 
-            return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         private void BuildEnginesBox(SearchResultModel model)
@@ -101,6 +101,12 @@ namespace SocialNetWorkingSearchEngine.Controllers
                     ((decimal)sentimentValuator.NegativeCount / model.Items.Count * 100).ToString("f") + "%";
                 sentimentBox.StatItems[2].ValueText =
                     ((decimal)sentimentValuator.NeutralCount / model.Items.Count * 100).ToString("f") + "%";
+                sentimentBox.StatItems[0].ValuePercent =
+                    ((decimal)sentimentValuator.PositiveCount / model.Items.Count * 100);
+                sentimentBox.StatItems[1].ValuePercent =
+                    ((decimal)sentimentValuator.NegativeCount / model.Items.Count * 100);
+                sentimentBox.StatItems[2].ValuePercent =
+                    ((decimal)sentimentValuator.NeutralCount / model.Items.Count * 100);
                 
             }
             else
@@ -108,6 +114,9 @@ namespace SocialNetWorkingSearchEngine.Controllers
                 sentimentBox.StatItems[0].ValueText = "0%";
                 sentimentBox.StatItems[1].ValueText = "0%";
                 sentimentBox.StatItems[2].ValueText = "0%";
+                sentimentBox.StatItems[0].ValuePercent = 0;
+                sentimentBox.StatItems[1].ValuePercent = 0;
+                sentimentBox.StatItems[2].ValuePercent = 0;
             }
         }
 

@@ -36,7 +36,10 @@
     margin-bottom:7px;
 }
 
-#container_results {}
+#container_results {
+    float: left;
+    width: 650px;
+}
 
 #container_results .total {
 	margin: 0 0 10px 0;
@@ -399,3 +402,31 @@ float:left;
 .tagcloud .font3 {font-size:125%;}
 .tagcloud .font4 {font-size:140%;}
 .tagcloud .font5 {font-size:150%;}
+
+
+#boxesContainer {
+	float:left;
+	width:250px;
+    border: solid 1px red;
+}
+
+.tableBox 
+{
+    width: 200px;
+    border-collapse: collapse;
+    border-spacing: 0px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom:1px solid #ccc;	
+    
+}
+
+.tableBox td {
+	font-size:0.75em;
+	font-weight:bold;
+	padding-bottom:7px;
+    height: 16px;
+    border: none;
+}
+
