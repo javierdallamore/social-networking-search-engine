@@ -95,7 +95,7 @@ $(document).ready(function () {
             });
         });
 
-        $("#imgLoading").hide();
+        //$("#imgLoading").hide();
     };
 
     function OnSaveItemButtonClick(itemId, e) {
