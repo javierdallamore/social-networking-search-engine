@@ -5,9 +5,10 @@ $(document).ready(function () {
 
 
     $("#btnSearch").click(onClick);
-
+    $("#imgLoading").hide();
 
     function onClick(e) {
+        $("#imgLoading").show();
         var values = $(":checked").map(function (value, index) { return index.value; });
         var valuesAsString = _.reduce(values, function (memo, currentItem) { return memo + ',' + currentItem });
         $("#result").html("");
@@ -100,6 +101,8 @@ $(document).ready(function () {
 
             });
         });
+
+        $("#imgLoading").hide();
     };
 
     function OnSaveItemButtonClick(itemId, e) {
