@@ -142,10 +142,10 @@ namespace SocialNetWorkingSearchEngine.Controllers
         }
 
         [HttpPost]
-        public JsonResult SavePost(Post entity)
+        public JsonResult SavePost(Post post)
         {
             var servicesManager = new ServicesManager();
-            return Json(servicesManager.SavePost(entity), JsonRequestBehavior.AllowGet);
+            return Json(servicesManager.SavePost(post), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -163,10 +163,10 @@ namespace SocialNetWorkingSearchEngine.Controllers
         }
 
         [HttpPost]
-        public JsonResult TagEntity(Post entity, string tagName)
+        public JsonResult TagPost(Post post, string tagName)
         {
             var servicesManager = new ServicesManager();
-            return Json(servicesManager.TagEntity(entity, tagName), JsonRequestBehavior.AllowGet);
+            return Json(servicesManager.TagPost(post, tagName), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
