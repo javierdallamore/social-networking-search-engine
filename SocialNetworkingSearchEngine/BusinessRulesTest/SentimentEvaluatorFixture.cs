@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using BusinessRules;
+using Core.Domain;
 using NUnit.Framework;
 using SearchEnginesBase.Entities;
 using SharpTestsEx;
@@ -47,7 +48,7 @@ namespace BusinessRulesTest
         public void WhenContainConchaDeTuMadreShouldByNegativeTest()
         {
             //arrange
-            var item = new SocialNetworkingItem() {Content = "andate a la concha de tu madre"};
+            var item = new Post() {Content = "andate a la concha de tu madre"};
             var sentimentValuator = GetSentimentValuator();
             //act
             sentimentValuator.ProcessItem(item);
@@ -60,7 +61,7 @@ namespace BusinessRulesTest
         public void WhenContainIdoloShouldByPositiveTest()
         {
             //arrange
-            var item = new SocialNetworkingItem() { Content = "picante pereyra, sos mi idolo." };
+            var item = new Post() { Content = "picante pereyra, sos mi idolo." };
             var sentimentValuator = GetSentimentValuator();
             //act
             sentimentValuator.ProcessItem(item);
@@ -73,7 +74,7 @@ namespace BusinessRulesTest
         public void WhenContainComputoShouldByNeutralTest()
         {
             //arrange
-            var item = new SocialNetworkingItem() { Content = "El computo esta mal hecho." };
+            var item = new Post() { Content = "El computo esta mal hecho." };
             var sentimentValuator = GetSentimentValuator();
             //act
             sentimentValuator.ProcessItem(item);
@@ -86,7 +87,7 @@ namespace BusinessRulesTest
         public void WhenContainPutoAndIdoloShouldByNeutralTest()
         {
             //arrange
-            var item = new SocialNetworkingItem() { Content = "El puto es mi idolo" };
+            var item = new Post() { Content = "El puto es mi idolo" };
             var sentimentValuator = GetSentimentValuator();
             //act
             sentimentValuator.ProcessItem(item);
@@ -100,7 +101,7 @@ namespace BusinessRulesTest
         public void WhenContainPutoMasPuntoShouldByNegativeTest()
         {
             //arrange
-            var item = new SocialNetworkingItem() { Content = "El puto." };
+            var item = new Post() { Content = "El puto." };
             var sentimentValuator = GetSentimentValuator();
             //act
             sentimentValuator.ProcessItem(item);
@@ -114,9 +115,9 @@ namespace BusinessRulesTest
         public void ProcessItemShouldIncrementCountsTest()
         {
             //arrange
-            var item1 = new SocialNetworkingItem() { Content = "El puto." };
-            var item2 = new SocialNetworkingItem() { Content = "El idolo." };
-            var item3 = new SocialNetworkingItem() { Content = "asd asd as d" };
+            var item1 = new Post() { Content = "El puto." };
+            var item2 = new Post() { Content = "El idolo." };
+            var item3 = new Post() { Content = "asd asd as d" };
             var sentimentValuator = GetSentimentValuator();
             //act
             sentimentValuator.ProcessItem(item1);
@@ -132,9 +133,9 @@ namespace BusinessRulesTest
         public void ResetCountShouldSetCountsToCeroTest()
         {
             //arrange
-            var item1 = new SocialNetworkingItem() { Content = "El puto." };
-            var item2 = new SocialNetworkingItem() { Content = "El idolo." };
-            var item3 = new SocialNetworkingItem() { Content = "asd asd as d" };
+            var item1 = new Post() { Content = "El puto." };
+            var item2 = new Post() { Content = "El idolo." };
+            var item3 = new Post() { Content = "asd asd as d" };
             var sentimentValuator = GetSentimentValuator();
             sentimentValuator.ProcessItem(item1);
             sentimentValuator.ProcessItem(item2);
@@ -152,11 +153,11 @@ namespace BusinessRulesTest
         public void EvaluateListShouldSetCountsTest()
         {
             //arrange
-            var item1 = new SocialNetworkingItem() { Content = "El puto." };
-            var item2 = new SocialNetworkingItem() { Content = "El idolo." };
-            var item3 = new SocialNetworkingItem() { Content = "asd asd as d" };
+            var item1 = new Post() { Content = "El puto." };
+            var item2 = new Post() { Content = "El idolo." };
+            var item3 = new Post() { Content = "asd asd as d" };
             var sentimentValuator = GetSentimentValuator();
-            var list = new List<SocialNetworkingItem>() {item1, item2, item3};
+            var list = new List<Post>() { item1, item2, item3 };
             //act
             sentimentValuator.ProcessItems(list);
             //assert
@@ -170,9 +171,9 @@ namespace BusinessRulesTest
         public void BuildBoxInModelWith3ItemsTest()
         {
             //arrange
-            var item1 = new SocialNetworkingItem() { Content = "El puto." };
-            var item2 = new SocialNetworkingItem() { Content = "El idolo." };
-            var item3 = new SocialNetworkingItem() { Content = "asd asd as d" };
+            var item1 = new Post() { Content = "El puto." };
+            var item2 = new Post() { Content = "El idolo." };
+            var item3 = new Post() { Content = "asd asd as d" };
             var model = new SearchResultModel();
             model.Items.Add(item1);
             model.Items.Add(item2);

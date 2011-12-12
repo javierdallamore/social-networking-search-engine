@@ -75,12 +75,12 @@
   <ItemGroup>
     <Compile Include="IServicesManager.cs" />
     <Compile Include="ISearchEngineManager.cs" />
-    <Compile Include="PichersSearchEngine.cs" />
     <Compile Include="SearchEngineConfiguration.cs" />
     <Compile Include="SearchEngineManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SentimentValuator.cs" />
     <Compile Include="ServicesManager.cs" />
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">

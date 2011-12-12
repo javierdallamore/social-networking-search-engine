@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using SearchEnginesBase.Entities;
+using Core.Domain;
 using SocialNetWorkingSearchEngine.Models;
 
 namespace SocialNetWorkingSearchEngine
@@ -21,7 +21,7 @@ namespace SocialNetWorkingSearchEngine
             _engines = new Dictionary<string, Engine>();
         }
 
-        private Dictionary<string,Engine> _engines;
+        private readonly Dictionary<string,Engine> _engines;
 
         public List<Engine> Engines { get { return _engines.Select(o=>o.Value).ToList(); } }
 
@@ -48,12 +48,12 @@ namespace SocialNetWorkingSearchEngine
             }
         }
 
-        public void ProcessItem(SocialNetworkingItem item)
+        public void ProcessItem(Post item)
         {
             if (string.IsNullOrWhiteSpace(item.SocialNetworkName)) return;
-            if(!_engines.ContainsKey(item.SocialNetworkName))
+            if (!_engines.ContainsKey(item.SocialNetworkName))
             {
-                _engines.Add(item.SocialNetworkName,new Engine(){Name = item.SocialNetworkName});
+                _engines.Add(item.SocialNetworkName, new Engine() {Name = item.SocialNetworkName});
             }
             _engines[item.SocialNetworkName].Counter++;
         }

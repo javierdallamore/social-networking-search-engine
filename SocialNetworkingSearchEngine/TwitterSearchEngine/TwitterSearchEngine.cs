@@ -27,6 +27,9 @@ namespace TwitterSearchEngine
         //Este metodo itera los resultados y crea las entidades de dominio
         private List<SocialNetworkingItem> SocialNetworkingItemList(SearchResultsTwitter entity)
         {
+            if (entity == null)
+                return null;
+
             List<SocialNetworkingItem> users = (from u in entity.Results
                                                 select new SocialNetworkingItem
                                       {

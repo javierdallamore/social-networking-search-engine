@@ -25,8 +25,8 @@
                 <div id="sources" class="sources_box clearfix">
                     <div style="float: left; width: 125px; font-size: 15px;">
                         <label>
-                            <input type="checkbox" name="src[]" value="SearchEngineMock" checked="checked">
-                            Local DB</label></div>
+                            <input type="checkbox" name="src[]" value="SavedPosts" checked="checked">
+                            Saved posts</label></div>
                     <div style="float: left; width: 125px; font-size: 15px;">
                         <label>
                             <input type="checkbox" name="src[]" value="FacebookSearchEngine" checked="checked">

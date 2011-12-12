@@ -3,9 +3,9 @@ using FluentNHibernate.Mapping;
 
 namespace DataAccess.Mapping
 {
-    public class EntityMap : ClassMap<Entity>
+    public class PostMap : ClassMap<Post>
     {
-        public EntityMap()
+        public PostMap()
         {
             Id(x => x.Id).GeneratedBy.Assigned();
             Map(x => x.SocialNetworkName, "SOCIAL_NET_NAME").Length(50);

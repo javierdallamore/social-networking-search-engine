@@ -64,8 +64,7 @@ namespace BusinessRulesTest
             SearchEngineManager.ConfigureAddins();
             var searchEngineManager = new SearchEngineManager();
             var result =searchEngineManager.Search(string.Empty, new List<string>() {"SearchEngineMock"});
-            Assert.AreEqual(result.Count, 1);
-            Assert.AreEqual(result[0].SocialNetworkingItems.Count, 2);
+            Assert.AreEqual(result.Count, 2);
         }
 
         [TestMethod]

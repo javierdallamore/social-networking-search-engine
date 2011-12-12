@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Core.Domain
 {
-    public class Entity
+    public class Post
     {
-        public Entity()
+        public Post()
         {
             Tags = new List<Tag>();
         }
