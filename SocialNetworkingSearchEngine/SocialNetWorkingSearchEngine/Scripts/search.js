@@ -11,6 +11,12 @@ $(document).ready(function () {
     });
 
     $("#btnSearch").click(onClick);
+    $("#txtSearchPattern").keyup(function (event) {
+        if (event.keyCode == 13) {
+            $("#btnSearch").click();
+        }
+    });
+
     $("#imgLoading").hide();
 
     function onClick(e) {
@@ -24,7 +30,7 @@ $(document).ready(function () {
             result_listTag.html("");
 
             buildBoxes(json.StatBoxs);
-            
+
             _.each(json.Items, function (socialNetworkingItems) {
 
                 $.socialNetworkingItemNamespace.searchResultsItemShowed[socialNetworkingItems.Id] = socialNetworkingItems;
@@ -33,12 +39,11 @@ $(document).ready(function () {
                 item_result += "<div class=\"icon\">";
                 item_result += "<img src=\"" + socialNetworkingItems.SentimentIconPath + "\"" + " class=\"icon sentiment\"\">"; //sentiment icon							                                  //icon
                 item_result += "<img src=\"" + socialNetworkingItems.SocialNetworkIconPath + "\"" + " class=\"icon\"\">";   //social media icon               
-                item_result += "</div>"; 						                                                            //icon
-                item_result += "<div>"; 							                                                        //body
+                item_result += "</div>"; //icon
+                item_result += "<div>"; //body
                 item_result += "<div>"; //header post
 
                 item_result += "<div style=\"float: right;\">";
-                //item_result += "Rating: <span id=\"stars-cap\"></span>";
                 item_result += "<div id=\"stars-wrapper" + socialNetworkingItems.Id + "\">";
                 item_result += "<select name=\"selrate\">";
                 item_result += "<option value=\"1\">Very poor</option>";
@@ -51,34 +56,34 @@ $(document).ready(function () {
                 item_result += "</div>";
 
                 item_result += "<div>";
-                item_result += "<h3>"; 							                                                            //result title
+                item_result += "<h3>"; //result title
                 item_result += "<a href=\"" + socialNetworkingItems.UrlPost + "\" target=\"_blank\">" + socialNetworkingItems.Content + "<\a>"; //link
-                item_result += "</h3>"; 							                                                        //result title
+                item_result += "</h3>";
                 item_result += "</div>";
                 item_result += "</div>"; //header post
-                item_result += "<div class=\"info\"> <p>";                                                                  //Info
+                item_result += "<div class=\"info\"> <p>";  //Info
                 item_result += "El " + socialNetworkingItems.CreatedAtShort + " por ";
                 item_result += "<img src=\"" + socialNetworkingItems.ProfileImage + "\" class=\"user_image\"\>";
                 item_result += " <a href=\"" + socialNetworkingItems.UrlProfile + "\" target=\"_blank\">" + socialNetworkingItems.UserName + "<\a>";
-                item_result += "</p></div>";                                                                                //Info
-                item_result += "<div><p>Tag it:</p>"; 							                                            //result tag seccion
+                item_result += "</p></div>";  //Info
+                item_result += "<div><p>Tag it:</p>"; 	//result tag seccion
                 item_result += "<ul></ul>";
-                item_result += "</div>"; 						                                                            //result tag seccion
+                item_result += "</div>"; 				//result tag seccion
 
                 item_result += "<div>"; //Send email and save
                 item_result += "<div>"; //email
                 item_result += "<a href=\"javascript:void(0)\" id=\"aSendEmail" + socialNetworkingItems.Id + "\">Enviar e-mail</a>";
-                item_result += "</div>"; //email                                                                                   //Send email and save
+                item_result += "</div>";
                 item_result += "<div style=\"float: right\">"; //Save
                 item_result += "<input id=\"btnSave" + socialNetworkingItems.Id + "\" type=\"image\" src=\"../Content/Save-icon.png\" style=\"vertical-align: middle; height: 30px;\"/>";
-                item_result += "</div>"; //Save
+                item_result += "</div>";
                 item_result += "</div>";
                 item_result += "<div id=\"divSendTo" + socialNetworkingItems.Id + "\" style=\"display: none;\" >";
                 item_result += "<p style=\"margin: 10px 0px 0px 0px; line-height: 0;\"> Para: </p>";
                 item_result += "<input id=\"txtDestinatary" + socialNetworkingItems.Id + "\" type=\"text\" style=\"height: 12px; vertical-align: middle; font-size: 12px\"/>";
                 item_result += "<input id=\"btnSendEmail" + socialNetworkingItems.Id + "\" type=\"image\" src=\"../Content/48x48-send_e-mail.png\" style=\"vertical-align: middle; height: 35px;\"/>";
                 item_result += "</div>";
-                item_result += "</div>"; 						                                                            //result item
+                item_result += "</div>"; 	//result item
 
                 result_listTag.append(item_result);
 
