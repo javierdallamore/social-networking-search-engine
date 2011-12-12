@@ -5,5 +5,5 @@ obj
 TestResults
 *TeamCity*
 *.suo
-*/App.config
-*/Web.config
+App.config
+Web.config

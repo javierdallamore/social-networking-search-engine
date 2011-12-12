@@ -39,11 +39,12 @@ namespace BusinessRules
             }
         }
 
-        public Post SaveEntity(Post entity)
+        public Post SavePost(Post entity)
         {
             bool begin = NHSessionManager.Instance.BeginTransaction();
             try
             {
+                SetTags(entity);
                 entity = _entityRepository.SaveOrUpdate(entity);
                 if (begin)
                     NHSessionManager.Instance.CommitTransaction();
@@ -54,6 +55,19 @@ namespace BusinessRules
                 if (begin)
                     NHSessionManager.Instance.RollbackTransaction();
                 return null;
+            }
+        }
+
+        private void SetTags(Post entity)
+        {
+            if (!String.IsNullOrEmpty(entity.CurrentTags))
+            {
+                var values = entity.CurrentTags.Split(',');
+                foreach (var tagName in values)
+                {
+                    var tag = new TagRepository().GetByName(tagName);
+                    entity.Tags.Add(tag ?? new Tag() { Name = tagName });
+                }
             }
         }
 

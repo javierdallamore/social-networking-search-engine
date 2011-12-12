@@ -25,7 +25,8 @@ namespace DataAccess.DAO
 
         public List<Post> GetByQuery(string query)
         {
-            return Session.QueryOver<Post>().Where(x => x.Content.IsLike(query)).List<Post>() as List<Post>;
+            query = !String.IsNullOrEmpty(query) ? "%" + query + "%" : query;
+            return Session.QueryOver<Post>().Where(x => x.Content.IsInsensitiveLike(query)).List<Post>() as List<Post>;
         }
     }
 }
