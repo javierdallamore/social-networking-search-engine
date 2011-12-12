@@ -12,13 +12,13 @@ namespace BusinessRules
     {
         private readonly IProfileRepository _profileRepository;
         private readonly ITagRepository _tagRepository;
-        private readonly IPostRepository _entityRepository;
+        private readonly IPostRepository _postRepository;
 
         public ServicesManager()
         {
             _profileRepository = new ProfileRepository();
             _tagRepository = new TagRepository();
-            _entityRepository = new PostRepository();
+            _postRepository = new PostRepository();
         }
 
         public Profile SaveProfile(Profile profile)
@@ -39,21 +39,35 @@ namespace BusinessRules
             }
         }
 
-        public Post SaveEntity(Post entity)
+        public Post SavePost(Post post)
         {
             bool begin = NHSessionManager.Instance.BeginTransaction();
             try
             {
-                entity = _entityRepository.SaveOrUpdate(entity);
+                SetTags(post);
+                post = _postRepository.SaveOrUpdate(post);
                 if (begin)
                     NHSessionManager.Instance.CommitTransaction();
-                return entity;
+                return post;
             }
             catch (Exception)
             {
                 if (begin)
                     NHSessionManager.Instance.RollbackTransaction();
                 return null;
+            }
+        }
+
+        private void SetTags(Post post)
+        {
+            if (!String.IsNullOrEmpty(post.CurrentTags))
+            {
+                var values = post.CurrentTags.Split(',');
+                foreach (var tagName in values)
+                {
+                    var tag = new TagRepository().GetByName(tagName);
+                    post.Tags.Add(tag ?? new Tag() { Name = tagName });
+                }
             }
         }
 
@@ -75,32 +89,32 @@ namespace BusinessRules
             }
         }
 
-        public Post TagEntity(Post entity, Guid tagId)
+        public Post TagPost(Post post, Guid tagId)
         {
             var tag = _tagRepository.GetById(tagId);
-            return TagEntity(entity, tag);
+            return TagPost(post, tag);
         }
 
-        public Post TagEntity(Post entity, string tagName)
+        public Post TagPost(Post post, string tagName)
         {
             var tag = _tagRepository.GetByName(tagName) ?? new Tag() { Name = tagName };
-            return TagEntity(entity, tag);
+            return TagPost(post, tag);
         }
 
-        private Post TagEntity(Post entity, Tag tag)
+        private Post TagPost(Post post, Tag tag)
         {
             bool begin = NHSessionManager.Instance.BeginTransaction();
             try
             {
-                if (tag != null && !entity.Tags.Any(x => x.Id == tag.Id))
+                if (tag != null && !post.Tags.Any(x => x.Id == tag.Id))
                 {
-                    entity.Tags.Add(tag);
-                    _entityRepository.SaveOrUpdate(entity);
+                    post.Tags.Add(tag);
+                    _postRepository.SaveOrUpdate(post);
                 }
 
                 if (begin)
                     NHSessionManager.Instance.CommitTransaction();
-                return entity;
+                return post;
             }
             catch (Exception)
             {
@@ -112,7 +126,7 @@ namespace BusinessRules
 
         public List<Post> GetAllEntities()
         {
-            return _entityRepository.GetAll();
+            return _postRepository.GetAll();
         }
 
         public List<Tag> GetAllTags()
@@ -127,17 +141,17 @@ namespace BusinessRules
 
         public List<Post> GetAllEntitiesByTag(string tagName)
         {
-            return _entityRepository.GetAllByTagName(tagName);
+            return _postRepository.GetAllByTagName(tagName);
         }
 
         public List<Post> GetAllEntitiesByTag(Guid tagId)
         {
-            return _entityRepository.GetAllByTagNameId(tagId);
+            return _postRepository.GetAllByTagNameId(tagId);
         }
 
         public List<Post> GetAllEntitiesByProfile(Guid profileId)
         {
-            return _entityRepository.GetAllByProfile(profileId);
+            return _postRepository.GetAllByProfile(profileId);
         }
 
         public void SendMail(string to, string address, string displayName, string subject, string body, string userName, string password, int port, string host)

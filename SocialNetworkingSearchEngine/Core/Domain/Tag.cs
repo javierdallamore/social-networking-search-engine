@@ -6,7 +6,7 @@ namespace Core.Domain
     {
         public Tag()
         {
-            
+            Id = Guid.NewGuid();
         }
 
         public virtual Guid Id { get; set; }

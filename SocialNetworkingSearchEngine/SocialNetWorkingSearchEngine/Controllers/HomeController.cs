@@ -141,30 +141,35 @@ namespace SocialNetWorkingSearchEngine.Controllers
             return Json(servicesManager.GetAllTags(), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult SaveEntity(Post entity)
+        [HttpPost]
+        public JsonResult SavePost(Post post)
         {
             var servicesManager = new ServicesManager();
-            return Json(servicesManager.SaveEntity(entity), JsonRequestBehavior.AllowGet);
+            return Json(servicesManager.SavePost(post), JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public JsonResult SaveProfile(Profile profile)
         {
             var servicesManager = new ServicesManager();
             return Json(servicesManager.SaveProfile(profile), JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public JsonResult SaveTag(Tag tag)
         {
             var servicesManager = new ServicesManager();
             return Json(servicesManager.SaveTag(tag), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult TagEntity(Post entity, string tagName)
+        [HttpPost]
+        public JsonResult TagPost(Post post, string tagName)
         {
             var servicesManager = new ServicesManager();
-            return Json(servicesManager.TagEntity(entity, tagName), JsonRequestBehavior.AllowGet);
+            return Json(servicesManager.TagPost(post, tagName), JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public void SendMail(string to, string subject, string body)
         {
             var address = ConfigurationManager.AppSettings["addressFrom"];
@@ -174,7 +179,8 @@ namespace SocialNetWorkingSearchEngine.Controllers
             var port = Convert.ToInt32(ConfigurationManager.AppSettings["port"]);
             var host = ConfigurationManager.AppSettings["host"];
 
-            Utils.SendMail(to, address, displayName, subject, body, userName, password, port, host);
+            var servicesManager = new ServicesManager();
+            servicesManager.SendMail(to, address, displayName, subject, body, userName, password, port, host);
         }
     }
 }
