@@ -66,12 +66,12 @@ $(document).ready(function () {
 
                 item_result += "<div>"; 							                                                        //save
                 item_result += "<a href=\"javascript:void(0)\" id=\"aSendEmail" + socialNetworkingItems.Id + "\">Send by Email</a>";
-                item_result += "<input id=\"btnSave" + socialNetworkingItems.Id + "\" type=\"button\" value=\"Save\">";
+                item_result += "<input id=\"btnSave" + socialNetworkingItems.Id + "\" type=\"button\" value=\"Save\" />";
                 item_result += "</div>";                                                                                    //save
-                item_result += "<div id=\"divSendTo" + socialNetworkingItems.Id + "\" style=\"display: none;\">";
+                item_result += "<div id=\"divSendTo" + socialNetworkingItems.Id + "\" style=\"display: none;\" >";
                 item_result += "<p> Para: </p>";
-                item_result += "<input id=\"txtDestinatary\"" + socialNetworkingItems.Id + " type=\"text\">";
-                item_result += "<input id=\"btnSendEmail\"" + socialNetworkingItems.Id + "type=\"button\" value=\"Send\">";
+                item_result += "<input id=\"txtDestinatary" + socialNetworkingItems.Id + "\" type=\"text\" />";
+                item_result += "<input id=\"btnSendEmail" + socialNetworkingItems.Id + "\" type=\"button\" value=\"Send mail\" />";
                 item_result += "</div>";
 
                 item_result += "</div>"; 						                                                            //result item
@@ -102,6 +102,10 @@ $(document).ready(function () {
                     onSaveItemButtonClick(socialNetworkingItems.Id, $(this));
                 });
 
+                $("#btnSendEmail" + socialNetworkingItems.Id).click(function (e) {
+                    onSendEmailItemButtonClick(socialNetworkingItems.Id, socialNetworkingItems.UrlPost, socialNetworkingItems.Content);
+                });
+
                 $("#stars-wrapper" + socialNetworkingItems.Id + " select option").each(function () {
                     if (parseInt($(this).val()) === socialNetworkingItems.Calification) {
                         $(this).attr("selected", "selected");
@@ -121,11 +125,10 @@ $(document).ready(function () {
         });
     };
 
-    function onSendEmailItemButtonClick(itemId, e) {
-        //btnSendEmail
-        var id = itemId.substr(12);
-        var destinataries = $("#txtDestinatary" + id).val();
-        $.post("Home/SendMail", { to: destinataries, subject: null, body: null },
+    function onSendEmailItemButtonClick(itemId, urlPost, content) {
+        var mailBody = content + "\n\n" + urlPost;
+        var destinataries = $("#txtDestinatary" + itemId).val();
+        $.post("Home/SendMail", { to: destinataries, subject: 'Social networking', body: mailBody },
             function callback() {
 
             },
