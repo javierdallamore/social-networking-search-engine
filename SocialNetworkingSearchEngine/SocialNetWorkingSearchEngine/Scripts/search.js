@@ -11,6 +11,12 @@ $(document).ready(function () {
     });
 
     $("#btnSearch").click(onClick);
+    $("#txtSearchPattern").keyup(function (event) {
+        if (event.keyCode == 13) {
+            $("#btnSearch").click();
+        }
+    });
+
     $("#imgLoading").hide();
 
     function onClick(e) {
@@ -24,21 +30,20 @@ $(document).ready(function () {
             result_listTag.html("");
 
             buildBoxes(json.StatBoxs);
-            
+
             _.each(json.Items, function (socialNetworkingItems) {
 
                 $.socialNetworkingItemNamespace.searchResultsItemShowed[socialNetworkingItems.Id] = socialNetworkingItems;
                 var itemId = socialNetworkingItems.Id + "ITEMDIV";
                 var item_result = "<div id=\"" + itemId + "\"" + " class=\"result clearfix\">";    //result item
                 item_result += "<div class=\"icon\">";
-                item_result += "<img src=\"" + socialNetworkingItems.SentimentIconPath + "\"" + " class=\"icon sentiment\"\">"; //sentiment icon							                                  //icon
-                item_result += "<img src=\"" + socialNetworkingItems.SocialNetworkIconPath + "\"" + " class=\"icon\"\">";   //social media icon               
-                item_result += "</div>"; 						                                                            //icon
-                item_result += "<div>"; 							                                                        //body
+                item_result += "<img id=\"imgIconSentiment" + socialNetworkingItems.Id + "\"  class=\"icon sentiment\"\">"; //sentiment icon							                                  //icon
+                item_result += "<img id=\"imgIconFrom" + socialNetworkingItems.Id + "\"  class=\"icon\"\">";   //social media icon               
+                item_result += "</div>"; //icon
+                item_result += "<div>"; //body
                 item_result += "<div>"; //header post
 
                 item_result += "<div style=\"float: right;\">";
-                //item_result += "Rating: <span id=\"stars-cap\"></span>";
                 item_result += "<div id=\"stars-wrapper" + socialNetworkingItems.Id + "\">";
                 item_result += "<select name=\"selrate\">";
                 item_result += "<option value=\"1\">Very poor</option>";
@@ -51,40 +56,36 @@ $(document).ready(function () {
                 item_result += "</div>";
 
                 item_result += "<div>";
-                item_result += "<h3>"; 							                                                            //result title
-                item_result += "<a href=\"" + socialNetworkingItems.UrlPost + "\" target=\"_blank\">" + socialNetworkingItems.Content + "<\a>"; //link
-                item_result += "</h3>"; 							                                                        //result title
+                item_result += "<h3>"; //result title
+                item_result += "<a href=\"" + socialNetworkingItems.UrlPost + "\" target=\"_blank\" title=\"" + socialNetworkingItems.Content + "\">" + socialNetworkingItems.Content.substring(0, 150) + "..." + "<\a>"; //link
+                item_result += "</h3>";
                 item_result += "</div>";
                 item_result += "</div>"; //header post
-                item_result += "<div class=\"info\"> <p>";                                                                  //Info
+                item_result += "<div class=\"info\"> <p>";  //Info
                 item_result += "El " + socialNetworkingItems.CreatedAtShort + " por ";
                 item_result += "<img src=\"" + socialNetworkingItems.ProfileImage + "\" class=\"user_image\"\>";
                 item_result += " <a href=\"" + socialNetworkingItems.UrlProfile + "\" target=\"_blank\">" + socialNetworkingItems.UserName + "<\a>";
-                item_result += "</p></div>";                                                                                //Info
-                item_result += "<div><p>Tag it:</p>"; 							                                            //result tag seccion
+                item_result += "</p></div>";  //Info
+                item_result += "<div><p>Tag it:</p>"; 	//result tag seccion
                 item_result += "<ul></ul>";
-                item_result += "</div>"; 						                                                            //result tag seccion
+                item_result += "</div>"; 				//result tag seccion
 
-                item_result += "<div>"; 							                                                        //save
-                item_result += "<a href=\"javascript:void(0)\" id=\"aSendEmail" + socialNetworkingItems.Id + "\">Send by Email</a>";
-                item_result += "<input id=\"btnSave" + socialNetworkingItems.Id + "\" type=\"button\" value=\"Save\" />";
-                item_result += "</div>";                                                                                    //save
-                item_result += "<div id=\"divSendTo" + socialNetworkingItems.Id + "\" style=\"display: none;\" >";
-                item_result += "<p> Para: </p>";
-                item_result += "<input id=\"txtDestinatary" + socialNetworkingItems.Id + "\" type=\"text\" />";
-                item_result += "<input id=\"btnSendEmail" + socialNetworkingItems.Id + "\" type=\"button\" value=\"Send mail\" />";
+                item_result += "<div>"; //Send email and save
+                item_result += "<div>"; //email
+                item_result += "<a href=\"javascript:void(0)\" id=\"aSendEmail" + socialNetworkingItems.Id + "\">Enviar e-mail</a>";
                 item_result += "</div>";
-
-                item_result += "</div>"; 						                                                            //result item
+                item_result += "<div style=\"float: right\">"; //Save
+                item_result += "<input id=\"btnSave" + socialNetworkingItems.Id + "\" type=\"image\" src=\"../Content/Save-icon.png\" style=\"vertical-align: middle; height: 30px;\"/>";
+                item_result += "</div>";
+                item_result += "</div>";
+                item_result += "<div id=\"divSendTo" + socialNetworkingItems.Id + "\" style=\"display: none;\" >";
+                item_result += "<p style=\"margin: 10px 0px 0px 0px; line-height: 0;\"> Para: </p>";
+                item_result += "<input id=\"txtDestinatary" + socialNetworkingItems.Id + "\" type=\"text\" style=\"height: 12px; vertical-align: middle; font-size: 12px\"/>";
+                item_result += "<input id=\"btnSendEmail" + socialNetworkingItems.Id + "\" type=\"image\" src=\"../Content/48x48-send_e-mail.png\" style=\"vertical-align: middle; height: 35px;\"/>";
+                item_result += "</div>";
+                item_result += "</div>"; 	//result item
 
                 result_listTag.append(item_result);
-
-                $("#aSendEmail" + socialNetworkingItems.Id).click(function () {
-                    $("#divSendTo" + socialNetworkingItems.Id).slideToggle('slow', function () {
-
-                    });
-                });
-
 
                 //Creo la lista con tags
                 var itemTagContainers = $("#" + itemId + " ul");
@@ -99,12 +100,50 @@ $(document).ready(function () {
                     });
                 });
 
+                // sentiment image
+                if (socialNetworkingItems.Sentiment != "undefined" && socialNetworkingItems.Sentiment != null) {
+                    switch (socialNetworkingItems.Sentiment.toLowerCase()) {
+                        case "positivo":
+                            $("#imgIconSentiment" + socialNetworkingItems.Id).attr("src", "../Content/sentiment_positive.png");
+                            break;
+                        case "neutro":
+                            $("#imgIconSentiment" + socialNetworkingItems.Id).attr("src", "../Content/sentiment_neutral.png");
+                        case "negativo":
+                            $("#imgIconSentiment" + socialNetworkingItems.Id).attr("src", "../Content/sentiment_negative.png");
+                            break;
+                        default:
+                            $("#imgIconSentiment" + socialNetworkingItems.Id).attr("src", "");
+                    };
+                };
+
+                // network from image
+                if (socialNetworkingItems.SocialNetworkName != "undefined" && socialNetworkingItems.SocialNetworkName != null) {
+                    switch (socialNetworkingItems.SocialNetworkName.toLowerCase()) {
+                        case "facebook":
+                            $("#imgIconFrom" + socialNetworkingItems.Id).attr("src", "../Content/facebook_icon.ico");
+                            break;
+                        case "twitter":
+                            $("#imgIconFrom" + socialNetworkingItems.Id).attr("src", "../Content/twitter_icon.ico");
+                            break;
+                        default:
+                            $("#imgIconFrom" + socialNetworkingItems.Id).attr("src", "../Content/search_item_icon.gif");
+                    };
+                };
+                
+                
+
                 $("#btnSave" + socialNetworkingItems.Id).click(function (e) {
                     onSaveItemButtonClick(socialNetworkingItems.Id, $(this));
                 });
 
                 $("#btnSendEmail" + socialNetworkingItems.Id).click(function (e) {
                     onSendEmailItemButtonClick(socialNetworkingItems.Id, socialNetworkingItems.UrlPost, socialNetworkingItems.Content);
+                });
+
+                $("#aSendEmail" + socialNetworkingItems.Id).click(function () {
+                    $("#divSendTo" + socialNetworkingItems.Id).slideToggle('slow', function () {
+
+                    });
                 });
 
                 $("#stars-wrapper" + socialNetworkingItems.Id + " select option").each(function () {

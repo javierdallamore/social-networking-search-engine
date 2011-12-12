@@ -28,10 +28,13 @@ a, a:link, a:visited, a:hover {
 }
 
 /* css clear fixes */
-.clearfix:after{content:".";display:block;clear:both;visibility:hidden;line-height:0;height:0;}.clearfix{display:inline-block;}html[xmlns] .clearfix{display:block;}* html .clearfix{height:1%;}
+.clearfix:after{content:".";display:block;clear:both;visibility:hidden;line-height:0;height:0;}
+.clearfix{display:inline-block; border-bottom: 1px solid #D4D4D4; padding-bottom: 10px; margin-bottom: 25px;}html[xmlns] 
+.clearfix{display:block;}* html 
+.clearfix{height:1%;}
 
 #splash {
-	width:960px;
+	width:700px;
 	margin:0 auto 0;
 }
 
@@ -59,9 +62,6 @@ a, a:link, a:visited, a:hover {
 	-webkit-border-radius:10px;
 	-khtml-border-radius:10px;
 	border-radius:10px;
-    width: 700px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 dl{margin:0;}
@@ -619,4 +619,10 @@ ul#tabnav a:hover { /* settings for hover effect */
 
 #splash ul#tabnav li a {
 	padding: 4px 0.5em;
+}
+
+.line-separator{
+    height:1px;
+    background:#717171;
+    border-bottom:1px solid #313030;
 }
