@@ -31,14 +31,14 @@ $(document).ready(function () {
 
             buildBoxes(json.StatBoxs);
 
-            _.each(json, function (socialNetworkingItems) {
+            _.each(json.Items, function (socialNetworkingItems) {
 
                 $.socialNetworkingItemNamespace.searchResultsItemShowed[socialNetworkingItems.Id] = socialNetworkingItems;
                 var itemId = socialNetworkingItems.Id + "ITEMDIV";
                 var item_result = "<div id=\"" + itemId + "\"" + " class=\"result clearfix\">";    //result item
                 item_result += "<div class=\"icon\">";
                 item_result += "<img src=\"" + socialNetworkingItems.SentimentIconPath + "\"" + " class=\"icon sentiment\"\">"; //sentiment icon							                                  //icon
-                item_result += "<img src=\"" + socialNetworkingItems.SocialNetworkIconPath + "\"" + " class=\"icon\"\">";   //social media icon               
+                item_result += "<img id=\"imgIconFrom" + socialNetworkingItems.Id + "\" src=\"" + socialNetworkingItems.SocialNetworkIconPath + "\"" + " class=\"icon\"\">";   //social media icon               
                 item_result += "</div>"; //icon
                 item_result += "<div>"; //body
                 item_result += "<div>"; //header post
@@ -87,13 +87,6 @@ $(document).ready(function () {
 
                 result_listTag.append(item_result);
 
-                $("#aSendEmail" + socialNetworkingItems.Id).click(function () {
-                    $("#divSendTo" + socialNetworkingItems.Id).slideToggle('slow', function () {
-
-                    });
-                });
-
-
                 //Creo la lista con tags
                 var itemTagContainers = $("#" + itemId + " ul");
                 itemTagContainers.each(function (i, e) {
@@ -113,6 +106,12 @@ $(document).ready(function () {
 
                 $("#btnSendEmail" + socialNetworkingItems.Id).click(function (e) {
                     onSendEmailItemButtonClick(socialNetworkingItems.Id, socialNetworkingItems.UrlPost, socialNetworkingItems.Content);
+                });
+
+                $("#aSendEmail" + socialNetworkingItems.Id).click(function () {
+                    $("#divSendTo" + socialNetworkingItems.Id).slideToggle('slow', function () {
+
+                    });
                 });
 
                 $("#stars-wrapper" + socialNetworkingItems.Id + " select option").each(function () {
