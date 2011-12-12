@@ -53,7 +53,7 @@ $(document).ready(function () {
                     item_result += "<option value=\"1\">Very poor</option>";
                     item_result += "<option value=\"2\">Not that bad</option>";
                     item_result += "<option value=\"3\">Average</option>";
-                    item_result += "<option value=\"4\" selected=\"selected\">Good</option>";
+                    item_result += "<option value=\"4\">Good</option>";
                     item_result += "<option value=\"5\">Perfect</option>";
                     item_result += "</select>";
                     item_result += "</div>";
@@ -74,7 +74,7 @@ $(document).ready(function () {
             var divList = $("div[id^='stars-wrapper']");
 
             _.each($("#search_result_list"), function () {
-                $("div[id^='stars-wrapper']").each(function (i,e) {
+                $("div[id^='stars-wrapper']").each(function (i, e) {
                     $(e).stars({
                         inputType: "select"
                     });
@@ -111,6 +111,16 @@ $(document).ready(function () {
         var item = $.socialNetworkingItemNamespace.searchResultsItemShowed[itemId];
         item.Tags.push(itemAssignedTags);
 
+        //Add calification to entity
+        var rankingControl = "#stars-wrapper" + itemId;
+        var ui = $(rankingControl).data("stars");
+        var itemCalification = ui.options.value;
+        item.Calification = itemCalification;
+
+
+//        $.getJSON("Home/SaveEntity", { Entity: item }, function (result) {
+//            result.toString();
+//        });
     };
 
 });

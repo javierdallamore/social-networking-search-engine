@@ -16,7 +16,6 @@ namespace BusinessRules
         public List<SocialNetworkingSearchResult> Search(string searchParameters, List<string> searchEnginesName)
         {
             var socialNetworkingSearchResults = new List<SocialNetworkingSearchResult>();
-
             foreach (var searchEngine in _searchEngines.Where(x => searchEnginesName.Any(y=>y ==x.Name)))
             {
                 try

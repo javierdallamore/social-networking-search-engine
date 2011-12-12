@@ -7,6 +7,7 @@ using BusinessRules;
 using Core.Domain;
 using SearchEnginesBase.Entities;
 using SearchEnginesBase.Utils;
+using SocialNetWorkingSearchEngine.Models;
 
 namespace SocialNetWorkingSearchEngine.Controllers
 {
@@ -30,15 +31,86 @@ namespace SocialNetWorkingSearchEngine.Controllers
             return View();
         }
 
-        public JsonResult SearchResults(string parameters, string searchEngines)
+        private List<string> negativeWords = new List<string>() { "Conchuda", "concha", "boludo", "puto" };
+        private List<string> positiveWords = new List<string>() { "idolo", "exito", "amo", "genio" };
+        private List<string> ignoreList = new List<string>() { ".", "," };
+
+        public JsonResult SearchResults(string parameters, string searchEngines, string sentiment)
         {
             var result = new List<SocialNetworkingSearchResult>();
             if (ModelState.IsValid)
             {
                 var searchEngineManager = new SearchEngineManager();
                 result = searchEngineManager.Search(parameters, searchEngines.Split(',').ToList());
+                var model = new SearchResultModel();
+                
+                var sentimentValuator = new SentimentValuator();
+                sentimentValuator.NegativeWords = negativeWords;
+                sentimentValuator.PositiveWords = positiveWords;
+                sentimentValuator.IgnoreChars = ignoreList;
+
+                foreach (var socialNetworkingSearchResult in result)
+                {
+                    foreach (var item in socialNetworkingSearchResult.SocialNetworkingItems)
+                    {
+                        sentimentValuator.ProcessItem(item);
+                        if (string.IsNullOrWhiteSpace(sentiment) || item.Sentiment.ToLower() == sentiment.ToLower())
+                        {
+                            model.Items.Add(item);
+                        }
+                    }
+                }
+                
+                BuildSentimentBox(model, sentimentValuator);
+                BuildEnginesBox(model);
             } 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        private void BuildEnginesBox(SearchResultModel model)
+        {
+            var builder = new SearchEngineBoxBuilder();
+            builder.BuildBox(model);
+        }
+
+        public void BuildSentimentBox(SearchResultModel model, SentimentValuator sentimentValuator)
+        {
+            var sentimentBox = new StatBox() {Title = "Sentimiento"};
+            model.StatBoxs.Add(sentimentBox);
+            sentimentBox.StatItems.Add(new StatItem()
+                                           {
+                                               Title = "Positivas",
+                                               Link = "#",
+                                               Value = sentimentValuator.PositiveCount
+                                           });
+            sentimentBox.StatItems.Add(new StatItem()
+                                           {
+                                               Title = "Negativas",
+                                               Link = "#",
+                                               Value = sentimentValuator.NegativeCount
+                                           });
+            sentimentBox.StatItems.Add(new StatItem()
+                                           {
+                                               Title = "Neutras",
+                                               Link = "#",
+                                               Value = sentimentValuator.NeutralCount
+                                           });
+            if (model.Items.Count >0)
+            {
+                sentimentBox.StatItems[0].ValueText =
+                    ((decimal)sentimentValuator.PositiveCount / model.Items.Count * 100).ToString("f") + "%";
+                sentimentBox.StatItems[1].ValueText =
+                    ((decimal)sentimentValuator.NegativeCount / model.Items.Count * 100).ToString("f") + "%";
+                sentimentBox.StatItems[2].ValueText =
+                    ((decimal)sentimentValuator.NeutralCount / model.Items.Count * 100).ToString("f") + "%";
+                
+            }
+            else
+            {
+                sentimentBox.StatItems[0].ValueText = "0%";
+                sentimentBox.StatItems[1].ValueText = "0%";
+                sentimentBox.StatItems[2].ValueText = "0%";
+            }
         }
 
         public JsonResult GetAllEntities(string parameters, string searchEngines)
@@ -77,13 +149,13 @@ namespace SocialNetWorkingSearchEngine.Controllers
             return Json(servicesManager.SaveEntity(entity), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult SaveEntity(Profile profile)
+        public JsonResult SaveProfile(Profile profile)
         {
             var servicesManager = new ServicesManager();
             return Json(servicesManager.SaveProfile(profile), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult SaveEntity(Tag tag)
+        public JsonResult SaveTag(Tag tag)
         {
             var servicesManager = new ServicesManager();
             return Json(servicesManager.SaveTag(tag), JsonRequestBehavior.AllowGet);
