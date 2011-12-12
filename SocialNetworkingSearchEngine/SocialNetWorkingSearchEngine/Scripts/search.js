@@ -86,18 +86,19 @@ $(document).ready(function () {
                 });
 
                 $("#btnSave" + socialNetworkingItems.Id).click(function (e) {
-                    OnSaveItemButtonClick(socialNetworkingItems.Id, e);
+                    onSaveItemButtonClick(socialNetworkingItems.Id, $(this));
                 });
-                
+
+
             });
 
             //Atach Save button click event.
-            
+
 
             //Atach send email button click event.
             _.each($("input[id^='btnSendEmail']"), function (inputElement) {
                 $(inputElement).click(function (e) {
-                    OnSendEmailItemButtonClick($(inputElement).attr("Id"), e);
+                    onSendEmailItemButtonClick($(inputElement).attr("Id"), e);
                 });
             });
 
@@ -114,7 +115,7 @@ $(document).ready(function () {
         });
     };
 
-    function OnSendEmailItemButtonClick(itemId, e) {
+    function onSendEmailItemButtonClick(itemId, e) {
         //btnSendEmail
         var id = itemId.substr(12);
         var destinataries = $("#txtDestinatary" + id).val();
@@ -127,7 +128,7 @@ $(document).ready(function () {
             });
     };
 
-    function OnSaveItemButtonClick(itemId, e) {
+    function onSaveItemButtonClick(itemId, button) {
         var itemDivId = itemId + "ITEMDIV";
         var itemAssignedTags = $("#" + itemDivId.toString() + " li.tagItem").map(function () {
             return $(this).text();
@@ -141,11 +142,37 @@ $(document).ready(function () {
         var itemCalification = ui.options.value;
         item.Calification = itemCalification;
 
-        item.Tags = null;
+        item.Tags = [];
         item.CurrentTags = _.reduce(itemAssignedTags, function (values, acc) { return acc + "," + values; });
 
-        $.post('Home/SavePost', item, function (result) {
-            result.toString();
+        $.post('Home/SavePost', item).success(function (result) {
+            success("Post saved successfully", button);
+        }).error(function (result) {
+            error("Error saving post", button);
         });
     };
 });
+
+function success(message, control) {
+    $('.success-notification').remove();
+    var $err = $('<div>').addClass('success-notification')
+                             .html('<h2>' + message + '</h2>(click on this box to close)')
+                             .css('left', control.position().left);
+    control.after($err);
+    $err.fadeIn('slow');
+    setTimeout(function () {
+        $('.success-notification').remove();
+    }, 2000);
+};
+
+function error(message, control) {
+    $('.error-notification').remove();
+    var $err = $('<div>').addClass('error-notification')
+                             .html('<h2>' + message + '</h2>(click on this box to close)')
+                             .css('left', control.position().left);
+    control.after($err);
+    $err.fadeIn('fast');
+    setTimeout(function () {
+        $('.error-notification').remove();
+    }, 2000);
+};

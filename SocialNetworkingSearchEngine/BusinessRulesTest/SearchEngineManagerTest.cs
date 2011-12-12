@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using BusinessRules;
+using Core.Domain;
 using DataAccess;
+using DataAccess.DAO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BusinessRulesTest
@@ -72,6 +74,18 @@ namespace BusinessRulesTest
         {
             NHSessionManager.CreateDB = true;
             NHSessionManager.Instance.BeginTransaction();
+            NHSessionManager.Instance.CommitTransaction();
+        }
+
+        [TestMethod]
+        public void CreateTags()
+        {
+            NHSessionManager.Instance.BeginTransaction();
+            var tagRepository = new TagRepository();
+            tagRepository.SaveOrUpdate(new Tag() {Name = "tag1"});
+            tagRepository.SaveOrUpdate(new Tag() { Name = "tag2" });
+            tagRepository.SaveOrUpdate(new Tag() { Name = "tag3" });
+            tagRepository.SaveOrUpdate(new Tag() { Name = "tag4" });
             NHSessionManager.Instance.CommitTransaction();
         }
     }
