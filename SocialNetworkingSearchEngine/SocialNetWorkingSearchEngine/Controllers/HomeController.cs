@@ -14,7 +14,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
     {
         public ActionResult Index()
         {
-            ViewData["Message"] = "Welcome to Pichers & Pichers Social Networking Search Engine";
+            ViewData["Message"] = "Welcome to Social Networking Search Engine";
 
             return View();
         }
@@ -52,7 +52,6 @@ namespace SocialNetWorkingSearchEngine.Controllers
                                                 IgnoreChars = ignoreList
                                             };
 
-
                 foreach (var item in result)
                 {
                     sentimentValuator.ProcessItem(item);
@@ -63,6 +62,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
                 
                 BuildSentimentBox(model, sentimentValuator);
                 BuildEnginesBox(model);
+                BuildTopUsersBox(model);
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
@@ -71,12 +71,18 @@ namespace SocialNetWorkingSearchEngine.Controllers
         {
             ignoreList = new List<string>() {".", ","};
             negativeWords = new List<string>();
-            positiveWords =  new List<string>();
+            positiveWords = new List<string>();
 
             var serviceManager = new ServicesManager();
 
             negativeWords = serviceManager.GetAllWords().Where(x => x.Sentiment == "Negativo").Select(x => x.Name).ToList();
             positiveWords = serviceManager.GetAllWords().Where(x => x.Sentiment == "Positivo").Select(x => x.Name).ToList();
+        }
+
+        private void BuildTopUsersBox(SearchResultModel model)
+        {
+            var builder = new TopUsersBoxBuilder();
+            builder.BuildBox(model);
         }
 
         private void BuildEnginesBox(SearchResultModel model)
