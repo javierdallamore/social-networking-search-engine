@@ -5,7 +5,6 @@ using Core.Domain;
 using Core.RepositoryInterfaces;
 using DataAccess;
 using DataAccess.DAO;
-using SearchEnginesBase.Utils;
 
 namespace BusinessRules
 {

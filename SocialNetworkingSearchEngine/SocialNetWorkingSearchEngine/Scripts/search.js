@@ -109,7 +109,7 @@ $(document).ready(function () {
             });
         });
 
-        $("#imgLoading").hide();
+        //$("#imgLoading").hide();
     };
 
     function OnSendEmailItemButtonClick(itemId, e) {
