@@ -174,7 +174,8 @@ namespace SocialNetWorkingSearchEngine.Controllers
             var port = Convert.ToInt32(ConfigurationManager.AppSettings["port"]);
             var host = ConfigurationManager.AppSettings["host"];
 
-            Utils.SendMail(to, address, displayName, subject, body, userName, password, port, host);
+            var servicesManager = new ServicesManager();
+            servicesManager.SendMail(to, address, displayName, subject, body, userName, password, port, host);
         }
     }
 }
