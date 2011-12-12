@@ -4,6 +4,8 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Core.Domain;
+using DataAccess.DAO;
 using SearchEnginesBase.Entities;
 using SearchEnginesBase.Interfaces;
 
@@ -13,9 +15,14 @@ namespace BusinessRules
     {
         private static List<SearchEngineConfiguration> _searchEngines;
 
-        public List<SocialNetworkingSearchResult> Search(string searchParameters, List<string> searchEnginesName)
+        public List<Post> Search(string searchParameters, List<string> searchEnginesName)
         {
-            var socialNetworkingSearchResults = new List<SocialNetworkingSearchResult>();
+            var results = new List<Post>();
+
+            // Si indica que busque post guardados, primero agrego esos posts.
+            if (searchEnginesName.Any(y => y == "SavedPosts"))
+                results.AddRange(SearchSavedPosts(searchParameters));
+
             foreach (var searchEngine in _searchEngines.Where(x => searchEnginesName.Any(y=>y ==x.Name)))
             {
                 try
@@ -24,7 +31,9 @@ namespace BusinessRules
                     {
                         var socialNetworkingSearchResult = searchEngine.Instance.Search(searchParameters, 1);
                         if (socialNetworkingSearchResult != null)
-                            socialNetworkingSearchResults.Add(socialNetworkingSearchResult);
+                        {
+                            results.AddRange(ConvertFromSocialNetworkingItemToPosts(socialNetworkingSearchResult.SocialNetworkingItems));
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -33,7 +42,29 @@ namespace BusinessRules
                 }
             }
 
-            return socialNetworkingSearchResults;
+            return results;
+        }
+
+        private IEnumerable<Post> SearchSavedPosts(string searchParameters)
+        {
+            var postRepository = new PostRepository();
+            return postRepository.GetByQuery(searchParameters);
+        }
+
+        private List<Post> ConvertFromSocialNetworkingItemToPosts(List<SocialNetworkingItem> entityList)
+        {
+            List<Post> posts = (from u in entityList
+                                    select new Post
+                                                {
+                                                    UserName = u.UserName,
+                                                    ProfileImage = u.ProfileImage,
+                                                    Content = u.Content,
+                                                    UrlPost = u.UrlPost,
+                                                    UrlProfile = u.UrlProfile,
+                                                    CreatedAt = u.CreatedAt,
+                                                    Source = u.Source
+                                                }).ToList();
+            return posts;
         }
 
         public static void ConfigureAddins()

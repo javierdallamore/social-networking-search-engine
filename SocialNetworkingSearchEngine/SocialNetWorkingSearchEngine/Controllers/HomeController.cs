@@ -5,8 +5,6 @@ using System.Linq;
 using System.Web.Mvc;
 using BusinessRules;
 using Core.Domain;
-using SearchEnginesBase.Entities;
-using SearchEnginesBase.Utils;
 using SocialNetWorkingSearchEngine.Models;
 
 namespace SocialNetWorkingSearchEngine.Controllers
@@ -37,29 +35,29 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
         public JsonResult SearchResults(string parameters, string searchEngines, string sentiment)
         {
-            var result = new List<SocialNetworkingSearchResult>();
+            var result = new List<Post>();
             if (ModelState.IsValid)
             {
                 var searchEngineManager = new SearchEngineManager();
                 result = searchEngineManager.Search(parameters, searchEngines.Split(',').ToList());
                 var model = new SearchResultModel();
-                
-                var sentimentValuator = new SentimentValuator();
-                sentimentValuator.NegativeWords = negativeWords;
-                sentimentValuator.PositiveWords = positiveWords;
-                sentimentValuator.IgnoreChars = ignoreList;
 
-                foreach (var socialNetworkingSearchResult in result)
+                var sentimentValuator = new SentimentValuator
+                                            {
+                                                NegativeWords = negativeWords,
+                                                PositiveWords = positiveWords,
+                                                IgnoreChars = ignoreList
+                                            };
+
+                foreach (var item in result)
                 {
-                    foreach (var item in socialNetworkingSearchResult.SocialNetworkingItems)
+                    sentimentValuator.ProcessItem(item);
+                    if (string.IsNullOrWhiteSpace(sentiment) || item.Sentiment.ToLower() == sentiment.ToLower())
                     {
-                        sentimentValuator.ProcessItem(item);
-                        if (string.IsNullOrWhiteSpace(sentiment) || item.Sentiment.ToLower() == sentiment.ToLower())
-                        {
-                            model.Items.Add(item);
-                        }
+                        model.Items.Add(item);
                     }
                 }
+
                 
                 BuildSentimentBox(model, sentimentValuator);
                 BuildEnginesBox(model);
@@ -143,7 +141,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
             return Json(servicesManager.GetAllTags(), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult SaveEntity(Entity entity)
+        public JsonResult SaveEntity(Post entity)
         {
             var servicesManager = new ServicesManager();
             return Json(servicesManager.SaveEntity(entity), JsonRequestBehavior.AllowGet);
@@ -161,7 +159,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
             return Json(servicesManager.SaveTag(tag), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult TagEntity(Entity entity, string tagName)
+        public JsonResult TagEntity(Post entity, string tagName)
         {
             var servicesManager = new ServicesManager();
             return Json(servicesManager.TagEntity(entity, tagName), JsonRequestBehavior.AllowGet);

@@ -58,7 +58,7 @@ namespace DataAccess
                 .Database(MsSqlConfiguration.MsSql2008.ConnectionString(connectionString));
             //.ShowSql()
             //.ProxyFactoryFactory<ProxyFactoryFactory>());
-            fc.Mappings(m => m.FluentMappings.AddFromAssemblyOf<EntityMap>());
+            fc.Mappings(m => m.FluentMappings.AddFromAssemblyOf<PostMap>());
             fc.ExposeConfiguration(BuildSchema);
 
             sessionFactory = fc.BuildSessionFactory();

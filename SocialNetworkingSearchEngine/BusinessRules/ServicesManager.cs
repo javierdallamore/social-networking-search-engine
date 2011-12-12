@@ -13,13 +13,13 @@ namespace BusinessRules
     {
         private readonly IProfileRepository _profileRepository;
         private readonly ITagRepository _tagRepository;
-        private readonly IEntityRepository _entityRepository;
+        private readonly IPostRepository _entityRepository;
 
         public ServicesManager()
         {
             _profileRepository = new ProfileRepository();
             _tagRepository = new TagRepository();
-            _entityRepository = new EntityRepository();
+            _entityRepository = new PostRepository();
         }
 
         public Profile SaveProfile(Profile profile)
@@ -40,7 +40,7 @@ namespace BusinessRules
             }
         }
 
-        public Entity SaveEntity(Entity entity)
+        public Post SaveEntity(Post entity)
         {
             bool begin = NHSessionManager.Instance.BeginTransaction();
             try
@@ -76,19 +76,19 @@ namespace BusinessRules
             }
         }
 
-        public Entity TagEntity(Entity entity, Guid tagId)
+        public Post TagEntity(Post entity, Guid tagId)
         {
             var tag = _tagRepository.GetById(tagId);
             return TagEntity(entity, tag);
         }
 
-        public Entity TagEntity(Entity entity, string tagName)
+        public Post TagEntity(Post entity, string tagName)
         {
             var tag = _tagRepository.GetByName(tagName) ?? new Tag() { Name = tagName };
             return TagEntity(entity, tag);
         }
 
-        private Entity TagEntity(Entity entity, Tag tag)
+        private Post TagEntity(Post entity, Tag tag)
         {
             bool begin = NHSessionManager.Instance.BeginTransaction();
             try
@@ -111,7 +111,7 @@ namespace BusinessRules
             }
         }
 
-        public List<Entity> GetAllEntities()
+        public List<Post> GetAllEntities()
         {
             return _entityRepository.GetAll();
         }
@@ -126,17 +126,17 @@ namespace BusinessRules
             return _profileRepository.GetAll();
         }
 
-        public List<Entity> GetAllEntitiesByTag(string tagName)
+        public List<Post> GetAllEntitiesByTag(string tagName)
         {
             return _entityRepository.GetAllByTagName(tagName);
         }
 
-        public List<Entity> GetAllEntitiesByTag(Guid tagId)
+        public List<Post> GetAllEntitiesByTag(Guid tagId)
         {
             return _entityRepository.GetAllByTagNameId(tagId);
         }
 
-        public List<Entity> GetAllEntitiesByProfile(Guid profileId)
+        public List<Post> GetAllEntitiesByProfile(Guid profileId)
         {
             return _entityRepository.GetAllByProfile(profileId);
         }

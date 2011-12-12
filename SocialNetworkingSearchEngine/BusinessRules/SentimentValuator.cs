@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Core.Domain;
 using SearchEnginesBase.Entities;
 
 namespace BusinessRules
@@ -40,7 +41,7 @@ namespace BusinessRules
             get { return _positiveCount; }
         }
 
-        public void ProcessItem(SocialNetworkingItem item)
+        public void ProcessItem(Post item)
         {
             string content = item.Content.ToLower();
             foreach (var ignoreChar in IgnoreChars)
@@ -73,7 +74,7 @@ namespace BusinessRules
             _neutralCount = 0;
         }
 
-        public void ProcessItems(List<SocialNetworkingItem> list)
+        public void ProcessItems(List<Post> list)
         {
             foreach (var item in list)
             {

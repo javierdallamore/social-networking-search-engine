@@ -7,18 +7,18 @@ namespace BusinessRules
     public interface IServicesManager
     {
         Profile SaveProfile(Profile profile);
-        Entity SaveEntity(Entity entity);
+        Post SaveEntity(Post entity);
         Tag SaveTag(Tag tag);
 
-        Entity TagEntity(Entity entity, Guid tagId);
-        Entity TagEntity(Entity entity, string tagName);
+        Post TagEntity(Post entity, Guid tagId);
+        Post TagEntity(Post entity, string tagName);
 
         List<Tag> GetAllTags();
         List<Profile> GetAllProfiles();
-        List<Entity> GetAllEntities();               
-        List<Entity> GetAllEntitiesByTag(string tagName);
-        List<Entity> GetAllEntitiesByTag(Guid tagId);
-        List<Entity> GetAllEntitiesByProfile(Guid profileId);
+        List<Post> GetAllEntities();               
+        List<Post> GetAllEntitiesByTag(string tagName);
+        List<Post> GetAllEntitiesByTag(Guid tagId);
+        List<Post> GetAllEntitiesByProfile(Guid profileId);
 
         void SendMail(string to, string address, string displayName, string subject, string body, string userName, string password, int port, string host);
     }

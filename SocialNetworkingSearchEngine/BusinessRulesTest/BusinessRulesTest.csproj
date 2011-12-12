@@ -108,6 +108,10 @@
       <Project>{D21CC7B4-70C4-4168-82D6-A220B03145FC}</Project>
       <Name>BusinessRules</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{050D36FC-6A4F-4229-A4B4-110F8E8FC58F}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj">
       <Project>{913B4C84-F2D2-4A30-9268-201D893D6FFC}</Project>
       <Name>DataAccess</Name>

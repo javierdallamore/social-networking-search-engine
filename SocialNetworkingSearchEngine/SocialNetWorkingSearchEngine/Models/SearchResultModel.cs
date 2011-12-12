@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
-using SearchEnginesBase.Entities;
+using Core.Domain;
 
 namespace SocialNetWorkingSearchEngine.Models
 {
     public class SearchResultModel
     {
-        public List<SocialNetworkingItem> Items { get; private set; }
+        public List<Post> Items { get; private set; }
         public List<StatBox> StatBoxs { get; private set; }
         public string OrderBy { get; set; }
 
         public SearchResultModel()
         {
-            Items = new List<SocialNetworkingItem>();
+            Items = new List<Post>();
             StatBoxs = new List<StatBox>();
         }
     }

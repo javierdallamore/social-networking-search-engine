@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Core.Domain;
 using NUnit.Framework;
 using SearchEnginesBase.Entities;
 using SharpTestsEx;
@@ -43,7 +44,7 @@ namespace BusinessRulesTest
         {
             //arrange
             SearchEngineBoxBuilder builder = new SearchEngineBoxBuilder();
-            var item1 = new SocialNetworkingItem() {SocialNetworkName = "Twitter"};
+            var item1 = new Post(){SocialNetworkName = "Twitter"};
             //act
             builder.ProcessItem(item1);
 
@@ -58,8 +59,8 @@ namespace BusinessRulesTest
         {
             //arrange
             SearchEngineBoxBuilder builder = new SearchEngineBoxBuilder();
-            var item1 = new SocialNetworkingItem() {SocialNetworkName = "Twitter"};
-            var item2 = new SocialNetworkingItem() {SocialNetworkName = "Twitter"};
+            var item1 = new Post() {SocialNetworkName = "Twitter"};
+            var item2 = new Post() { SocialNetworkName = "Twitter" };
             //act
             builder.ProcessItem(item1);
             builder.ProcessItem(item2);
@@ -74,10 +75,10 @@ namespace BusinessRulesTest
         {
             //arrange
             SearchEngineBoxBuilder builder = new SearchEngineBoxBuilder();
-            var item1 = new SocialNetworkingItem() {SocialNetworkName = "Twitter"};
-            var item2 = new SocialNetworkingItem() {SocialNetworkName = "Twitter"};
-            var item3 = new SocialNetworkingItem() {SocialNetworkName = "Facebook"};
-            var item4 = new SocialNetworkingItem() { SocialNetworkName = "Facebook" };
+            var item1 = new Post() { SocialNetworkName = "Twitter" };
+            var item2 = new Post() { SocialNetworkName = "Twitter" };
+            var item3 = new Post() { SocialNetworkName = "Facebook" };
+            var item4 = new Post() { SocialNetworkName = "Facebook" };
             //act
             builder.ProcessItem(item1);
             builder.ProcessItem(item2);
@@ -96,12 +97,12 @@ namespace BusinessRulesTest
             //arrange
             SearchEngineBoxBuilder builder = new SearchEngineBoxBuilder();
             var model = new SearchResultModel();
-            var item1 = new SocialNetworkingItem() {SocialNetworkName = "Twitter"};
-            var item2 = new SocialNetworkingItem() {SocialNetworkName = "Twitter"};
-            var item3 = new SocialNetworkingItem() {SocialNetworkName = "Twitter"};
-            var item4 = new SocialNetworkingItem() {SocialNetworkName = "Facebook"};
-            var item5 = new SocialNetworkingItem() {SocialNetworkName = "Facebook"};
-            model.Items.AddRange(new List<SocialNetworkingItem>(){item1,item2,item3,item4,item5});
+            var item1 = new Post() { SocialNetworkName = "Twitter" };
+            var item2 = new Post() { SocialNetworkName = "Twitter" };
+            var item3 = new Post() { SocialNetworkName = "Twitter" };
+            var item4 = new Post() { SocialNetworkName = "Facebook" };
+            var item5 = new Post() { SocialNetworkName = "Facebook" };
+            model.Items.AddRange(new List<Post>() { item1, item2, item3, item4, item5 });
             //act
             builder.BuildBox(model);
 

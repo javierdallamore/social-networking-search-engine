@@ -172,10 +172,6 @@
       <Project>{050D36FC-6A4F-4229-A4B4-110F8E8FC58F}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SearchEnginesBase\SearchEnginesBase.csproj">
-      <Project>{82E660CC-FF11-4332-8671-B8FC905476A2}</Project>
-      <Name>SearchEnginesBase</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -8,7 +8,6 @@ namespace SearchEnginesBase.Entities
         public SocialNetworkingItem()
         {
             Id = Guid.NewGuid();
-            Tags = new List<string>();
         }
 
         public virtual string SocialNetworkName { get; set; }
@@ -45,7 +44,5 @@ namespace SearchEnginesBase.Entities
         public virtual string UrlProfile { get; set; }
         
         public virtual string Source { get; set; }
-
-        public virtual List<string> Tags { get; set; }
     }
 }
