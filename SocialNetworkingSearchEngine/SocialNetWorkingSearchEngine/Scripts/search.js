@@ -89,7 +89,11 @@ $(document).ready(function () {
                     onSaveItemButtonClick(socialNetworkingItems.Id, $(this));
                 });
 
-
+                $("#stars-wrapper" + socialNetworkingItems.Id + " select option").each(function () {
+                    if (parseInt($(this).val()) === socialNetworkingItems.Calification) {
+                        $(this).attr("selected", "selected");
+                    }
+                });
             });
 
             //Atach Save button click event.

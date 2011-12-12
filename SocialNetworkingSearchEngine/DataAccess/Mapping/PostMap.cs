@@ -17,6 +17,7 @@ namespace DataAccess.Mapping
             Map(x => x.UrlPost);
             Map(x => x.UrlProfile);
             Map(x => x.Source);
+            Map(x => x.Calification);
             
             HasManyToMany(x => x.Tags).AsBag().Cascade.All();
             References(x => x.Profile).Cascade.SaveUpdate();
