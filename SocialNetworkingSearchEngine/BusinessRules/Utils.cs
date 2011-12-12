@@ -14,7 +14,8 @@ namespace BusinessRules
             msg.From = new MailAddress(address, displayName, Encoding.UTF8);
             msg.Subject = subject;
             msg.SubjectEncoding = Encoding.UTF8;
-            msg.Body = body;
+            msg.IsBodyHtml = true;
+            msg.Body = body;            
             msg.BodyEncoding = Encoding.UTF8;
             msg.IsBodyHtml = false;
 
