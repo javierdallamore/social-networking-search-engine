@@ -69,9 +69,9 @@ $(document).ready(function () {
                 item_result += "<input id=\"btnSave" + socialNetworkingItems.Id + "\" type=\"button\" value=\"Save\" />";
                 item_result += "</div>";                                                                                    //save
                 item_result += "<div id=\"divSendTo" + socialNetworkingItems.Id + "\" style=\"display: none;\" >";
-                item_result += "<p> Para: </p>";
-                item_result += "<input id=\"txtDestinatary" + socialNetworkingItems.Id + "\" type=\"text\" />";
-                item_result += "<input id=\"btnSendEmail" + socialNetworkingItems.Id + "\" type=\"button\" value=\"Send mail\" />";
+                item_result += "<p style=\"margin: 10px 0px 0px 0px; line-height: 0;\"> Para: </p>";
+                item_result += "<input id=\"txtDestinatary" + socialNetworkingItems.Id + "\" type=\"text\" style=\"height: 12px; vertical-align: middle; font-size: 12px\"/>";
+                item_result += "<input id=\"btnSendEmail" + socialNetworkingItems.Id + "\" type=\"image\" src   =\"../Content/48x48-send_e-mail.png\" style=\"vertical-align: middle; height: 35px;\"/>";
                 item_result += "</div>";
 
                 item_result += "</div>"; 						                                                            //result item

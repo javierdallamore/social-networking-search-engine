@@ -111,6 +111,7 @@
     <Compile Include="SearchEngineBoxBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\48x48-send_e-mail.png" />
     <Content Include="Content\facebook.png" />
     <Content Include="Content\favicon.ico" />
     <Content Include="Content\gitHubList.css" />
