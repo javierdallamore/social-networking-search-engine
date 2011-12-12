@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     $.socialNetworkingItemNamespace = {};
     $.socialNetworkingItemNamespace.searchResultsItemShowed = new Array();
 
@@ -18,13 +17,15 @@ $(document).ready(function () {
         $("#imgLoading").show();
         var values = $(":checked").map(function (value, index) { return index.value; });
         var valuesAsString = _.reduce(values, function (memo, currentItem) { return memo + ',' + currentItem; });
-        $("#result").html("");
+        // $("#container_results").html("");
         $.getJSON("Home/SearchResults", { parameters: $("#txtSearchPattern").val(), searchEngines: valuesAsString }, function (json) {
 
             var result_listTag = $("#search_result_list");
             result_listTag.html("");
 
-            _.each(json, function (socialNetworkingItems) {
+            buildBoxes(json.StatBoxs);
+            
+            _.each(json.Items, function (socialNetworkingItems) {
 
                 $.socialNetworkingItemNamespace.searchResultsItemShowed[socialNetworkingItems.Id] = socialNetworkingItems;
                 var itemId = socialNetworkingItems.Id + "ITEMDIV";
@@ -185,3 +186,30 @@ function error(message, control) {
         $('.error-notification').remove();
     }, 2000);
 };
+
+function buildBoxes(statBoxs) {
+    $("#boxesContainer").html("");
+    _.each(statBoxs, function (box) {
+        var boxHtml = "";
+        boxHtml += '<div id="' + box.Title + 'box" class="box">';
+        boxHtml += '    <h4> ' + box.Title + '</h4> ';
+        boxHtml += '    <table class="tableBox">';
+        _.each(box.StatItems, function (item) {
+            var html = "";
+            html += '        <tr>';
+            html += '             <td width="80px" style="overflow:hidden;max-width:85px;">';
+            html += '                ' + item.Title;
+            html += '            </td>';
+            html += '            <td >';
+            html += '            <div class="chart_bar" style="width:' + item.ValuePercent /3  + 'px;">&nbsp;</div>';
+            html += '            </td>';
+            html += '            <td style="text-align:right;">' + item.ValueText + '</td>';
+            html += '        </tr>';
+            boxHtml += html;
+        });
+        boxHtml += '    </table>';
+        boxHtml += '</div>';
+        $("#boxesContainer").append(boxHtml);
+    });    
+};
+
