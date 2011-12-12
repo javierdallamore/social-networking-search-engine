@@ -64,16 +64,19 @@ $(document).ready(function () {
                 item_result += "<ul></ul>";
                 item_result += "</div>"; 						                                                            //result tag seccion
 
-                item_result += "<div>"; 							                                                        //save
-                item_result += "<a href=\"javascript:void(0)\" id=\"aSendEmail" + socialNetworkingItems.Id + "\">Send by Email</a>";
-                item_result += "<input id=\"btnSave" + socialNetworkingItems.Id + "\" type=\"button\" value=\"Save\" />";
-                item_result += "</div>";                                                                                    //save
+                item_result += "<div>"; //Send email and save
+                item_result += "<div>"; //email
+                item_result += "<a href=\"javascript:void(0)\" id=\"aSendEmail" + socialNetworkingItems.Id + "\">Enviar e-mail</a>";
+                item_result += "</div>"; //email                                                                                   //Send email and save
+                item_result += "<div style=\"float: right\">"; //Save
+                item_result += "<input id=\"btnSave" + socialNetworkingItems.Id + "\" type=\"image\" src=\"../Content/Save-icon.png\" style=\"vertical-align: middle; height: 30px;\"/>";
+                item_result += "</div>"; //Save
+                item_result += "</div>";
                 item_result += "<div id=\"divSendTo" + socialNetworkingItems.Id + "\" style=\"display: none;\" >";
                 item_result += "<p style=\"margin: 10px 0px 0px 0px; line-height: 0;\"> Para: </p>";
                 item_result += "<input id=\"txtDestinatary" + socialNetworkingItems.Id + "\" type=\"text\" style=\"height: 12px; vertical-align: middle; font-size: 12px\"/>";
-                item_result += "<input id=\"btnSendEmail" + socialNetworkingItems.Id + "\" type=\"image\" src   =\"../Content/48x48-send_e-mail.png\" style=\"vertical-align: middle; height: 35px;\"/>";
+                item_result += "<input id=\"btnSendEmail" + socialNetworkingItems.Id + "\" type=\"image\" src=\"../Content/48x48-send_e-mail.png\" style=\"vertical-align: middle; height: 35px;\"/>";
                 item_result += "</div>";
-
                 item_result += "</div>"; 						                                                            //result item
 
                 result_listTag.append(item_result);
