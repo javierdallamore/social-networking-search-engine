@@ -13,14 +13,23 @@ $(document).ready(function () {
         var valuesAsString = _.reduce(values, function (memo, currentItem) { return memo + ',' + currentItem });
         $("#result").html("");
         $.getJSON("Home/SearchResults", { parameters: $("#txtSearchPattern").val(), searchEngines: valuesAsString }, function (json) {
+
+            //Obtengo los tags
+            var tagArrays = new Array();
+            $.getJSON("Home/GetAllTags", {}, function (json) {
+                _.each(json, function (tag) {
+                    tagArrays.push(tag.Name);
+                });
+            });
+
             var result_listTag = $("#search_result_list");
             result_listTag.html("");
 
             _.each(json, function (socialNetworkingItems) {
 
                 $.socialNetworkingItemNamespace.searchResultsItemShowed[socialNetworkingItems.Id] = socialNetworkingItems;
-
-                var item_result = "<div id=\"" + socialNetworkingItems.Id + "ITEMDIV\"" + " class=\"result clearfix\">";    //result item
+                var itemId = socialNetworkingItems.Id + "ITEMDIV";
+                var item_result = "<div id=\"" + itemId + "\"" + " class=\"result clearfix\">";    //result item
                 item_result += "<div class=\"icon\">";
                 item_result += "<img src=\"" + socialNetworkingItems.SentimentIconPath + "\"" + " class=\"icon sentiment\"\">"; //sentiment icon							                                  //icon
                 item_result += "<img src=\"" + socialNetworkingItems.SocialNetworkIconPath + "\"" + " class=\"icon\"\">";   //social media icon               
@@ -57,6 +66,18 @@ $(document).ready(function () {
                 item_result += "</div>"; 						                                                            //result item
 
                 result_listTag.append(item_result);
+
+                //Creo la lista con tags
+                var itemTagContainers = $("#" + itemId + " ul");
+                itemTagContainers.each(function (i, e) {
+                    $(e).tagHandler({
+                        availableTags: tagArrays,
+                        autocomplete: true,
+                        assignedTags: _.map(socialNetworkingItems.Tags, function (tag) {
+                            return tag.Name;
+                        })
+                    });
+                });
             });
 
             _.each($("#search_result_list :input[type=button]"), function (inputElement) {
@@ -73,25 +94,6 @@ $(document).ready(function () {
                         inputType: "select"
                     });
                 });
-            });
-
-            //Obtengo los tags
-            var tagArrays = new Array();
-            $.getJSON("Home/GetAllTags", {}, function (json) {
-                _.each(json, function (tag) {
-                    tagArrays.push(tag.Name);
-                });
-
-
-                //Creo la lista con tags
-                var itemTagContainers = $('#search_result_list ul');
-                itemTagContainers.each(function (i, e) {
-                    $(e).tagHandler({
-                        availableTags: tagArrays,
-                        autocomplete: true
-                    });
-                });
-
             });
         });
 
