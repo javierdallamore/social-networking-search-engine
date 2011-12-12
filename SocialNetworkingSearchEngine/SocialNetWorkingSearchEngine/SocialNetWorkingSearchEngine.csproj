@@ -112,6 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\facebook.png" />
+    <Content Include="Content\favicon.ico" />
     <Content Include="Content\gitHubList.css" />
     <Content Include="Content\global.css" />
     <Content Include="Content\jquery-ui-1.8.16.custom.css" />
