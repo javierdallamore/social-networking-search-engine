@@ -118,6 +118,7 @@
     <Content Include="Content\jquery.ui.stars.css" />
     <Content Include="Content\jquery.ui.stars.gif" />
     <Content Include="Content\loader.gif" />
+    <Content Include="Content\loading36.gif" />
     <Content Include="Content\search.css" />
     <Content Include="Content\tag_remove.cur" />
     <Content Include="Content\tag_remove.png" />

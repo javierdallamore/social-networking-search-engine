@@ -16,6 +16,7 @@
                             <td>
                                 <input id="btnSearch" type="button" value="Search">
                             </td>
+                            <td><img id="imgLoading" src="../../Content/loading36.gif" /></td>
                         </tr>
                     </tbody>
                 </table>

@@ -16,7 +16,12 @@ body {
 	font-size:1em;
 }
 
-img { border:none; }
+img { border-style: none;
+    border-color: inherit;
+    border-width: medium;
+    height: 34px;
+    width: 37px;
+}
 
 a, a:link, a:visited, a:hover {
 	color:#0066CC;
