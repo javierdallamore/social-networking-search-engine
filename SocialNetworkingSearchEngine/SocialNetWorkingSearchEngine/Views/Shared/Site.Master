@@ -22,10 +22,10 @@
 <body>
     <div class="page">
         <div id="header">
-            <h1>Social Networking Search Engine</h1>
+            <%--<h1>Social Networking Search Engine</h1>--%>
         </div>
 
-        <div id="main">
+        <div id="main" style="margin-top: 10px">
             <asp:ContentPlaceHolder ID="MainContent" runat="server" />
 
             <div id="footer">

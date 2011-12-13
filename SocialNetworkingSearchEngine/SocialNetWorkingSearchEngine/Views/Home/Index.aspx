@@ -7,21 +7,28 @@
 
     <div id="splash">
         <%--Search seccion--%>
-        <div class="search_block">
+        <div class="search_block" style="padding: 1px 10px 10px 10px;">
             <div id="search">
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <input id="txtSearchPattern" type="text">
-                            </td>
-                            <td>
-                                <input id="btnSearch" type="button" value="Buscar">
-                            </td>
-                            <td><img id="imgLoading" src="../../Content/loading36.gif" /></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div style="float: left;">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input id="txtSearchPattern" type="text" style="width: 315px;">
+                                </td>
+                                <td>
+                                    <input id="btnSearch" type="button" value="Buscar">
+                                </td>
+                                <td>
+                                    <img id="imgLoading" src="../../Content/loading36.gif" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="height: 50px; text-align: right; line-height: 50px;">
+                    <h1>SocialNetworking Search Engine</h1>
+                </div>
             </div>
             <div>
                 <div id="sources" class="sources_box clearfix">
