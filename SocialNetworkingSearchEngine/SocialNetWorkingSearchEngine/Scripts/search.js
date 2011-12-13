@@ -91,8 +91,8 @@ $(document).ready(function () {
                 var itemTagContainers = $("#" + itemId + " ul");
                 itemTagContainers.each(function (i, e) {
                     $(e).tagHandler({
-                        //                        msgNoNewTag: 'No tiene permisos para crear un nuevo tag',
-                        //                        msgError: 'No se pudo cargar la lista de tag',
+                        msgNoNewTag: "No tiene permisos para crear un nuevo tag",
+                        msgError: "No se pudo cargar la lista de tag",
                         availableTags: tagArrays,
                         autocomplete: true,
                         allowAdd: false,
