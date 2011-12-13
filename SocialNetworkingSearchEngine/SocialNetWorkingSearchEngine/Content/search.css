@@ -7,12 +7,12 @@
     padding-top: 0;
     position:absolute;
     z-index:1;
-    font-size: 100%;
+    font-size: 90%;
 }
 
 .error-notification h2 {
     font-family:Trebuchet MS,Helvetica,sans-serif;
-    font-size:140%;
+    font-size:110%;
     font-weight:bold;
     margin-bottom:7px;
 }
@@ -26,12 +26,12 @@
     padding-top: 0;
     position:absolute;
     z-index:1;
-    font-size: 100%;
+    font-size: 90%;
 }
 
 .success-notification h2 {
     font-family:Trebuchet MS,Helvetica,sans-serif;
-    font-size:140%;
+    font-size:110%;
     font-weight:bold;
     margin-bottom:7px;
 }

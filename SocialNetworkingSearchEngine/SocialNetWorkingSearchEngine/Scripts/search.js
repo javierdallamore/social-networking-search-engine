@@ -91,8 +91,8 @@ $(document).ready(function () {
                 var itemTagContainers = $("#" + itemId + " ul");
                 itemTagContainers.each(function (i, e) {
                     $(e).tagHandler({
-//                        msgNoNewTag: 'No tiene permisos para crear un nuevo tag',
-//                        msgError: 'No se pudo cargar la lista de tag',
+                        //                        msgNoNewTag: 'No tiene permisos para crear un nuevo tag',
+                        //                        msgError: 'No se pudo cargar la lista de tag',
                         availableTags: tagArrays,
                         autocomplete: true,
                         allowAdd: false,
@@ -180,18 +180,26 @@ $(document).ready(function () {
     };
 
     function onSaveItemButtonClick(itemId, button) {
-        var itemDivId = itemId + "ITEMDIV";
-        var itemAssignedTags = $("#" + itemDivId.toString() + " li.tagItem").map(function () {
-            return $(this).text();
-        });
-        var item = $.socialNetworkingItemNamespace.searchResultsItemShowed[itemId];
-        item.Tags.push(itemAssignedTags);
 
+        var itemDivId = itemId + "ITEMDIV";
+        var item = $.socialNetworkingItemNamespace.searchResultsItemShowed[itemId];
+        
         //Add calification to entity
         var rankingControl = "#stars-wrapper" + itemId;
         var ui = $(rankingControl).data("stars");
         var itemCalification = ui.options.value;
         item.Calification = itemCalification;
+
+        var itemAssignedTags = $("#" + itemDivId.toString() + " li.tagItem").map(function () {
+            return $(this).text();
+        });
+
+        if (itemAssignedTags.length == 0 && (item.Calification == undefined || item.Calification == null || item.Calification == 0)) {
+            error("Debe agregar al menos un tag o calificar el post para poder guardarlo", button);
+            return;
+        }
+        
+        item.Tags.push(itemAssignedTags);
 
         item.Tags = [];
         item.CurrentTags = _.reduce(itemAssignedTags, function (values, acc) { return acc + "," + values; });
@@ -225,7 +233,7 @@ function error(message, control) {
     $err.fadeIn('fast');
     setTimeout(function () {
         $('.error-notification').remove();
-    }, 2000);
+    }, 4000);
 };
 
 function buildBoxes(statBoxs) {
