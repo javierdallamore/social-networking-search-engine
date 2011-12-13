@@ -38,7 +38,7 @@
 
 #container_results {
     float: left;
-    width: 750px;
+    width: 800px;
 }
 
 #container_results .total {
@@ -406,7 +406,7 @@ float:left;
 
 #boxesContainer {
 	float:left;
-	width:250px;
+	width:210px;
 }
 
 .tableBox 
