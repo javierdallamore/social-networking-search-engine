@@ -43,21 +43,6 @@
 
         <%--Lext Boxes--%>
         <div id="boxesContainer">
-            <%--<div id="sentimentBox" class="box_segment">
-                <h4> Sentiment</h4>
-                    <table class="tableBox">
-                        <tr>
-                                <td width="90px" style="overflow:hidden;max-width:90px;">
-                                Positivo
-                            </td>
-                            <td >
-                            <div class="chart_bar" style="width:25px;">&nbsp;</div>
-                            </td>
-                            <td style="text-align:right;">99</td>
-                        </tr>
-                
-                    </table>
-            </div>--%>
         </div>
 
         <%--Search results--%>
