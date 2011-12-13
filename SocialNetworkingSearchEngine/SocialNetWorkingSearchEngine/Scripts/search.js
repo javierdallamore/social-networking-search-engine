@@ -181,6 +181,9 @@ function search(parameters, searchEngines, sentiment, socialNetwork, user) {
             item_result += "<option value=\"5\">Perfect</option>";
             item_result += "</select>";
             item_result += "</div>";
+            item_result += "<div style=\"float: right\">"; //Save
+            item_result += "<input id=\"btnSave" + socialNetworkingItems.Id + "\" type=\"image\" src=\"../Content/Save-icon.png\" style=\"vertical-align: middle; height: 20px;\"/>";
+            item_result += "</div>";
             item_result += "</div>";
 
             item_result += "<div>";
@@ -199,12 +202,7 @@ function search(parameters, searchEngines, sentiment, socialNetwork, user) {
             item_result += "</div>"; 				//result tag seccion
 
             item_result += "<div>"; //Send email and save
-            item_result += "<div>"; //email
             item_result += "<a href=\"javascript:void(0)\" id=\"aSendEmail" + socialNetworkingItems.Id + "\">Enviar e-mail</a>";
-            item_result += "</div>";
-            item_result += "<div style=\"float: right\">"; //Save
-            item_result += "<input id=\"btnSave" + socialNetworkingItems.Id + "\" type=\"image\" src=\"../Content/Save-icon.png\" style=\"vertical-align: middle; height: 20px;\"/>";
-            item_result += "</div>";
             item_result += "</div>";
             item_result += "<div id=\"divSendTo" + socialNetworkingItems.Id + "\" style=\"display: none;\" >";
             item_result += "<p style=\"margin: 10px 0px 0px 0px; line-height: 0;\"> Para: </p>";
