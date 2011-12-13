@@ -64,13 +64,17 @@ namespace BusinessRules
 
         private void SetTags(Post post)
         {
+            post.Tags = new List<Tag>();
             if (!String.IsNullOrEmpty(post.CurrentTags))
             {
                 var values = post.CurrentTags.Split(',');
                 foreach (var tagName in values)
                 {
-                    var tag = new TagRepository().GetByName(tagName);
-                    post.Tags.Add(tag ?? new Tag() { Name = tagName });
+                    if(!String.IsNullOrEmpty(tagName) && String.Compare(tagName,"null")!=0)
+                    {
+                        var tag = new TagRepository().GetByName(tagName);
+                        post.Tags.Add(tag ?? new Tag() { Name = tagName });
+                    }
                 }
             }
         }

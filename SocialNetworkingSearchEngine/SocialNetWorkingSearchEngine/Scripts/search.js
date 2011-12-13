@@ -26,25 +26,24 @@ $(document).ready(function () {
 });
 
 
-function onSendEmailItemButtonClick(itemId, urlPost, content) {
+function onSendEmailItemButtonClick(itemId, urlPost, content, button) {
     var mailBody = content + "\n\n" + urlPost;
     var destinataries = $("#txtDestinatary" + itemId).val();
-    $.post("Home/SendMail", { to: destinataries, subject: 'Social networking', body: mailBody },
-            function callback() {
-
-            },
-            function errCallback() {
-
-            });
+    $("#imgLoading").show();
+    $.post("Home/SendMail", { to: destinataries, subject: 'Social networking', body: mailBody })
+    .success(function (e) {
+        success("Email enviado exitosamente", button);
+        $("#imgLoading").hide();
+    }).error(
+    function (e) {
+        error("Ha ocurrido un error al intentar enviar el mail", button);
+        $("#imgLoading").hide();
+    });
 };
 
 function onSaveItemButtonClick(itemId, button) {
     var itemDivId = itemId + "ITEMDIV";
-    var itemAssignedTags = $("#" + itemDivId.toString() + " li.tagItem").map(function () {
-        return $(this).text();
-    });
     var item = $.socialNetworkingItemNamespace.searchResultsItemShowed[itemId];
-    item.Tags.push(itemAssignedTags);
 
     //Add calification to entity
     var rankingControl = "#stars-wrapper" + itemId;
@@ -52,8 +51,20 @@ function onSaveItemButtonClick(itemId, button) {
     var itemCalification = ui.options.value;
     item.Calification = itemCalification;
 
+    var itemAssignedTags = $("#" + itemDivId.toString() + " li.tagItem").map(function () {
+        return $(this).text();
+    });
+
+    if (itemAssignedTags.length == 0 && (item.Calification == undefined || item.Calification == null || item.Calification == 0)) {
+        error("Debe agregar al menos un tag o calificar el post para poder guardarlo", button);
+        return;
+    }
+
     item.Tags = [];
-    item.CurrentTags = _.reduce(itemAssignedTags, function (values, acc) { return acc + "," + values; });
+    item.CurrentTags = undefined;
+    if (itemAssignedTags.length > 0) {
+        item.CurrentTags = _.reduce(itemAssignedTags, function (values, acc) { return acc + "," + values; });
+    }
 
     $.post('Home/SavePost', item).success(function (result) {
         success("Post guardado correctamente", button);
@@ -145,14 +156,22 @@ function getTextPattern() {
 };
 
 function getSelectedSearchEngines() {
-    var values = $(":checked").map(function (value, index) { return index.value; });
-    var result = _.reduce(values, function (memo, currentItem) { return memo + ',' + currentItem; });
-    return result;
+    return $(":checked").map(function (value, index) { return index.value; });
 };
 
 function search(parameters, searchEngines, sentiment, socialNetwork, user) {
+
     $("#imgLoading").show();
-    $.getJSON("Home/SearchResults", { parameters: parameters, searchEngines: searchEngines, sentiment: sentiment, socialNetworking: socialNetwork, userName: user }, function (json) {
+
+    if (searchEngines === undefined || searchEngines.length == 0 ||
+            parameters === "" || parameters === null || parameters === undefined) {
+        $("#imgLoading").hide();
+        error("El ingreso de par&aacute;metros de b&uacute;squeda y selecci&oacute;n de al menos un motor de b&uacute;squeda es obligatorio", $("#btnSearch"));
+        return;
+    }
+    var searchEnginesAsString = _.reduce(searchEngines, function (memo, currentItem) { return memo + ',' + currentItem; });
+
+    $.getJSON("Home/SearchResults", { parameters: parameters, searchEngines: searchEnginesAsString, sentiment: sentiment, socialNetworking: socialNetwork, userName: user }, function (json) {
 
         var result_listTag = $("#search_result_list");
         result_listTag.html("");
@@ -217,8 +236,8 @@ function search(parameters, searchEngines, sentiment, socialNetwork, user) {
             var itemTagContainers = $("#" + itemId + " ul");
             itemTagContainers.each(function (i, e) {
                 $(e).tagHandler({
-                    //                        msgNoNewTag: 'No tiene permisos para crear un nuevo tag',
-                    //                        msgError: 'No se pudo cargar la lista de tag',
+                    msgNoNewTag: "No tiene permisos para crear un nuevo tag",
+                    msgError: "No se pudo cargar la lista de tag",
                     availableTags: tagArrays,
                     autocomplete: true,
                     allowAdd: false,
@@ -266,7 +285,7 @@ function search(parameters, searchEngines, sentiment, socialNetwork, user) {
             });
 
             $("#btnSendEmail" + socialNetworkingItems.Id).click(function (e) {
-                onSendEmailItemButtonClick(socialNetworkingItems.Id, socialNetworkingItems.UrlPost, socialNetworkingItems.Content);
+                onSendEmailItemButtonClick(socialNetworkingItems.Id, socialNetworkingItems.UrlPost, socialNetworkingItems.Content, $(this));
             });
 
             $("#aSendEmail" + socialNetworkingItems.Id).click(function () {
