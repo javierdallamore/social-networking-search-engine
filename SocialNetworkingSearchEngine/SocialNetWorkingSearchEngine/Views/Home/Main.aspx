@@ -13,13 +13,13 @@
         <tr>
             <td>
                 <input type="checkbox" name="engine" value="SearchEngineMock" id="chSearchEngineMock" />
-                <label for="chSearchEngineMock">Search engine mock</label>
+                <label for="chSearchEngineMock">Local DB</label>
             </td>
         </tr>
         <tr>
             <td>
                 <input type="checkbox" name="engine" id="chTwitterSearchEngine" value="TwitterSearchEngine" checked="checked" />
-                <label for="chTwitterSearchEngine">Twitter search engine</label>
+                <label for="chTwitterSearchEngine">Twitter</label>
             </td>
         </tr>
         <tr>
