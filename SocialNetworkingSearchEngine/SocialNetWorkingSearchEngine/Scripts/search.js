@@ -66,7 +66,7 @@ $(document).ready(function () {
                 item_result += "<img src=\"" + socialNetworkingItems.ProfileImage + "\" class=\"user_image\"\>";
                 item_result += " <a href=\"" + socialNetworkingItems.UrlProfile + "\" target=\"_blank\">" + socialNetworkingItems.UserName + "<\a>";
                 item_result += "</p></div>";  //Info
-                item_result += "<div style=\"float: left\"><p>Tag it:</p></div>"; //result tag seccion
+                item_result += "<div style=\"float: left\"><p>Tag:</p></div>"; //result tag seccion
                 item_result += "<ul></ul>";
                 item_result += "</div>"; 				//result tag seccion
 
@@ -91,6 +91,8 @@ $(document).ready(function () {
                 var itemTagContainers = $("#" + itemId + " ul");
                 itemTagContainers.each(function (i, e) {
                     $(e).tagHandler({
+//                        msgNoNewTag: 'No tiene permisos para crear un nuevo tag',
+//                        msgError: 'No se pudo cargar la lista de tag',
                         availableTags: tagArrays,
                         autocomplete: true,
                         allowAdd: false,
@@ -195,9 +197,9 @@ $(document).ready(function () {
         item.CurrentTags = _.reduce(itemAssignedTags, function (values, acc) { return acc + "," + values; });
 
         $.post('Home/SavePost', item).success(function (result) {
-            success("Post saved successfully", button);
+            success("Post guardado correctamente", button);
         }).error(function (result) {
-            error("Error saving post", button);
+            error("Error al guardar post", button);
         });
     };
 });
@@ -205,7 +207,7 @@ $(document).ready(function () {
 function success(message, control) {
     $('.success-notification').remove();
     var $err = $('<div>').addClass('success-notification')
-                             .html('<h2>' + message + '</h2>(click on this box to close)')
+                             .html('<h2>' + message + '</h2>(click para cerrar)')
                              .css('left', control.position().left);
     control.after($err);
     $err.fadeIn('slow');
@@ -217,7 +219,7 @@ function success(message, control) {
 function error(message, control) {
     $('.error-notification').remove();
     var $err = $('<div>').addClass('error-notification')
-                             .html('<h2>' + message + '</h2>(click on this box to close)')
+                             .html('<h2>' + message + '</h2>(click para cerrar)')
                              .css('left', control.position().left);
     control.after($err);
     $err.fadeIn('fast');

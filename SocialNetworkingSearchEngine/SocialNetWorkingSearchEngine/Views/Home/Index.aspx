@@ -16,7 +16,7 @@
                                 <input id="txtSearchPattern" type="text">
                             </td>
                             <td>
-                                <input id="btnSearch" type="button" value="Search">
+                                <input id="btnSearch" type="button" value="Buscar">
                             </td>
                             <td><img id="imgLoading" src="../../Content/loading36.gif" /></td>
                         </tr>
@@ -28,15 +28,15 @@
                     <div style="float: left; width: 125px; font-size: 15px;">
                         <label>
                             <input type="checkbox" name="src[]" value="SavedPosts" checked="checked">
-                            Saved posts</label></div>
+                            Local DB</label></div>
                     <div style="float: left; width: 125px; font-size: 15px;">
                         <label>
                             <input type="checkbox" name="src[]" value="FacebookSearchEngine" checked="checked">
-                            facebook</label></div>
+                            Facebook</label></div>
                     <div style="float: left; width: 125px; font-size: 15px;">
                         <label>
                             <input type="checkbox" name="src[]" value="TwitterSearchEngine" checked="checked">
-                            twitter</label></div>
+                            Twitter</label></div>
                 </div>
             </div>
         </div>
