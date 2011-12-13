@@ -22,9 +22,17 @@ $(document).ready(function () {
     function onClick(e) {
         $("#imgLoading").show();
         var values = $(":checked").map(function (value, index) { return index.value; });
+        var searchparameters = $("#txtSearchPattern").val();
+        
+        if(values===undefined || values.length==0 ||
+            searchparameters === "" || searchparameters === null || searchparameters === undefined) {
+            error("El ingreso de parámetros de búsqueda y selección de al menos un motor de búsqueda es obligatorio", $(this));
+            return;
+        }
         var valuesAsString = _.reduce(values, function (memo, currentItem) { return memo + ',' + currentItem; });
+        
         // $("#container_results").html("");
-        $.getJSON("Home/SearchResults", { parameters: $("#txtSearchPattern").val(), searchEngines: valuesAsString }, function (json) {
+        $.getJSON("Home/SearchResults", { parameters: searchparameters, searchEngines: valuesAsString }, function (json) {
 
             var result_listTag = $("#search_result_list");
             result_listTag.html("");
@@ -171,10 +179,10 @@ $(document).ready(function () {
         var mailBody = content + "\n\n" + urlPost;
         var destinataries = $("#txtDestinatary" + itemId).val();
         $.post("Home/SendMail", { to: destinataries, subject: 'Social networking', body: mailBody })
-        .success(function(e) {
+        .success(function (e) {
             success("Email enviado exitosamente", button);
         }).error(
-        function(e) {
+        function (e) {
             error("Ha ocurrido un error al intentar enviar el mail", button);
         });
     };
