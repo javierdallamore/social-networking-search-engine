@@ -43,7 +43,7 @@
 
         <%--Lext Boxes--%>
         <div id="boxesContainer">
-            <div id="sentimentBox" class="box">
+            <%--<div id="sentimentBox" class="box_segment">
                 <h4> Sentiment</h4>
                     <table class="tableBox">
                         <tr>
@@ -57,7 +57,7 @@
                         </tr>
                 
                     </table>
-            </div>
+            </div>--%>
         </div>
 
         <%--Search results--%>

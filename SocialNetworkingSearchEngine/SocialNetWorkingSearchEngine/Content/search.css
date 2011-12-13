@@ -407,7 +407,6 @@ float:left;
 #boxesContainer {
 	float:left;
 	width:250px;
-    border: solid 1px red;
 }
 
 .tableBox 
@@ -417,9 +416,7 @@ float:left;
     border-spacing: 0px;
     border-top: none;
     border-right: none;
-    border-left: none;
-    border-bottom:1px solid #ccc;	
-    
+    border-left: none;    
 }
 
 .tableBox td {
