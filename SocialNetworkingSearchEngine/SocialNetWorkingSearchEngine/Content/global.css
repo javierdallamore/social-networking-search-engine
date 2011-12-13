@@ -259,6 +259,15 @@ h2 {
 	font-family:arial,sans-serif;
 }
 
+h4 {
+    display: block;
+    -webkit-margin-before: 1.33em;
+    -webkit-margin-after: 1.33em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+}
+
 p {
 	display:block;
 	margin:0 0 1em 0;
