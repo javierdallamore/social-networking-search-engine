@@ -18,28 +18,31 @@ namespace BusinessRules
         {
             var results = new List<Post>();
 
-            // Si indica que busque post guardados, primero agrego esos posts.
-            if (searchEnginesName.Any(y => y == "SavedPosts"))
-                results.AddRange(SearchSavedPosts(searchParameters));
-
-            foreach (var searchEngine in _searchEngines.Where(x => searchEnginesName.Any(y=>y ==x.Name)))
+            if (!string.IsNullOrEmpty(searchParameters))
             {
-                try
+                // Si indica que busque post guardados, primero agrego esos posts.
+                if (searchEnginesName.Any(y => y == "SavedPosts"))
+                    results.AddRange(SearchSavedPosts(searchParameters));
+
+                foreach (var searchEngine in _searchEngines.Where(x => searchEnginesName.Any(y => y == x.Name)))
                 {
-                    if (searchEngine.Instance != null)
+                    try
                     {
-                        var socialNetworkingSearchResult = searchEngine.Instance.Search(searchParameters, 1);
-                        if (socialNetworkingSearchResult != null)
+                        if (searchEngine.Instance != null)
                         {
-                            results.AddRange(ConvertFromSocialNetworkingItemToPosts(socialNetworkingSearchResult.SocialNetworkingItems));
+                            var socialNetworkingSearchResult = searchEngine.Instance.Search(searchParameters, 1);
+                            if (socialNetworkingSearchResult != null)
+                            {
+                                results.AddRange(ConvertFromSocialNetworkingItemToPosts(socialNetworkingSearchResult.SocialNetworkingItems));
+                            }
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        //LogError(ex);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    //LogError(ex);
-                }
-            }
+            }            
 
             return results;
         }

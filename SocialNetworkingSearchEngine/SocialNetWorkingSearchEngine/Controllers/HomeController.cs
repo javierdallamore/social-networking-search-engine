@@ -43,27 +43,31 @@ namespace SocialNetWorkingSearchEngine.Controllers
                 var searchEngineManager = new SearchEngineManager();
                 result = searchEngineManager.Search(parameters, searchEngines.Split(',').ToList());
 
-                GetAllWords();
-
-                var sentimentValuator = new SentimentValuator
-                                            {
-                                                NegativeWords = negativeWords,
-                                                PositiveWords = positiveWords,
-                                                IgnoreChars = ignoreList
-                                            };
-
-                foreach (var item in result)
+                if (result.Count > 0)
                 {
-                    sentimentValuator.ProcessItem(item);
+                    GetAllWords();
 
-                    if (string.IsNullOrWhiteSpace(sentiment) || item.Sentiment.ToLower() == sentiment.ToLower())
-                        model.Items.Add(item);
+                    var sentimentValuator = new SentimentValuator
+                    {
+                        NegativeWords = negativeWords,
+                        PositiveWords = positiveWords,
+                        IgnoreChars = ignoreList
+                    };
+
+                    foreach (var item in result)
+                    {
+                        sentimentValuator.ProcessItem(item);
+
+                        if (string.IsNullOrWhiteSpace(sentiment) || item.Sentiment.ToLower() == sentiment.ToLower())
+                            model.Items.Add(item);
+                    }
+
+                    BuildSentimentBox(model, sentimentValuator);
+                    BuildEnginesBox(model);
+                    BuildTopUsersBox(model);
                 }
-                
-                BuildSentimentBox(model, sentimentValuator);
-                BuildEnginesBox(model);
-                BuildTopUsersBox(model);
             }
+
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
