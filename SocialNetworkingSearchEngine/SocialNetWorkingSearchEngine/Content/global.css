@@ -86,9 +86,10 @@ dl{margin:0;}
 table{
 	display:block;	
 }
+/*
 tr, td{
 	display:inline-block;	
-}
+}*/
 
 /*
 	border:1px solid #ddd;
