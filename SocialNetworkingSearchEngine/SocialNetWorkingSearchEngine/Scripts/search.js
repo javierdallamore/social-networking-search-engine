@@ -114,21 +114,30 @@ function buildBoxes(statBoxs) {
 };
 
 function callSearch(title) {
-    var correctParam = "";
+    var correctSentimentParam = null;
+    var correctSocialNetworkParam = null;
+    var correctUserParam = null;
     switch (title.toLowerCase()) {
         case "positivas":
-            correctParam = "positivo";
+            correctSentimentParam = "positivo";
             break;
         case "negativas":
-            correctParam = "negativo";
+            correctSentimentParam = "negativo";
             break;
         case "neutras":
-            correctParam = "neutro";
+            correctSentimentParam = "neutro";
+            break;
+        case "facebook":
+            correctSocialNetworkParam = "facebook";
+            break;
+        case "twitter":
+            correctSocialNetworkParam = "twitter";
             break;
         default:
+            correctUserParam = title;
     }
 
-    search(getTextPattern(), getSelectedSearchEngines(), correctParam);
+    search(getTextPattern(), getSelectedSearchEngines(), correctSentimentParam, correctSocialNetworkParam, correctUserParam);
 };
 
 function getTextPattern() {
@@ -141,9 +150,9 @@ function getSelectedSearchEngines() {
     return result;
 };
 
-function search(parameters, searchEngines, sentiment) {
+function search(parameters, searchEngines, sentiment, socialNetwork, user) {
     $("#imgLoading").show();
-    $.getJSON("Home/SearchResults", { parameters: parameters, searchEngines: searchEngines, sentiment: sentiment }, function (json) {
+    $.getJSON("Home/SearchResults", { parameters: parameters, searchEngines: searchEngines, sentiment: sentiment, socialNetworking: socialNetwork, userName: user }, function (json) {
 
         var result_listTag = $("#search_result_list");
         result_listTag.html("");

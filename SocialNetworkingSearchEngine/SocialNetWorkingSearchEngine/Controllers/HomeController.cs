@@ -60,9 +60,21 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
                         if (string.IsNullOrEmpty(sentiment) && string.IsNullOrEmpty(socialNetworking) && string.IsNullOrEmpty(userName))
                             model.Items.Add(item);
+                        
                         else if (ValidateFilters(sentiment, socialNetworking, userName, item))
                             model.Items.Add(item);
                     }
+                    
+                    //TODO: INPROVE QuickFix para el evaluador del sentimiento cuando hay filtros se queda con el resultado viejo
+                    if (!string.IsNullOrEmpty(sentiment) || !string.IsNullOrEmpty(socialNetworking) || !string.IsNullOrEmpty(userName))
+                    {
+                        sentimentValuator.ResetCounters();
+                        foreach (var item in model.Items)
+                        {
+                            sentimentValuator.ProcessItem(item);
+                        }
+                    }
+
 
                     BuildSentimentBox(model, sentimentValuator);
                     BuildEnginesBox(model);
