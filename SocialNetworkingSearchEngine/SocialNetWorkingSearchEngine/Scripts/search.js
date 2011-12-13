@@ -230,7 +230,7 @@ function buildBoxes(statBoxs) {
     $("#boxesContainer").html("");
     _.each(statBoxs, function (box) {
         var boxHtml = "";
-        boxHtml += '<div id="' + box.Title + 'box" class="box">';
+        boxHtml += '<div id="' + box.Title + 'box" class="box_segment">';
         boxHtml += '    <h4> ' + box.Title + '</h4> ';
         boxHtml += '    <table class="tableBox">';
         _.each(box.StatItems, function (item) {
