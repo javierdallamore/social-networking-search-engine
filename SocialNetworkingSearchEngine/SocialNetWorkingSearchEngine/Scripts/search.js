@@ -139,7 +139,7 @@ $(document).ready(function () {
                 });
 
                 $("#btnSendEmail" + socialNetworkingItems.Id).click(function (e) {
-                    onSendEmailItemButtonClick(socialNetworkingItems.Id, socialNetworkingItems.UrlPost, socialNetworkingItems.Content);
+                    onSendEmailItemButtonClick(socialNetworkingItems.Id, socialNetworkingItems.UrlPost, socialNetworkingItems.Content, $(this));
                 });
 
                 $("#aSendEmail" + socialNetworkingItems.Id).click(function () {
@@ -167,23 +167,23 @@ $(document).ready(function () {
         });
     };
 
-    function onSendEmailItemButtonClick(itemId, urlPost, content) {
+    function onSendEmailItemButtonClick(itemId, urlPost, content, button) {
         var mailBody = content + "\n\n" + urlPost;
         var destinataries = $("#txtDestinatary" + itemId).val();
-        $.post("Home/SendMail", { to: destinataries, subject: 'Social networking', body: mailBody },
-            function callback() {
-
-            },
-            function errCallback() {
-
-            });
+        $.post("Home/SendMail", { to: destinataries, subject: 'Social networking', body: mailBody })
+        .success(function(e) {
+            success("Email enviado exitosamente", button);
+        }).error(
+        function(e) {
+            error("Ha ocurrido un error al intentar enviar el mail", button);
+        });
     };
 
     function onSaveItemButtonClick(itemId, button) {
 
         var itemDivId = itemId + "ITEMDIV";
         var item = $.socialNetworkingItemNamespace.searchResultsItemShowed[itemId];
-        
+
         //Add calification to entity
         var rankingControl = "#stars-wrapper" + itemId;
         var ui = $(rankingControl).data("stars");
@@ -198,7 +198,7 @@ $(document).ready(function () {
             error("Debe agregar al menos un tag o calificar el post para poder guardarlo", button);
             return;
         }
-        
+
         item.Tags.push(itemAssignedTags);
 
         item.Tags = [];
