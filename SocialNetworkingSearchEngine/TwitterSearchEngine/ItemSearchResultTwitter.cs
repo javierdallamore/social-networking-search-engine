@@ -13,7 +13,7 @@ namespace TwitterSearchEngine
         public string FromUserIdString { get; set; }
         [DataMember(Name = "from_user_name", Order = 3)]
         public string FromUserName { get; set; }                
-        [DataMember(Name = "geo", Order = 4)]
+        //[DataMember(Name = "geo", Order = 4)]
         public Geo Geo { get; set; }                
         [DataMember(Name = "id_str", Order = 5)]
         public string IdString { get; set; }
