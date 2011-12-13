@@ -18,7 +18,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
             return View();
         }
-        
+
         public ActionResult Explore()
         {
             return View();
@@ -33,13 +33,13 @@ namespace SocialNetWorkingSearchEngine.Controllers
         private List<string> positiveWords;
         private List<string> ignoreList;
 
-        public JsonResult SearchResults(string parameters, string searchEngines, string sentiment)
+        public JsonResult SearchResults(string parameters, string searchEngines, string sentiment, string socialNetworking, string userName)
         {
             var result = new List<Post>();
             var model = new SearchResultModel();
 
             if (ModelState.IsValid)
-            {                
+            {
                 var searchEngineManager = new SearchEngineManager();
                 result = searchEngineManager.Search(parameters, searchEngines.Split(',').ToList());
 
@@ -58,7 +58,9 @@ namespace SocialNetWorkingSearchEngine.Controllers
                     {
                         sentimentValuator.ProcessItem(item);
 
-                        if (string.IsNullOrWhiteSpace(sentiment) || item.Sentiment.ToLower() == sentiment.ToLower())
+                        if (string.IsNullOrEmpty(sentiment) && string.IsNullOrEmpty(socialNetworking) && string.IsNullOrEmpty(userName))
+                            model.Items.Add(item);
+                        else if (ValidateFilters(sentiment, socialNetworking, userName, item))
                             model.Items.Add(item);
                     }
 
@@ -71,9 +73,22 @@ namespace SocialNetWorkingSearchEngine.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
+        private bool ValidateFilters(string sentiment, string socialNetworking, string userName, Post item)
+        {
+            var functionValueReturn = false;
+
+            if ((!string.IsNullOrEmpty(sentiment) && item.Sentiment.ToLower() == sentiment.ToLower()) ||
+                        (!string.IsNullOrEmpty(socialNetworking) && item.SocialNetworkName.ToLower() == socialNetworking.ToLower()) ||
+                        (!string.IsNullOrEmpty(userName) && item.UserName.ToLower() == userName.ToLower()))
+            {
+                functionValueReturn = true;
+            }
+            return functionValueReturn;
+        }
+
         private void GetAllWords()
         {
-            ignoreList = new List<string>() {".", ","};
+            ignoreList = new List<string>() { ".", "," };
             negativeWords = new List<string>();
             positiveWords = new List<string>();
 
@@ -97,7 +112,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
         public void BuildSentimentBox(SearchResultModel model, SentimentValuator sentimentValuator)
         {
-            var sentimentBox = new StatBox() {Title = "Sentimiento"};
+            var sentimentBox = new StatBox() { Title = "Sentimiento" };
             model.StatBoxs.Add(sentimentBox);
             sentimentBox.StatItems.Add(new StatItem()
                                            {
@@ -117,7 +132,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
                                                Link = "#",
                                                Value = sentimentValuator.NeutralCount
                                            });
-            if (model.Items.Count >0)
+            if (model.Items.Count > 0)
             {
                 sentimentBox.StatItems[0].ValueText =
                     ((decimal)sentimentValuator.PositiveCount / model.Items.Count * 100).ToString("f") + "%";
@@ -131,7 +146,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
                     ((decimal)sentimentValuator.NegativeCount / model.Items.Count * 100);
                 sentimentBox.StatItems[2].ValuePercent =
                     ((decimal)sentimentValuator.NeutralCount / model.Items.Count * 100);
-                
+
             }
             else
             {
@@ -206,7 +221,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
         public void SendMail(string to, string subject, string body)
         {
             var address = ConfigurationManager.AppSettings["addressFrom"];
-            var displayName = ConfigurationManager.AppSettings["displayName"]; 
+            var displayName = ConfigurationManager.AppSettings["displayName"];
             var userName = ConfigurationManager.AppSettings["userName"];
             var password = ConfigurationManager.AppSettings["password"];
             var port = Convert.ToInt32(ConfigurationManager.AppSettings["port"]);

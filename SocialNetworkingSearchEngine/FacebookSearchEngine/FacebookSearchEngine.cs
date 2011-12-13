@@ -19,9 +19,9 @@ namespace FacebookSearchEngine
             JSONObject json = api.Get(engineURL + searchParameters + "&type=post&limit=25");
 
             var list = SocialNetworkingItemList(json);
-            return new SocialNetworkingSearchResult() { SocialNetworkingItems = list, SocialNetworkingName = "Facebook using 'Facebook search engine'" };
+            return new SocialNetworkingSearchResult() { SocialNetworkingItems = list, SocialNetworkingName = Name };
         }
-       
+
         //Este metodo itera los resultados y crea las entidades de dominio
         private List<SocialNetworkingItem> SocialNetworkingItemList(JSONObject json)
         {
@@ -30,9 +30,10 @@ namespace FacebookSearchEngine
 
             JSONObject[] data = json.Dictionary["data"].Array;
 
-            for(int i=0; i<data.Length; i++)
+            for (int i = 0; i < data.Length; i++)
             {
                 var post = data[i].Dictionary;
+
                 if (!post.ContainsKey("message")) continue;
 
                 user = new SocialNetworkingItem();
@@ -41,9 +42,11 @@ namespace FacebookSearchEngine
                 user.Content = post["message"].String;
                 user.CreatedAt = DateTimeOffset.Parse(post["created_time"].String).UtcDateTime;
                 user.ProfileImage = GetProfilePictureUrl().Replace("?", post["from"].Dictionary["id"].String);
-                string postid = post["id"].String;
-                user.UrlPost = GetProfileUrl()+postid.Substring(postid.IndexOf('_')+1);
-                user.UrlProfile = GetProfileUrl()+post["from"].Dictionary["id"].String;
+
+                var postid = post["id"].String;
+                
+                user.UrlPost = GetProfileUrl() + postid.Substring(postid.IndexOf('_') + 1);
+                user.UrlProfile = GetProfileUrl() + post["from"].Dictionary["id"].String;
                 // Facebook no me da la fuente del post
                 user.Source = "";
 
