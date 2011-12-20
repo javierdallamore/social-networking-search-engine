@@ -166,7 +166,13 @@ namespace BusinessRules
         {
             Utils.SendMail(to, address, displayName, subject, body, userName, password, port, host);
         }
-       
+
+        public void SendPostToMail(string to, string address, string displayName, string subject, string userName, string password, int port, string host, Post post)
+        {
+            var body = Utils.GenerateBodyHtml(post);
+            Utils.SendMail(to, address, displayName, subject, body, userName, password, port, host);
+        }       
+
         public List<Word> GetAllWords()
         {
             return _wordRepository.GetAll();

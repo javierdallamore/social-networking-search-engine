@@ -64,17 +64,13 @@ namespace SocialNetWorkingSearchEngine.Controllers
                         else if (ValidateFilters(sentiment, socialNetworking, userName, item))
                             model.Items.Add(item);
                     }
-                    
-                    //TODO: INPROVE QuickFix para el evaluador del sentimiento cuando hay filtros se queda con el resultado viejo
-                    if (!string.IsNullOrEmpty(sentiment) || !string.IsNullOrEmpty(socialNetworking) || !string.IsNullOrEmpty(userName))
-                    {
-                        sentimentValuator.ResetCounters();
-                        foreach (var item in model.Items)
-                        {
-                            sentimentValuator.ProcessItem(item);
-                        }
-                    }
 
+                    sentimentValuator.ResetCounters();
+                    
+                    foreach (var item in model.Items)
+                    {
+                        sentimentValuator.ProcessItem(item);
+                    }
 
                     BuildSentimentBox(model, sentimentValuator);
                     BuildEnginesBox(model);
@@ -241,6 +237,20 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
             var servicesManager = new ServicesManager();
             servicesManager.SendMail(to, address, displayName, subject, body, userName, password, port, host);
+        }
+
+        [HttpPost]
+        public void SendPostToMail(string to, string subject, Post post)
+        {
+            var address = ConfigurationManager.AppSettings["addressFrom"];
+            var displayName = ConfigurationManager.AppSettings["displayName"];
+            var userName = ConfigurationManager.AppSettings["userName"];
+            var password = ConfigurationManager.AppSettings["password"];
+            var port = Convert.ToInt32(ConfigurationManager.AppSettings["port"]);
+            var host = ConfigurationManager.AppSettings["host"];
+
+            var servicesManager = new ServicesManager();
+            servicesManager.SendPostToMail(to, address, displayName, subject, userName, password, port, host, post);
         }
     }
 }

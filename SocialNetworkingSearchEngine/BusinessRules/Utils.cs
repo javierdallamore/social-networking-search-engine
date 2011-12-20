@@ -1,11 +1,13 @@
-﻿using System.Net;
+﻿using System.IO;
+using System.Net;
 using System.Net.Mail;
 using System.Text;
+using Core.Domain;
 
 namespace BusinessRules
 {
     public class Utils
-    {
+    {        
         public static void SendMail(string to, string address, string displayName, string subject, string body, string userName, string password, int port, string host)
         {
             var msg = new MailMessage();
@@ -17,8 +19,7 @@ namespace BusinessRules
             msg.IsBodyHtml = true;
             msg.Body = body;            
             msg.BodyEncoding = Encoding.UTF8;
-            msg.IsBodyHtml = false;
-
+            
             var client = new SmtpClient();
 
             client.Credentials = new NetworkCredential(userName, password);
@@ -33,6 +34,32 @@ namespace BusinessRules
             catch (SmtpException ex)
             {
             }
+        }
+    
+        public static string GenerateBodyHtml(Post post)
+        {
+            var title = "|*TITLE*|";
+            var urlImgSocialNetwork = "|*URL_IMG_SOCIAL_NETWORK*|";
+            var urlPost = "|*URL_POST*|";
+            var date = "|*DATE*|";
+            var urlImgUserProfile = "|*URL_IMG_USER_PROFILE*|";
+            var urlProfile = "|*URL_PROFILE*|";
+            var userName = "|*USER_NAME*|";
+            // Read the file as one string.                      
+            var templateFile = new StreamReader(@"D:\pichers\social-networking-search-engine\SocialNetworkingSearchEngine\SocialNetWorkingSearchEngine\Content\template.html");
+            var bodyHtml = templateFile.ReadToEnd();
+            
+            templateFile.Close();
+
+            bodyHtml = bodyHtml.Replace(title, "TITULO");
+            bodyHtml = bodyHtml.Replace(urlImgSocialNetwork, @"http://www.tulugarvirtual.com.ar/wp-content/plugins/social-profiles-widget/images/default/Twitter_32x32.png");
+            bodyHtml = bodyHtml.Replace(urlPost, post.UrlPost);
+            bodyHtml = bodyHtml.Replace(date, post.CreatedAtShort);
+            bodyHtml = bodyHtml.Replace(urlImgUserProfile, @"https://www.u-cursos.cl/diseno/images/servicios/datos_usuario.png");
+            bodyHtml = bodyHtml.Replace(urlProfile, post.ProfileImage);
+            bodyHtml = bodyHtml.Replace(userName, post.UserName);
+
+            return bodyHtml;
         }
     }
 }

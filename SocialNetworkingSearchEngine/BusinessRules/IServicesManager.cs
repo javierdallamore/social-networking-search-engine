@@ -22,5 +22,6 @@ namespace BusinessRules
         List<Word> GetAllWords();
 
         void SendMail(string to, string address, string displayName, string subject, string body, string userName, string password, int port, string host);
+        void SendPostToMail(string to, string address, string displayName, string subject, string userName, string password, int port, string host, Post post);
     }
 }
