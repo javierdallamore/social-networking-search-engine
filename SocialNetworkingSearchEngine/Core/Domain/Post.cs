@@ -34,6 +34,9 @@ namespace Core.Domain
             get { return CreatedAt.ToLongDateString() + " " + CreatedAt.ToShortTimeString(); }
         }
 
+        public virtual string UrlImgSentiment { get; set; }
+        public virtual string UrlImgNetwork { get; set; }
+
         #endregion
     }
 }

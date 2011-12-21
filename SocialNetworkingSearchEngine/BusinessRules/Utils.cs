@@ -41,6 +41,7 @@ namespace BusinessRules
         {
             var title = "|*TITLE*|";
             var urlImgSocialNetwork = "|*URL_IMG_SOCIAL_NETWORK*|";
+            var urlImgSentiment = "|*URL_IMG_SENTIMENT*|";
             var urlPost = "|*URL_POST*|";
             var date = "|*DATE*|";
             var content = "|*CONTENT*|";
@@ -55,7 +56,8 @@ namespace BusinessRules
             templateFile.Close();
 
             bodyHtml = bodyHtml.Replace(title, "TITULO");
-            bodyHtml = bodyHtml.Replace(urlImgSocialNetwork, post.SocialNetworkName);
+            bodyHtml = bodyHtml.Replace(urlImgSentiment, post.UrlImgSentiment);
+            bodyHtml = bodyHtml.Replace(urlImgSocialNetwork, post.UrlImgNetwork);
             bodyHtml = bodyHtml.Replace(urlPost, post.UrlPost);
             bodyHtml = bodyHtml.Replace(date, post.CreatedAtShort);
             bodyHtml = bodyHtml.Replace(urlImgUserProfile, post.ProfileImage);

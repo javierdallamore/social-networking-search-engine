@@ -241,7 +241,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
         [HttpPost]
         public void SendPostToMail(string to, string subject, string content, string urlPost, string createdAt, string usrName,
-            string urlUser, string urlImgNetwork, string urlImgProfile)
+            string urlUser, string urlImgNetwork, string urlImgProfile, string urlImgSentiment)
         {
             var address = ConfigurationManager.AppSettings["addressFrom"];
             var displayName = ConfigurationManager.AppSettings["displayName"];
@@ -257,10 +257,9 @@ namespace SocialNetWorkingSearchEngine.Controllers
                                UserName = usrName,
                                UrlProfile = urlUser,
                                ProfileImage = urlImgProfile,
-                               //TODO Ojo aca guardo la url de la imagen de la red social en el NetworkName
-                               // porque no tenemos otro lugar, ver de mejorar al mejorar tb este metodo sacando
-                               //la creacion de esta instancia de post y pasar directamente el post
-                               SocialNetworkName = urlImgNetwork
+                               UrlImgNetwork = urlImgNetwork,
+                               UrlImgSentiment = urlImgSentiment
+                               
                            };
             var servicesManager = new ServicesManager();
             servicesManager.SendPostToMail(to, address, displayName, subject, userName, password, port, host, post);
