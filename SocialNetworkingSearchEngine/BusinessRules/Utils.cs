@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Mail;
 using System.Text;
+using System.Web;
 using Core.Domain;
 
 namespace BusinessRules
@@ -42,11 +43,13 @@ namespace BusinessRules
             var urlImgSocialNetwork = "|*URL_IMG_SOCIAL_NETWORK*|";
             var urlPost = "|*URL_POST*|";
             var date = "|*DATE*|";
+            var content = "|*CONTENT*|";
             var urlImgUserProfile = "|*URL_IMG_USER_PROFILE*|";
             var urlProfile = "|*URL_PROFILE*|";
             var userName = "|*USER_NAME*|";
-            // Read the file as one string.                      
-            var templateFile = new StreamReader(@"D:\pichers\social-networking-search-engine\SocialNetworkingSearchEngine\SocialNetWorkingSearchEngine\Content\template.html");
+            // Read the file as one string.
+            var path = HttpContext.Current.Server.MapPath("../Content/template.html");
+            var templateFile = new StreamReader(path);
             var bodyHtml = templateFile.ReadToEnd();
             
             templateFile.Close();
@@ -55,9 +58,10 @@ namespace BusinessRules
             bodyHtml = bodyHtml.Replace(urlImgSocialNetwork, @"http://www.tulugarvirtual.com.ar/wp-content/plugins/social-profiles-widget/images/default/Twitter_32x32.png");
             bodyHtml = bodyHtml.Replace(urlPost, post.UrlPost);
             bodyHtml = bodyHtml.Replace(date, post.CreatedAtShort);
-            bodyHtml = bodyHtml.Replace(urlImgUserProfile, @"https://www.u-cursos.cl/diseno/images/servicios/datos_usuario.png");
-            bodyHtml = bodyHtml.Replace(urlProfile, post.ProfileImage);
+            bodyHtml = bodyHtml.Replace(urlImgUserProfile, post.ProfileImage);
+            bodyHtml = bodyHtml.Replace(urlProfile, post.UrlProfile);
             bodyHtml = bodyHtml.Replace(userName, post.UserName);
+            bodyHtml = bodyHtml.Replace(content, post.Content);
 
             return bodyHtml;
         }

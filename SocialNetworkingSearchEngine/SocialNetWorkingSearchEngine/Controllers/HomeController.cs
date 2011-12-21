@@ -240,7 +240,8 @@ namespace SocialNetWorkingSearchEngine.Controllers
         }
 
         [HttpPost]
-        public void SendPostToMail(string to, string subject, Post post)
+        public void SendPostToMail(string to, string subject, string content, string urlPost, string createdAt, string usrName,
+            string urlUser, string urlImgNetwork, string urlImgProfile)
         {
             var address = ConfigurationManager.AppSettings["addressFrom"];
             var displayName = ConfigurationManager.AppSettings["displayName"];
@@ -249,6 +250,15 @@ namespace SocialNetWorkingSearchEngine.Controllers
             var port = Convert.ToInt32(ConfigurationManager.AppSettings["port"]);
             var host = ConfigurationManager.AppSettings["host"];
 
+            var post = new Post
+                           {
+                               Content = content,
+                               UrlPost = urlPost,
+                               UserName = usrName,
+                               UrlProfile = urlUser,
+                               ProfileImage = urlImgProfile,
+                               SocialNetworkName = urlImgNetwork
+                           };
             var servicesManager = new ServicesManager();
             servicesManager.SendPostToMail(to, address, displayName, subject, userName, password, port, host, post);
         }
