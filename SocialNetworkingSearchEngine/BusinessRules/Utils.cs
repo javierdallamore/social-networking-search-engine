@@ -55,7 +55,7 @@ namespace BusinessRules
             templateFile.Close();
 
             bodyHtml = bodyHtml.Replace(title, "TITULO");
-            bodyHtml = bodyHtml.Replace(urlImgSocialNetwork, @"http://www.tulugarvirtual.com.ar/wp-content/plugins/social-profiles-widget/images/default/Twitter_32x32.png");
+            bodyHtml = bodyHtml.Replace(urlImgSocialNetwork, post.SocialNetworkName);
             bodyHtml = bodyHtml.Replace(urlPost, post.UrlPost);
             bodyHtml = bodyHtml.Replace(date, post.CreatedAtShort);
             bodyHtml = bodyHtml.Replace(urlImgUserProfile, post.ProfileImage);

@@ -257,6 +257,9 @@ namespace SocialNetWorkingSearchEngine.Controllers
                                UserName = usrName,
                                UrlProfile = urlUser,
                                ProfileImage = urlImgProfile,
+                               //TODO Ojo aca guardo la url de la imagen de la red social en el NetworkName
+                               // porque no tenemos otro lugar, ver de mejorar al mejorar tb este metodo sacando
+                               //la creacion de esta instancia de post y pasar directamente el post
                                SocialNetworkName = urlImgNetwork
                            };
             var servicesManager = new ServicesManager();

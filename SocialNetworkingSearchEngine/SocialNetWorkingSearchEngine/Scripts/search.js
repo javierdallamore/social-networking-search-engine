@@ -45,8 +45,10 @@ function onSendEmailItemButtonClick(itemId, urlPost, content, button) {
     var destinataries = $("#txtDestinatary" + itemId).val();
     $("#imgLoading").show();
 
+    var urlIconNetwork = window.location.origin + "/" + $("#imgIconFrom"+itemId).attr("src").substr(3);
+    
     $.post("Home/SendPostToMail", { to: destinataries, subject: 'Social networking', content: item.Content, urlPost: item.UrlPost,
-        createdAt: item.CreatedAt, usrName: item.UserName, urlUser: item.UrlProfile, urlImgNetwork: item.socialNetwork, urlImgProfile: item.ProfileImage
+        createdAt: item.CreatedAt, usrName: item.UserName, urlUser: item.UrlProfile, urlImgNetwork: urlIconNetwork, urlImgProfile: item.ProfileImage
     })
     .success(function (e) {
         success("Email enviado exitosamente", button);
