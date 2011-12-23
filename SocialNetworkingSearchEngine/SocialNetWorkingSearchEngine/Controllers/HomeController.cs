@@ -42,7 +42,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
             {
                 var searchEngineManager = new SearchEngineManager();
                 result = searchEngineManager.Search(parameters, searchEngines.Split(',').ToList());
-
+                result = result.OrderByDescending(o => o.CreatedAt).ToList();
                 if (result.Count > 0)
                 {
                     GetAllWords();
