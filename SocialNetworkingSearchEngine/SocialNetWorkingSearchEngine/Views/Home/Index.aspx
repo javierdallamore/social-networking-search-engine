@@ -27,7 +27,7 @@
                     </table>
                 </div>
                 <div style="height: 50px; text-align: right; line-height: 50px;">
-                    <h1>SocialNetworking Search Engine</h1>
+                    <h1>Buscador Redes Sociales</h1>
                 </div>
             </div>
             <div>
