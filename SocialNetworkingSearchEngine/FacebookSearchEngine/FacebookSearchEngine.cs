@@ -16,7 +16,7 @@ namespace FacebookSearchEngine
         {
             var api = new FacebookAPI();
             var engineURL = GetEngineUrl();
-            JSONObject json = api.Get(engineURL + searchParameters + "&type=post&limit=25");
+            JSONObject json = api.Get(engineURL + searchParameters + "&type=post&limit=100");
 
             var list = SocialNetworkingItemList(json);
             return new SocialNetworkingSearchResult() { SocialNetworkingItems = list, SocialNetworkingName = Name };

@@ -26,13 +26,16 @@ namespace Core.Domain
         public virtual string UrlProfile { get; set; }
         public virtual string Source { get; set; }
         public virtual int Calification { get; set; }
-        
+        public virtual string Query { get; set; }
         #region No Mapeado
         public virtual string CurrentTags { get; set; } 
         public virtual string CreatedAtShort
         {
             get { return CreatedAt.ToLongDateString() + " " + CreatedAt.ToShortTimeString(); }
         }
+
+        public virtual string UrlImgSentiment { get; set; }
+        public virtual string UrlImgNetwork { get; set; }
 
         #endregion
     }

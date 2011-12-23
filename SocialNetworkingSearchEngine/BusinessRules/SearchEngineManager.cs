@@ -33,7 +33,7 @@ namespace BusinessRules
                             var socialNetworkingSearchResult = searchEngine.Instance.Search(searchParameters, 1);
                             if (socialNetworkingSearchResult != null)
                             {
-                                results.AddRange(ConvertFromSocialNetworkingItemToPosts(socialNetworkingSearchResult.SocialNetworkingItems));
+                                results.AddRange(ConvertFromSocialNetworkingItemToPosts(socialNetworkingSearchResult.SocialNetworkingItems, searchParameters));
                             }
                         }
                     }
@@ -53,7 +53,7 @@ namespace BusinessRules
             return postRepository.GetByQuery(searchParameters);
         }
 
-        private List<Post> ConvertFromSocialNetworkingItemToPosts(List<SocialNetworkingItem> entityList)
+        private List<Post> ConvertFromSocialNetworkingItemToPosts(List<SocialNetworkingItem> entityList, string query)
         {
             if (entityList == null)
                 return new List<Post>();
@@ -68,7 +68,8 @@ namespace BusinessRules
                                                UrlPost = u.UrlPost,
                                                UrlProfile = u.UrlProfile,
                                                CreatedAt = u.CreatedAt,
-                                               Source = u.Source
+                                               Source = u.Source,
+                                               Query = query
                                            }).ToList();
             return posts;
         }
@@ -92,13 +93,17 @@ namespace BusinessRules
                                                       Name = row["name"].ToString()
                                                   };
                     var engineType = Type.GetType(row["type"].ToString());
-                    if (!typeof(ISearchEngine).IsAssignableFrom(engineType))
+                    if (engineType == null || !typeof(ISearchEngine).IsAssignableFrom(engineType))
                     {
                         continue;
                     }
                     engineConfiguration.Type = engineType;
-                    engineConfiguration.Instance = engineType.GetConstructor(System.Type.EmptyTypes).Invoke(null) as ISearchEngine;
-                    _searchEngines.Add(engineConfiguration);
+                    var constructorInfo = engineType.GetConstructor(System.Type.EmptyTypes);
+                    if (constructorInfo != null)
+                    {
+                        engineConfiguration.Instance = constructorInfo.Invoke(null) as ISearchEngine;
+                        _searchEngines.Add(engineConfiguration);
+                    }
                 }
                 catch (Exception ex)
                 {

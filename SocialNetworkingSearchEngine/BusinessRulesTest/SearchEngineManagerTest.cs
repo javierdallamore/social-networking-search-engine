@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BusinessRules;
 using Core.Domain;
 using DataAccess;
@@ -106,6 +107,32 @@ namespace BusinessRulesTest
             wordRepository.SaveOrUpdate(new Word() { Name = "genio", Sentiment = "Positivo"});
 
             NHSessionManager.Instance.CommitTransaction();
+        }
+
+        [TestMethod]
+        public void SendMailHTMLTest()
+        {
+            //var to = "cuchillozapallero@gmail.com, mellibo@gmail.com, diegohi@gmail.com, mundojava.blogspot.com@gmail.com, javierdallamore@gmail.com";
+            var to = "cuchillozapallero@gmail.com";
+            var address = "desarrollo@pichersandpichers.com.ar";            
+            var displayName = "Administrador";
+            var subject = "Send Mail HTML Body Test";
+
+            var post = new Post();
+
+            post.UrlPost = @"http://twitter.com/#!/rgmamani/statuses/144888351332372480";
+            post.CreatedAt = new DateTime(2011, 12, 8);
+            post.UrlProfile = @"http://twitter.com/#!/rgmamani";
+            post.UserName = "rgmamani";
+
+            var body = Utils.GenerateBodyHtml(post);
+
+            var userName = "desarrollo@pichersandpichers.com.ar";
+            var password = "Pichers123";
+            var port = 587;
+            var host = "smtp.gmail.com";
+                            
+            Utils.SendMail(to, address, displayName, subject, body, userName, password, port, host);
         }
     }
 }

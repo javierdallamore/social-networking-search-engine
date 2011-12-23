@@ -25,12 +25,33 @@ $(document).ready(function () {
     $("#imgLoading").hide();
 });
 
+//function onSendEmailItemButtonClick(itemId, urlPost, content, button) {
+//    var mailBody = content + "\n\n" + urlPost;
+//    var destinataries = $("#txtDestinatary" + itemId).val();
+//    $("#imgLoading").show();
+//    $.post("Home/SendMail", { to: destinataries, subject: 'Social networking', body: mailBody })
+//    .success(function (e) {
+//        success("Email enviado exitosamente", button);
+//        $("#imgLoading").hide();
+//    }).error(
+//    function (e) {
+//        error("Ha ocurrido un error al intentar enviar el mail", button);
+//        $("#imgLoading").hide();
+//    });
+//};
 
 function onSendEmailItemButtonClick(itemId, urlPost, content, button) {
-    var mailBody = content + "\n\n" + urlPost;
+    var item = $.socialNetworkingItemNamespace.searchResultsItemShowed[itemId];
     var destinataries = $("#txtDestinatary" + itemId).val();
     $("#imgLoading").show();
-    $.post("Home/SendMail", { to: destinataries, subject: 'Social networking', body: mailBody })
+
+    var urlIconNetwork = window.location.origin + "/" + $("#imgIconFrom" + itemId).attr("src").substr(3);
+    var urlIconSentiment = window.location.origin + "/" + $("#imgIconSentiment" + itemId).attr("src").substr(3);
+    
+    $.post("Home/SendPostToMail", { to: destinataries, subject: 'Social networking', content: item.Content, urlPost: item.UrlPost,
+        createdAt: item.CreatedAt, usrName: item.UserName, urlUser: item.UrlProfile, urlImgNetwork: urlIconNetwork,
+        urlImgProfile: item.ProfileImage, urlImgSentiment: urlIconSentiment
+    })
     .success(function (e) {
         success("Email enviado exitosamente", button);
         $("#imgLoading").hide();
