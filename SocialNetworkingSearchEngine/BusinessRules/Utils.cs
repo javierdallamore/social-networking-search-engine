@@ -55,7 +55,7 @@ namespace BusinessRules
             
             templateFile.Close();
 
-            bodyHtml = bodyHtml.Replace(title, "TITULO");
+            bodyHtml = bodyHtml.Replace(title, "Post Enviado para revision.");
             bodyHtml = bodyHtml.Replace(urlImgSentiment, post.UrlImgSentiment);
             bodyHtml = bodyHtml.Replace(urlImgSocialNetwork, post.UrlImgNetwork);
             bodyHtml = bodyHtml.Replace(urlPost, post.UrlPost);
@@ -63,7 +63,9 @@ namespace BusinessRules
             bodyHtml = bodyHtml.Replace(urlImgUserProfile, post.ProfileImage);
             bodyHtml = bodyHtml.Replace(urlProfile, post.UrlProfile);
             bodyHtml = bodyHtml.Replace(userName, post.UserName);
-            bodyHtml = bodyHtml.Replace(content, post.Content);
+
+            var postContent = post.Content.Length > 150 ? post.Content.Substring(0, 150) + "..." : post.Content;
+            bodyHtml = bodyHtml.Replace(content, postContent);
 
             return bodyHtml;
         }
