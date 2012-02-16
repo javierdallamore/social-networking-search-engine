@@ -138,10 +138,12 @@
     <Content Include="Content\twitter_icon.ico" />
     <Content Include="Content\twitter_icon.png" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.16.custom.min.js" />
     <Content Include="Scripts\jquery.taghandler.js" />
     <Content Include="Scripts\jquery.ui.stars.min.js" />
     <Content Include="Scripts\search.js" />
+    <Content Include="Scripts\underscore-min.js" />
     <Content Include="Views\Home\Explore.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Home\Main.aspx" />

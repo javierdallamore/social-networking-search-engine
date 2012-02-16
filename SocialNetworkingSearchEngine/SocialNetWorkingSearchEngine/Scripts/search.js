@@ -222,7 +222,7 @@ function search(parameters, searchEngines, sentiment, socialNetwork, user) {
             item_result += "</select>";
             item_result += "</div>";
             item_result += "<div style=\"float: right\">"; //Save
-            item_result += "<input id=\"btnSave" + socialNetworkingItems.Id + "\" type=\"image\" src=\"../Content/Save-icon.png\" style=\"vertical-align: middle; height: 20px;\"/>";
+            item_result += "<input id=\"btnSave" + socialNetworkingItems.Id + "\" type=\"image\" src=\"Content/Save-icon.png\" style=\"vertical-align: middle; height: 20px;\"/>";
             item_result += "</div>";
             item_result += "</div>";
 
@@ -247,7 +247,7 @@ function search(parameters, searchEngines, sentiment, socialNetwork, user) {
             item_result += "<div id=\"divSendTo" + socialNetworkingItems.Id + "\" style=\"display: none;\" >";
             item_result += "<p style=\"margin: 10px 0px 0px 0px; line-height: 0;\"> Para: </p>";
             item_result += "<input id=\"txtDestinatary" + socialNetworkingItems.Id + "\" type=\"text\" style=\"height: 12px; vertical-align: middle; font-size: 12px\"/>";
-            item_result += "<input id=\"btnSendEmail" + socialNetworkingItems.Id + "\" type=\"image\" src=\"../Content/48x48-send_e-mail.png\" style=\"vertical-align: middle; height: 35px;\"/>";
+            item_result += "<input id=\"btnSendEmail" + socialNetworkingItems.Id + "\" type=\"image\" src=\"Content/48x48-send_e-mail.png\" style=\"vertical-align: middle; height: 35px;\"/>";
             item_result += "</div>";
             item_result += "</div>"; 	//result item
 
@@ -272,13 +272,13 @@ function search(parameters, searchEngines, sentiment, socialNetwork, user) {
             if (socialNetworkingItems.Sentiment != "undefined" && socialNetworkingItems.Sentiment != null) {
                 switch (socialNetworkingItems.Sentiment.toLowerCase()) {
                     case "positivo":
-                        $("#imgIconSentiment" + socialNetworkingItems.Id).attr("src", "../Content/sentiment_positive.png");
+                        $("#imgIconSentiment" + socialNetworkingItems.Id).attr("src", "Content/sentiment_positive.png");
                         break;
                     case "neutro":
-                        $("#imgIconSentiment" + socialNetworkingItems.Id).attr("src", "../Content/sentiment_neutral.png");
+                        $("#imgIconSentiment" + socialNetworkingItems.Id).attr("src", "Content/sentiment_neutral.png");
                         break;
                     case "negativo":
-                        $("#imgIconSentiment" + socialNetworkingItems.Id).attr("src", "../Content/sentiment_negative.png");
+                        $("#imgIconSentiment" + socialNetworkingItems.Id).attr("src", "Content/sentiment_negative.png");
                         break;
                     default:
                         $("#imgIconSentiment" + socialNetworkingItems.Id).attr("src", "");
@@ -289,13 +289,13 @@ function search(parameters, searchEngines, sentiment, socialNetwork, user) {
             if (socialNetworkingItems.SocialNetworkName != "undefined" && socialNetworkingItems.SocialNetworkName != null) {
                 switch (socialNetworkingItems.SocialNetworkName.toLowerCase()) {
                     case "facebook":
-                        $("#imgIconFrom" + socialNetworkingItems.Id).attr("src", "../Content/facebook_icon.ico");
+                        $("#imgIconFrom" + socialNetworkingItems.Id).attr("src", "Content/facebook_icon.ico");
                         break;
                     case "twitter":
-                        $("#imgIconFrom" + socialNetworkingItems.Id).attr("src", "../Content/twitter_icon.ico");
+                        $("#imgIconFrom" + socialNetworkingItems.Id).attr("src", "Content/twitter_icon.ico");
                         break;
                     default:
-                        $("#imgIconFrom" + socialNetworkingItems.Id).attr("src", "../Content/search_item_icon.gif");
+                        $("#imgIconFrom" + socialNetworkingItems.Id).attr("src", "Content/search_item_icon.gif");
                 };
             };
 

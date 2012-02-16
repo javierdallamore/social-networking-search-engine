@@ -20,7 +20,7 @@
                                     <input id="btnSearch" type="button" value="Buscar">
                                 </td>
                                 <td>
-                                    <img id="imgLoading" src="../../Content/loading36.gif" />
+                                    <img id="imgLoading" src='<%: Url.Content("~/Content/loading36.gif") %>' />
                                 </td>
                             </tr>
                         </tbody>

@@ -194,7 +194,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
         public JsonResult GetAllTags()
         {
             var servicesManager = new ServicesManager();
-            return Json(servicesManager.GetAllTags(), JsonRequestBehavior.AllowGet);
+            return Json(servicesManager.GetAllTags(), "application/json", JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
