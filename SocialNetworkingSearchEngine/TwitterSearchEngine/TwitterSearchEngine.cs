@@ -39,7 +39,7 @@ namespace TwitterSearchEngine
                                                                Content = u.Text,
                                                                UrlPost = GetPostUrl(u.FromUser, u.IdString),
                                                                UrlProfile = GetProfileUrl(u.FromUser),
-                                                               CreatedAt = DateTimeOffset.Parse(u.CreatedAt).UtcDateTime,
+                                                               CreatedAt = DateTimeOffset.Parse(u.CreatedAt, System.Globalization.CultureInfo.GetCultureInfo("en-US")).UtcDateTime,
                                                                Source = u.Source
                                                            }).ToList();
             return users;
