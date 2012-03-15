@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Facebook;
 using SearchEnginesBase.Entities;
+using SearchEnginesBase.Utils;
 
 namespace FacebookSearchEngine
 {
@@ -14,12 +15,21 @@ namespace FacebookSearchEngine
 
         public SocialNetworkingSearchResult Search(string searchParameters, int page)
         {
-            var api = new FacebookAPI();
-            var engineURL = GetEngineUrl();
-            JSONObject json = api.Get(engineURL + searchParameters + "&type=post&limit=100");
+            List<SocialNetworkingItem> list;
+            try
+            {
+                var api = new FacebookAPI();
+                var engineURL = GetEngineUrl();
+                JSONObject json = api.Get(engineURL + searchParameters + "&type=post&limit=100");
 
-            var list = SocialNetworkingItemList(json);
-            return new SocialNetworkingSearchResult() { SocialNetworkingItems = list, SocialNetworkingName = Name };
+                list = SocialNetworkingItemList(json);
+                return new SocialNetworkingSearchResult() { SocialNetworkingItems = list, SocialNetworkingName = Name };
+            }
+            catch (Exception e)
+            {
+                Logger.Log.Error(e);
+            }
+            return null;
         }
 
         //Este metodo itera los resultados y crea las entidades de dominio

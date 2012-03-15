@@ -7,6 +7,7 @@ using Core.Domain;
 using DataAccess.DAO;
 using SearchEnginesBase.Entities;
 using SearchEnginesBase.Interfaces;
+using SearchEnginesBase.Utils;
 
 namespace BusinessRules
 {
@@ -39,7 +40,7 @@ namespace BusinessRules
                     }
                     catch (Exception ex)
                     {
-                        //LogError(ex);
+                        Logger.Log.Error(ex.Message, ex);
                     }
                 }
             }            
@@ -107,7 +108,7 @@ namespace BusinessRules
                 }
                 catch (Exception ex)
                 {
-                    continue;
+                    Logger.Log.Error(ex.Message, ex);
                 }
             }
         }

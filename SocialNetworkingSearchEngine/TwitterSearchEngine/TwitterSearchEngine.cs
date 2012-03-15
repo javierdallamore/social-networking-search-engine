@@ -15,13 +15,21 @@ namespace TwitterSearchEngine
 
         public SocialNetworkingSearchResult Search(string searchParameters, int page)
         {
-            var engineURL = GetEngineUrl();
-            var parameters = GetParameters(page, 100);
-            var jsonResults = Utils.BuildSearchQuery(engineURL, searchParameters, parameters);
-            var entity = Utils.DeserializarJsonTo<SearchResultsTwitter>(jsonResults);
-            var list = SocialNetworkingItemList(entity);
+            try
+            {
+                var engineURL = GetEngineUrl();
+                var parameters = GetParameters(page, 100);
+                var jsonResults = Utils.BuildSearchQuery(engineURL, searchParameters, parameters);
+                var entity = Utils.DeserializarJsonTo<SearchResultsTwitter>(jsonResults);
+                var list = SocialNetworkingItemList(entity);
 
-            return new SocialNetworkingSearchResult() { SocialNetworkingItems = list, SocialNetworkingName = Name };
+                return new SocialNetworkingSearchResult() { SocialNetworkingItems = list, SocialNetworkingName = Name };
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
         }
 
         //Este metodo itera los resultados y crea las entidades de dominio

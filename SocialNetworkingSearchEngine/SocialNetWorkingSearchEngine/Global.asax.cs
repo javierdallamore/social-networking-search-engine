@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using BusinessRules;
+using log4net.Config;
 
 namespace SocialNetWorkingSearchEngine
 {
@@ -23,6 +24,7 @@ namespace SocialNetWorkingSearchEngine
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
 
+
         }
 
         protected void Application_Start()
@@ -30,6 +32,7 @@ namespace SocialNetWorkingSearchEngine
             AreaRegistration.RegisterAllAreas();
 
             RegisterRoutes(RouteTable.Routes);
+            XmlConfigurator.Configure();
             SearchEngineManager.ConfigureAddins();
         }
     }
