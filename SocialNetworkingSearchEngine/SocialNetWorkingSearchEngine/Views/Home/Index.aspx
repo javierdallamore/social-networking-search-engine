@@ -44,6 +44,11 @@
                         <label>
                             <input type="checkbox" name="src[]" value="TwitterSearchEngine" checked="checked">
                             Twitter</label></div>
+
+                    <div style="float: left; width: 125px; font-size: 15px;">
+                        <label>
+                            <input type="checkbox" name="src[]" value="GooglePlusSearchEngine" checked="checked">
+                            Google +</label></div>
                 </div>
             </div>
         </div>

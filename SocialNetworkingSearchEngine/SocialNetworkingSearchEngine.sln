@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterSearchEngine", "Twit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacebookSearchEngine", "FacebookSearchEngine\FacebookSearchEngine.csproj", "{971F8E8C-0994-43B3-9B56-AC77FB2812C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GooglePlusSearchEngine", "GooglePlusSearchEngine\GooglePlusSearchEngine.csproj", "{8F2EC09D-818C-424D-BC78-E39AB2444960}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = SocialNetworkingSearchEngine.vsmdi
@@ -143,6 +145,16 @@ Global
 		{971F8E8C-0994-43B3-9B56-AC77FB2812C9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{971F8E8C-0994-43B3-9B56-AC77FB2812C9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{971F8E8C-0994-43B3-9B56-AC77FB2812C9}.Release|x86.ActiveCfg = Release|Any CPU
+		{8F2EC09D-818C-424D-BC78-E39AB2444960}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F2EC09D-818C-424D-BC78-E39AB2444960}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F2EC09D-818C-424D-BC78-E39AB2444960}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{8F2EC09D-818C-424D-BC78-E39AB2444960}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{8F2EC09D-818C-424D-BC78-E39AB2444960}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8F2EC09D-818C-424D-BC78-E39AB2444960}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F2EC09D-818C-424D-BC78-E39AB2444960}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F2EC09D-818C-424D-BC78-E39AB2444960}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{8F2EC09D-818C-424D-BC78-E39AB2444960}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{8F2EC09D-818C-424D-BC78-E39AB2444960}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
