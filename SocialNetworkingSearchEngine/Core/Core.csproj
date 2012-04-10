@@ -42,14 +42,13 @@
   <ItemGroup>
     <Compile Include="Domain\Profile.cs" />
     <Compile Include="Domain\QueryDef.cs" />
-    <Compile Include="Domain\Query.cs" />
     <Compile Include="Domain\Tag.cs" />
     <Compile Include="Domain\Post.cs" />
     <Compile Include="Domain\User.cs" />
     <Compile Include="Domain\Word.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryInterfaces\IProfileRepository.cs" />
-    <Compile Include="RepositoryInterfaces\IQueryRepository.cs" />
+    <Compile Include="RepositoryInterfaces\IQueryDefRepository.cs" />
     <Compile Include="RepositoryInterfaces\IRepositoryBase.cs" />
     <Compile Include="RepositoryInterfaces\ITagRepository.cs" />
     <Compile Include="RepositoryInterfaces\IPostRepository.cs" />

@@ -14,7 +14,7 @@ namespace BusinessRules
         private readonly ITagRepository _tagRepository;
         private readonly IPostRepository _postRepository;
         private readonly IWordRepository _wordRepository;
-        private readonly IQueryRepository _queryRepository;
+        private readonly IQueryDefRepository _queryDefRepository;
 
         public ServicesManager()
         {
@@ -22,7 +22,7 @@ namespace BusinessRules
             _tagRepository = new TagRepository();
             _postRepository = new PostRepository();
             _wordRepository = new WordRepository();
-            _queryRepository = new QueryRepository();
+            _queryDefRepository = new QueryDefRepository();
         }
 
         #region IServicesManager Members
@@ -164,9 +164,9 @@ namespace BusinessRules
             return _postRepository.GetAllByProfile(profileId);
         }
 
-        public List<Query> GetTopActiveQuerys(int top)
+        public List<QueryDef> GetTopActiveQuerys(int top)
         {
-            return _queryRepository.GetTopActiveQuerys(top).ToList();
+            return _queryDefRepository.GetTopActiveQuerys(top).ToList();
         }
 
         public void SendMail(string to, string address, string displayName, string subject, string body, string userName, string password, int port, string host)

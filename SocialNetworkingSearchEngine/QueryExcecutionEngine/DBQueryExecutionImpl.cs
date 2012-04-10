@@ -10,7 +10,7 @@ namespace QueryExcecutionEngine
     public class DBQueryExecutionImpl: IExcecutionEngineService
     {
         //private readonly string _connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["SearchEngineMockDB"].ConnectionString;
-        private List<Query> _querysToSearch;
+        private List<QueryDef> _querysToSearch;
         private IServicesManager _serviceManager;
         private SearchEngineManager _searchEngineManager;
 
@@ -31,7 +31,7 @@ namespace QueryExcecutionEngine
             {
                 foreach (var query in _querysToSearch)
                 {
-                    var posts = _searchEngineManager.Search(query.QueryString, query.SearchEnginesNamesList);
+                    var posts = _searchEngineManager.Search(query.Query, query.SearchEnginesNamesList);
                     foreach (var post in posts)
                     {
                         _serviceManager.SavePost(post);

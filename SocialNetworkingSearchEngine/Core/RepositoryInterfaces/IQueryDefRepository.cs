@@ -6,8 +6,8 @@ using Core.Domain;
 
 namespace Core.RepositoryInterfaces
 {
-    public interface IQueryRepository:IRepositoryBase<Query, Guid>
+    public interface IQueryDefRepository:IRepositoryBase<QueryDef, Guid>
     {
-        IEnumerable<Query> GetTopActiveQuerys(int top);
+        IEnumerable<QueryDef> GetTopActiveQuerys(int top);
     }
 }

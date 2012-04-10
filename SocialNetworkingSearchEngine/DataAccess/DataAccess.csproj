@@ -58,13 +58,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAO\ProfileRepository.cs" />
-    <Compile Include="DAO\QueryRepository.cs" />
+    <Compile Include="DAO\QueryDefRepository.cs" />
     <Compile Include="DAO\TagRepository.cs" />
     <Compile Include="DAO\RepositoryBase.cs" />
     <Compile Include="DAO\PostRepository.cs" />
     <Compile Include="DAO\WordRepository.cs" />
     <Compile Include="Mapping\ProfileMap.cs" />
-    <Compile Include="Mapping\QueryMap.cs" />
+    <Compile Include="Mapping\QueryDefMap.cs" />
     <Compile Include="Mapping\TagMap.cs" />
     <Compile Include="Mapping\PostMap.cs" />
     <Compile Include="Mapping\WordMap.cs" />
