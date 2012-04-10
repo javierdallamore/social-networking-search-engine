@@ -1,4 +1,5 @@
-﻿using SearchEnginesBase.Entities;
+﻿using System.Collections.Generic;
+using SearchEnginesBase.Entities;
 
 namespace SearchEnginesBase.Interfaces
 {
@@ -6,5 +7,6 @@ namespace SearchEnginesBase.Interfaces
     {
         string Name { get;}
         SocialNetworkingSearchResult Search(string searchParameters, int page);
+        List<string> CountriesToFilterISOCodes { get; set; }
     }
 }

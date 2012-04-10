@@ -1,4 +1,5 @@
-﻿using SearchEnginesBase.Entities;
+﻿using System.Collections.Generic;
+using SearchEnginesBase.Entities;
 using SearchEnginesBase.Interfaces;
 
 namespace SearchEngineMock
@@ -22,6 +23,12 @@ namespace SearchEngineMock
             NHSessionManager.Instance.CommitTransaction();
 
             return socialNetworkingSearchResult;
+        }
+
+        public List<string> CountriesToFilterISOCodes
+        {
+            get { throw new System.NotImplementedException(); }
+            set { throw new System.NotImplementedException(); }
         }
     }
 }

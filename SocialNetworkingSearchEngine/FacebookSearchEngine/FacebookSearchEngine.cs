@@ -32,6 +32,12 @@ namespace FacebookSearchEngine
             return null;
         }
 
+        public List<string> CountriesToFilterISOCodes
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
+
         //Este metodo itera los resultados y crea las entidades de dominio
         private List<SocialNetworkingItem> SocialNetworkingItemList(JSONObject json)
         {

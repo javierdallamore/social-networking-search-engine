@@ -28,6 +28,12 @@ namespace GooglePlusSearchEngine
             return new SocialNetworkingSearchResult() { SocialNetworkingItems = list, SocialNetworkingName = Name };
         }
 
+        public List<string> CountriesToFilterISOCodes
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
+
         private string GetEngineUrl()
         {
             return "https://www.googleapis.com/plus/v1/activities?query=";
