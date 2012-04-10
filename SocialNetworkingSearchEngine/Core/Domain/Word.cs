@@ -12,5 +12,6 @@ namespace Core.Domain
         public virtual Guid Id { get; set; }
         public virtual string Name { get; set; }
         public virtual string Sentiment { get; set; }
+        public virtual int Weigth { get; set; }
     }
 }

@@ -41,8 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Profile.cs" />
+    <Compile Include="Domain\QueryDef.cs" />
     <Compile Include="Domain\Tag.cs" />
     <Compile Include="Domain\Post.cs" />
+    <Compile Include="Domain\User.cs" />
     <Compile Include="Domain\Word.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryInterfaces\IProfileRepository.cs" />

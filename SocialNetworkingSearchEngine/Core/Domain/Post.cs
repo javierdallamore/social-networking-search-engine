@@ -27,6 +27,11 @@ namespace Core.Domain
         public virtual string Source { get; set; }
         public virtual int Calification { get; set; }
         public virtual string Query { get; set; }
+
+        public virtual User CurrentOwner { get; set; }
+        public virtual DateTime DateTimeAssinedToOwner { get; set; }
+
+
         #region No Mapeado
         public virtual string CurrentTags { get; set; } 
         public virtual string CreatedAtShort
