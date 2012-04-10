@@ -32,6 +32,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacebookSearchEngine", "Fac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GooglePlusSearchEngine", "GooglePlusSearchEngine\GooglePlusSearchEngine.csproj", "{8F2EC09D-818C-424D-BC78-E39AB2444960}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryExcecutionEngine", "QueryExcecutionEngine\QueryExcecutionEngine.csproj", "{BE542DC7-7FA7-4C86-883D-17C8573B1D03}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = SocialNetworkingSearchEngine.vsmdi
@@ -155,6 +157,16 @@ Global
 		{8F2EC09D-818C-424D-BC78-E39AB2444960}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{8F2EC09D-818C-424D-BC78-E39AB2444960}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{8F2EC09D-818C-424D-BC78-E39AB2444960}.Release|x86.ActiveCfg = Release|Any CPU
+		{BE542DC7-7FA7-4C86-883D-17C8573B1D03}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{BE542DC7-7FA7-4C86-883D-17C8573B1D03}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{BE542DC7-7FA7-4C86-883D-17C8573B1D03}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{BE542DC7-7FA7-4C86-883D-17C8573B1D03}.Debug|x86.ActiveCfg = Debug|x86
+		{BE542DC7-7FA7-4C86-883D-17C8573B1D03}.Debug|x86.Build.0 = Debug|x86
+		{BE542DC7-7FA7-4C86-883D-17C8573B1D03}.Release|Any CPU.ActiveCfg = Release|x86
+		{BE542DC7-7FA7-4C86-883D-17C8573B1D03}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{BE542DC7-7FA7-4C86-883D-17C8573B1D03}.Release|Mixed Platforms.Build.0 = Release|x86
+		{BE542DC7-7FA7-4C86-883D-17C8573B1D03}.Release|x86.ActiveCfg = Release|x86
+		{BE542DC7-7FA7-4C86-883D-17C8573B1D03}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
