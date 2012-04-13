@@ -11,9 +11,9 @@ namespace DataAccess.DAO
     {
         #region Implementation of IQueryDefRepository
 
-        public IEnumerable<QueryDef> GetTopActiveQuerys(int top)
+        public IEnumerable<QueryDef> GetActiveQuerys()
         {
-            return Session.QueryOver<QueryDef>().Where(x=>x.Enabled).Take(top).List();
+            return Session.QueryOver<QueryDef>().Where(x=>x.Enabled).List();
         }
 
         #endregion

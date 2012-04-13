@@ -8,6 +8,6 @@ namespace Core.RepositoryInterfaces
 {
     public interface IQueryDefRepository:IRepositoryBase<QueryDef, Guid>
     {
-        IEnumerable<QueryDef> GetTopActiveQuerys(int top);
+        IEnumerable<QueryDef> GetActiveQuerys();
     }
 }

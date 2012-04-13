@@ -22,7 +22,7 @@ namespace BusinessRules
         List<Post> GetAllEntitiesByTag(Guid tagId);
         List<Post> GetAllEntitiesByProfile(Guid profileId);
         List<Word> GetAllWords();
-        List<QueryDef> GetTopActiveQuerys(int top);
+        List<QueryDef> GetActiveQuerys();
 
         void SendMail(string to, string address, string displayName, string subject, string body, string userName, string password, int port, string host);
         void SendPostToMail(string to, string address, string displayName, string subject, string userName, string password, int port, string host, Post post);

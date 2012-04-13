@@ -169,9 +169,9 @@ namespace BusinessRules
             return _postRepository.GetAllByProfile(profileId);
         }
 
-        public List<QueryDef> GetTopActiveQuerys(int top)
+        public List<QueryDef> GetActiveQuerys()
         {
-            return _queryDefRepository.GetTopActiveQuerys(top).ToList();
+            return _queryDefRepository.GetActiveQuerys().ToList();
         }
 
         public void SendMail(string to, string address, string displayName, string subject, string body, string userName, string password, int port, string host)
