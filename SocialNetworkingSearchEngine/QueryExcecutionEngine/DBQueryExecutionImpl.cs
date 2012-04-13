@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Timers;
 using BusinessRules;
 using Core.Domain;
 using log4net;
@@ -26,7 +27,7 @@ namespace QueryExcecutionEngine
             _logger = LogManager.GetLogger(GetType());
             _logger.Info("====== Initializing Service ======\n\n");
             _serviceManager = new ServicesManager();
-            _querysToSearch = _serviceManager.GetTopActiveQuerys(10);
+            _querysToSearch = _serviceManager.GetActiveQuerys();
             _searchEngineManager = new SearchEngineManager();
 
             _logger.Info("\n\n====== SETTING UP SENTIMENT EVALUATOR ======\n\n");
@@ -49,21 +50,31 @@ namespace QueryExcecutionEngine
         {
             try
             {
-                _logger.Info("\n\n====== Service Running... ======\n\n");
-                
-                foreach (var query in _querysToSearch)
-                {
-                    var posts = _searchEngineManager.Search(query.Query, query.SearchEnginesNamesList);
-                    foreach (var post in posts)
-                    {
-                        if (_serviceManager.ExistPost(post.UrlPost)) continue;
-                        _sentimentValuator.ProcessItem(post);
-                        _serviceManager.SavePost(post);
-                    }
+                _logger.Info("\n\n====== SERVICE RUNNING ======\n\n");
 
-                    _logger.Info("\n" + posts.Count + " Posts Found \n");
-                }
-                _logger.Info("\n\n====== Service Finish Work ======\n\n");
+                //TODO - Setear el intervalo en tiempo de busquedas, ponerlo como configurable...
+                var timer = new Timer(2*60*1000);
+                timer.Elapsed += ((sender,e) =>
+                                      {
+                                          _logger.Info("\n\n====== START SEARCH (TIME ELAPSED) " + DateTime.Now + " ======\n\n");
+
+                                          foreach (var query in _querysToSearch)
+                                          {
+                                              var posts = _searchEngineManager.Search(query.Query, query.SearchEnginesNamesList);
+                                              foreach (var post in posts)
+                                              {
+                                                  if (_serviceManager.ExistPost(post.UrlPost)) continue;
+                                                  _sentimentValuator.ProcessItem(post);
+                                                  _serviceManager.SavePost(post);
+                                              }
+
+                                              _logger.Info("\n" + posts.Count + " POSTs FOUND \n");
+                                              _logger.Info("\n\n====== END SEARCH " + DateTime.Now + " ======\n\n");
+                                              _logger.Info("\n\n====== WAITING FOR ANOTHER TIME ELAPSE ======\n\n");
+                                          }
+                                      });
+
+                timer.Start();
             }
             catch (Exception e)
             {
