@@ -56,6 +56,7 @@ namespace QueryExcecutionEngine
                     var posts = _searchEngineManager.Search(query.Query, query.SearchEnginesNamesList);
                     foreach (var post in posts)
                     {
+                        if (_serviceManager.ExistPost(post.UrlPost)) continue;
                         _sentimentValuator.ProcessItem(post);
                         _serviceManager.SavePost(post);
                     }

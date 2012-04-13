@@ -111,6 +111,11 @@ namespace BusinessRules
             return TagPost(post, tag);
         }
 
+        public bool ExistPost(string postUrl)
+        {
+            return _postRepository.ExistPost(postUrl);
+        }
+
         private Post TagPost(Post post, Tag tag)
         {
             bool begin = NHSessionManager.Instance.BeginTransaction();

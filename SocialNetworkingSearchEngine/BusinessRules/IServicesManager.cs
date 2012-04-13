@@ -13,6 +13,8 @@ namespace BusinessRules
         Post TagPost(Post post, Guid tagId);
         Post TagPost(Post post, string tagName);
 
+        bool ExistPost(string postUrl);
+
         List<Tag> GetAllTags();
         List<Profile> GetAllProfiles();
         List<Post> GetAllEntities();               

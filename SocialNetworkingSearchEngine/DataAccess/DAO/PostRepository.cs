@@ -28,5 +28,11 @@ namespace DataAccess.DAO
             query = !String.IsNullOrEmpty(query) ? "%" + query + "%" : query;
             return Session.QueryOver<Post>().Where(x => x.Content.IsInsensitiveLike(query) || x.Query.IsInsensitiveLike(query)).List<Post>() as List<Post>;
         }
+
+        public bool ExistPost(string postUrl)
+        {
+            var posts = Session.QueryOver<Post>().Where(x => x.UrlPost.ToLower() == postUrl.ToLower()).List<Post>();
+            return (posts.Count > 0);
+        }
     }
 }

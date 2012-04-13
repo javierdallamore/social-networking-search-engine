@@ -10,5 +10,6 @@ namespace Core.RepositoryInterfaces
         List<Post> GetAllByProfile(Guid profileId);
         List<Post> GetAllByTagNameId(Guid tagId);
         List<Post> GetByQuery(string query);
+        bool ExistPost(string postUrl);
     }
 }
