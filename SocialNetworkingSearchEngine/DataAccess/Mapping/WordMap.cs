@@ -10,6 +10,7 @@ namespace DataAccess.Mapping
             Id(x => x.Id).GeneratedBy.Assigned();
             Map(x => x.Name).Not.Nullable();
             Map(x => x.Sentiment).Not.Nullable();
+            Map(x => x.Weigth).Not.Nullable();
         }
     }
 }

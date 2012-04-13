@@ -1,4 +1,6 @@
 using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Core.Domain
 {
@@ -10,6 +12,8 @@ namespace Core.Domain
         }
 
         public virtual Guid Id { get; set; }
+        [Required]
+        [DisplayName("Tag")]
         public virtual string Name { get; set; }
     }
 }
