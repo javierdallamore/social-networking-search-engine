@@ -31,7 +31,7 @@ namespace DataAccess.DAO
 
         public bool ExistPost(string postUrl)
         {
-            var posts = Session.QueryOver<Post>().Where(x => x.UrlPost.ToLower() == postUrl.ToLower()).List<Post>();
+            var posts = Session.QueryOver<Post>().Where(x => x.UrlPost.IsInsensitiveLike(postUrl)).List<Post>();
             return (posts.Count > 0);
         }
     }
