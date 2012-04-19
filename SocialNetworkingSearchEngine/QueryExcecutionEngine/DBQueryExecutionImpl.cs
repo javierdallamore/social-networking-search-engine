@@ -53,22 +53,27 @@ namespace QueryExcecutionEngine
                 _logger.Info("\n\n====== SERVICE RUNNING ======\n\n");
 
                 //TODO - Setear el intervalo en tiempo de busquedas, ponerlo como configurable...
-                var timer = new Timer(2*60*1000);
+                var timer = new Timer(1*1000);
                 timer.Elapsed += ((sender,e) =>
                                       {
+                                          (sender as Timer).Stop();
                                           _logger.Info("\n\n====== START SEARCH (TIME ELAPSED) " + DateTime.Now + " ======\n\n");
 
                                           foreach (var query in _querysToSearch)
                                           {
-                                              var posts = _searchEngineManager.Search(query.Query, query.SearchEnginesNamesList);
-                                              foreach (var post in posts)
+                                              //Por cada red social a la que apunta la query
+                                              foreach (var searchEngineName in query.SearchEnginesNamesList)
                                               {
-                                                  if (_serviceManager.ExistPost(post.UrlPost)) continue;
-                                                  _sentimentValuator.ProcessItem(post);
-                                                  _serviceManager.SavePost(post);
+                                                  var postsResult = _searchEngineManager.Search(query.Query, new List<string>{searchEngineName});
+                                                  foreach (var post in postsResult)
+                                                  {
+                                                      if (_serviceManager.ExistPost(post.UrlPost)) continue;
+                                                      _sentimentValuator.ProcessItem(post);
+                                                      _serviceManager.SavePost(post);
+                                                  }
+                                                  _logger.Info("\n\n" + postsResult.Count + " POSTs FOUND IN " + searchEngineName + "\n");
                                               }
-
-                                              _logger.Info("\n" + posts.Count + " POSTs FOUND \n");
+                                              
                                               _logger.Info("\n\n====== END SEARCH " + DateTime.Now + " ======\n\n");
                                               _logger.Info("\n\n====== WAITING FOR ANOTHER TIME ELAPSE ======\n\n");
                                           }
