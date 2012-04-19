@@ -23,6 +23,7 @@ namespace BusinessRules
         List<Post> GetAllEntitiesByProfile(Guid profileId);
         List<Word> GetAllWords();
         List<QueryDef> GetActiveQuerys();
+        List<QueryDef> GetActiveQuerysWithMinQuequeLenghtViolated();
 
         void SendMail(string to, string address, string displayName, string subject, string body, string userName, string password, int port, string host);
         void SendPostToMail(string to, string address, string displayName, string subject, string userName, string password, int port, string host, Post post);

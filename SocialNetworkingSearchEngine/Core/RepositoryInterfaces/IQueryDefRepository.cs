@@ -9,5 +9,6 @@ namespace Core.RepositoryInterfaces
     public interface IQueryDefRepository:IRepositoryBase<QueryDef, Guid>
     {
         IEnumerable<QueryDef> GetActiveQuerys();
+        IEnumerable<QueryDef> GetActiveQuerysWithMinQuequeLenghtViolated();
     }
 }

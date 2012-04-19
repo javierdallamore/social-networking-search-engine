@@ -27,6 +27,7 @@ namespace Core.Domain
         public virtual string Source { get; set; }
         public virtual int Calification { get; set; }
         public virtual string Query { get; set; }
+        public virtual QueryDef QueryDef { get; set; }
 
         public virtual User CurrentOwner { get; set; }
         public virtual DateTime DateTimeAssinedToOwner { get; set; }

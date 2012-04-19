@@ -174,6 +174,11 @@ namespace BusinessRules
             return _queryDefRepository.GetActiveQuerys().ToList();
         }
 
+        public List<QueryDef> GetActiveQuerysWithMinQuequeLenghtViolated()
+        {
+            return _queryDefRepository.GetActiveQuerysWithMinQuequeLenghtViolated().ToList();
+        }
+
         public void SendMail(string to, string address, string displayName, string subject, string body, string userName, string password, int port, string host)
         {
             Utils.SendMail(to, address, displayName, subject, body, userName, password, port, host);

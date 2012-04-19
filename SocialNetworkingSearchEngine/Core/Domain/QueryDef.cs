@@ -12,6 +12,7 @@ namespace Core.Domain
         public virtual int DaysOldestPost { get; set; }
         public virtual bool Enabled { get; set; }
         public virtual string SearchEnginesNames { get; set; }
+        public virtual IEnumerable<Post> Posts { get; set; } 
 
         public virtual List<string> SearchEnginesNamesList
         {

@@ -17,6 +17,8 @@ namespace DataAccess.Mapping
             Map(x => x.DaysOldestPost);
             Map(x => x.MinQueueLength);
             Map(x => x.SearchEnginesNames);
+
+            HasMany(x => x.Posts);
         }
     }
 }

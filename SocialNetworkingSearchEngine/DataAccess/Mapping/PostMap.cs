@@ -19,7 +19,8 @@ namespace DataAccess.Mapping
             Map(x => x.Source);
             Map(x => x.Calification);
             Map(x => x.Query);
-            
+
+            References(x => x.QueryDef).Cascade.SaveUpdate();
             HasManyToMany(x => x.Tags).AsBag().Cascade.All();
             References(x => x.Profile).Cascade.SaveUpdate();
         }

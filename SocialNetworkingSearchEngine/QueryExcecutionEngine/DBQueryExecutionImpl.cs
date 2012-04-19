@@ -18,6 +18,8 @@ namespace QueryExcecutionEngine
         private SearchEngineManager _searchEngineManager;
         private SentimentValuator _sentimentValuator;
 
+        private const int TIME_INTERVAL_TO_CHECK_FOR_NEW_QUERYS = 5*1000;
+
         #region Implementation of IExcecutionEngineService
 
         public void Initialize()
@@ -27,7 +29,6 @@ namespace QueryExcecutionEngine
             _logger = LogManager.GetLogger(GetType());
             _logger.Info("====== Initializing Service ======\n\n");
             _serviceManager = new ServicesManager();
-            _querysToSearch = _serviceManager.GetActiveQuerys();
             _searchEngineManager = new SearchEngineManager();
 
             _logger.Info("\n\n====== SETTING UP SENTIMENT EVALUATOR ======\n\n");
@@ -52,39 +53,45 @@ namespace QueryExcecutionEngine
             {
                 _logger.Info("\n\n====== SERVICE RUNNING ======\n\n");
 
-                //TODO - Setear el intervalo en tiempo de busquedas, ponerlo como configurable...
-                var timer = new Timer(1*1000);
-                timer.Elapsed += ((sender,e) =>
-                                      {
-                                          (sender as Timer).Stop();
-                                          _logger.Info("\n\n====== START SEARCH (TIME ELAPSED) " + DateTime.Now + " ======\n\n");
-
-                                          foreach (var query in _querysToSearch)
-                                          {
-                                              //Por cada red social a la que apunta la query
-                                              foreach (var searchEngineName in query.SearchEnginesNamesList)
-                                              {
-                                                  var postsResult = _searchEngineManager.Search(query.Query, new List<string>{searchEngineName});
-                                                  foreach (var post in postsResult)
-                                                  {
-                                                      if (_serviceManager.ExistPost(post.UrlPost)) continue;
-                                                      _sentimentValuator.ProcessItem(post);
-                                                      _serviceManager.SavePost(post);
-                                                  }
-                                                  _logger.Info("\n\n" + postsResult.Count + " POSTs FOUND IN " + searchEngineName + "\n");
-                                              }
-                                              
-                                              _logger.Info("\n\n====== END SEARCH " + DateTime.Now + " ======\n\n");
-                                              _logger.Info("\n\n====== WAITING FOR ANOTHER TIME ELAPSE ======\n\n");
-                                          }
-                                      });
-
-                timer.Start();
+                var timerToSearchForQuerys = new Timer(TIME_INTERVAL_TO_CHECK_FOR_NEW_QUERYS);
+                timerToSearchForQuerys.Elapsed += ((sender, e) =>
+                                                       {
+                                                           (sender as Timer).Stop();
+                                                           _querysToSearch = _serviceManager.GetActiveQuerysWithMinQuequeLenghtViolated();
+                                                           foreach (var queryDef in _querysToSearch)
+                                                           {
+                                                               StartSearch(queryDef);
+                                                           }
+                                                       });
+                timerToSearchForQuerys.Start();
             }
             catch (Exception e)
             {
                 _logger.Error(e);
             }
+        }
+
+        private void StartSearch(QueryDef query)
+        {
+            _logger.Info("\n\n====== START SEARCH " + DateTime.Now + " ======\n\n");
+
+            //Por cada red social a la que apunta la query
+            foreach (var searchEngineName in query.SearchEnginesNamesList)
+            {
+                _logger.Info("\n\n====== START SEARCH FOR (" + searchEngineName + ") " + DateTime.Now + " ======\n\n");
+
+                var postsResult = _searchEngineManager.Search(query.Query, new List<string> { searchEngineName });
+                foreach (var post in postsResult)
+                {
+                    if (_serviceManager.ExistPost(post.UrlPost)) continue;
+                    _sentimentValuator.ProcessItem(post);
+                    _serviceManager.SavePost(post);
+                }
+                _logger.Info("\n\n===" + postsResult.Count + " POSTs FOUND IN " + searchEngineName + "\n");
+            }
+
+            _logger.Info("\n\n====== END QUERY SEARCH " + DateTime.Now + " ======\n\n");
+            _logger.Info("\n\n====== WAITING FOR ANOTHER TIME ELAPSE ======\n\n");
         }
 
         public void Stop()
