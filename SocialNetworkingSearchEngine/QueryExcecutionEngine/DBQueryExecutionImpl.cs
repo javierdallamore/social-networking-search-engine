@@ -18,7 +18,7 @@ namespace QueryExcecutionEngine
         private SearchEngineManager _searchEngineManager;
         private SentimentValuator _sentimentValuator;
 
-        private const int TIME_INTERVAL_TO_CHECK_FOR_NEW_QUERYS = 5*1000;
+        private const int TIME_INTERVAL_TO_CHECK_FOR_NEW_QUERYS = 5*60*1000;
 
         #region Implementation of IExcecutionEngineService
 
@@ -56,7 +56,6 @@ namespace QueryExcecutionEngine
                 var timerToSearchForQuerys = new Timer(TIME_INTERVAL_TO_CHECK_FOR_NEW_QUERYS);
                 timerToSearchForQuerys.Elapsed += ((sender, e) =>
                                                        {
-                                                           (sender as Timer).Stop();
                                                            _querysToSearch = _serviceManager.GetActiveQuerysWithMinQuequeLenghtViolated();
                                                            foreach (var queryDef in _querysToSearch)
                                                            {
