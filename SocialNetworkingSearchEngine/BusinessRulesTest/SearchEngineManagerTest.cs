@@ -110,6 +110,29 @@ namespace BusinessRulesTest
         }
 
         [TestMethod]
+        public void CreateQuerys()
+        {
+            NHSessionManager.Instance.BeginTransaction();
+            var queryDefRepository = new QueryDefRepository();
+            queryDefRepository.SaveOrUpdate(new QueryDef
+                                                {
+                                                    Enabled = true, 
+                                                    Query = "diego", 
+                                                    SearchEnginesNames = "TwitterSearchEngine;FacebookSearchEngine;GooglePlusSearchEnginde",
+                                                    MinQueueLength = 500
+                                                });
+            queryDefRepository.SaveOrUpdate(new QueryDef
+            {
+                Enabled = true,
+                Query = "marcos",
+                SearchEnginesNames = "TwitterSearchEngine;FacebookSearchEngine;GooglePlusSearchEnginde",
+                MinQueueLength = 500
+            });
+
+            NHSessionManager.Instance.CommitTransaction();
+        }
+
+        [TestMethod]
         public void SendMailHTMLTest()
         {
             //var to = "cuchillozapallero@gmail.com, mellibo@gmail.com, diegohi@gmail.com, mundojava.blogspot.com@gmail.com, javierdallamore@gmail.com";
