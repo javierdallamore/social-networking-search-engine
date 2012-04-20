@@ -84,6 +84,7 @@ namespace QueryExcecutionEngine
                 {
                     if (_serviceManager.ExistPost(post.UrlPost)) continue;
                     _sentimentValuator.ProcessItem(post);
+                    post.QueryDef = query;
                     _serviceManager.SavePost(post);
                 }
                 _logger.Info("\n\n===" + postsResult.Count + " POSTs FOUND IN " + searchEngineName + "\n");
