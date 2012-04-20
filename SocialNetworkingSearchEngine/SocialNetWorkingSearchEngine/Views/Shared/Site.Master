@@ -15,9 +15,8 @@
     <script type="text/javascript" src="<%: Url.Content("~/Scripts/jquery-1.7.1.min.js") %>"></script>
     <script type="text/javascript" src="<%: Url.Content("~/Scripts/underscore-min.js") %>"></script>
     <script type="text/javascript" src="<%: Url.Content("~/Scripts/jquery-ui-1.8.16.custom.min.js") %>"></script>
-    <script type="text/javascript" src="<%: Url.Content("~/Scripts/jquery.taghandler.js") %>"></script>
+    <script type="text/javascript" src="<%: Url.Content("~/Scripts/jquery.taghandler.min.js") %>"></script>
     <script type="text/javascript" src="<%: Url.Content("~/Scripts/jquery.ui.stars.min.js") %>"></script>
-    <script type="text/javascript" src="<%: Url.Content("~/Scripts/search.js") %>"></script>
 </head>
 
 <body>
