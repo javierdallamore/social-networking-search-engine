@@ -67,6 +67,7 @@
     <Compile Include="Mapping\QueryDefMap.cs" />
     <Compile Include="Mapping\TagMap.cs" />
     <Compile Include="Mapping\PostMap.cs" />
+    <Compile Include="Mapping\UserMap.cs" />
     <Compile Include="Mapping\WordMap.cs" />
     <Compile Include="NHSessionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

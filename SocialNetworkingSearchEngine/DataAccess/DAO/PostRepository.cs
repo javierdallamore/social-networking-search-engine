@@ -29,6 +29,12 @@ namespace DataAccess.DAO
             return Session.QueryOver<Post>().Where(x => x.Content.IsInsensitiveLike(query) || x.Query.IsInsensitiveLike(query)).List<Post>() as List<Post>;
         }
 
+        public IEnumerable<Post> GetByAssignedUser(User assignedUser)
+        {
+            var posts = Session.QueryOver<Post>().Where(x => x.CurrentOwner.Id == assignedUser.Id).List<Post>();
+            return posts;
+        }
+
         public bool ExistPost(string postUrl)
         {
             var posts = Session.QueryOver<Post>().Where(x => x.UrlPost.IsInsensitiveLike(postUrl)).List<Post>();

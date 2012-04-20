@@ -112,5 +112,11 @@ namespace BusinessRules
                 }
             }
         }
+
+        public IEnumerable<Post> GetUserAssignedPost(User user)
+        {
+            var postRepository = new PostRepository();
+            return postRepository.GetByAssignedUser(user);
+        }
     }
 }
