@@ -17,6 +17,7 @@
     <script type="text/javascript" src="<%: Url.Content("~/Scripts/jquery-ui-1.8.16.custom.min.js") %>"></script>
     <script type="text/javascript" src="<%: Url.Content("~/Scripts/jquery.taghandler.min.js") %>"></script>
     <script type="text/javascript" src="<%: Url.Content("~/Scripts/jquery.ui.stars.min.js") %>"></script>
+    <asp:ContentPlaceHolder ID="headerContent" runat="server" />
 </head>
 
 <body>

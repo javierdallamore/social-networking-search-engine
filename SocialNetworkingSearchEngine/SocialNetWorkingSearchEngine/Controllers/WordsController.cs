@@ -26,9 +26,9 @@ namespace SocialNetWorkingSearchEngine.Controllers
         //
         // GET: /Words/
 
-        public ViewResult Index()
+        public ViewResult Index(string like = "")
         {
-            return View(wordRepository.GetAll());
+            return View(wordRepository.GetAll().Where(x=>x.Name.StartsWith(like)));
         }
 
         //

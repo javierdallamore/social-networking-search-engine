@@ -1,11 +1,23 @@
-<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<IEnumerable<Core.Domain.Word>>" %>
-<!DOCTYPE html>
+<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<Core.Domain.Word>>" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="headerContent" runat="server">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#filtrar").click(function() {
+                filtrar();
+            });
+        });
 
-<html>
-<head runat="server">
-    <title>Index</title>
-</head>
-<body>
+        function filtrar() {
+            var like = $("#txtFilter").val();
+            location.href = "?like=" + like;
+            return;
+        }
+    </script>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <p>
+        Buscar: <input id="txtFilter" type="text" value=""/> <button id="filtrar">Filtrar</button>
+    </p>
     <p>
         <%: Html.ActionLink("Agregar", "Create") %>
     </p>
@@ -43,7 +55,5 @@
     <% } %>
     
     </table>
-</body>
-</html>
-
+</asp:Content>
 
