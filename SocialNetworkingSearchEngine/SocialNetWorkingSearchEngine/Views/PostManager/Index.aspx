@@ -95,10 +95,7 @@
         </ul>
     </div>
     <script type="text/javascript">
-        function save_complete(responseText, textStatus) {
-            alert(responseText);
-        }
-
+        $(document).ready(function() {
             //Creo las estrellitas del rating
             $("div[id^='stars-wrapper']").each(function(i, e) {
                 $(e).stars({
@@ -134,7 +131,7 @@
                     //$.post("SavePost", JSON.stringify({ idPost: item_id, rating: item_rating, sentiment: item_sentiment, tags: item_tags }), save_complete, "application/json");
                     
                     $.ajax({
-                        url: '/HomeUser/UpdatePost',
+                        url: '/PostManager/UpdatePost',
                         type: 'POST',
                         dataType: 'json',
                         traditional: 'true',
@@ -145,5 +142,11 @@
                     });
                 });
             });
+            
+            function save_complete(responseText, textStatus) {
+            alert(responseText);
+        }
+
+        });
     </script>
 </asp:Content>
