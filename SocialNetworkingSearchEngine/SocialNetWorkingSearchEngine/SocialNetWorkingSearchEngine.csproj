@@ -105,7 +105,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\HomeUserController.cs" />
+    <Compile Include="Controllers\PostManagerController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Controllers\WordsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -155,7 +155,7 @@
     <Content Include="Scripts\jquery.ui.stars.min.js" />
     <Content Include="Scripts\search.js" />
     <Content Include="Scripts\underscore-min.js" />
-    <Content Include="Views\HomeUser\Index.aspx" />
+    <Content Include="Views\PostManager\Index.aspx" />
     <Content Include="Views\Home\Explore.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Home\Main.aspx" />

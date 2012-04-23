@@ -11,7 +11,7 @@ using SocialNetWorkingSearchEngine.Models;
 
 namespace SocialNetWorkingSearchEngine.Controllers
 {
-    public class HomeUserController : Controller
+    public class PostManagerController : Controller
     {
         public ActionResult Index()
         {
