@@ -54,20 +54,22 @@
                                 <option value="5" <% if (post.Calification == 5){%> selected="selected" <% } %>>Perfecto</option>
                             </select>
                         </div>
-                        <div id="sentiment">
+                        <div id="sentiment_<%=post.Id %>">
                             <span>Sentimiento:</span>
-                            <br/>
+                            <br />
                             <%=Html.DropDownList("option_sentiment_" + post.Id,new SelectList(new List<string>{"negativo","positivo","neutro"},post.Sentiment.ToLower()))%>
                         </div>
                         <div id="save">
+                            <button id="button_save_<%=post.Id%>">
+                                Guardar</button>
                         </div>
                     </div>
                     <%--POST CONTENT--%>
-                    <div style="width: 90%">
+                    <div style="width: 85%">
                         <a href="<%=post.UrlPost%>" target="_blank" title="<%=post.Content%>">
                             <%=post.Content %></a>
                     </div>
-                    <div>
+                    <div style="width: 85%">
                         El
                         <%=post.CreatedAtShort%>
                         por
@@ -76,7 +78,7 @@
                             <%=post.UserName%></a>
                     </div>
                     <%--TAGS CONTAINER--%>
-                    <div>
+                    <div style="width: 85%">
                         <p>
                             Tag:</p>
                         <p id="assigned_tag_string_array_<%=post.Id%>" style="display: none">
@@ -93,28 +95,55 @@
         </ul>
     </div>
     <script type="text/javascript">
-        //Creo las estrellitas del rating
-        $("div[id^='stars-wrapper']").each(function (i, e) {
-            $(e).stars({
-                inputType: "select"
-            });
-        });
+        function save_complete(responseText, textStatus) {
+            alert(responseText);
+        }
 
-        var tags = [<%=string.Join(",",Model.TagsStringsArray) %>];
-
-        //Creo la lista con tags
-        $("ul[id^='ul_tags']").each(function (i, e) {
-            var assigned_tags_id_field = "assigned_tag_string_array_" + e.id.substr(e.id.lastIndexOf('_')+1);
-            var assigned_tags_string = $("#" + assigned_tags_id_field).text().trim();
-            var assigned_tags_array = (assigned_tags_string == "") ? [] : assigned_tags_string.split(",");
-            $(e).tagHandler({
-                msgNoNewTag: "No tiene permisos para crear un nuevo tag",
-                msgError: "No se pudo cargar la lista de tag",
-                availableTags: tags,
-                autocomplete: true,
-                allowAdd: true,
-                assignedTags: assigned_tags_array
+            //Creo las estrellitas del rating
+            $("div[id^='stars-wrapper']").each(function(i, e) {
+                $(e).stars({
+                    inputType: "select"
+                });
             });
-        });
+
+            var tags = [<%=string.Join(",",Model.TagsStringsArray) %>];
+
+            //Creo la lista con tags
+            $("ul[id^='ul_tags']").each(function(i, e) {
+                var assigned_tags_id_field = "assigned_tag_string_array_" + e.id.substr(e.id.lastIndexOf('_') + 1);
+                var assigned_tags_string = $("#" + assigned_tags_id_field).text().trim();
+                var assigned_tags_array = (assigned_tags_string == "") ? [] : assigned_tags_string.split(",");
+                $(e).tagHandler({
+                    msgNoNewTag: "No tiene permisos para crear un nuevo tag",
+                    msgError: "No se pudo cargar la lista de tag",
+                    availableTags: tags,
+                    autocomplete: true,
+                    allowAdd: true,
+                    assignedTags: assigned_tags_array
+                });
+            });
+
+            //Atacho el save a cada item
+            $("button[id^='button_save']").each(function(i, e) {
+                $(e).click(function(event) {
+                    var item_id = e.id.substr(e.id.lastIndexOf("_") + 1);
+                    var item_rating = $("#stars-wrapper_" + item_id).data("stars").options.value;
+                    var item_tags = $("#ul_tags_" + item_id).tagHandler("getTags");
+                    var item_sentiment = $("#sentiment_" + item_id + " option:selected").val();
+
+                    //$.post("SavePost", JSON.stringify({ idPost: item_id, rating: item_rating, sentiment: item_sentiment, tags: item_tags }), save_complete, "application/json");
+                    
+                    $.ajax({
+                        url: '/HomeUser/UpdatePost',
+                        type: 'POST',
+                        dataType: 'json',
+                        traditional: 'true',
+                        data: { idPost: item_id, rating: item_rating, sentiment: item_sentiment, tags: item_tags },
+                        success: function (data) {
+                            save_complete(data);
+                        }
+                    });
+                });
+            });
     </script>
 </asp:Content>

@@ -64,6 +64,18 @@ namespace BusinessRules
             }
         }
 
+        public Post UpdatePost(string idPost, int rating, string sentiment, List<string> tags)
+        {
+            var post = _postRepository.GetById(new Guid(idPost));
+            if (post == null) return null;
+            
+            post.Sentiment = sentiment;
+            post.Calification = rating;
+            post.CurrentTags = string.Join(",", tags);
+            
+            return SavePost(post);
+        }
+
         private void SetTags(Post post)
         {
             post.Tags = new List<Tag>();

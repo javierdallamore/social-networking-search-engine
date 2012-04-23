@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -19,6 +20,15 @@ namespace SocialNetWorkingSearchEngine.Controllers
             userHomeModel.Posts = searchEngineManager.GetUserAssignedPost(new User { Id = 1, Login = "diego" });
 
             return View(userHomeModel);
+        }
+
+        [HttpPost]
+        public JsonResult UpdatePost(string idPost, int rating, string sentiment, List<string> tags)
+        {
+            var servicesManager = new ServicesManager();
+            servicesManager.UpdatePost(idPost, rating, sentiment, tags);
+
+            return Json("ok", JsonRequestBehavior.AllowGet);
         }
     }
 }
