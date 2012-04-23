@@ -20,5 +20,7 @@ namespace SocialNetWorkingSearchEngine.Models
         public DbSet<Core.Domain.Word> Words { get; set; }
 
         public DbSet<Core.Domain.Tag> Tags { get; set; }
+
+        public DbSet<Core.Domain.User> Users { get; set; }
     }
 }

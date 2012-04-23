@@ -5,7 +5,6 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text.RegularExpressions" #>
 <#@ import namespace="EnvDTE" #>
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -37,14 +36,14 @@ namespace <#= Model.ControllerNamespace #>
         public <#= Model.ControllerName #>(<#= String.Join(", ", Repositories.Values.Select(x => "I" + x.RepositoryTypeName + " " + x.VariableName)) #>)
         {
 <# foreach(var repository in Repositories.Values) { #>
-			this.<#= repository.VariableName #> = <#= repository.VariableName #>;
+			<#= repository.VariableName #> = <#= repository.VariableName #>;
 <# } #>
         }
 
         //
         // GET: /<#= routingName #>/
 
-        public ViewResult Index()
+        public ViewResult Index(int page = 1, string like = "")
         {
 <#
 	var propertiesToInclude = relatedEntities.Select(relation => relation.LazyLoadingProperty).Where(x => x != null);
@@ -53,7 +52,10 @@ namespace <#= Model.ControllerNamespace #>
 		includeExpression = "Including(" + includeExpression + ")";
 	}
 #>
-            return View(<#= Repositories[modelType.FullName].VariableName #>.All<#= includeExpression #>);
+            IList<<#= modelName #>> list = <#= Repositories[modelType.FullName].VariableName #>.GetAll().Where(x => x.Name.StartsWith(like)).ToList();
+            var model = new <#= modelName #>ViewModel(list, page, 2);
+            model.Filter = like;
+            return View(model);
         }
 
         //
@@ -110,8 +112,8 @@ namespace <#= Model.ControllerNamespace #>
         public ActionResult Edit(<#= modelName #> <#= modelVariable #>)
         {
             if (ModelState.IsValid) {
-				var entity = <#= Repositories[modelType.FullName].VariableName #>.GetById(<#= modelName #>.<#= primaryKeyProperty.Name #>);
-				_mapper.Map<<#= modelName #>>(entity, <#= modelVariable #>);
+				var entity = <#= Repositories[modelType.FullName].VariableName #>.GetById(<#= modelVariable #>.<#= primaryKeyProperty.Name #>);
+				//_mapper.Map<<#= modelName #>>(entity, <#= modelVariable #>);
                 return RedirectToAction("Index");
             } else {
 <# foreach(var relatedEntity in relatedEntities.Where(x => x.RelationType == RelationType.Parent)) { #>
@@ -135,7 +137,7 @@ namespace <#= Model.ControllerNamespace #>
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(<#= primaryKeyProperty.Type.AsString #> id)
         {
-            <#= Repositories[modelType.FullName].VariableName #>.Delete(<#= Repositories[modelType.FullName].VariableName #>.GetById(id);
+            <#= Repositories[modelType.FullName].VariableName #>.Delete(<#= Repositories[modelType.FullName].VariableName #>.GetById(id));
 
             return RedirectToAction("Index");
         }
@@ -156,9 +158,9 @@ IDictionary<string, RepositoryInfo> Repositories {
 			var relatedTypes = relatedEntities.Where(x => x.RelationType == RelationType.Parent).Select(x => x.RelatedEntityType).Distinct();
 			_repositories = relatedTypes.ToDictionary(
 				relatedType => relatedType.FullName,
-				relatedType => new RepositoryInfo { RepositoryTypeName = relatedType.Name + "Repository", VariableName = relatedType.Name.ToLower() + "Repository" }
+				relatedType => new RepositoryInfo { RepositoryTypeName = relatedType.Name + "Repository", VariableName = "_" + relatedType.Name.ToLower() + "Repository" }
 			); 
-			_repositories[((CodeType)Model.ModelType).FullName] = new RepositoryInfo { RepositoryTypeName = Model.Repository, VariableName = ((CodeType)Model.ModelType).Name.ToLower() + "Repository" };
+			_repositories[((CodeType)Model.ModelType).FullName] = new RepositoryInfo { RepositoryTypeName = Model.Repository, VariableName = "_" + ((CodeType)Model.ModelType).Name.ToLower() + "Repository" };
 		}
 		return _repositories;
 	}

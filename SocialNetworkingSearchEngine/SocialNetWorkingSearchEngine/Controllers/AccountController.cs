@@ -7,6 +7,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
+using DataAccess.DAO;
+using EfficientlyLazy.Crypto;
 using SocialNetWorkingSearchEngine.Models;
 
 namespace SocialNetWorkingSearchEngine.Controllers
@@ -15,6 +17,12 @@ namespace SocialNetWorkingSearchEngine.Controllers
     [HandleError]
     public class AccountController : Controller
     {
+        private UserRepository _userRepository;
+
+        public AccountController()
+        {
+            _userRepository = new UserRepository();
+        }
 
         public IFormsAuthenticationService FormsService { get; set; }
         public IMembershipService MembershipService { get; set; }
@@ -41,9 +49,10 @@ namespace SocialNetWorkingSearchEngine.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (MembershipService.ValidateUser(model.UserName, model.Password))
+                var user = _userRepository.GetByLoginPass(model.UserName, DataHashing.Compute(Algorithm.SHA1,  model.Password));
+                if (user != null)
                 {
-                    FormsService.SignIn(model.UserName, model.RememberMe);
+                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
                     if (!String.IsNullOrEmpty(returnUrl))
                     {
                         return Redirect(returnUrl);
@@ -55,7 +64,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+                    ModelState.AddModelError("", "Usuario y/o Clave Incorrecta.");
                 }
             }
 

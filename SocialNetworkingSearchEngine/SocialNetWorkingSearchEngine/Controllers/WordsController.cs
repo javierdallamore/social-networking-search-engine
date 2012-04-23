@@ -1,34 +1,36 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Core.Domain;
 using Core.RepositoryInterfaces;
 using DataAccess.DAO;
+using SocialNetWorkingSearchEngine.Models;
 
 namespace SocialNetWorkingSearchEngine.Controllers
 {   
     public class WordsController : Controller
     {
-		private readonly IWordRepository wordRepository;
+		private readonly IWordRepository _wordRepository;
 
         public WordsController()
         {
-			this.wordRepository = new WordRepository();
+			_wordRepository = new WordRepository();
         }
 
         public WordsController(IWordRepository wordRepository)
         {
-			this.wordRepository = wordRepository;
+			_wordRepository = wordRepository;
         }
 
         //
         // GET: /Words/
 
-        public ViewResult Index(string like = "")
+        public ViewResult Index(int page = 1, string like = "")
         {
-            return View(wordRepository.GetAll().Where(x=>x.Name.StartsWith(like)));
+            IList<Word> list = _wordRepository.GetAll().Where(x => x.Name.StartsWith(like)).ToList();
+            var model = new CrudViewModel<Word>(list, page, 2);
+            model.Filter = like;
+            return View(model);
         }
 
         //
@@ -36,7 +38,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
         public ViewResult Details(System.Guid id)
         {
-            return View(wordRepository.GetById(id));
+            return View(_wordRepository.GetById(id));
         }
 
         //
@@ -54,19 +56,18 @@ namespace SocialNetWorkingSearchEngine.Controllers
         public ActionResult Create(Word word)
         {
             if (ModelState.IsValid) {
-                wordRepository.Save(word);
+                _wordRepository.Save(word);
                 return RedirectToAction("Index");
-            } else {
-				return View();
-			}
+            }
+            return View();
         }
-        
+
         //
         // GET: /Words/Edit/5
  
         public ActionResult Edit(System.Guid id)
         {
-             return View(wordRepository.GetById(id));
+             return View(_wordRepository.GetById(id));
         }
 
         //
@@ -76,11 +77,10 @@ namespace SocialNetWorkingSearchEngine.Controllers
         public ActionResult Edit(Word word)
         {
             if (ModelState.IsValid) {
-                wordRepository.Save(word);
+                _wordRepository.Save(word);
                 return RedirectToAction("Index");
-            } else {
-				return View();
-			}
+            }
+            return View();
         }
 
         //
@@ -88,7 +88,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
  
         public ActionResult Delete(System.Guid id)
         {
-            return View(wordRepository.GetById(id));
+            return View(_wordRepository.GetById(id));
         }
 
         //
@@ -97,7 +97,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(System.Guid id)
         {
-            wordRepository.Delete(wordRepository.GetById(id));
+            _wordRepository.Delete(_wordRepository.GetById(id));
 
             return RedirectToAction("Index");
         }

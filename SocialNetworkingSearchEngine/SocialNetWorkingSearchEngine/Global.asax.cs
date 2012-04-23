@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using BusinessRules;
+using DataAccess;
 using log4net.Config;
 
 namespace SocialNetWorkingSearchEngine
@@ -35,5 +37,37 @@ namespace SocialNetWorkingSearchEngine
             XmlConfigurator.Configure();
             SearchEngineManager.ConfigureAddins();
         }
+
+        protected void Application_BeginRequest(object sender, EventArgs e)
+        {
+            if (!RequestMayNeedIterationWithPersistence(sender as HttpApplication)) return;
+            NHSessionManager.Instance.BeginTransaction();
+        }
+
+        protected void Application_EndRequest(object sender, EventArgs e)
+        {
+            if (!RequestMayNeedIterationWithPersistence(sender as HttpApplication)) return;
+            NHSessionManager.Instance.CommitTransaction();
+        }
+
+        private static readonly string[] NoPersistenceFileExtensions = new string[] { ".jpg", ".gif", ".png", ".css", ".js", ".swf", ".xap", ".doc", ".ico", ".htm" };
+        
+        private static bool RequestMayNeedIterationWithPersistence(HttpApplication application)
+        {
+            if (application == null)
+            {
+                return false;
+            }
+            HttpContext context = application.Context;
+            if (context == null)
+            {
+                return false;
+            }
+            if (context.Request.FilePath == "/") return false;
+
+            string extension = Path.GetExtension(context.Request.PhysicalPath);
+            return ((extension != null) && (Array.IndexOf<string>(NoPersistenceFileExtensions, extension.ToLower()) < 0));
+        }
+
     }
 }

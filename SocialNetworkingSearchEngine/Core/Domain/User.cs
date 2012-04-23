@@ -15,5 +15,6 @@ namespace Core.Domain
         public virtual IEnumerable<Post> AssignedPosts { get; set; }
 
     #endregion
+
     }
 }

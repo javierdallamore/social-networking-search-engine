@@ -1,0 +1,1052 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EfficientlyLazy.Crypto</name>
+    </assembly>
+    <members>
+        <member name="T:EfficientlyLazy.Crypto.Configuration.ISecureSetting">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.Configuration.ISecureSetting.Key">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:EfficientlyLazy.Crypto.Configuration.SecureCollection`1">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.Configuration.SecureCollection`1.#ctor">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.Configuration.SecureCollection`1.Add(`0)">
+            <summary>
+            Adds an item to the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param><exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.</exception>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.Configuration.SecureCollection`1.Clear">
+            <summary>
+            Removes all items from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only. </exception>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.Configuration.SecureCollection`1.Contains(`0)">
+            <summary>
+            Determines whether the <see cref="T:System.Collections.Generic.ICollection`1"/> contains a specific value.
+            </summary>
+            <returns>
+            true if <paramref name="item"/> is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.
+            </returns>
+            <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.Configuration.SecureCollection`1.CopyTo(`0[],System.Int32)">
+            <summary>
+            Copies the elements of the <see cref="T:System.Collections.Generic.ICollection`1"/> to an <see cref="T:System.Array"/>, starting at a particular <see cref="T:System.Array"/> index.
+            </summary>
+            <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from <see cref="T:System.Collections.Generic.ICollection`1"/>. The <see cref="T:System.Array"/> must have zero-based indexing.</param><param name="arrayIndex">The zero-based index in <paramref name="array"/> at which copying begins.</param><exception cref="T:System.ArgumentNullException"><paramref name="array"/> is null.</exception><exception cref="T:System.ArgumentOutOfRangeException"><paramref name="arrayIndex"/> is less than 0.</exception><exception cref="T:System.ArgumentException"><paramref name="array"/> is multidimensional.-or-The number of elements in the source <see cref="T:System.Collections.Generic.ICollection`1"/> is greater than the available space from <paramref name="arrayIndex"/> to the end of the destination <paramref name="array"/>.-or-Type cannot be cast automatically to the type of the destination <paramref name="array"/>.</exception>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.Configuration.SecureCollection`1.Remove(`0)">
+            <summary>
+            Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <returns>
+            true if <paramref name="item"/> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false. This method also returns false if <paramref name="item"/> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </returns>
+            <param name="item">The object to remove from the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param><exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.</exception>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.Configuration.SecureCollection`1.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
+            </returns>
+            <filterpriority>1</filterpriority>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.Configuration.SecureCollection`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
+            </returns>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.Configuration.SecureCollection`1.Item(System.Int32)">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.Configuration.SecureCollection`1.Item(System.String)">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.Configuration.SecureCollection`1.Count">
+            <summary>
+            Gets the number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <returns>
+            The number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </returns>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.Configuration.SecureCollection`1.IsReadOnly">
+            <summary>
+            Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.
+            </summary>
+            <returns>
+            true if the <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only; otherwise, false.
+            </returns>
+        </member>
+        <member name="T:EfficientlyLazy.Crypto.Configuration.SecureSection">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.Configuration.SecureSection.#ctor">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.Configuration.SecureSection.Settings">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.Configuration.SecureSection.SqlConnectionStrings">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:EfficientlyLazy.Crypto.Configuration.SecureSectionHandler">
+            <summary>
+             Handles access to secured configuration sections.
+            </summary>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.Configuration.SecureSectionHandler.Create(System.Object,System.Object,System.Xml.XmlNode)">
+            <summary>
+            Creates a configuration section handler.
+            </summary>
+            <returns>
+            The created section handler object.
+            </returns>
+            <param name="parent">Parent object.</param><param name="configContext">Configuration context object.</param><param name="section">Section XML node.</param><filterpriority>2</filterpriority>
+        </member>
+        <member name="T:EfficientlyLazy.Crypto.Configuration.SecureSetting">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.Configuration.SecureSetting.Key">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.Configuration.SecureSetting.Value">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.Configuration.SecureSetting.IsEncrypted">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:EfficientlyLazy.Crypto.Configuration.SqlConnectionString">
+            <summary>
+            </summary>
+        </member>
+        <member name="F:EfficientlyLazy.Crypto.Configuration.SqlConnectionString.ConnectionStringSettings">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.Configuration.SqlConnectionString.#ctor">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.Configuration.SqlConnectionString.GetBuilder(EfficientlyLazy.Crypto.ICryptoEngine)">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.Configuration.SqlConnectionString.Key">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.Configuration.SqlConnectionString.Server">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.Configuration.SqlConnectionString.Database">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.Configuration.SqlConnectionString.UseWinAuth">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.Configuration.SqlConnectionString.UserID">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.Configuration.SqlConnectionString.EncryptedUserID">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.Configuration.SqlConnectionString.Password">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.Configuration.SqlConnectionString.EncryptedPassword">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.Configuration.SqlConnectionString.ApplicationName">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.Configuration.SqlConnectionString.ShowWorkstationID">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:EfficientlyLazy.Crypto.CryptoManager">
+            <summary>
+            Static manager to wrap the specified ICryptoEngine.
+            </summary>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.CryptoManager.Initialize(EfficientlyLazy.Crypto.ICryptoEngine)">
+            <summary>
+            Initializes the CryptoEngine to use.
+            </summary>
+            <param name="engine">CryptoEngine to use</param>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.CryptoManager.Encrypt(System.Byte[])">
+            <summary>
+            Encrypts the specified plain text.
+            </summary>
+            <param name="plaintext">The plain text.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.CryptoManager.Encrypt(System.String)">
+            <summary>
+            Encrypts the specified plain text.
+            </summary>
+            <param name="plaintext">The plain text.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.CryptoManager.Decrypt(System.Byte[])">
+            <summary>
+            Decrypts the specified cipher text.
+            </summary>
+            <param name="cipherText">The cipher text.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.CryptoManager.Decrypt(System.String)">
+            <summary>
+            Decrypts the specified cipher text.
+            </summary>
+            <param name="cipherText">The cipher text.</param>
+            <returns></returns>
+        </member>
+        <member name="T:EfficientlyLazy.Crypto.DataGenerator">
+            <summary>
+            Generation of true random data.
+            This overcomes the limitations of .NET Framework's Random
+            class, which - when initialized multiple times within a very short
+            period of time - can generate the same "random" number.
+            </summary>
+        </member>
+        <member name="F:EfficientlyLazy.Crypto.DataGenerator.LOWERCASE_CHARACTERS">
+            <summary>Characters: abcdefghijklmnopqrstuvwxyz</summary>
+        </member>
+        <member name="F:EfficientlyLazy.Crypto.DataGenerator.NUMERIC_CHARACTERS">
+            <summary>Characters: 0123456789</summary>
+        </member>
+        <member name="F:EfficientlyLazy.Crypto.DataGenerator.SPECIAL_CHARACTERS">
+            <summary>Characters: `~!@#$%^&amp;*()-_=+[]{}\\|;:'\",&lt;.&gt;/?</summary>
+        </member>
+        <member name="F:EfficientlyLazy.Crypto.DataGenerator.UPPERCASE_CHARACTERS">
+            <summary>Characters: ABCDEFGHIJKLMNOPQRSTUVWXYZ</summary>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataGenerator.#ctor(System.Int32,System.Int32)">
+            <summary>
+             Represents a pseudo-random number generator, a device that produces a sequence of numbers that meet certain statistical requirements for randomness.
+            </summary>
+            <param name="minimum">The inclusive lower bound of the random number or string length returned.</param>
+            <param name="maximum">The exclusive upper bound of the random number or string length returned. maximum must be greater than or equal to minimum.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">minimum is less than or equal to 0.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">maximum is less than or equal to 0.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">minimum is greater than maximum.</exception>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataGenerator.#ctor(System.Int32,System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+             Represents a pseudo-random number generator, a device that produces a sequence of numbers that meet certain statistical requirements for randomness.
+            </summary>
+            <param name="minimum">The inclusive lower bound of the random number or string length returned.</param>
+            <param name="maximum">The exclusive upper bound of the random number or string length returned. maximum must be greater than or equal to minimum.</param>
+            <param name="includeUppercase">Includes the <see cref="F:EfficientlyLazy.Crypto.DataGenerator.UPPERCASE_CHARACTERS"/> in the generated random string</param>
+            <param name="includeLowercase">Includes the <see cref="F:EfficientlyLazy.Crypto.DataGenerator.LOWERCASE_CHARACTERS"/> in the generated random string</param>
+            <param name="includeNumbers">Includes the <see cref="F:EfficientlyLazy.Crypto.DataGenerator.NUMERIC_CHARACTERS"/> in the generated random string</param>
+            <param name="includeSpecials">Includes the <see cref="F:EfficientlyLazy.Crypto.DataGenerator.SPECIAL_CHARACTERS"/> in the generated random string</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">minimum is less than or equal to 0.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">maximum is less than or equal to 0.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">minimum is greater than maximum.</exception>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataGenerator.ResetLengths(System.Int32,System.Int32)">
+            <summary>
+             Sets the lower and upper bound of the random number or string length returned.
+            </summary>
+            <param name="minimum">The inclusive lower bound of the random number or string length returned.</param>
+            <param name="maximum">The exclusive upper bound of the random number or string length returned. maximum must be greater than or equal to minimum.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">minimum is less than or equal to 0.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">maximum is less than or equal to 0.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">minimum is greater than maximum.</exception>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataGenerator.ResetCharacterRequirements(System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+             Defines the character sets used when generated string values.
+            </summary>
+            <param name="includeUppercase">Includes the <see cref="F:EfficientlyLazy.Crypto.DataGenerator.UPPERCASE_CHARACTERS"/> in the generated random string</param>
+            <param name="includeLowercase">Includes the <see cref="F:EfficientlyLazy.Crypto.DataGenerator.LOWERCASE_CHARACTERS"/> in the generated random string</param>
+            <param name="includeNumbers">Includes the <see cref="F:EfficientlyLazy.Crypto.DataGenerator.NUMERIC_CHARACTERS"/> in the generated random string</param>
+            <param name="includeSpecials">Includes the <see cref="F:EfficientlyLazy.Crypto.DataGenerator.SPECIAL_CHARACTERS"/> in the generated random string</param>
+            <exception cref="T:System.ArgumentException">At least one of the 4 character sets must be used.</exception>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataGenerator.RandomInteger(System.Int32,System.Int32)">
+             <summary>
+             Generates a random number within a specified range.
+             </summary>
+            <param name="minimum">The inclusive lower bound of the random number returned.</param>
+            <param name="maximum">The exclusive upper bound of the random number returned. maximum must be greater than or equal to minimum.</param>
+             <returns>Returns a random number within a specified range.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">minimum is less than or equal to 0.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">maximum is less than or equal to 0.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">minimum is greater than maximum.</exception>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataGenerator.NextInteger">
+            <summary>
+             Generates a random number within a specified range.
+            </summary>
+            <returns>Returns a random number within the configured range.</returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataGenerator.RandomDouble">
+            <summary>
+            Returns a random number between 0.0 and 1.0.
+            </summary>
+            <returns>A double-precision floating point number greater than or equal to 0.0, and less than 1.0.</returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataGenerator.NextDouble">
+            <summary>
+            Returns a random number between 0.0 and 1.0.
+            </summary>
+            <returns>A double-precision floating point number greater than or equal to 0.0, and less than 1.0.</returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataGenerator.RandomBytes(System.Byte[])">
+            <summary>
+             Fills the elements of a specified array of bytes with random numbers.
+            </summary>
+            <param name="buffer">An array of bytes to contain random numbers.</param>
+            <exception cref="T:System.ArgumentNullException">buffer is null</exception>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataGenerator.NextBytes(System.Byte[])">
+            <summary>
+             Fills the elements of a specified array of bytes with random numbers.
+            </summary>
+            <param name="buffer">An array of bytes to contain random numbers.</param>
+            <exception cref="T:System.ArgumentNullException">buffer is null</exception>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataGenerator.RandomString(System.Int32,System.Int32,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+             Generates a random string between the specifed lengths using the specified character sets
+            </summary>
+            <param name="minimumLength">The inclusive lower length of the random string returned.</param>
+            <param name="maximumLength">The exclusive upper length of the random string returned. maximumLength must be greater than or equal to minimumLength.</param>
+            <param name="includeUppercase">Includes the <see cref="F:EfficientlyLazy.Crypto.DataGenerator.UPPERCASE_CHARACTERS"/> in the generated random string</param>
+            <param name="includeLowercase">Includes the <see cref="F:EfficientlyLazy.Crypto.DataGenerator.LOWERCASE_CHARACTERS"/> in the generated random string</param>
+            <param name="includeNumbers">Includes the <see cref="F:EfficientlyLazy.Crypto.DataGenerator.NUMERIC_CHARACTERS"/> in the generated random string</param>
+            <param name="includeSpecials">Includes the <see cref="F:EfficientlyLazy.Crypto.DataGenerator.SPECIAL_CHARACTERS"/> in the generated random string</param>
+            <returns>Returns a random string between the specifed lengths using the specified character sets</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">minimumLength is less than or equal to 0.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">maximumLength is less than or equal to 0.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">minimumLength is greater than maximumLength.</exception>
+            <exception cref="T:System.ArgumentException">At least one of the 4 character sets must be used.</exception>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataGenerator.NextString">
+            <summary>
+             Generates a random string between the specifed lengths using the specified character sets
+            </summary>
+            <returns>Returns a random string between the specifed lengths using the specified character sets</returns>
+        </member>
+        <member name="T:EfficientlyLazy.Crypto.DataHashing">
+            <summary>
+            Data Hashing
+            </summary>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataHashing.Compute(EfficientlyLazy.Crypto.Algorithm,System.String)">
+            <summary>Generates the hash of a text.</summary>
+            <param name="algorithm"><see cref="T:EfficientlyLazy.Crypto.Algorithm"/> to use.</param>
+            <param name="plaintext">The input to compute the hash code for.</param>
+            <returns>The hash as a hexadecimal string.</returns>
+            <remarks>Using Encoding.Default for character encoding</remarks>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataHashing.Compute(EfficientlyLazy.Crypto.Algorithm,System.String,System.Text.Encoding)">
+            <summary>Generates the hash of a text.</summary>
+            <param name="algorithm"><see cref="T:EfficientlyLazy.Crypto.Algorithm"/> to use.</param>
+            <param name="plaintext">The input to compute the hash code for.</param>
+            <param name="encoding">Character encoding to use.</param>
+            <returns>The hash as a hexadecimal string.</returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataHashing.Compute(EfficientlyLazy.Crypto.Algorithm,System.Byte[])">
+            <summary>Generates the hash of a text.</summary>
+            <param name="algorithm"><see cref="T:EfficientlyLazy.Crypto.Algorithm"/> to use.</param>
+            <param name="plaintext">The input to compute the hash code for.</param>
+            <returns>The hash as a hexadecimal string.</returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataHashing.Compute(EfficientlyLazy.Crypto.Algorithm,System.IO.FileSystemInfo)">
+            <summary>
+            Get File Hash
+            </summary>
+            <param name="algorithm"><see cref="T:EfficientlyLazy.Crypto.Algorithm"/> to use.</param>
+            <param name="file">The file to compute the hash code for.</param>
+            <returns>Hashed string</returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataHashing.ComputeHMAC(EfficientlyLazy.Crypto.Algorithm,System.String,System.String)">
+            <summary>
+            Hash-based Message Authentication Code Hashing
+            </summary>
+            <param name="algorithm"><see cref="T:EfficientlyLazy.Crypto.Algorithm"/> to use.</param>
+            <param name="plaintext">The input to compute the hash code for.</param>
+            <param name="key">Key to use in the hash algorithm</param>
+            <returns>Hashed string</returns>
+            <remarks>Using Encoding.Default for character encoding</remarks>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataHashing.ComputeHMAC(EfficientlyLazy.Crypto.Algorithm,System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Hash-based Message Authentication Code Hashing
+            </summary>
+            <param name="algorithm"><see cref="T:EfficientlyLazy.Crypto.Algorithm"/> to use.</param>
+            <param name="plaintext">The input to compute the hash code for.</param>
+            <param name="key">Key to use in the hash algorithm</param>
+            <param name="encoding">Character encoding to use.</param>
+            <returns>Hashed string</returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataHashing.ComputeHMAC(EfficientlyLazy.Crypto.Algorithm,System.Byte[],System.Byte[])">
+            <summary>
+            Hash-based Message Authentication Code Hashing
+            </summary>
+            <param name="algorithm"><see cref="T:EfficientlyLazy.Crypto.Algorithm"/> to use.</param>
+            <param name="plaintext">The input to compute the hash code for.</param>
+            <param name="key">Key to use in the hash algorithm.</param>
+            <returns>Hashed string</returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataHashing.ComputeHMAC(EfficientlyLazy.Crypto.Algorithm,System.IO.FileSystemInfo,System.String)">
+            <summary>
+            Hash-based Message Authentication Code Hashing
+            </summary>
+            <param name="algorithm"><see cref="T:EfficientlyLazy.Crypto.Algorithm"/> to use.</param>
+            <param name="file">The file to compute the hash code for.</param>
+            <param name="key">Key to use in the hash algorithm</param>
+            <returns>Hashed string</returns>
+            <remarks>Using Encoding.Default for character encoding</remarks>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataHashing.ComputeHMAC(EfficientlyLazy.Crypto.Algorithm,System.IO.FileSystemInfo,System.String,System.Text.Encoding)">
+            <summary>
+            Hash-based Message Authentication Code Hashing
+            </summary>
+            <param name="algorithm"><see cref="T:EfficientlyLazy.Crypto.Algorithm"/> to use.</param>
+            <param name="file">The file to compute the hash code for.</param>
+            <param name="key">Key to use in the hash algorithm</param>
+            <param name="encoding">Character encoding to use.</param>
+            <returns>Hashed string</returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataHashing.ComputeHMAC(EfficientlyLazy.Crypto.Algorithm,System.IO.FileSystemInfo,System.Byte[])">
+            <summary>
+            Hash-based Message Authentication Code Hashing
+            </summary>
+            <param name="algorithm"><see cref="T:EfficientlyLazy.Crypto.Algorithm"/> to use.</param>
+            <param name="file">The file to compute the hash code for.</param>
+            <param name="key">Key to use in the hash algorithm</param>
+            <returns>Hashed string</returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataHashing.Validate(EfficientlyLazy.Crypto.Algorithm,System.String,System.String)">
+            <summary>Checks a text with a hash.</summary>
+            <param name="algorithm"><see cref="T:EfficientlyLazy.Crypto.Algorithm"/> to use.</param>
+            <param name="originalValue">The text to compare the hash against.</param>
+            <param name="hashValue">The hash to compare against.</param>
+            <returns>True if the hash validates, false otherwise.</returns>
+            <remarks>Using Encoding.Default for character encoding</remarks>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataHashing.Validate(EfficientlyLazy.Crypto.Algorithm,System.String,System.String,System.Text.Encoding)">
+            <summary>Checks a text with a hash.</summary>
+            <param name="algorithm"><see cref="T:EfficientlyLazy.Crypto.Algorithm"/> to use.</param>
+            <param name="originalValue">The text to compare the hash against.</param>
+            <param name="hashValue">The hash to compare against.</param>
+            <param name="encoding">Character encoding to use.</param>
+            <returns>True if the hash validates, false otherwise.</returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataHashing.Validate(EfficientlyLazy.Crypto.Algorithm,System.Byte[],System.String)">
+            <summary>Checks a text with a hash.</summary>
+            <param name="algorithm"><see cref="T:EfficientlyLazy.Crypto.Algorithm"/> to use.</param>
+            <param name="originalValue">The text to compare the hash against.</param>
+            <param name="hashValue">The hash to compare against.</param>
+            <returns>True if the hash validates, false otherwise.</returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataHashing.Validate(EfficientlyLazy.Crypto.Algorithm,System.IO.FileSystemInfo,System.String)">
+            <summary>
+            Checks the file with a hash.
+            </summary>
+            <param name="algorithm"><see cref="T:EfficientlyLazy.Crypto.Algorithm"/> to use.</param>
+            <param name="file">The file that was hashed.</param>
+            <param name="hashValue">The hash to compare against.</param>
+            <returns>True if the hash validates, false otherwise.</returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataHashing.ValidateHMAC(EfficientlyLazy.Crypto.Algorithm,System.Byte[],System.Byte[],System.String)">
+            <summary>Checks a text with a hash.</summary>
+            <param name="algorithm"><see cref="T:EfficientlyLazy.Crypto.Algorithm"/> to use.</param>
+            <param name="originalValue">The text to compare the hash against.</param>
+            <param name="key">Key to use in the hash algorithm</param>
+            <param name="hashValue">The hash to compare against.</param>
+            <returns>True if the hash validates, false otherwise.</returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataHashing.ValidateHMAC(EfficientlyLazy.Crypto.Algorithm,System.String,System.String,System.String)">
+            <summary>Checks a text with a hash.</summary>
+            <param name="algorithm"><see cref="T:EfficientlyLazy.Crypto.Algorithm"/> to use.</param>
+            <param name="originalValue">The text to compare the hash against.</param>
+            <param name="key">Key to use in the hash algorithm</param>
+            <param name="hashValue">The hash to compare against.</param>
+            <returns>True if the hash validates, false otherwise.</returns>
+            <remarks>Using Encoding.Default for character encoding</remarks>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataHashing.ValidateHMAC(EfficientlyLazy.Crypto.Algorithm,System.String,System.String,System.String,System.Text.Encoding)">
+            <summary>Checks a text with a hash.</summary>
+            <param name="algorithm"><see cref="T:EfficientlyLazy.Crypto.Algorithm"/> to use.</param>
+            <param name="originalValue">The text to compare the hash against.</param>
+            <param name="key">Key to use in the hash algorithm</param>
+            <param name="hashValue">The hash to compare against.</param>
+            <param name="encoding">Character encoding to use.</param>
+            <returns>True if the hash validates, false otherwise.</returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataHashing.ValidateHMAC(EfficientlyLazy.Crypto.Algorithm,System.IO.FileSystemInfo,System.String,System.String)">
+            <summary>Checks a text with a hash.</summary>
+            <param name="algorithm"><see cref="T:EfficientlyLazy.Crypto.Algorithm"/> to use.</param>
+            <param name="file">The file to compare the hash against.</param>
+            <param name="key">Key to use in the hash algorithm</param>
+            <param name="hashValue">The hash to compare against.</param>
+            <returns>True if the hash validates, false otherwise.</returns>
+            <remarks>Using Encoding.Default for character encoding</remarks>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataHashing.ValidateHMAC(EfficientlyLazy.Crypto.Algorithm,System.IO.FileSystemInfo,System.String,System.String,System.Text.Encoding)">
+            <summary>Checks a text with a hash.</summary>
+            <param name="algorithm"><see cref="T:EfficientlyLazy.Crypto.Algorithm"/> to use.</param>
+            <param name="file">The file to compare the hash against.</param>
+            <param name="key">Key to use in the hash algorithm</param>
+            <param name="hashValue">The hash to compare against.</param>
+            <param name="encoding">Character encoding to use.</param>
+            <returns>True if the hash validates, false otherwise.</returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DataHashing.ValidateHMAC(EfficientlyLazy.Crypto.Algorithm,System.IO.FileSystemInfo,System.Byte[],System.String)">
+            <summary>Checks a text with a hash.</summary>
+            <param name="algorithm"><see cref="T:EfficientlyLazy.Crypto.Algorithm"/> to use.</param>
+            <param name="file">The file to compare the hash against.</param>
+            <param name="key">Key to use in the hash algorithm</param>
+            <param name="hashValue">The hash to compare against.</param>
+            <returns>True if the hash validates, false otherwise.</returns>
+        </member>
+        <member name="T:EfficientlyLazy.Crypto.DPAPIEngine">
+            <summary>
+            Encryption/Decryption using the windows crypto API.
+            </summary>
+        </member>
+        <member name="T:EfficientlyLazy.Crypto.ICryptoEngine">
+            <summary>
+            Encryption/Decryption interface
+            </summary>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.ICryptoEngine.Encrypt(System.Byte[])">
+            <summary>
+            Encrypts the specified plain text.
+            </summary>
+            <param name="plaintext">The plain text.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.ICryptoEngine.Encrypt(System.String)">
+            <summary>
+            Encrypts the specified plain text.
+            </summary>
+            <param name="plaintext">The plain text.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.ICryptoEngine.Decrypt(System.Byte[])">
+            <summary>
+            Decrypts the specified cipher text.
+            </summary>
+            <param name="cipherText">The cipher text.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.ICryptoEngine.Decrypt(System.String)">
+            <summary>
+            Decrypts the specified cipher text.
+            </summary>
+            <param name="cipherText">The cipher text.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.ICryptoEngine.GetSetting(System.String)">
+            <summary>
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.ICryptoEngine.GetSqlConnectionString(System.String)">
+            <summary>
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DPAPIEngine.#ctor(EfficientlyLazy.Crypto.KeyType)">
+            <summary>
+             Initializes a new instance of the <see cref="T:EfficientlyLazy.Crypto.DPAPIEngine"/> object.
+            </summary>
+            <param name="keyType">Defines the method (<see cref="T:EfficientlyLazy.Crypto.KeyType"/>) to use for encryption/decryption.</param>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DPAPIEngine.Encrypt(System.Byte[])">
+            <summary>
+            Encrypts the specified plain text to a byte array.
+            </summary>
+            <param name="plaintext">The plain text to encrypt.</param>
+            <returns>Byte array of encrypted data.</returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DPAPIEngine.Encrypt(System.String)">
+            <summary>
+            Encrypts the specified plain text to a string.
+            </summary>
+            <param name="plaintext">The plain text to encrypt.</param>
+            <returns>String of encrypted data.</returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DPAPIEngine.Decrypt(System.Byte[])">
+            <summary>
+            Decrypts the specified cipher text.
+            </summary>
+            <param name="cipherText">The cipher text.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DPAPIEngine.Decrypt(System.String)">
+            <summary>
+            Decrypts the specified cipher text.
+            </summary>
+            <param name="cipherText">The cipher text.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DPAPIEngine.GetSetting(System.String)">
+            <summary>
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DPAPIEngine.GetSqlConnectionString(System.String)">
+            <summary>
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DPAPIEngine.ProtectData(EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeDATABLOB@,System.String,EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeDATABLOB@,System.IntPtr,EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeCRYPTPROTECTPROMPTSTRUCT@,System.Int32,EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeDATABLOB@)">
+            <summary>
+             Performs encryption on the data in a <see cref="T:EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeDATABLOB"/> structure
+            </summary>
+            <param name="plainText">Structure that contains the plaintext to be encrypted.</param>
+            <param name="description">A readable description of the data to be encrypted.</param>
+            <param name="entropy">Structure that contains a password or other additional entropy used to encrypt the data.</param>
+            <param name="reserved">Reserved for future use and must be set to NULL.</param>
+            <param name="prompt">Structure that provides information about where and when prompts are to be displayed and what the content of those prompts should be.</param>
+            <param name="flags">Crypt Protection</param>
+            <param name="cipherText">Structure that receives the encrypted data.</param>
+            <returns>If the function succeeds, then <c>TRUE</c> else <c>FALSE</c>.</returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DPAPIEngine.UnprotectData(EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeDATABLOB@,System.String@,EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeDATABLOB@,System.IntPtr,EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeCRYPTPROTECTPROMPTSTRUCT@,System.Int32,EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeDATABLOB@)">
+            <summary>
+             Decrypts and does an integrity check of the data in a <see cref="T:EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeDATABLOB"/> structure
+            </summary>
+            <param name="cipherText">Structure that contains the encrypted data.</param>
+            <param name="description">A readable description of the data to be encrypted.</param>
+            <param name="entropy">Structure that contains a password or other additional entropy used to encrypt the data.</param>
+            <param name="reserved">Reserved for future use and must be set to NULL.</param>
+            <param name="prompt">Structure that provides information about where and when prompts are to be displayed and what the content of those prompts should be.</param>
+            <param name="flags">Crypt Protection</param>
+            <param name="plainText">Structure that receives the decrypted data.</param>
+            <returns>If the function succeeds, then <c>TRUE</c> else <c>FALSE</c>.</returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DPAPIEngine.SetEntropy(System.String)">
+            <summary>
+             Sets additional entropy used for encryption/decryption
+            </summary>
+            <param name="entropy">Additional entropy used for encryption/decryption</param>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DPAPIEngine.SetEntropy(System.Security.SecureString)">
+            <summary>
+             Sets additional entropy used for encryption/decryption
+            </summary>
+            <param name="entropy">Additional entropy used for encryption/decryption</param>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DPAPIEngine.SetEncoding(System.Text.Encoding)">
+            <summary>
+             Sets character encoding to use during encryption/decryption.
+            </summary>
+            <param name="encoding">Character encoding to use during encryption/decryption.</param>
+            <exception cref="T:System.ArgumentNullException">encoding is null</exception>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.DPAPIEngine.Entropy">
+            <summary>
+             Additional entropy used for encryption/decryption.
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.DPAPIEngine.KeyType">
+            <summary>
+             Method (<see cref="T:EfficientlyLazy.Crypto.KeyType"/>) to use for encryption/decryption.
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.DPAPIEngine.Encoding">
+            <summary>
+             Character encoding to use during encryption/decryption.
+            </summary>
+        </member>
+        <member name="T:EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeCryptProtectPromptFlags">
+            <summary>
+             Indicates when prompts to the user are to be displayed.
+            </summary>
+        </member>
+        <member name="F:EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeCryptProtectPromptFlags.PromptOnUnprotect">
+            <summary>
+             This flag can be combined with CRYPTPROTECT_PROMPT_ON_PROTECT to enforce the UI (user interface) policy of the caller. When CryptUnprotectData is called, the dwPromptFlags specified in the CryptProtectData call are enforced.
+            </summary>
+        </member>
+        <member name="F:EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeCryptProtectPromptFlags.PromptOnProtect">
+            <summary>
+             This flag is used to provide the prompt for the protect phase.
+            </summary>
+        </member>
+        <member name="T:EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeCRYPTPROTECTPROMPTSTRUCT">
+            <summary>
+            Provides the text of a prompt and information about when and where that prompt is to be displayed when using the CryptProtectData and CryptUnprotectData functions.
+            </summary>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeCRYPTPROTECTPROMPTSTRUCT.Default">
+            <summary>
+             Creates a default instance of CRYPTPROTECT_PROMPTSTRUCT.
+            </summary>
+            <returns>The default instance of CRYPTPROTECT_PROMPTSTRUCT</returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeCRYPTPROTECTPROMPTSTRUCT.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeCRYPTPROTECTPROMPTSTRUCT.Size">
+            <summary>
+            The size, in bytes, of this structure.
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeCRYPTPROTECTPROMPTSTRUCT.PromptFlags">
+            <summary>
+            Indicates when prompts to the user are to be displayed.
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeCRYPTPROTECTPROMPTSTRUCT.Handle">
+            <summary>
+            Window handle to the parent window.
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeCRYPTPROTECTPROMPTSTRUCT.Prompt">
+            <summary>
+            A string containing the text of a prompt to be displayed.
+            </summary>
+        </member>
+        <member name="T:EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeDATABLOB">
+            <summary>
+             Structure that holds the encrypted data.
+            </summary>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeDATABLOB.Null">
+            <summary>
+             Creates an empty DATA_BLOB.
+            </summary>
+            <returns>An empty DATA_BLOB</returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeDATABLOB.Init(System.Byte[])">
+            <summary>
+             Creates the structure that holds byte[] data to be encrypted.
+            </summary>
+            <param name="data">Data to be encrypted.</param>
+            <returns>Structure that holds byte[] data to be encrypted.</returns>
+            <exception cref="T:System.MemberAccessException">Unable to allocate data buffer for BLOB structure</exception>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeDATABLOB.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeDATABLOB.DataLength">
+            <summary>
+             Holds the length of the data
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.DPAPIEngine.DPAPINativeDATABLOB.DataPointer">
+            <summary>
+             Pointer to the byte string that contains the text to be encrypted.
+            </summary>
+        </member>
+        <member name="T:EfficientlyLazy.Crypto.Algorithm">
+            <summary>Algorithms used for Data Hashing</summary>
+        </member>
+        <member name="F:EfficientlyLazy.Crypto.Algorithm.MD5">
+            <summary>MD5 Hashing</summary>
+        </member>
+        <member name="F:EfficientlyLazy.Crypto.Algorithm.SHA1">
+            <summary>SHA1 Hashing</summary>
+        </member>
+        <member name="F:EfficientlyLazy.Crypto.Algorithm.SHA256">
+            <summary>SHA256 Hashing</summary>
+        </member>
+        <member name="F:EfficientlyLazy.Crypto.Algorithm.SHA384">
+            <summary>SHA384 Hashing</summary>
+        </member>
+        <member name="F:EfficientlyLazy.Crypto.Algorithm.SHA512">
+            <summary>SHA512 Hashing</summary>
+        </member>
+        <member name="T:EfficientlyLazy.Crypto.KeyType">
+            <summary>DPAPI Key Type</summary>
+        </member>
+        <member name="F:EfficientlyLazy.Crypto.KeyType.UserKey">
+            <summary>Encrypt at the User Level</summary>
+        </member>
+        <member name="F:EfficientlyLazy.Crypto.KeyType.MachineKey">
+            <summary>Encrypt at the Machine Level</summary>
+        </member>
+        <member name="T:EfficientlyLazy.Crypto.KeySize">
+            <summary><see cref="T:System.Security.Cryptography.Rijndael"/> Key Size</summary>
+        </member>
+        <member name="F:EfficientlyLazy.Crypto.KeySize.Key128Bit">
+            <summary>128bit key length</summary>
+        </member>
+        <member name="F:EfficientlyLazy.Crypto.KeySize.Key192Bit">
+            <summary>192bit key length</summary>
+        </member>
+        <member name="F:EfficientlyLazy.Crypto.KeySize.Key256Bit">
+            <summary>256bit key length</summary>
+        </member>
+        <member name="T:EfficientlyLazy.Crypto.ExtensionMethods">
+            <summary>
+            Extension Methods
+            </summary>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.ExtensionMethods.Encrypt(System.Byte[])">
+            <summary>
+            Encrypts the specified plain text.
+            </summary>
+            <param name="plaintext">The plain text.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.ExtensionMethods.Encrypt(System.String)">
+            <summary>
+            Encrypts the specified plain text.
+            </summary>
+            <param name="plaintext">The plain text.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.ExtensionMethods.Decrypt(System.Byte[])">
+            <summary>
+            Decrypts the specified cipher text.
+            </summary>
+            <param name="cipherText">The cipher text.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.ExtensionMethods.Decrypt(System.String)">
+            <summary>
+            Decrypts the specified cipher text.
+            </summary>
+            <param name="cipherText">The cipher text.</param>
+            <returns></returns>
+        </member>
+        <member name="T:EfficientlyLazy.Crypto.RijndaelEngine">
+            <summary>
+            Encryption/Decryption using <see cref="T:System.Security.Cryptography.RijndaelManaged"/>.
+            </summary>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.RijndaelEngine.#ctor(System.String)">
+            <summary>
+             Initializes a new instance of the <see cref="T:EfficientlyLazy.Crypto.RijndaelEngine"/> object.
+            </summary>
+            <param name="key">Represents the secret key for the algorithm</param>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.RijndaelEngine.#ctor(System.Security.SecureString)">
+            <summary>
+             Initializes a new instance of the <see cref="T:EfficientlyLazy.Crypto.RijndaelEngine"/> object.
+            </summary>
+            <param name="key">Represents the secret key for the algorithm</param>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.RijndaelEngine.Encrypt(System.Byte[])">
+            <summary>
+            Encrypts the specified plain text.
+            </summary>
+            <param name="plaintext">The plain text.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.RijndaelEngine.Encrypt(System.String)">
+            <summary>
+            Encrypts the specified plain text.
+            </summary>
+            <param name="plaintext">The plain text.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.RijndaelEngine.Decrypt(System.Byte[])">
+            <summary>
+            Decrypts the specified cipher text.
+            </summary>
+            <param name="cipherText">The cipher text.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.RijndaelEngine.Decrypt(System.String)">
+            <summary>
+            Decrypts the specified cipher text.
+            </summary>
+            <param name="cipherText">The cipher text.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.RijndaelEngine.GetSetting(System.String)">
+            <summary>
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.RijndaelEngine.GetSqlConnectionString(System.String)">
+            <summary>
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.RijndaelEngine.AddSalt(System.Byte[])">
+            <summary>
+            Adds an array of randomly generated bytes at the beginning of the
+            array holding original plain text value.
+            </summary>
+            <param name="plainTextBytes">
+            Byte array containing original plain text value.
+            </param>
+            <returns>
+            Either original array of plain text bytes (if salt is not used) or a
+            modified array containing a randomly generated salt added at the 
+            beginning of the plain text bytes. 
+            </returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.RijndaelEngine.GenerateSalt">
+            <summary>
+            Generates an array holding cryptographically strong bytes.
+            </summary>
+            <returns>
+            Array of randomly generated bytes.
+            </returns>
+            <remarks>
+            Salt size will be defined at random or exactly as specified by the
+            minSlatLen and maxSaltLen parameters passed to the object constructor.
+            The first four bytes of the salt array will contain the salt length
+            split into four two-bit pieces.
+            </remarks>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.RijndaelEngine.SetInitVector(System.String)">
+            <summary>
+             Sets the initialization vector (IV) for the algorithm
+            </summary>
+            <param name="initVector">The initialization vector (IV) for the algorithm</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.RijndaelEngine.SetInitVector(System.Security.SecureString)">
+            <summary>
+             Sets the initialization vector (IV) for the algorithm
+            </summary>
+            <param name="initVector">The initialization vector (IV) for the algorithm</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.RijndaelEngine.SetRandomSaltLength(System.Int32,System.Int32)">
+            <summary>
+             Sets the minimum and maximum lengths of the random salt used in encryption/decryption
+            </summary>
+             <remarks>If both are set to 0, no random salt will be used.</remarks>
+            <param name="minimumLength">Minimum salt length, must be greater than 0 (unless both minimum and maximum are set to 0)</param>
+            <param name="maximumLength">Maximum salt length, must be greater than 0 (unless both minimum and maximum are set to 0)</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.RijndaelEngine.SetSalt(System.String)">
+            <summary>
+             Sets the key salt used to derive the key
+            </summary>
+            <param name="salt">Key salt used to derive the key</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.RijndaelEngine.SetSalt(System.Security.SecureString)">
+            <summary>
+             Sets the key salt used to derive the key
+            </summary>
+            <param name="salt">Key salt used to derive the key</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.RijndaelEngine.SetKeySize(EfficientlyLazy.Crypto.KeySize)">
+            <summary>
+             Sets the size of the secret key used by the algorithm
+            </summary>
+            <param name="keySize">The size of the secret key used by the algorithm</param>
+            <returns></returns>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.RijndaelEngine.SetIterations(System.Int32)">
+            <summary>
+             Sets the number of iterations for the operation
+            </summary>
+            <param name="iterations">The number of iterations for the operation</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:EfficientlyLazy.Crypto.RijndaelEngine.SetEncoding(System.Text.Encoding)">
+            <summary>
+             Sets the character encoding
+            </summary>
+            <param name="encoding">The character encoding</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.RijndaelEngine.Key">
+            <summary>
+             Represents the secret key for the algorithm
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.RijndaelEngine.InitVector">
+            <summary>
+             Represents the initialization vector (IV) for the algorithm
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.RijndaelEngine.RandomSaltMinimumLength">
+            <summary>
+             Minimum length of the random salt used in encryption/decryption.  If 0, no random salt will be used.
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.RijndaelEngine.RandomSaltMaximumLength">
+            <summary>
+             Maximum length of the random salt used in encryption/decryption.  If 0, no random salt will be used.
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.RijndaelEngine.Salt">
+            <summary>
+             Key salt used to derive the key
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.RijndaelEngine.KeySize">
+            <summary>
+             Represents the size, in bits, of the secret key used by the algorithm
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.RijndaelEngine.PasswordIterations">
+            <summary>
+             The number of iterations for the operation
+            </summary>
+        </member>
+        <member name="P:EfficientlyLazy.Crypto.RijndaelEngine.Encoding">
+            <summary>
+             Represents the character encoding
+            </summary>
+        </member>
+    </members>
+</doc>

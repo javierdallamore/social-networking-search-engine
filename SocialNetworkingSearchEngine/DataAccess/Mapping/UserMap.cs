@@ -15,6 +15,7 @@ namespace DataAccess.Mapping
             Map(x => x.Login).Not.Nullable();
             Map(x => x.Name);
             Map(x => x.IsAdmin);
+            Map(x => x.HashedPass);
 
             HasMany(x => x.AssignedPosts).Inverse().KeyColumn("CurrentOwner_id").Cascade.All();
         }
