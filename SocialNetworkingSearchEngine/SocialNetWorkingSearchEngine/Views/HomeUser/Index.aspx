@@ -54,6 +54,11 @@
                                 <option value="5" <% if (post.Calification == 5){%> selected="selected" <% } %>>Perfecto</option>
                             </select>
                         </div>
+                        <div id="sentiment">
+                            <span>Sentimiento:</span>
+                            <br/>
+                            <%=Html.DropDownList("option_sentiment_" + post.Id,new SelectList(new List<string>{"negativo","positivo","neutro"},post.Sentiment.ToLower()))%>
+                        </div>
                         <div id="save">
                         </div>
                     </div>
