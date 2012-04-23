@@ -9,9 +9,6 @@
             <% foreach (var post in Model.Posts)
                { %>
             <li style="border-bottom: 1px solid darkgray">
-                <p id="assigned_tag_string<%=post.Id%>" style="display: none">
-                    [<%=string.Join(",", post.Tags.Select(x => x.Name))%>]
-                </p>
                 <div class="result clearfix">
                     <%--ICONS--%>
                     <div style="float: left">
@@ -43,11 +40,11 @@
                             default:%>
                                 <%=Url.Content("../../Content/search_item_icon.gif")%>
                                 <%break;
-                            }%>" id="img1" class="icon"/>
+                            }%>" id="img1" class="icon" />
                     </div>
                     <%--RATING--%>
                     <div style="float: right">
-                        <div id="stars-wrapper<%=post.Id%>">
+                        <div id="stars-wrapper_<%=post.Id%>">
                             <select name="selrate">
                                 <option value="1" <% if (post.Calification == 1){%> selected="selected" <% } %>>Pobre</option>
                                 <option value="2" <% if (post.Calification == 2){%> selected="selected" <% } %>>No tan
@@ -60,13 +57,11 @@
                         <div id="save">
                         </div>
                     </div>
-
                     <%--POST CONTENT--%>
                     <div style="width: 90%">
                         <a href="<%=post.UrlPost%>" target="_blank" title="<%=post.Content%>">
                             <%=post.Content %></a>
                     </div>
-                    
                     <div>
                         El
                         <%=post.CreatedAtShort%>
@@ -75,10 +70,14 @@
                         <a href="<%=post.UrlProfile%>" target="_blank">
                             <%=post.UserName%></a>
                     </div>
+                    <%--TAGS CONTAINER--%>
                     <div>
                         <p>
                             Tag:</p>
-                        <ul id="ul_tags<%=post.Id%>">
+                        <p id="assigned_tag_string_array_<%=post.Id%>" style="display: none">
+                            <%=string.Join(",", post.Tags.Select(x => x.Name))%>
+                        </p>
+                        <ul id="ul_tags_<%=post.Id%>">
                         </ul>
                     </div>
                     <div id="email">
@@ -97,16 +96,19 @@
         });
 
         var tags = [<%=string.Join(",",Model.TagsStringsArray) %>];
+
         //Creo la lista con tags
         $("ul[id^='ul_tags']").each(function (i, e) {
+            var assigned_tags_id_field = "assigned_tag_string_array_" + e.id.substr(e.id.lastIndexOf('_')+1);
+            var assigned_tags_string = $("#" + assigned_tags_id_field).text().trim();
+            var assigned_tags_array = (assigned_tags_string == "") ? [] : assigned_tags_string.split(",");
             $(e).tagHandler({
                 msgNoNewTag: "No tiene permisos para crear un nuevo tag",
                 msgError: "No se pudo cargar la lista de tag",
                 availableTags: tags,
                 autocomplete: true,
-                allowAdd: true
-                //assignedTags: _.map(socialNetworkingItems.Tags, function (tag) {
-                //return tag.Name;
+                allowAdd: true,
+                assignedTags: assigned_tags_array
             });
         });
     </script>
