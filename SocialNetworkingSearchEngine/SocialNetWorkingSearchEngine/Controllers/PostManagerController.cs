@@ -7,17 +7,19 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using BusinessRules;
 using Core.Domain;
+using SocialNetWorkingSearchEngine.Helpers;
 using SocialNetWorkingSearchEngine.Models;
 
 namespace SocialNetWorkingSearchEngine.Controllers
 {
+    [Authorize]
     public class PostManagerController : Controller
     {
         public ActionResult Index()
         {
             var searchEngineManager = new SearchEngineManager();
             var userHomeModel = new UserHomeModel();
-            userHomeModel.Posts = searchEngineManager.GetUserAssignedPost(new User { Id = 1, Login = "diego" });
+            userHomeModel.Posts = searchEngineManager.GetUserAssignedPost(UserHelper.GetCurrent());
 
             return View(userHomeModel);
         }

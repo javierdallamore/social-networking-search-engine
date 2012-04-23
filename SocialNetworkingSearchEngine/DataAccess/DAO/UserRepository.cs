@@ -11,5 +11,11 @@ namespace DataAccess.DAO
             return
                 Session.QueryOver<User>().Where(x => x.Login == userName && x.HashedPass == password).SingleOrDefault();
         }
+
+        public User GetByLogin(string login)
+        {
+            return
+                Session.QueryOver<User>().Where(x => x.Login == login).SingleOrDefault();
+        }
     }
 }
