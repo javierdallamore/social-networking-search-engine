@@ -4,11 +4,17 @@
     Index
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <style>
+        .hlt {
+            background-color: yellow;
+        }
+    </style>
+
     <div style="width: 900px;">
         <ul style="list-style-type: none">
             <% foreach (var post in Model.Posts)
                { %>
-            <li style="border-bottom: 1px solid darkgray">
+            <li id="post_list_item_<%=post.Id %>" style="border-bottom: 1px solid darkgray">
                 <div class="result clearfix">
                     <%--ICONS--%>
                     <div style="float: left">
@@ -65,8 +71,8 @@
                         </div>
                     </div>
                     <%--POST CONTENT--%>
-                    <div style="width: 85%">
-                        <a href="<%=post.UrlPost%>" target="_blank" title="<%=post.Content%>">
+                    <div id="post_content<%=post.Id %>" style="width: 85%">
+                        <a href="<%=post.UrlPost%>" target="_blank" title="<%=post.Content.Replace("\"","&quot;")%>">
                             <%=post.Content %></a>
                     </div>
                     <div style="width: 85%">
@@ -81,15 +87,20 @@
                     <div style="width: 85%">
                         <p>
                             Tag:</p>
-                        <p id="assigned_tag_string_array_<%=post.Id%>" style="display: none">
-                            <%=string.Join(",", post.Tags.Select(x => x.Name))%>
-                        </p>
                         <ul id="ul_tags_<%=post.Id%>">
                         </ul>
                     </div>
                     <div id="email">
                     </div>
                 </div>
+                
+                <%--Campos ocultos--%>
+                <p id="assigned_tag_string_array_<%=post.Id%>" style="display: none">
+                    <%=string.Join(",", post.Tags.Select(x => x.Name))%>
+                </p>
+                <p id="query_words_<%=post.Id %>" style="display: none">
+                    <%=string.Join(",", post.QueryDef.Query.Split(' ')) %>
+                </p>
             </li>
             <% } %>
         </ul>
@@ -128,8 +139,6 @@
                     var item_tags = $("#ul_tags_" + item_id).tagHandler("getTags");
                     var item_sentiment = $("#sentiment_" + item_id + " option:selected").val();
 
-                    //$.post("SavePost", JSON.stringify({ idPost: item_id, rating: item_rating, sentiment: item_sentiment, tags: item_tags }), save_complete, "application/json");
-                    
                     $.ajax({
                         url: '/PostManager/UpdatePost',
                         type: 'POST',
@@ -142,11 +151,22 @@
                     });
                 });
             });
-            
-            function save_complete(responseText, textStatus) {
-            alert(responseText);
-        }
 
+            highlight_query_words();
         });
+        
+        function save_complete(responseText, textStatus) {
+                alert(responseText);
+        }
+            
+        function highlight_query_words() {
+            $("li[id^='post_list_item']").each(function(i, e) {
+                var query_words = $("[id^='query_words']", e).text().trim().split(",");
+                _.each(query_words,function(word) {
+                    var regex = new RegExp(word, "gi");
+                    $("[id^='post_content']",e).html( $("[id^='post_content']",e).html().replace(regex ,"<span class='hlt'>"+word+"</span>"));
+                });
+            });
+        }
     </script>
 </asp:Content>
