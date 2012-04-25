@@ -80,7 +80,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
         {
             FormsService.SignOut();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "PostManager");
         }
 
         // **************************************

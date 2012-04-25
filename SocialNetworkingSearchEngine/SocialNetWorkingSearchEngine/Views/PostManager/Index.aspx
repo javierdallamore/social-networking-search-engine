@@ -27,7 +27,7 @@
     <div style="padding: 10px;background-color: #EEEEEE; margin-bottom: 15px">
             <div style="text-align: right;">
                 Usuario: <%=HttpContext.Current.User.Identity.Name %>
-                <%=Html.ActionLink("(X)", "LogOff", "Account",new {Title="Cerrar sesion"}) %>
+                <%=Html.ActionLink("(X)","LogOff", "Account",null,new {Title="Cerrar sesion"}) %>
             </div>
     </div>
     <div id="container">
