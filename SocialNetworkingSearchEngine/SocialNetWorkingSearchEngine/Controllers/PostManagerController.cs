@@ -17,9 +17,20 @@ namespace SocialNetWorkingSearchEngine.Controllers
     {
         public ActionResult Index()
         {
-            var searchEngineManager = new SearchEngineManager();
+            var servicesManager = new ServicesManager();
             var userHomeModel = new UserHomeModel();
-            userHomeModel.Posts = searchEngineManager.GetUserAssignedPost(UserHelper.GetCurrent());
+
+            var userAssignedPostNotProcessed =
+                servicesManager.GetNotProcessedUserAssignedPost(UserHelper.GetCurrent()).ToList();
+            var diferenceInPostToProcess = Params.MAX_POST_TO_PROCESS_PER_USER - userAssignedPostNotProcessed.Count();
+            
+            if (diferenceInPostToProcess > 0)
+            {
+                var newAssignedPost = servicesManager.AssignPostToUser(diferenceInPostToProcess, UserHelper.GetCurrent());
+                userAssignedPostNotProcessed = userAssignedPostNotProcessed.Concat(newAssignedPost).ToList();
+            }
+            userHomeModel.Posts = userAssignedPostNotProcessed;
+
 
             return View(userHomeModel);
         }

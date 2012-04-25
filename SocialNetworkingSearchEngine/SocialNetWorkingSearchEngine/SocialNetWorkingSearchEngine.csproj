@@ -118,6 +118,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Params.cs" />
     <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\SearchModels.cs" />

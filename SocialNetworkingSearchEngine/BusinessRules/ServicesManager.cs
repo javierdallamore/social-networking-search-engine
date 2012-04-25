@@ -266,6 +266,39 @@ namespace BusinessRules
             return _wordRepository.GetAll();
         }
 
+        public IEnumerable<Post> GetUserAssignedPost(User user)
+        {
+            return _postRepository.GetByAssignedUser(user);
+        }
+
+        public IEnumerable<Post> GetNotProcessedUserAssignedPost(User user)
+        {
+            var posts = _postRepository.GetNotProcessedByAssignedUser(user);
+            return posts;
+        }
+
+        public IEnumerable<Post> AssignPostToUser(int cant, User user)
+        {
+            var begin = NHSessionManager.Instance.BeginTransaction();
+            try
+            {
+                var unAssignedPost = _postRepository.GetNotAssigned(cant).ToList();
+                foreach (var post in unAssignedPost)
+                {
+                    post.CurrentOwner = user;
+                }
+                if (begin)
+                    NHSessionManager.Instance.CommitTransaction();
+                return unAssignedPost;
+            }
+            catch (Exception)
+            {
+                if (begin)
+                    NHSessionManager.Instance.RollbackTransaction();
+                return null;
+            }
+        }
+
         #endregion
     }
 }

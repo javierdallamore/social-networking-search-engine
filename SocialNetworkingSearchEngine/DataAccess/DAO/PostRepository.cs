@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Core.Domain;
 using Core.RepositoryInterfaces;
 using NHibernate.Criterion;
@@ -32,6 +33,20 @@ namespace DataAccess.DAO
         public IEnumerable<Post> GetByAssignedUser(User assignedUser)
         {
             var posts = Session.QueryOver<Post>().Where(x => x.CurrentOwner.Id == assignedUser.Id).List<Post>();
+            return posts;
+        }
+
+        public IEnumerable<Post> GetNotProcessedByAssignedUser(User assignedUser)
+        {
+            var posts = Session.QueryOver<Post>().Where(x => x.CurrentOwner.Id == assignedUser.Id &&
+                x.Calification <= 0).List();
+
+            return posts.Where(x=> x.PostTags.Count == 0);
+        }
+
+        public IEnumerable<Post> GetNotAssigned(int cant)
+        {
+            var posts = Session.QueryOver<Post>().Where(x => x.CurrentOwner == null).Take(cant).List<Post>();
             return posts;
         }
 
