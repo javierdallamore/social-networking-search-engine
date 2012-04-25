@@ -96,7 +96,7 @@
                 
                 <%--Campos ocultos--%>
                 <p id="assigned_tag_string_array_<%=post.Id%>" style="display: none">
-                    <%=string.Join(",", post.Tags.Select(x => x.Name))%>
+                    <%=string.Join(",", post.PostTags.Select(x => x.Tag.Name))%>
                 </p>
                 <p id="query_words_<%=post.Id %>" style="display: none">
                     <%=string.Join(",", post.QueryDef.Query.Split(' ')) %>

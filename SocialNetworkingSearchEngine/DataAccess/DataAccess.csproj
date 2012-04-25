@@ -64,6 +64,7 @@
     <Compile Include="DAO\RepositoryBase.cs" />
     <Compile Include="DAO\PostRepository.cs" />
     <Compile Include="DAO\WordRepository.cs" />
+    <Compile Include="Mapping\PostTagMap.cs" />
     <Compile Include="Mapping\ProfileMap.cs" />
     <Compile Include="Mapping\QueryDefMap.cs" />
     <Compile Include="Mapping\TagMap.cs" />

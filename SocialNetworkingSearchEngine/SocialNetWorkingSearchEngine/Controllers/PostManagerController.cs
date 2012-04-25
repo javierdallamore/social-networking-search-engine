@@ -28,7 +28,8 @@ namespace SocialNetWorkingSearchEngine.Controllers
         public JsonResult UpdatePost(string idPost, int rating, string sentiment, List<string> tags)
         {
             var servicesManager = new ServicesManager();
-            servicesManager.UpdatePost(idPost, rating, sentiment, tags);
+            var currentUser = UserHelper.GetCurrent();
+            servicesManager.UpdatePost(idPost, rating, sentiment, tags, currentUser);
 
             return Json("ok", JsonRequestBehavior.AllowGet);
         }

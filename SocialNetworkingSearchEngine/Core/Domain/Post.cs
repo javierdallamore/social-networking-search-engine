@@ -9,11 +9,16 @@ namespace Core.Domain
         {
             Id = Guid.NewGuid();
             CreatedAt = DateTime.Now;
+            PostTags = new List<PostTag>();
             Tags = new List<Tag>();
         }
 
         public virtual Guid Id { get; set; }
+        
+        //Por compatibilidad con lo anterior
         public virtual IList<Tag> Tags { get; set; }
+        
+        public virtual IList<PostTag> PostTags { get; set; }
         public virtual Profile Profile { get; set; }
 
         public virtual string SocialNetworkName { get; set; }

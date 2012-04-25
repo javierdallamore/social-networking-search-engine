@@ -22,7 +22,11 @@ namespace DataAccess.Mapping
             
             References(x => x.CurrentOwner);
             References(x => x.QueryDef).Cascade.SaveUpdate();
+            
+            //Por compatibilidad con lo anterior
             HasManyToMany(x => x.Tags).AsBag().Cascade.All();
+            
+            HasMany(x => x.PostTags).AsBag().Cascade.All();
             References(x => x.Profile).Cascade.SaveUpdate();
         }
     }

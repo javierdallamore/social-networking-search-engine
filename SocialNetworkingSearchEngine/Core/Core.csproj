@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\PostTag.cs" />
     <Compile Include="Domain\Profile.cs" />
     <Compile Include="Domain\QueryDef.cs" />
     <Compile Include="Domain\Tag.cs" />

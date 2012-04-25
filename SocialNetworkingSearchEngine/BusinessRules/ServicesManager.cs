@@ -64,16 +64,30 @@ namespace BusinessRules
             }
         }
 
-        public Post UpdatePost(string idPost, int rating, string sentiment, List<string> tags)
+        public Post UpdatePost(string idPost, int rating, string sentiment, List<string> tags, User user)
         {
-            var post = _postRepository.GetById(new Guid(idPost));
-            if (post == null) return null;
-            
-            post.Sentiment = sentiment;
-            post.Calification = rating;
-            post.CurrentTags = string.Join(",", tags);
-            
-            return SavePost(post);
+            bool begin = NHSessionManager.Instance.BeginTransaction();
+            try
+            {
+                var post = _postRepository.GetById(new Guid(idPost));
+                if (post == null) return null;
+
+                post.Sentiment = sentiment;
+                post.Calification = rating;
+                post.CurrentTags = string.Join(",", tags);
+                SetTagToPost(post, user);
+
+                var postSaved = _postRepository.SaveOrUpdate(post);
+                if (begin)
+                    NHSessionManager.Instance.CommitTransaction();
+                return postSaved;
+            }
+            catch (Exception)
+            {
+                if (begin)
+                    NHSessionManager.Instance.RollbackTransaction();
+                return null;
+            }
         }
 
         private void SetTags(Post post)
@@ -89,6 +103,51 @@ namespace BusinessRules
                         var tag = new TagRepository().GetByName(tagName);
                         post.Tags.Add(tag ?? new Tag() { Name = tagName });
                     }
+                }
+            }
+        }
+
+        private void SetTagToPost(Post post, User user)
+        {
+            if ((string.IsNullOrEmpty(post.CurrentTags))) return;
+            var values = post.CurrentTags.Split(',');
+            //TODO Improve this
+            //Elimino tags que borrados
+            var tagsToDelete = new List<PostTag>();
+            foreach (var postTag in post.PostTags)
+            {
+                var delete = true;
+                foreach (var value in values)
+                {
+                    if (string.CompareOrdinal(postTag.Tag.Name.ToLower(), value.ToLower())==0)
+                    {
+                        delete = false;
+                    }
+                }
+                if (delete) tagsToDelete.Add(postTag);
+            }
+            foreach (var postTag in tagsToDelete)
+            {
+                post.PostTags.Remove(postTag);
+            }
+
+
+            foreach (var tagName in values)
+            {
+                //Agrego los tags nuevos
+                if (string.IsNullOrEmpty(tagName) || string.CompareOrdinal(tagName, "null") == 0) continue;
+
+                var postTagsAlreadyAssigned =
+                    post.PostTags.Where(x => String.CompareOrdinal(x.Tag.Name.ToLower(), tagName.ToLower()) == 0);
+                if (!postTagsAlreadyAssigned.Any())
+                {
+                    var tagSaved = _tagRepository.GetByName(tagName);
+                    if (tagSaved == null)
+                    {
+                        tagSaved = new Tag { Name = tagName };
+                    }
+                    var postTag = new PostTag { Post = post, Tag = tagSaved, User = user };
+                    post.PostTags.Add(postTag);
                 }
             }
         }
