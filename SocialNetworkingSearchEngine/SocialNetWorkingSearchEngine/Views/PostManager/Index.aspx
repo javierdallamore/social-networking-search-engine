@@ -8,13 +8,33 @@
         .hlt {
             background-color: yellow;
         }
+        .result_list li {
+            margin-bottom: 20px;
+            margin-top: 15px;
+        }
+        #result_list {
+            width: 1024px; 
+            margin: 0 auto;
+        }
+        
+        #result_list li select{
+            padding: 0px;
+            font-weight: bold;
+            font-size: 0.8em;
+        }
     </style>
-
-    <div style="width: 900px;">
-        <ul style="list-style-type: none">
+    
+    <div style="padding: 10px;background-color: #EEEEEE; margin-bottom: 15px">
+            <div style="text-align: right;">
+                Usuario: <%=HttpContext.Current.User.Identity.Name %>
+                <%=Html.ActionLink("(X)", "LogOff", "Account",new {Title="Cerrar sesion"}) %>
+            </div>
+    </div>
+    <div id="container">
+        <ul id="result_list" style="list-style-type: none">
             <% foreach (var post in Model.Posts)
                { %>
-            <li id="post_list_item_<%=post.Id %>" style="border-bottom: 1px solid darkgray">
+            <li id="post_list_item_<%=post.Id %>">
                 <div class="result clearfix">
                     <%--ICONS--%>
                     <div style="float: left">
@@ -60,14 +80,15 @@
                                 <option value="5" <% if (post.Calification == 5){%> selected="selected" <% } %>>Perfecto</option>
                             </select>
                         </div>
+                        <br/>
                         <div id="sentiment_<%=post.Id %>">
                             <span>Sentimiento:</span>
                             <br />
                             <%=Html.DropDownList("option_sentiment_" + post.Id,new SelectList(new List<string>{"negativo","positivo","neutro"},post.Sentiment.ToLower()))%>
                         </div>
+                        <br/>
                         <div id="save">
-                            <button id="button_save_<%=post.Id%>">
-                                Guardar</button>
+                            <input id="button_save_<%=post.Id%>" type="image" src="<%=Url.Content("../../Content/Save-icon.png") %>" style="height: 20px"/>
                         </div>
                     </div>
                     <%--POST CONTENT--%>
@@ -83,10 +104,10 @@
                         <a href="<%=post.UrlProfile%>" target="_blank">
                             <%=post.UserName%></a>
                     </div>
+                    <br/>
                     <%--TAGS CONTAINER--%>
                     <div style="width: 85%">
-                        <p>
-                            Tag:</p>
+                        <span>Tag:</span>
                         <ul id="ul_tags_<%=post.Id%>">
                         </ul>
                     </div>
@@ -132,7 +153,7 @@
             });
 
             //Atacho el save a cada item
-            $("button[id^='button_save']").each(function(i, e) {
+            $("input[id^='button_save']").each(function(i, e) {
                 $(e).click(function(event) {
                     var item_id = e.id.substr(e.id.lastIndexOf("_") + 1);
                     var item_rating = $("#stars-wrapper_" + item_id).data("stars").options.value;
