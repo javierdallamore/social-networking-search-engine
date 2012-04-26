@@ -7,9 +7,9 @@ using Core.Domain;
 
 namespace SocialNetWorkingSearchEngine.Models
 {
-    public class UserHomeModel
+    public class PostManagerModel
     {
-        public UserHomeModel()
+        public PostManagerModel()
         {
             var servicesManager = new ServicesManager();
             Tags = servicesManager.GetAllTags();
@@ -24,5 +24,8 @@ namespace SocialNetWorkingSearchEngine.Models
                 return tags;
             }
         }
+
+        public IEnumerable<Word> NegativeWords { get; set; }
+        public IEnumerable<Word> PositiveWords { get; set; }
     }
 }

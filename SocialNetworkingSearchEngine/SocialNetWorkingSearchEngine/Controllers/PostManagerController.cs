@@ -18,7 +18,10 @@ namespace SocialNetWorkingSearchEngine.Controllers
         public ActionResult Index()
         {
             var servicesManager = new ServicesManager();
-            var userHomeModel = new UserHomeModel();
+            var userHomeModel = new PostManagerModel();
+            
+            userHomeModel.NegativeWords = servicesManager.GetAllWords().Where(x=>x.Sentiment.ToLower() == "negativo");
+            userHomeModel.PositiveWords = servicesManager.GetAllWords().Where(x => x.Sentiment.ToLower() == "positivo");
 
             var userAssignedPostNotProcessed =
                 servicesManager.GetNotProcessedUserAssignedPost(UserHelper.GetCurrent()).ToList();

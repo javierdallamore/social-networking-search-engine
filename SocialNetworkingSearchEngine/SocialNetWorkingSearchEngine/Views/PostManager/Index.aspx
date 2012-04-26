@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<SocialNetWorkingSearchEngine.Models.UserHomeModel>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<SocialNetWorkingSearchEngine.Models.PostManagerModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Index
@@ -7,6 +7,12 @@
     <style>
         .hlt {
             background-color: yellow;
+        }
+        .hlt_negative {
+            background-color: red;
+        }
+        .hlt_positive {
+            background-color: greenyellow;
         }
         .result_list li {
             margin-bottom: 20px;
@@ -128,6 +134,9 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function() {
+            var negativeWords = [<%=string.Join(",", Model.NegativeWords.Select(x => "'" + x.Name + "'"))%>];
+            var positiveWords = [<%=string.Join(",", Model.PositiveWords.Select(x => "'" + x.Name + "'"))%>];
+
             //Creo las estrellitas del rating
             $("div[id^='stars-wrapper']").each(function(i, e) {
                 $(e).stars({
@@ -174,6 +183,9 @@
             });
 
             highlight_query_words();
+            
+            highlight_words(negativeWords,"hlt_negative");
+            highlight_words(positiveWords,"hlt_positive");
         });
         
         function save_complete(responseText, textStatus) {
@@ -186,6 +198,15 @@
                 _.each(query_words,function(word) {
                     var regex = new RegExp(word, "gi");
                     $("[id^='post_content']",e).html( $("[id^='post_content']",e).html().replace(regex ,"<span class='hlt'>"+word+"</span>"));
+                });
+            });
+        }
+        
+        function highlight_words(wordsArray, classStyle) {
+            $("li[id^='post_list_item']").each(function(i, e) {
+                _.each(wordsArray,function(word) {
+                    var regex = new RegExp('\\b' + word + '\\b', "gi");
+                    $("[id^='post_content']",e).html( $("[id^='post_content']",e).html().replace(regex ,"<span class='" + classStyle + "'>"+word+"</span>"));
                 });
             });
         }
