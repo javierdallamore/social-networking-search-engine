@@ -7,6 +7,8 @@ namespace SocialNetWorkingSearchEngine.Helpers
 {
     public static class Params
     {
-        public const int MAX_POST_TO_PROCESS_PER_USER = 4;
+        //public const int MAX_POST_TO_PROCESS_PER_USER = 4;
+        public static readonly int MAX_POST_TO_PROCESS_PER_USER =
+            int.Parse(System.Configuration.ConfigurationManager.AppSettings["max_post_to_process_per_user"]);
     }
 }
