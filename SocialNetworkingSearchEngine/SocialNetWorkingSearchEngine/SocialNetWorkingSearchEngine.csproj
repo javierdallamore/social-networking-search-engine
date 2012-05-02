@@ -149,6 +149,7 @@
     <Content Include="Content\sentiment_negative.png" />
     <Content Include="Content\sentiment_neutral.png" />
     <Content Include="Content\sentiment_positive.png" />
+    <Content Include="Content\tables.css" />
     <Content Include="Content\tag_remove.cur" />
     <Content Include="Content\tag_remove.png" />
     <Content Include="Content\tag_update.png" />

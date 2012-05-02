@@ -86,22 +86,6 @@ dl{margin:0;}
 table{
 	display:block;	
 }
-/*
-tr, td{
-	display:inline-block;	
-}*/
-
-/*
-	border:1px solid #ddd;
-	float:left;
-	padding:5px;
-	margin:0 10px 5px 0;
-	max-height:50px;
-	max-width:100px;
-	overflow:hidden;
-	text-align:center;
-*/
-
 
 .orange, a.orange {
 	color:#ff8c00;
