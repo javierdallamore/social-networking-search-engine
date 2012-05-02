@@ -25,6 +25,11 @@ namespace SearchEngineMock
             return socialNetworkingSearchResult;
         }
 
+        public SocialNetworkingSearchResult Search(string searchParameters, int page, string location, string language = null)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public List<string> CountriesToFilterISOCodes
         {
             get { throw new System.NotImplementedException(); }

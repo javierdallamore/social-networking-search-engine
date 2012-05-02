@@ -48,6 +48,39 @@ namespace BusinessRules
             return results;
         }
 
+        public List<Post> Search(string searchParameters, List<string> searchEnginesName, string location, string language = null)
+        {
+            var results = new List<Post>();
+
+            if (!string.IsNullOrEmpty(searchParameters))
+            {
+                // Si indica que busque post guardados, primero agrego esos posts.
+                if (searchEnginesName.Any(y => y == "SavedPosts"))
+                    results.AddRange(SearchSavedPosts(searchParameters));
+
+                foreach (var searchEngine in _searchEngines.Where(x => searchEnginesName.Any(y => y == x.Name)))
+                {
+                    try
+                    {
+                        if (searchEngine.Instance != null)
+                        {
+                            var socialNetworkingSearchResult = searchEngine.Instance.Search(searchParameters, 1,location,language);
+                            if (socialNetworkingSearchResult != null)
+                            {
+                                results.AddRange(ConvertFromSocialNetworkingItemToPosts(socialNetworkingSearchResult.SocialNetworkingItems, searchParameters));
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Log.Error(ex.Message, ex);
+                    }
+                }
+            }
+
+            return results;
+        }
+
         private IEnumerable<Post> SearchSavedPosts(string searchParameters)
         {
             var postRepository = new PostRepository();

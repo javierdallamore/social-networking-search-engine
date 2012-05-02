@@ -28,6 +28,11 @@ namespace GooglePlusSearchEngine
             return new SocialNetworkingSearchResult() { SocialNetworkingItems = list, SocialNetworkingName = Name };
         }
 
+        public SocialNetworkingSearchResult Search(string searchParameters, int page, string location, string language = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<string> CountriesToFilterISOCodes
         {
             get { throw new NotImplementedException(); }

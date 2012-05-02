@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 using SearchEnginesBase.Entities;
 using SearchEnginesBase.Utils;
 
@@ -8,6 +10,8 @@ namespace TwitterSearchEngine
 {
     public class TwitterSearchEngine : SearchEnginesBase.Interfaces.ISearchEngine
     {
+        private StringBuilder _queryParams;
+
         public string Name
         {
             get { return "Twitter"; }
@@ -18,8 +22,8 @@ namespace TwitterSearchEngine
             try
             {
                 var engineURL = GetEngineUrl();
-                var parameters = GetParameters(page, 100);
-                var jsonResults = Utils.BuildSearchQuery(engineURL, searchParameters, parameters);
+                _queryParams.Append(GetPageParameter(page, 100));
+                var jsonResults = Utils.BuildSearchQuery(engineURL, searchParameters, _queryParams.ToString());
                 var entity = Utils.DeserializarJsonTo<SearchResultsTwitter>(jsonResults);
                 var list = SocialNetworkingItemList(entity);
 
@@ -27,9 +31,17 @@ namespace TwitterSearchEngine
             }
             catch (Exception ex)
             {
-                
                 throw;
             }
+        }
+
+        public SocialNetworkingSearchResult Search(string searchParameters, int page, string location, string language = null)
+        {
+            _queryParams = new StringBuilder();
+            _queryParams.Append(GetLocationParameter(location));
+            if (!string.IsNullOrEmpty(language)) _queryParams.Append(GetLangParameter(language));
+
+            return Search(searchParameters, page);
         }
 
         public List<string> CountriesToFilterISOCodes
@@ -74,12 +86,48 @@ namespace TwitterSearchEngine
             return "http://twitter.com/#!/" + fromUser;
         }
 
-        private string GetParameters(int page, int rpp)
+        private string GetPageParameter(int page, int rpp)
         {
             var _page = page == 1 ? string.Empty : "&page=" + page;
             var _rpp = "&rpp=" + rpp;
 
             return _page + _rpp;
+        }
+
+        private string GetLangParameter(string lang)
+        {
+            if (string.IsNullOrWhiteSpace(lang) || lang.Length > 2)
+            {
+                throw new ArgumentException("lang no es un ISO 639-1 valido");
+            }
+            return "&lang=" + lang;
+        }
+
+        private string GetLocationParameter(string location)
+        {
+            if (location == null || location.Length != 2)
+            {
+                throw new ArgumentException("lang no es un ISO 3166-1 valido");
+            }
+            location = GetGeoLocationByISOCountryName(location);
+            if (!string.IsNullOrEmpty(location))
+                return "&geocode=" + location;
+
+            return string.Empty;
+        }
+
+        private string GetGeoLocationByISOCountryName(string isoCountryName)
+        {
+            if (isoCountryName == null || isoCountryName.Length != 2)
+            {
+                throw new ArgumentException("isoCountryName no es un ISO 3166-1 valido");
+            }
+            switch (isoCountryName)
+            {
+                case "AR":
+                    return "-35,-64,2000km";
+            }
+            return string.Empty;
         }
     }
 }

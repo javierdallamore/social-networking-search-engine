@@ -32,6 +32,11 @@ namespace FacebookSearchEngine
             return null;
         }
 
+        public SocialNetworkingSearchResult Search(string searchParameters, int page, string location, string language = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<string> CountriesToFilterISOCodes
         {
             get { throw new NotImplementedException(); }
