@@ -16,7 +16,7 @@ namespace Core.Domain
 
         public virtual List<string> SearchEnginesNamesList
         {
-            get { return SearchEnginesNames.Split(';').ToList(); }
+            get { return SearchEnginesNames == null ? new List<string>() : SearchEnginesNames.Split(';').ToList(); }
         }
     }
 }

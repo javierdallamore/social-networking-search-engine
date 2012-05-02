@@ -6,7 +6,7 @@ using Core.Domain;
 
 namespace Core.RepositoryInterfaces
 {
-    public interface IQueryDefRepository:IRepositoryBase<QueryDef, Guid>
+    public interface IQueryDefRepository:IRepositoryBase<QueryDef, int>
     {
         IEnumerable<QueryDef> GetActiveQuerys();
         IEnumerable<QueryDef> GetActiveQuerysWithMinQuequeLenghtViolated();

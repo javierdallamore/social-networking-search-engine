@@ -28,7 +28,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
         public ViewResult Index(int page = 1, string like = "")
         {
             IList<Word> list = _wordRepository.GetAll().Where(x => x.Name.StartsWith(like)).ToList();
-            var model = new CrudViewModel<Word>(list, page, 2);
+            var model = new CrudViewModel<Word>(list, page, 20);
             model.Filter = like;
             return View(model);
         }

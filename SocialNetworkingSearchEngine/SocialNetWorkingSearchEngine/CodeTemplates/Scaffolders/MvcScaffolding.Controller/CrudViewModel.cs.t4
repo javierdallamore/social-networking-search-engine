@@ -1,0 +1,20 @@
+﻿<#@ template language="C#" HostSpecific="True"  inherits="DynamicTransform" #>
+<#@ Output Extension="cs" #>
+using System.Collections.Generic;
+using Webdiyer.WebControls.Mvc;
+
+namespace CrudScaffolder.Models
+{
+    public class CrudViewModel<T>:PagedList<T>
+    {
+        public CrudViewModel(IList<T> items, int pageIndex, int pageSize) : base(items, pageIndex, pageSize)
+        {
+        }
+
+        public CrudViewModel(IEnumerable<T> items, int pageIndex, int pageSize, int totalItemCount) : base(items, pageIndex, pageSize, totalItemCount)
+        {
+        }
+
+        public string Filter { get; set; }
+    }
+}

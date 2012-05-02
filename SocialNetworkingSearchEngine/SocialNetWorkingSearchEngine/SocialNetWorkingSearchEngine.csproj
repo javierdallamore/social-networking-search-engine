@@ -112,6 +112,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostManagerController.cs" />
+    <Compile Include="Controllers\QueryDefsController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\WordsController.cs" />
@@ -123,8 +124,6 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\SearchModels.cs" />
     <Compile Include="Models\SearchResultModel.cs" />
-    <Compile Include="Models\SocialNetWorkingSearchEngineContext.cs" />
-    <Compile Include="Models\TagRepository.cs" />
     <Compile Include="Models\PostManagerModel.cs" />
     <Compile Include="Models\CrudViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -186,6 +185,12 @@
     <Content Include="Views\Account\LogOn.aspx" />
     <Content Include="Views\Account\Register.aspx" />
     <Content Include="Views\Home\About.aspx" />
+    <Content Include="Views\QueryDefs\Create.aspx" />
+    <Content Include="Views\QueryDefs\CreateOrEdit.ascx" />
+    <Content Include="Views\QueryDefs\Delete.aspx" />
+    <Content Include="Views\QueryDefs\Details.aspx" />
+    <Content Include="Views\QueryDefs\Edit.aspx" />
+    <Content Include="Views\QueryDefs\Index.aspx" />
     <Content Include="Views\Shared\Error.aspx" />
     <Content Include="Views\Shared\LogOnUserControl.ascx" />
     <Content Include="Views\Shared\Site.Master" />

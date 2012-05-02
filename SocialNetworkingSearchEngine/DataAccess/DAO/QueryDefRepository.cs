@@ -6,7 +6,7 @@ using NHibernate.Criterion;
 
 namespace DataAccess.DAO
 {
-    public class QueryDefRepository : RepositoryBase<QueryDef, Guid>, IQueryDefRepository
+    public class QueryDefRepository : RepositoryBase<QueryDef, int>, IQueryDefRepository
     {
         #region Implementation of IQueryDefRepository
 
