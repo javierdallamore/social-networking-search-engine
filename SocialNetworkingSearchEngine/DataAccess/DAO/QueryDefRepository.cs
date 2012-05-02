@@ -17,17 +17,16 @@ namespace DataAccess.DAO
 
         public IEnumerable<QueryDef> GetActiveQuerysWithMinQuequeLenghtViolated()
         {
-            var query = "SELECT q.[Id] " +
-                               ",q.[Query] " +
-                               ",q.[Enabled] " +
-                               ",q.[DaysOldestPost] " +
-                               ",q.[MinQueueLength] " +
-                               ",q.[SearchEnginesNames] " +
-                           "FROM QueryDef q, Post p " +
-                           "WHERE q.Enabled = 'true' " +
-                               "and p.QueryDef_id = q.Id " +
-                           "GROUP BY q.Id, q.Query, q.Enabled, q.DaysOldestPost, q.MinQueueLength, q.SearchEnginesNames " +
-                           "HAVING COUNT (p.Id) < q.MinQueueLength";
+            const string query = "SELECT q.[Id] " +
+                                 ",q.[Query] " +
+                                 ",q.[Enabled] " +
+                                 ",q.[DaysOldestPost] " +
+                                 ",q.[MinQueueLength] " +
+                                 ",q.[SearchEnginesNames] " +
+                                 "FROM QueryDef q LEFT OUTER JOIN Post p ON p.QueryDef_id = q.Id " +
+                                 "WHERE q.Enabled = 'True' " +
+                                 "GROUP BY q.Id, q.Query, q.Enabled, q.DaysOldestPost, q.MinQueueLength, q.SearchEnginesNames " +
+                                 "HAVING COUNT (p.Id) < q.MinQueueLength";
 
             var resutl = Session.CreateSQLQuery(query).AddEntity(typeof(QueryDef)).List<QueryDef>();
             return resutl;
