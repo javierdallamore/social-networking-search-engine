@@ -18,7 +18,7 @@ namespace QueryExcecutionEngine
         private SearchEngineManager _searchEngineManager;
         private SentimentValuator _sentimentValuator;
 
-        private const int TIME_INTERVAL_TO_CHECK_FOR_NEW_QUERYS = 5*60*1000;
+        private const int TIME_INTERVAL_TO_CHECK_FOR_NEW_QUERYS = 10*1000;
 
         #region Implementation of IExcecutionEngineService
 
@@ -79,7 +79,7 @@ namespace QueryExcecutionEngine
             {
                 _logger.Info("\n\n====== START SEARCH FOR (" + searchEngineName + ") " + DateTime.Now + " ======\n\n");
 
-                var postsResult = _searchEngineManager.Search(query.Query, new List<string> { searchEngineName });
+                var postsResult = _searchEngineManager.Search(query.Query, new List<string> { searchEngineName }, ParamAccess.ISOLocationCountry);
                 foreach (var post in postsResult)
                 {
                     if (_serviceManager.ExistPost(post.UrlPost)) continue;
