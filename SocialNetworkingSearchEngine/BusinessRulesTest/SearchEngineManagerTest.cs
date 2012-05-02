@@ -133,6 +133,20 @@ namespace BusinessRulesTest
         }
 
         [TestMethod]
+        public void CreateUser()
+        {
+            NHSessionManager.Instance.BeginTransaction();
+            var userRepository = new UserRepository();
+            userRepository.SaveOrUpdate(new User
+                                            {
+                                                IsAdmin = false, 
+                                                Login = "diego", 
+                                                Name = "diego",
+                                                HashedPass = "8354336224c63279aadd00a9621757ef4fdf31fc"
+                                            });
+        }
+
+        [TestMethod]
         public void SendMailHTMLTest()
         {
             //var to = "cuchillozapallero@gmail.com, mellibo@gmail.com, diegohi@gmail.com, mundojava.blogspot.com@gmail.com, javierdallamore@gmail.com";
