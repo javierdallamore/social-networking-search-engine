@@ -107,7 +107,7 @@ namespace TwitterSearchEngine
         {
             if (location == null || location.Length != 2)
             {
-                throw new ArgumentException("lang no es un ISO 3166-1 valido");
+                throw new ArgumentException("location no es un ISO 3166-1 valido");
             }
             location = GetGeoLocationByISOCountryName(location);
             if (!string.IsNullOrEmpty(location))
