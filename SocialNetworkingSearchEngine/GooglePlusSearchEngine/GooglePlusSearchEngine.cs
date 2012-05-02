@@ -12,6 +12,8 @@ namespace GooglePlusSearchEngine
         const string _lenguaje = "es-419";
         const string _apiKey = "AIzaSyAoWGAxAZ8LkAX8B5FG0wVBGBBUg6GXgVo";
 
+        private StringBuilder _queryParams;
+
         public string Name
         {
             get { return "Google +"; }
@@ -20,8 +22,8 @@ namespace GooglePlusSearchEngine
         public SocialNetworkingSearchResult Search(string searchParameters, int page)
         {
             var engineURL = GetEngineUrl();
-            var parameters = GetParameters(_lenguaje, 0, string.Empty, string.Empty, 0, _apiKey);
-            var jsonResults = Utils.BuildSearchQuery(engineURL, searchParameters, parameters);
+            _queryParams.Append(GetParameters(20, string.Empty, string.Empty, 0, _apiKey));
+            var jsonResults = Utils.BuildSearchQuery(engineURL, searchParameters, _queryParams.ToString());
             var entity = Utils.DeserializarJsonTo<SearchResultsGooglePlus>(jsonResults);            
             var list = SocialNetworkingItemList(entity);
 
@@ -30,7 +32,10 @@ namespace GooglePlusSearchEngine
 
         public SocialNetworkingSearchResult Search(string searchParameters, int page, string location, string language = null)
         {
-            throw new NotImplementedException();
+            _queryParams = new StringBuilder();
+            _queryParams.Append(GetLocationParam(location));
+            _queryParams.Append(GetLenguaje(language));
+            return Search(searchParameters, page);
         }
 
         public List<string> CountriesToFilterISOCodes
@@ -47,23 +52,42 @@ namespace GooglePlusSearchEngine
         /// <summary>
         /// Metodo que arma los parametros para la consulta a la API REST de Google Plus.
         /// </summary>
-        /// <param name="lenguaje">Especifique el codigo del idioma de preferencia para la búsqueda. Para Español, Latino America el codigo es [es-419].</param>
         /// <param name="maximosResultados">Cantidad maxima de resultados por Response, sirve para paginar (valor entre 1 y 20).</param>
         /// <param name="ordenarPor">Especifica como ordenar los resultados de la busqueda. Los valores pueden ser "best" o "recent".</param>
         /// <param name="pageToken">Para obtener la siguiente pagina de resultados. El valor es "nextPageToken".</param>
         /// <param name="pp">No se que es, pero siempre es igual a 1</param>
         /// <param name="apiKey">Clave de la aplicacion para poder usar Google Plus</param>
         /// <returns></returns>
-        private string GetParameters(string lenguaje, int maximosResultados, string ordenarPor, string pageToken, int pp, string apiKey)
+        private string GetParameters(int maximosResultados, string ordenarPor, string pageToken, int pp, string apiKey)
         {
-            var _language = String.IsNullOrEmpty(lenguaje) ? String.Empty : "&language=" + lenguaje;
             var _maxResults = maximosResultados == 0 ? String.Empty : "&maxResults=" + maximosResultados;
             var _orderBy = String.IsNullOrEmpty(ordenarPor) ? String.Empty : "&orderBy=" + ordenarPor;
             var _pageToken = String.IsNullOrEmpty(pageToken) ? String.Empty : "&pageToken=" + pageToken;
-            var _pp = pp == 0 ? "1" : "&pp=" + pp;
+            var _pp = pp == 0 ? "&pp=1" : "&pp=" + pp;
             var _key = "&key=" + apiKey;
 
-            return _language + _maxResults + _orderBy + _pageToken + _pp + _key;
+            return  _maxResults + _orderBy + _pageToken + _pp + _key;
+        }
+
+        private string GetLenguaje(string lenguaje)
+        {
+            if (string.IsNullOrWhiteSpace(lenguaje) || lenguaje.Length > 2)
+            {
+                throw new ArgumentException("lang no es un ISO 639-1 valido");
+            }
+
+            return "&language=" + lenguaje;
+        }
+
+        /// <summary>
+        /// Arma el parametro para buscar por locacion en la API REST.
+        /// </summary>
+        /// <param name="location">location en ISO 3166-1 country codes</param>
+        /// <returns></returns>
+        private string GetLocationParam(string location)
+        {
+            //Retorna Empty porque hasta el momento google plus no soporta search por location
+            return string.Empty;
         }
 
         //Este metodo itera los resultados y crea las entidades de dominio
