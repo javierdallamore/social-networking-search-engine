@@ -13,5 +13,7 @@ namespace GooglePlusSearchEngine
 
         [DataMember(Name = "items")]
         public List<ItemSearchResultGooglePlus> Results { get; set; }
+        [DataMember(Name = "nextPageToken")]
+        public string NextPageToken { set; get; }
     }
 }
