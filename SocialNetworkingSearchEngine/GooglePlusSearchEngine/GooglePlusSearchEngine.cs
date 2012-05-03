@@ -9,8 +9,8 @@ namespace GooglePlusSearchEngine
 {
     public class GooglePlusSearchEngine : SearchEnginesBase.Interfaces.ISearchEngine
     {
-        const string _lenguaje = "es-419";
         const string _apiKey = "AIzaSyAoWGAxAZ8LkAX8B5FG0wVBGBBUg6GXgVo";
+        const int _maxResultPerPage = 100;
 
         private StringBuilder _queryParams;
 
@@ -21,14 +21,27 @@ namespace GooglePlusSearchEngine
 
         public SocialNetworkingSearchResult Search(string searchParameters, int page)
         {
-            var engineURL = GetEngineUrl();
             if (_queryParams == null) _queryParams = new StringBuilder();
             _queryParams.Append(GetParameters(20, string.Empty, string.Empty, 0, _apiKey));
-            var jsonResults = Utils.BuildSearchQuery(engineURL, searchParameters, _queryParams.ToString());
-            var entity = Utils.DeserializarJsonTo<SearchResultsGooglePlus>(jsonResults);            
-            var list = SocialNetworkingItemList(entity);
+
+            var list = GetResultItems(searchParameters);
             _queryParams.Clear();
             return new SocialNetworkingSearchResult() { SocialNetworkingItems = list, SocialNetworkingName = Name };
+        }
+
+        public List<SocialNetworkingItem> GetResultItems(string searchParameters)
+        {
+            var engineURL = GetEngineUrl();
+            var list = new List<SocialNetworkingItem>();
+            var nextResultTokenParam = string.Empty;
+            for (int i = 0; i < _maxResultPerPage/20; i++)
+            {
+                var jsonResults = Utils.BuildSearchQuery(engineURL, searchParameters, _queryParams + nextResultTokenParam);
+                var entity = Utils.DeserializarJsonTo<SearchResultsGooglePlus>(jsonResults);
+                list.AddRange(SocialNetworkingItemList(entity));
+                nextResultTokenParam = "&pageToken=" + entity.NextPageToken;
+            }
+            return list;
         }
 
         public SocialNetworkingSearchResult Search(string searchParameters, int page, string location, string language = null)
