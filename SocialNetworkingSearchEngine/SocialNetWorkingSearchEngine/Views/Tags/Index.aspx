@@ -1,37 +1,33 @@
-<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<IEnumerable<Core.Domain.Tag>>" %>
-<!DOCTYPE html>
+<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<Core.Domain.Tag>>" %>
 
-<html>
-<head runat="server">
-    <title>Index</title>
-</head>
-<body>
-    <p>
-        <%: Html.ActionLink("Agregar", "Create") %>
-    </p>
-    <table>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <div style="text-align: center">
+        <p>
+            <%: Html.ActionLink("Agregar", "Create") %>
+        </p>
+    </div>
+    <table id="hor-minimalist-b" style="width: 350px; margin: 0 auto">
         <tr>
-            <th></th>
+            <th>
+            </th>
             <th>
                 Tag
             </th>
         </tr>
-    
-    <% foreach (var item in Model) { %>
+        <% foreach (var item in Model)
+           { %>
         <tr>
             <td>
-                <%: Html.ActionLink("Editar", "Edit", new { id=item.Id }) %> |
-                <%: Html.ActionLink("Detalles", "Details", new { id=item.Id }) %> |
+                <%: Html.ActionLink("Editar", "Edit", new { id=item.Id }) %>
+                |
+                <%: Html.ActionLink("Detalles", "Details", new { id=item.Id }) %>
+                |
                 <%: Html.ActionLink("Eliminar", "Delete", new { id=item.Id }) %>
             </td>
             <td>
-    			<%: item.Name %>
+                <%: item.Name %>
             </td>
-        </tr>  
-    <% } %>
-    
+        </tr>
+        <% } %>
     </table>
-</body>
-</html>
-
-
+</asp:Content>

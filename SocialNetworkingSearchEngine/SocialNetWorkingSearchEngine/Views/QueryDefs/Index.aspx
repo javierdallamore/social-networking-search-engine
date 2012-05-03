@@ -1,36 +1,20 @@
-<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<SocialNetWorkingSearchEngine.Models.CrudViewModel<Core.Domain.QueryDef>>" %>
+<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<SocialNetWorkingSearchEngine.Models.CrudViewModel<Core.Domain.QueryDef>>" %>
 <%@ Import Namespace="Webdiyer.WebControls.Mvc" %>
-<!DOCTYPE html>
 
-<html>
-<head runat="server">
-    <title>Index</title>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#filtrar").click(function() {
-                filtrar();
-            });
-        });
-
-        function filtrar() {
-            var like = $("#Filter").val();
-            location.href = "?like=" + like;
-            return;
-        }
-    </script>
-</head>
-<body>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <div style="text-align: center">
         <p>
             Buscar: <%: Html.EditorFor(model => model.Filter,new{Id = "txtFilter"}) %> <button id="filtrar">Filtrar</button>
         </p>
     <p>
         <%: Html.ActionLink("Agregar", "Create") %>
     </p>
-    <table>
+    </div>
+    <table id="hor-minimalist-b" style="width: 1024px; margin: 0 auto">
         <tr>
             <th></th>
             <th>
-                Query
+                Texto de busqueda
             </th>
             <th>
                 MinQueueLength
@@ -39,16 +23,13 @@
                 DaysOldestPost
             </th>
             <th>
-                Enabled
+                Habilitada
             </th>
             <th>
-                SearchEnginesNames
+                Redes sociales a buscar
             </th>
             <th>
                 Posts
-            </th>
-            <th>
-                SearchEnginesNamesList
             </th>
         </tr>
     
@@ -72,20 +53,33 @@
     			<%: item.Enabled %>
             </td>
             <td>
-    			<%: item.SearchEnginesNames %>
+                <% foreach (var searchEngineName in item.SearchEnginesNamesList)
+                   {%>
+                       <%:searchEngineName%></br>
+                   <%}%>
             </td>
             <td>
-    			<%: Html.DisplayTextFor(_ => item.Posts).ToString() %>
-            </td>
-            <td>
-    			<%: (item.SearchEnginesNamesList == null ? "None" : item.SearchEnginesNamesList.Count.ToString()) %>
+    			<%: item.Posts.Count() %>
             </td>
         </tr>  
     <% } %>
     
     </table>
     <%: Html.Pager(Model,new PagerOptions { PageIndexParameterName = "page",FirstPageText = "primera", LastPageText = "última", PrevPageText = "anterior", NextPageText = "siguiente"})  %>
-</body>
-</html>
+    </table>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#filtrar").click(function () {
+                filtrar();
+            });
+        });
+
+        function filtrar() {
+            var like = $("#Filter").val();
+            location.href = "?like=" + like;
+            return;
+        }
+    </script>
+</asp:Content>
 
 
