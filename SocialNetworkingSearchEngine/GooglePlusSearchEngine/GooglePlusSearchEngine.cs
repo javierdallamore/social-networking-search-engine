@@ -22,11 +22,12 @@ namespace GooglePlusSearchEngine
         public SocialNetworkingSearchResult Search(string searchParameters, int page)
         {
             var engineURL = GetEngineUrl();
+            if (_queryParams == null) _queryParams = new StringBuilder();
             _queryParams.Append(GetParameters(20, string.Empty, string.Empty, 0, _apiKey));
             var jsonResults = Utils.BuildSearchQuery(engineURL, searchParameters, _queryParams.ToString());
             var entity = Utils.DeserializarJsonTo<SearchResultsGooglePlus>(jsonResults);            
             var list = SocialNetworkingItemList(entity);
-
+            _queryParams.Clear();
             return new SocialNetworkingSearchResult() { SocialNetworkingItems = list, SocialNetworkingName = Name };
         }
 

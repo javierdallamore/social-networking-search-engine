@@ -22,10 +22,12 @@ namespace TwitterSearchEngine
             try
             {
                 var engineURL = GetEngineUrl();
+                if (_queryParams == null) _queryParams = new StringBuilder();
                 _queryParams.Append(GetPageParameter(page, 100));
                 var jsonResults = Utils.BuildSearchQuery(engineURL, searchParameters, _queryParams.ToString());
                 var entity = Utils.DeserializarJsonTo<SearchResultsTwitter>(jsonResults);
                 var list = SocialNetworkingItemList(entity);
+                _queryParams.Clear();
 
                 return new SocialNetworkingSearchResult() { SocialNetworkingItems = list, SocialNetworkingName = Name };
             }
@@ -37,7 +39,7 @@ namespace TwitterSearchEngine
 
         public SocialNetworkingSearchResult Search(string searchParameters, int page, string location, string language = null)
         {
-            _queryParams = new StringBuilder();
+            if (_queryParams == null) _queryParams = new StringBuilder();
             _queryParams.Append(GetLocationParameter(location));
             if (!string.IsNullOrEmpty(language)) _queryParams.Append(GetLangParameter(language));
 
