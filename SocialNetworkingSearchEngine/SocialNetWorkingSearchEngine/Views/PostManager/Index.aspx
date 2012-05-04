@@ -178,10 +178,10 @@
                     var item_sentiment = $("#sentiment_" + item_id + " option:selected").val();
 
                     $("#saved_icon_" + item_id).css("display","none");
-                    $("#button_save_" + item_id).attr("src","/Content/loading36.gif");
+                    $("#button_save_" + item_id).attr("src","<%:Url.Content("~/Content/loading36.gif") %>");
 
                     $.ajax({
-                        url: '/PostManager/UpdatePost',
+                        url: 'UpdatePost',
                         type: 'POST',
                         dataType: 'json',
                         traditional: 'true',
@@ -200,7 +200,7 @@
         });
         
         function save_complete(responseText, item_id) {
-            $("#button_save_" + item_id).attr("src","/Content/Save-icon.png");
+            $("#button_save_" + item_id).attr("src","<%:Url.Content("~/Content/Save-icon.png") %>");
             $("#saved_icon_" + item_id).css("display","block");
         }
             
