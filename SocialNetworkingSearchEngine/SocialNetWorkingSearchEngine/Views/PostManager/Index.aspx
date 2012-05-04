@@ -48,29 +48,29 @@
                         switch (post.Sentiment.ToLower()) 
                         {
                             case "positivo":%>
-                                <%=Url.Content("../../Content/sentiment_positive.png")%>
+                                <%=Url.Content("~/Content/sentiment_positive.png")%>
                                 <%break;
                             case "neutro":%>
-                                <%=Url.Content("../../Content/sentiment_neutral.png")%>
+                                <%=Url.Content("~/Content/sentiment_neutral.png")%>
                                 <%break;
                             case "negativo":%>
-                                <%=Url.Content("../../Content/sentiment_negative.png")%>
+                                <%=Url.Content("~/Content/sentiment_negative.png")%>
                             <%break;
                             }%>" id="imgIconSentiment" class="icon sentiment" />
                         <img src="<% 
                         switch (post.SocialNetworkName.ToLower()) 
                         {
                             case "facebook":%>
-                                <%=Url.Content("../../Content/facebook_icon.ico")%>
+                                <%=Url.Content("~/Content/facebook_icon.ico")%>
                                 <%break;
                             case "twitter":%>
-                                <%=Url.Content("../../Content/twitter_icon.ico")%>
+                                <%=Url.Content("~/Content/twitter_icon.ico")%>
                                 <%break;
-                            case "googleplus":%>
-                                <%=Url.Content("../../Content/googlePlus.ico")%>
+                            case "Google +":%>
+                                <%=Url.Content("~/Content/Google-Plus-48.png")%>
                                 <%break;
                             default:%>
-                                <%=Url.Content("../../Content/search_item_icon.gif")%>
+                                <%=Url.Content("~/Content/search_item_icon.gif")%>
                                 <%break;
                             }%>" id="img1" class="icon" />
                     </div>
@@ -94,7 +94,7 @@
                         </div>
                         <br/>
                         <div id="save">
-                            <input id="button_save_<%=post.Id%>" type="image" src="<%=Url.Content("../../Content/Save-icon.png") %>" style="height: 20px"/>
+                            <input id="button_save_<%=post.Id%>" type="image" src="<%=Url.Content("~/Content/Save-icon.png") %>" style="height: 20px"/>
                         </div>
                     </div>
                     <%--POST CONTENT--%>
@@ -196,8 +196,8 @@
             $("li[id^='post_list_item']").each(function(i, e) {
                 var query_words = $("[id^='query_words']", e).text().trim().split(",");
                 _.each(query_words,function(word) {
-                    var regex = new RegExp(word, "gi");
-                    $("[id^='post_content']",e).html( $("[id^='post_content']",e).html().replace(regex ,"<span class='hlt'>"+word+"</span>"));
+                    var regex = new RegExp('\\b' + word + '\\b', "gi");
+                    $("[id^='post_content'] a",e).html( $("[id^='post_content'] a",e).html().replace(regex ,"<span class='hlt'>"+word+"</span>"));
                 });
             });
         }
@@ -206,7 +206,7 @@
             $("li[id^='post_list_item']").each(function(i, e) {
                 _.each(wordsArray,function(word) {
                     var regex = new RegExp('\\b' + word + '\\b', "gi");
-                    $("[id^='post_content']",e).html( $("[id^='post_content']",e).html().replace(regex ,"<span class='" + classStyle + "'>"+word+"</span>"));
+                    $("[id^='post_content'] a",e).html( $("[id^='post_content'] a",e).html().replace(regex ,"<span class='" + classStyle + "'>"+word+"</span>"));
                 });
             });
         }
