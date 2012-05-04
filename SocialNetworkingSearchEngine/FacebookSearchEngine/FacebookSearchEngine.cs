@@ -34,7 +34,7 @@ namespace FacebookSearchEngine
 
         public SocialNetworkingSearchResult Search(string searchParameters, int page, string location, string language = null)
         {
-            throw new NotImplementedException();
+            return Search(searchParameters, page);
         }
 
         public List<string> CountriesToFilterISOCodes
