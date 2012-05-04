@@ -66,7 +66,7 @@
                             case "twitter":%>
                                 <%=Url.Content("~/Content/twitter_icon.ico")%>
                                 <%break;
-                            case "Google +":%>
+                            case "google +":%>
                                 <%=Url.Content("~/Content/Google-Plus-48.png")%>
                                 <%break;
                             default:%>
