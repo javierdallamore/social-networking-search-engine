@@ -131,6 +131,9 @@
             </li>
             <% } %>
         </ul>
+        <div style="text-align: right">
+            <%:Html.ActionLink("Mas posts >>","Index") %>
+        </div>
     </div>
     <script type="text/javascript">
         $(document).ready(function() {
