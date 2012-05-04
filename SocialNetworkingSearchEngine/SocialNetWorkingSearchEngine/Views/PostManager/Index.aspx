@@ -93,8 +93,13 @@
                             <%=Html.DropDownList("option_sentiment_" + post.Id,new SelectList(new List<string>{"negativo","positivo","neutro"},post.Sentiment.ToLower()))%>
                         </div>
                         <br/>
-                        <div id="save">
-                            <input id="button_save_<%=post.Id%>" type="image" src="<%=Url.Content("~/Content/Save-icon.png") %>" style="height: 20px"/>
+                        <div>
+                            <div style="float: left; margin-left: 50px">
+                                <input id="button_save_<%=post.Id%>" type="image" src="<%=Url.Content("~/Content/Save-icon.png") %>" style="height: 18px"/>
+                            </div>
+                            <div style="float: right">
+                                <img id="saved_icon_<%=post.Id%>" src="<%:Url.Content("~/Content/ok_48.png") %>" style="display: none"/>
+                            </div>
                         </div>
                     </div>
                     <%--POST CONTENT--%>
@@ -172,6 +177,9 @@
                     var item_tags = $("#ul_tags_" + item_id).tagHandler("getTags");
                     var item_sentiment = $("#sentiment_" + item_id + " option:selected").val();
 
+                    $("#saved_icon_" + item_id).css("display","none");
+                    $("#button_save_" + item_id).attr("src","/Content/loading36.gif");
+
                     $.ajax({
                         url: '/PostManager/UpdatePost',
                         type: 'POST',
@@ -179,7 +187,7 @@
                         traditional: 'true',
                         data: { idPost: item_id, rating: item_rating, sentiment: item_sentiment, tags: item_tags },
                         success: function (data) {
-                            save_complete(data);
+                            save_complete(data, item_id);
                         }
                     });
                 });
@@ -191,8 +199,9 @@
             highlight_words(positiveWords,"hlt_positive");
         });
         
-        function save_complete(responseText, textStatus) {
-                alert(responseText);
+        function save_complete(responseText, item_id) {
+            $("#button_save_" + item_id).attr("src","/Content/Save-icon.png");
+            $("#saved_icon_" + item_id).css("display","block");
         }
             
         function highlight_query_words() {

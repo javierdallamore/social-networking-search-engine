@@ -143,6 +143,7 @@
     <Content Include="Content\jquery.ui.stars.gif" />
     <Content Include="Content\loader.gif" />
     <Content Include="Content\loading36.gif" />
+    <Content Include="Content\ok_48.png" />
     <Content Include="Content\Save-icon.png" />
     <Content Include="Content\search.css" />
     <Content Include="Content\search_item_icon.gif" />
