@@ -7,11 +7,11 @@
 <asp:Content ID="loginContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Log On</h2>
     <p>
-        Please enter your username and password. <%: Html.ActionLink("Register", "Register") %> if you don't have an account.
+        Ingrese su nombre de usuario y clave. <%: Html.ActionLink("Register", "Create", "Users") %> si aún no tiene cuenta.
     </p>
 
     <% using (Html.BeginForm()) { %>
-        <%: Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.") %>
+        <%: Html.ValidationSummary(true, "Datos incorrectos. Corriga los errores e intente nuevamente") %>
         <div>
             <fieldset>
                 <legend>Account Information</legend>
@@ -38,7 +38,7 @@
                 </div>
                 
                 <p>
-                    <input type="submit" value="Log On" />
+                    <input type="submit" value="Ingresar" />
                 </p>
             </fieldset>
         </div>

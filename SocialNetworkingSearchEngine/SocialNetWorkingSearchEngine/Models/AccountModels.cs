@@ -17,33 +17,33 @@ namespace SocialNetWorkingSearchEngine.Models
     {
         [Required]
         [DataType(DataType.Password)]
-        [DisplayName("Current password")]
+        [DisplayName("Clave actual")]
         public string OldPassword { get; set; }
 
         [Required]
         [ValidatePasswordLength]
         [DataType(DataType.Password)]
-        [DisplayName("New password")]
+        [DisplayName("Nueva clave")]
         public string NewPassword { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [DisplayName("Confirm new password")]
+        [DisplayName("Confirme nueva clave")]
         public string ConfirmPassword { get; set; }
     }
 
     public class LogOnModel
     {
         [Required]
-        [DisplayName("User name")]
+        [DisplayName("Nombre de Usuario")]
         public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [DisplayName("Password")]
+        [DisplayName("Clave")]
         public string Password { get; set; }
 
-        [DisplayName("Remember me?")]
+        [DisplayName("Recordarme?")]
         public bool RememberMe { get; set; }
     }
 
@@ -51,23 +51,23 @@ namespace SocialNetWorkingSearchEngine.Models
     public class RegisterModel
     {
         [Required]
-        [DisplayName("User name")]
+        [DisplayName("Nombre de usuario")]
         public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.EmailAddress)]
-        [DisplayName("Email address")]
+        [DisplayName("Email")]
         public string Email { get; set; }
 
         [Required]
         [ValidatePasswordLength]
         [DataType(DataType.Password)]
-        [DisplayName("Password")]
+        [DisplayName("Clave")]
         public string Password { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [DisplayName("Confirm password")]
+        [DisplayName("Confirmar clave")]
         public string ConfirmPassword { get; set; }
     }
     #endregion
