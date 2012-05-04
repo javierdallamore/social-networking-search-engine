@@ -136,6 +136,7 @@
     <Content Include="Content\facebook_icon.ico" />
     <Content Include="Content\favicon.ico" />
     <Content Include="Content\global.css" />
+    <Content Include="Content\Google-Plus-48.png" />
     <Content Include="Content\jquery-ui-1.8.16.custom.css" />
     <Content Include="Content\jquery.taghandler.css" />
     <Content Include="Content\jquery.ui.stars.css" />
