@@ -1,17 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Core.Domain;
 using Core.RepositoryInterfaces;
 using DataAccess.DAO;
 
 namespace SocialNetWorkingSearchEngine.Controllers
-{   
+{
+    [Authorize]
     public class TagsController : Controller
     {
 		private readonly ITagRepository tagRepository;
+        public User Usuario
+        {
+            get { return (User)Session["Usuario"]; }
+            set { Session["Usuario"] = value; }
+        }
 
         public TagsController()
         {
@@ -28,7 +30,12 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
         public ViewResult Index()
         {
-            return View(tagRepository.GetAll());
+            if (Usuario != null && Usuario.IsAdmin)
+            {
+                return View(tagRepository.GetAll()); 
+            }
+
+            return View("LogOnUserControl");
         }
 
         //
@@ -36,7 +43,12 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
         public ViewResult Details(System.Guid id)
         {
-            return View(tagRepository.GetById(id));
+            if (Usuario != null && Usuario.IsAdmin)
+            {
+                return View(tagRepository.GetById(id)); 
+            }
+
+            return View("LogOnUserControl");
         }
 
         //
@@ -44,7 +56,12 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            if (Usuario != null && Usuario.IsAdmin)
+            {
+                return View();                
+            }
+
+            return RedirectToAction("LogOn", "Account");
         } 
 
         //
@@ -53,12 +70,20 @@ namespace SocialNetWorkingSearchEngine.Controllers
         [HttpPost]
         public ActionResult Create(Tag tag)
         {
-            if (ModelState.IsValid) {
-                tagRepository.Save(tag);
-                return RedirectToAction("Index");
-            } else {
-				return View();
-			}
+            if (Usuario != null && Usuario.IsAdmin)
+            {
+                if (ModelState.IsValid)
+                {
+                    tagRepository.Save(tag);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View();
+                }
+            }
+
+            return RedirectToAction("LogOn", "Account");
         }
         
         //
@@ -66,7 +91,12 @@ namespace SocialNetWorkingSearchEngine.Controllers
  
         public ActionResult Edit(System.Guid id)
         {
-             return View(tagRepository.GetById(id));
+            if (Usuario != null && Usuario.IsAdmin)
+            {
+                return View(tagRepository.GetById(id));   
+            }
+
+            return RedirectToAction("LogOn", "Account");
         }
 
         //
@@ -75,13 +105,20 @@ namespace SocialNetWorkingSearchEngine.Controllers
         [HttpPost]
         public ActionResult Edit(Tag tag)
         {
-            if (ModelState.IsValid) {
-				tagRepository.SaveOrUpdate(tag);
-                
-                return RedirectToAction("Index");
-            } else {
-				return View();
-			}
+            if (Usuario != null && Usuario.IsAdmin)
+            {
+                if (ModelState.IsValid)
+                {
+                    tagRepository.SaveOrUpdate(tag);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View();
+                }                
+            }
+
+            return RedirectToAction("LogOn", "Account");
         }
 
         //
@@ -89,7 +126,12 @@ namespace SocialNetWorkingSearchEngine.Controllers
  
         public ActionResult Delete(System.Guid id)
         {
-            return View(tagRepository.GetById(id));
+            if (Usuario != null && Usuario.IsAdmin)
+            {
+                return View(tagRepository.GetById(id));    
+            }
+
+            return RedirectToAction("LogOn", "Account");
         }
 
         //
@@ -98,9 +140,13 @@ namespace SocialNetWorkingSearchEngine.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(System.Guid id)
         {
-            tagRepository.Delete(tagRepository.GetById(id));
+            if (Usuario != null && Usuario.IsAdmin)
+            {
+                tagRepository.Delete(tagRepository.GetById(id));
+                return RedirectToAction("Index");                
+            }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("LogOn", "Account");
         }
     }
 }

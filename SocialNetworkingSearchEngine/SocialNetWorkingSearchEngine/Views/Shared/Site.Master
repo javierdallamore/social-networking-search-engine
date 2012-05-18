@@ -3,16 +3,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+    <title>
+        <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
+    </title>
     <link href="<%: Url.Content("~/Content/favicon.ico") %>" rel="shortcut icon" type="image/x-icon" />
-    <%--<link href="../../Content/Site.css" rel="stylesheet" type="text/css" />--%>
     <link href="<%: Url.Content("~/Content/global.css") %>" rel="stylesheet" type="text/css" />
     <link href="<%: Url.Content("~/Content/search.css") %>" rel="stylesheet" type="text/css" />
     <link href="<%: Url.Content("~/Content/tables.css") %>" rel="stylesheet" type="text/css" />
-    <link href="<%: Url.Content("~/Content/jquery.ui.stars.css") %>" rel="stylesheet" type="text/css" />
-    <link href="<%: Url.Content("~/Content/jquery-ui-1.8.16.custom.css") %>" rel="stylesheet" type="text/css"/>
-    <link href="<%: Url.Content("~/Content/jquery.taghandler.css") %>" rel="stylesheet" type="text/css" />
-    
+    <link href="<%: Url.Content("~/Content/jquery.ui.stars.css") %>" rel="stylesheet"
+        type="text/css" />
+    <link href="<%: Url.Content("~/Content/jquery-ui-1.8.16.custom.css") %>" rel="stylesheet"
+        type="text/css" />
+    <link href="<%: Url.Content("~/Content/jquery.taghandler.css") %>" rel="stylesheet"
+        type="text/css" />
     <script type="text/javascript" src="<%: Url.Content("~/Scripts/jquery-1.7.1.min.js") %>"></script>
     <script type="text/javascript" src="<%: Url.Content("~/Scripts/underscore-min.js") %>"></script>
     <script type="text/javascript" src="<%: Url.Content("~/Scripts/jquery-ui-1.8.16.custom.min.js") %>"></script>
@@ -20,16 +23,26 @@
     <script type="text/javascript" src="<%: Url.Content("~/Scripts/jquery.ui.stars.min.js") %>"></script>
     <asp:ContentPlaceHolder ID="headerContent" runat="server" />
 </head>
-
 <body>
     <div class="page">
         <div id="header">
             <%--<h1>Social Networking Search Engine</h1>--%>
         </div>
-
         <div id="main">
+            <div id="menuh">
+                <ul>                                        
+                    <li><a href="<%: Url.Action("Logon", "Account") %>">Ingresar</a></li>   
+                    <li><a href="<%: Url.Action("Index", "Home") %>" id="primero">Inicio</a></li>
+                    <li><a href="<%: Url.Action("Index", "PostManager") %>">Post Manager</a></li>
+                    <li><a href="<%: Url.Action("Index", "Words") %>">Sentimientos</a></li>
+                    <li><a href="<%: Url.Action("Index", "QueryDefs") %>">Consultas</a></li>
+                    <li><a href="<%: Url.Action("Index", "Tags") %>">Etiquetas</a></li>                    
+                    <li><a href="<%: Url.Action("Index", "Users") %>">Usuarios</a></li>                                                                                                
+                    <li><a href="<%: Url.Action("About", "Home") %>">Acerca de nosotros</a></li>                     
+                    <li><a href="<%: Url.Action("LogOff", "Account") %>">Salir</a></li>    
+                </ul>
+            </div>
             <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-
             <div id="footer">
             </div>
         </div>

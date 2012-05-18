@@ -1,23 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Security.Principal;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
+using Core.Domain;
 using DataAccess.DAO;
 using EfficientlyLazy.Crypto;
 using SocialNetWorkingSearchEngine.Models;
 
 namespace SocialNetWorkingSearchEngine.Controllers
 {
-
     [HandleError]
     public class AccountController : Controller
     {
         private UserRepository _userRepository;
+        public User Usuario
+        {
+            get { return (User)Session["Usuario"]; }
+            set { Session["Usuario"] = value; }
+        }
 
         public AccountController()
         {
@@ -49,17 +49,20 @@ namespace SocialNetWorkingSearchEngine.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = _userRepository.GetByLoginPass(model.UserName, DataHashing.Compute(Algorithm.SHA1,  model.Password));
+                var user = _userRepository.GetByLoginPass(model.UserName, DataHashing.Compute(Algorithm.SHA1, model.Password));
+
                 if (user != null)
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                    Usuario = user;
+
                     if (!String.IsNullOrEmpty(returnUrl))
                     {
                         return Redirect(returnUrl);
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "PostManager");
                     }
                 }
                 else
@@ -79,6 +82,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
         public ActionResult LogOff()
         {
             FormsService.SignOut();
+            Usuario = null;
 
             return RedirectToAction("Index", "PostManager");
         }
@@ -157,6 +161,5 @@ namespace SocialNetWorkingSearchEngine.Controllers
         {
             return View();
         }
-
     }
 }

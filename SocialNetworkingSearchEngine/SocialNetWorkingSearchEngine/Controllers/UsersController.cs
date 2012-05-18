@@ -1,28 +1,32 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Core.Domain;
 using Core.RepositoryInterfaces;
-using DataAccess;
 using DataAccess.DAO;
 using EfficientlyLazy.Crypto;
 using SocialNetWorkingSearchEngine.Models;
 
 namespace SocialNetWorkingSearchEngine.Controllers
-{   
+{
     public class UsersController : Controller
     {
-		private readonly IUserRepository _userRepository;
+        private readonly IUserRepository _userRepository;
+
+        public User Usuario
+        {
+            get { return (User)Session["Usuario"]; }
+            set { Session["Usuario"] = value; }
+        }
 
         public UsersController()
         {
-			_userRepository = new UserRepository();
+            _userRepository = new UserRepository();
         }
 
         public UsersController(IUserRepository userRepository)
         {
-			_userRepository = userRepository;
+            _userRepository = userRepository;
         }
 
         //
@@ -30,10 +34,16 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
         public ViewResult Index(int page = 1, string like = "")
         {
-            IList<User> list = _userRepository.GetAll().Where(x => x.Name.StartsWith(like)).ToList();
-            var model = new CrudViewModel<User>(list, page, 2);
-            model.Filter = like;
-            return View(model);
+            if (Usuario != null && Usuario.IsAdmin)
+            {
+                IList<User> list = _userRepository.GetAll().Where(x => x.Name.StartsWith(like)).ToList();
+                var model = new CrudViewModel<User>(list, page, 2);
+                model.Filter = like;
+
+                return View(model);  
+            }
+
+            return View("LogOnUserControl");
         }
 
         //
@@ -41,7 +51,12 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
         public ViewResult Details(int id)
         {
-            return View(_userRepository.GetById(id));
+            if (Usuario != null && Usuario.IsAdmin)
+            {
+                return View(_userRepository.GetById(id)); 
+            }
+
+            return View("LogOnUserControl");
         }
 
         //
@@ -50,7 +65,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
         public ActionResult Create()
         {
             return View();
-        } 
+        }
 
         //
         // POST: /Users/Create
@@ -62,18 +77,21 @@ namespace SocialNetWorkingSearchEngine.Controllers
             {
                 user.HashedPass = DataHashing.Compute(Algorithm.SHA1, user.HashedPass);
                 _userRepository.Save(user);
+
                 return RedirectToAction("Index");
-            } else {
-				return View();
-			}
+            }
+            else
+            {
+                return View();
+            }
         }
-        
+
         //
         // GET: /Users/Edit/5
- 
+
         public ActionResult Edit(int id)
         {
-             return View(_userRepository.GetById(id));
+            return View(_userRepository.GetById(id));
         }
 
         //
@@ -82,18 +100,21 @@ namespace SocialNetWorkingSearchEngine.Controllers
         [HttpPost]
         public ActionResult Edit(User user)
         {
-            if (ModelState.IsValid) {
-				var entity = _userRepository.GetById(user.Id);
-				//_mapper.Map<User>(entity, user);
+            if (ModelState.IsValid)
+            {
+                var entity = _userRepository.GetById(user.Id);
+                //_mapper.Map<User>(entity, user);
                 return RedirectToAction("Index");
-            } else {
-				return View();
-			}
+            }
+            else
+            {
+                return View();
+            }
         }
 
         //
         // GET: /Users/Delete/5
- 
+
         public ActionResult Delete(int id)
         {
             return View(_userRepository.GetById(id));
@@ -106,6 +127,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             _userRepository.Delete(_userRepository.GetById(id));
+            
             return RedirectToAction("Index");
         }
     }

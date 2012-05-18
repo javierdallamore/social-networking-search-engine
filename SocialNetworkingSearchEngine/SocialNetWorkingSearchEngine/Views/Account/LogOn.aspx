@@ -6,14 +6,14 @@
 
 <asp:Content ID="loginContent" ContentPlaceHolderID="MainContent" runat="server">
     <p>
-        Ingrese su nombre de usuario y clave. <%: Html.ActionLink("Register", "Create", "Users") %> si aún no tiene cuenta.
+        Ingrese su nombre de usuario y clave. <%: Html.ActionLink("Registrese", "Create", "Users") %> si aún no tiene cuenta.
     </p>
 
     <% using (Html.BeginForm()) { %>
         <%: Html.ValidationSummary(true, "Datos incorrectos. Corriga los errores e intente nuevamente") %>
         <div>
             <fieldset>
-                <legend>Account Information</legend>
+                <legend>Información de la cuenta</legend>
                 
                 <div class="editor-label">
                     <%: Html.LabelFor(m => m.UserName) %>

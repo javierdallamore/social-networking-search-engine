@@ -620,3 +620,50 @@ ul#tabnav a:hover { /* settings for hover effect */
     background:#717171;
     border-bottom:1px solid #313030;
 }
+
+/* MENU   
+----------------------------------------------------------*/
+#menuh{
+    display: table;
+    font-family: helvetica,arial,sans-serif;
+    font-size: 1em;
+    margin: 0 auto;
+    padding: 1px 10px 10px;
+    width: 1024px;    
+}
+
+#menuh ul, li{
+    list-style-type: none;
+}
+
+#menuh ul{
+    margin: 0;
+    padding: 0;
+}
+
+#menuh li{
+    float: left;
+}
+
+#menuh a{
+    text-decoration: none;
+    color: #3366CC;
+    background: #F0F7FC;
+    display: block;
+    padding: 3px 10px;
+    text-align: center;
+    border: 1px solid #ACCFE8;
+    border-width: 1px 1px 1px 0;
+}
+
+#menuh a#primero{
+    border-left: 1px solid #ACCFE8;
+}
+
+#menuh a:hover{
+    background: #DBEBF6;
+}
+
+#about {
+    padding-left: 130px;
+}

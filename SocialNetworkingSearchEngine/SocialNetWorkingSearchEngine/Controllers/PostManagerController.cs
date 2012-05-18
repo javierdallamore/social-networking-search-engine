@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
 using BusinessRules;
-using Core.Domain;
 using SocialNetWorkingSearchEngine.Helpers;
 using SocialNetWorkingSearchEngine.Models;
 
@@ -25,7 +20,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
             var userAssignedPostNotProcessed =
                 servicesManager.GetNotProcessedUserAssignedPost(UserHelper.GetCurrent()).ToList();
-            var diferenceInPostToProcess = Params.MAX_POST_TO_PROCESS_PER_USER - userAssignedPostNotProcessed.Count();
+            var diferenceInPostToProcess = Params.MaxPostToProcessPerUser - userAssignedPostNotProcessed.Count();
             
             if (diferenceInPostToProcess > 0)
             {

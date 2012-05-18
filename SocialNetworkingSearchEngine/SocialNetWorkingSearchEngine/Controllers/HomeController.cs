@@ -10,23 +10,34 @@ using SocialNetWorkingSearchEngine.Models;
 namespace SocialNetWorkingSearchEngine.Controllers
 {
     [HandleError]
+    [Authorize]
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public User Usuario
         {
-            ViewData["Message"] = "Welcome to Social Networking Search Engine";
-
-            return View();
+            get { return (User)Session["Usuario"]; }
+            set { Session["Usuario"] = value; }
         }
 
-        public ActionResult Explore()
+        public ActionResult Index()
         {
-            return View();
+            if (Usuario != null && Usuario.IsAdmin)
+            {
+                ViewData["Message"] = "Bienvenido al Motor de Busqueda en Redes Sociales";
+                return View(); 
+            }
+
+            return RedirectToAction("LogOn", "Account");
         }
 
         public ActionResult About()
         {
-            return View();
+            if (Usuario != null && Usuario.IsAdmin)
+            {
+                return View(); 
+            }
+
+            return RedirectToAction("LogOn", "Account");
         }
 
         private List<string> negativeWords;
@@ -83,14 +94,10 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
         private bool ValidateFilters(string sentiment, string socialNetworking, string userName, Post item)
         {
-            var functionValueReturn = false;
+            bool functionValueReturn = (!string.IsNullOrEmpty(sentiment) && item.Sentiment.ToLower() == sentiment.ToLower()) ||
+                                       (!string.IsNullOrEmpty(socialNetworking) && item.SocialNetworkName.ToLower() == socialNetworking.ToLower()) ||
+                                       (!string.IsNullOrEmpty(userName) && item.UserName.ToLower() == userName.ToLower());
 
-            if ((!string.IsNullOrEmpty(sentiment) && item.Sentiment.ToLower() == sentiment.ToLower()) ||
-                        (!string.IsNullOrEmpty(socialNetworking) && item.SocialNetworkName.ToLower() == socialNetworking.ToLower()) ||
-                        (!string.IsNullOrEmpty(userName) && item.UserName.ToLower() == userName.ToLower()))
-            {
-                functionValueReturn = true;
-            }
             return functionValueReturn;
         }
 
