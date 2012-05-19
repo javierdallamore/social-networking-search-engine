@@ -9,6 +9,7 @@ using SocialNetWorkingSearchEngine.Models;
 
 namespace SocialNetWorkingSearchEngine.Controllers
 {
+    [Authorize]
     public class UsersController : Controller
     {
         private readonly IUserRepository _userRepository;
@@ -103,7 +104,8 @@ namespace SocialNetWorkingSearchEngine.Controllers
             if (ModelState.IsValid)
             {
                 var entity = _userRepository.GetById(user.Id);
-                //_mapper.Map<User>(entity, user);
+                entity.IsAdmin = user.IsAdmin;
+                entity.Name = user.Name;              
                 return RedirectToAction("Index");
             }
             else
