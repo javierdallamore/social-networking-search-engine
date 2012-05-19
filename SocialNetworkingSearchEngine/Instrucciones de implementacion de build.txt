@@ -1,0 +1,5 @@
+1) Ejecutar build.cmd. Genera en la carpeta build un rar con la publicacion. Este archivo se copia d:\dropbox\release.rar 
+2) Poner el archivo release.rar en la carpeta c:\dropbox del servidor
+3) Ejecutar en el servidor C:\Dropbox\powershell Scripts\UpdateSitioSocialeitor.cmd
+listooo
+por cualquier cosa va dejando las versiones anteriores en carpeta cuyo nombre es la FechaHora de implementacion
