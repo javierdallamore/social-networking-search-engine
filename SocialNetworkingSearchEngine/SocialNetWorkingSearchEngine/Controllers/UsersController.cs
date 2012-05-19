@@ -33,7 +33,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
         {
             if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
             IList<User> list = _userRepository.GetAll().Where(x => x.Name.StartsWith(like)).ToList();
-            var model = new CrudViewModel<User>(list, page, 2);
+            var model = new CrudViewModel<User>(list, page, 20);
             model.Filter = like;
 
             return View(model);
