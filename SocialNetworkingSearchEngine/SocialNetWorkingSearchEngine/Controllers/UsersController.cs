@@ -5,6 +5,7 @@ using Core.Domain;
 using Core.RepositoryInterfaces;
 using DataAccess.DAO;
 using EfficientlyLazy.Crypto;
+using SocialNetWorkingSearchEngine.Helpers;
 using SocialNetWorkingSearchEngine.Models;
 
 namespace SocialNetWorkingSearchEngine.Controllers
@@ -14,11 +15,6 @@ namespace SocialNetWorkingSearchEngine.Controllers
     {
         private readonly IUserRepository _userRepository;
 
-        public User Usuario
-        {
-            get { return (User)Session["Usuario"]; }
-            set { Session["Usuario"] = value; }
-        }
 
         public UsersController()
         {
@@ -35,16 +31,12 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
         public ViewResult Index(int page = 1, string like = "")
         {
-            if (Usuario != null && Usuario.IsAdmin)
-            {
-                IList<User> list = _userRepository.GetAll().Where(x => x.Name.StartsWith(like)).ToList();
-                var model = new CrudViewModel<User>(list, page, 2);
-                model.Filter = like;
+            if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
+            IList<User> list = _userRepository.GetAll().Where(x => x.Name.StartsWith(like)).ToList();
+            var model = new CrudViewModel<User>(list, page, 2);
+            model.Filter = like;
 
-                return View(model);  
-            }
-
-            return View("LogOnUserControl");
+            return View(model);
         }
 
         //
@@ -52,12 +44,8 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
         public ViewResult Details(int id)
         {
-            if (Usuario != null && Usuario.IsAdmin)
-            {
-                return View(_userRepository.GetById(id)); 
-            }
-
-            return View("LogOnUserControl");
+            if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
+            return View(_userRepository.GetById(id));
         }
 
         //
@@ -65,6 +53,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
         public ActionResult Create()
         {
+            if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
             return View();
         }
 
@@ -74,6 +63,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
         [HttpPost]
         public ActionResult Create(User user)
         {
+            if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
             if (ModelState.IsValid)
             {
                 user.HashedPass = DataHashing.Compute(Algorithm.SHA1, user.HashedPass);
@@ -92,6 +82,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
         public ActionResult Edit(int id)
         {
+            if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
             return View(_userRepository.GetById(id));
         }
 
@@ -101,6 +92,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
         [HttpPost]
         public ActionResult Edit(User user)
         {
+            if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
             if (ModelState.IsValid)
             {
                 var entity = _userRepository.GetById(user.Id);
@@ -128,6 +120,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
             _userRepository.Delete(_userRepository.GetById(id));
             
             return RedirectToAction("Index");

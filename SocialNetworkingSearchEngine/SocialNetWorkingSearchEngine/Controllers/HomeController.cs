@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web.Mvc;
 using BusinessRules;
 using Core.Domain;
+using SocialNetWorkingSearchEngine.Helpers;
 using SocialNetWorkingSearchEngine.Models;
 
 namespace SocialNetWorkingSearchEngine.Controllers
@@ -13,31 +14,18 @@ namespace SocialNetWorkingSearchEngine.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        public User Usuario
-        {
-            get { return (User)Session["Usuario"]; }
-            set { Session["Usuario"] = value; }
-        }
 
         public ActionResult Index()
         {
-            if (Usuario != null && Usuario.IsAdmin)
-            {
-                ViewData["Message"] = "Bienvenido al Motor de Busqueda en Redes Sociales";
-                return View(); 
-            }
-
-            return RedirectToAction("LogOn", "Account");
+            if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
+            ViewData["Message"] = "Bienvenido al Motor de Busqueda en Redes Sociales";
+            return View();
         }
 
         public ActionResult About()
         {
-            if (Usuario != null && Usuario.IsAdmin)
-            {
-                return View(); 
-            }
-
-            return RedirectToAction("LogOn", "Account");
+            if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
+            return View();
         }
 
         private List<string> negativeWords;

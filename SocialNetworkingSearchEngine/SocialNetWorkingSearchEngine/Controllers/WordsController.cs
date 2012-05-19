@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using Core.Domain;
 using Core.RepositoryInterfaces;
 using DataAccess.DAO;
+using SocialNetWorkingSearchEngine.Helpers;
 using SocialNetWorkingSearchEngine.Models;
 
 namespace SocialNetWorkingSearchEngine.Controllers
@@ -14,11 +15,6 @@ namespace SocialNetWorkingSearchEngine.Controllers
     {
         private readonly IWordRepository _wordRepository;
 
-        public User Usuario
-        {
-            get { return (User)Session["Usuario"]; }
-            set { Session["Usuario"] = value; }
-        }
 
         public WordsController()
         {
@@ -35,17 +31,13 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
         public ViewResult Index(int page = 1, string like = "")
         {
-            if (Usuario != null && Usuario.IsAdmin)
-            {
-                IList<Word> list = _wordRepository.GetAll().Where(x => x.Name.StartsWith(like)).ToList();
-                var model = new CrudViewModel<Word>(list, page, 20);
+            if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
+            IList<Word> list = _wordRepository.GetAll().Where(x => x.Name.StartsWith(like)).ToList();
+            var model = new CrudViewModel<Word>(list, page, 20);
 
-                model.Filter = like;
+            model.Filter = like;
 
-                return View(model); 
-            }
-
-            return View("LogOnUserControl");
+            return View(model);
         }
 
         //
@@ -53,12 +45,8 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
         public ViewResult Details(Guid id)
         {
-            if (Usuario != null && Usuario.IsAdmin)
-            {
-                return View(_wordRepository.GetById(id)); 
-            }
-
-            return View("LogOnUserControl");
+            if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
+            return View(_wordRepository.GetById(id));
         }
 
         //
@@ -66,12 +54,8 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
         public ActionResult Create()
         {
-            if (Usuario != null && Usuario.IsAdmin)
-            {
-                return View();
-            }
-
-            return RedirectToAction("LogOn", "Account");
+            if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
+            return View();
         }
 
         //
@@ -80,18 +64,14 @@ namespace SocialNetWorkingSearchEngine.Controllers
         [HttpPost]
         public ActionResult Create(Word word)
         {
-            if (Usuario != null && Usuario.IsAdmin)
+            if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    _wordRepository.Save(word);
-                    return RedirectToAction("Index");
-                }
-
-                return View();
+                _wordRepository.Save(word);
+                return RedirectToAction("Index");
             }
 
-            return RedirectToAction("LogOn", "Account");
+            return View();
         }
 
         //
@@ -99,12 +79,8 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
         public ActionResult Edit(Guid id)
         {
-            if (Usuario != null && Usuario.IsAdmin)
-            {
-                return View(_wordRepository.GetById(id));
-            }
-
-            return RedirectToAction("LogOn", "Account");
+            if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
+            return View(_wordRepository.GetById(id));
         }
 
         //
@@ -113,18 +89,14 @@ namespace SocialNetWorkingSearchEngine.Controllers
         [HttpPost]
         public ActionResult Edit(Word word)
         {
-            if (Usuario != null && Usuario.IsAdmin)
+            if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    _wordRepository.Save(word);
-                    return RedirectToAction("Index");
-                }
-
-                return View(); 
+                _wordRepository.Save(word);
+                return RedirectToAction("Index");
             }
 
-            return RedirectToAction("LogOn", "Account");
+            return View();
         }
 
         //
@@ -132,12 +104,8 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
         public ActionResult Delete(Guid id)
         {
-            if (Usuario != null && Usuario.IsAdmin)
-            {
-                return View(_wordRepository.GetById(id)); 
-            }
-
-            return RedirectToAction("LogOn", "Account");
+            if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
+            return View(_wordRepository.GetById(id));
         }
 
         //
@@ -146,14 +114,11 @@ namespace SocialNetWorkingSearchEngine.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            if (Usuario != null && Usuario.IsAdmin)
-            {
-                _wordRepository.Delete(_wordRepository.GetById(id));
+            if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
+            _wordRepository.Delete(_wordRepository.GetById(id));
 
-                return RedirectToAction("Index"); 
-            }
-
-            return RedirectToAction("LogOn", "Account");
+            return RedirectToAction("Index");
+            
         }
     }
 }

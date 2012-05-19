@@ -2,6 +2,7 @@ using System.Web.Mvc;
 using Core.Domain;
 using Core.RepositoryInterfaces;
 using DataAccess.DAO;
+using SocialNetWorkingSearchEngine.Helpers;
 
 namespace SocialNetWorkingSearchEngine.Controllers
 {
@@ -9,11 +10,6 @@ namespace SocialNetWorkingSearchEngine.Controllers
     public class TagsController : Controller
     {
 		private readonly ITagRepository tagRepository;
-        public User Usuario
-        {
-            get { return (User)Session["Usuario"]; }
-            set { Session["Usuario"] = value; }
-        }
 
         public TagsController()
         {
@@ -30,12 +26,8 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
         public ViewResult Index()
         {
-            if (Usuario != null && Usuario.IsAdmin)
-            {
-                return View(tagRepository.GetAll()); 
-            }
-
-            return View("LogOnUserControl");
+            if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
+            return View(tagRepository.GetAll());
         }
 
         //
@@ -43,12 +35,8 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
         public ViewResult Details(System.Guid id)
         {
-            if (Usuario != null && Usuario.IsAdmin)
-            {
-                return View(tagRepository.GetById(id)); 
-            }
-
-            return View("LogOnUserControl");
+            if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
+            return View(tagRepository.GetById(id));
         }
 
         //
@@ -56,12 +44,8 @@ namespace SocialNetWorkingSearchEngine.Controllers
 
         public ActionResult Create()
         {
-            if (Usuario != null && Usuario.IsAdmin)
-            {
-                return View();                
-            }
-
-            return RedirectToAction("LogOn", "Account");
+            if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
+            return View();
         } 
 
         //
@@ -70,20 +54,16 @@ namespace SocialNetWorkingSearchEngine.Controllers
         [HttpPost]
         public ActionResult Create(Tag tag)
         {
-            if (Usuario != null && Usuario.IsAdmin)
+            if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    tagRepository.Save(tag);
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    return View();
-                }
+                tagRepository.Save(tag);
+                return RedirectToAction("Index");
             }
-
-            return RedirectToAction("LogOn", "Account");
+            else
+            {
+                return View();
+            }
         }
         
         //
@@ -91,12 +71,8 @@ namespace SocialNetWorkingSearchEngine.Controllers
  
         public ActionResult Edit(System.Guid id)
         {
-            if (Usuario != null && Usuario.IsAdmin)
-            {
-                return View(tagRepository.GetById(id));   
-            }
-
-            return RedirectToAction("LogOn", "Account");
+            if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
+            return View(tagRepository.GetById(id));
         }
 
         //
@@ -105,20 +81,16 @@ namespace SocialNetWorkingSearchEngine.Controllers
         [HttpPost]
         public ActionResult Edit(Tag tag)
         {
-            if (Usuario != null && Usuario.IsAdmin)
+            if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    tagRepository.SaveOrUpdate(tag);
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    return View();
-                }                
+                tagRepository.SaveOrUpdate(tag);
+                return RedirectToAction("Index");
             }
-
-            return RedirectToAction("LogOn", "Account");
+            else
+            {
+                return View();
+            }
         }
 
         //
@@ -126,12 +98,8 @@ namespace SocialNetWorkingSearchEngine.Controllers
  
         public ActionResult Delete(System.Guid id)
         {
-            if (Usuario != null && Usuario.IsAdmin)
-            {
-                return View(tagRepository.GetById(id));    
-            }
-
-            return RedirectToAction("LogOn", "Account");
+            if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
+            return View(tagRepository.GetById(id));
         }
 
         //
@@ -140,13 +108,9 @@ namespace SocialNetWorkingSearchEngine.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(System.Guid id)
         {
-            if (Usuario != null && Usuario.IsAdmin)
-            {
-                tagRepository.Delete(tagRepository.GetById(id));
-                return RedirectToAction("Index");                
-            }
-
-            return RedirectToAction("LogOn", "Account");
+            if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
+            tagRepository.Delete(tagRepository.GetById(id));
+            return RedirectToAction("Index");
         }
     }
 }

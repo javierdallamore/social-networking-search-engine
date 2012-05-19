@@ -193,6 +193,7 @@
     <Content Include="Views\QueryDefs\Details.aspx" />
     <Content Include="Views\QueryDefs\Edit.aspx" />
     <Content Include="Views\QueryDefs\Index.aspx" />
+    <Content Include="Views\Shared\AccesoDenegdo.aspx" />
     <Content Include="Views\Shared\Error.aspx" />
     <Content Include="Views\Shared\LogOnUserControl.ascx" />
     <Content Include="Views\Shared\Site.Master" />
