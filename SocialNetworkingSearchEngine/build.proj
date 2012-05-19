@@ -32,9 +32,7 @@
 	</Target>
 	
 	<Target Name="CopyBuild">
-	<!--
         <Copy SourceFiles="build\$(ProjectName)_$(Configuration).rar" DestinationFiles="$(CopyRarToFolder)\release.rar" />
-	-->
 	</Target>
 
 </Project>
