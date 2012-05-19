@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+        <SolutionName>SocialNetworkingSearchEngine</SolutionName>
+        <SolutionFile>$(SolutionName).sln</SolutionFile>
+        <ProjectName>SocialNetWorkingSearchEngine</ProjectName>
+        <ProjectFile>$(ProjectName)\$(ProjectName).csproj</ProjectFile>
+		<CopyRarToFolder>d:\dropbox</CopyRarToFolder>
+	</PropertyGroup>
+
+    <Target Name="Build" DependsOnTargets="BuildPackage;CopyOutput;CopyBuild" />
+
+    <Target Name="BuildPackage">
+        <MSBuild Projects="$(SolutionFile)" ContinueOnError="false" Targets="Rebuild" Properties="Configuration=$(Configuration)" />
+        <MSBuild Projects="$(ProjectFile)" ContinueOnError="false" Targets="Package" Properties="Configuration=$(Configuration)" />
+	</Target>
+
+    <Target Name="CopyOutput">
+        <ItemGroup>
+            <PackagedFiles Include="$(ProjectName)\obj\$(Configuration)\Package\PackageTmp\**\*.*"/>
+			<dllMotores Include="$(SolutionDir)TwitterSearchEngine\bin\Debug\TwitterSearchEngine.dll;$(SolutionDir)FacebookSearchEngine\bin\Debug\FacebookSearchEngine.dll;$(SolutionDir)lib\FacebookAPI.dll;$(SolutionDir)GooglePlusSearchEngine\bin\Debug\GooglePlusSearchEngine.dll" />
+			<configFiles Include="configurations\production\**\*.*" />
+		</ItemGroup>
+
+        <Copy SourceFiles="@(PackagedFiles)" DestinationFiles="@(PackagedFiles->'build\$(ProjectName)\$(Configuration)\%(RecursiveDir)%(Filename)%(Extension)')"/>
+
+        <Copy SourceFiles="@(dllMotores)" DestinationFiles="@(dllMotores->'build\$(ProjectName)\$(Configuration)\bin\%(Filename)%(Extension)')" />
+        <Copy SourceFiles="@(configFiles)" DestinationFiles="@(configFiles->'build\$(ProjectName)\$(Configuration)\%(RecursiveDir)%(Filename)%(Extension)')" />
+
+		<exec Command="rar a -r -y -ierr ..\..\$(ProjectName)_$(Configuration).rar " WorkingDirectory="build\$(ProjectName)\$(Configuration)\" />
+	</Target>
+	
+	<Target Name="CopyBuild">
+	<!--
+        <Copy SourceFiles="build\$(ProjectName)_$(Configuration).rar" DestinationFiles="$(CopyRarToFolder)\release.rar" />
+	-->
+	</Target>
+
+</Project>

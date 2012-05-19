@@ -10,3 +10,4 @@ Web.config
 *.user
 *.dotCover
 *.orig
+build

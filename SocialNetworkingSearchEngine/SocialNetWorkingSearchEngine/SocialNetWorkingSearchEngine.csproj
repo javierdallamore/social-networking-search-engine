@@ -276,10 +276,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>copy $(SolutionDir)SearchEngineMock\bin\Debug\SearchEngineMock.dll $(TargetDir)
-copy $(SolutionDir)TwitterSearchEngine\bin\Debug\TwitterSearchEngine.dll $(TargetDir)
-copy $(SolutionDir)FacebookSearchEngine\bin\Debug\FacebookSearchEngine.dll $(TargetDir)
-copy $(SolutionDir)lib\FacebookAPI.dll $(TargetDir)
-copy $(SolutionDir)GooglePlusSearchEngine\bin\Debug\GooglePlusSearchEngine.dll $(TargetDir)</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>
