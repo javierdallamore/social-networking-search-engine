@@ -181,7 +181,7 @@
                     $("#button_save_" + item_id).attr("src","<%:Url.Content("~/Content/loading36.gif") %>");
 
                     $.ajax({
-                        url: 'UpdatePost',
+                        url: '<%:Url.Action("UpdatePost") %>',
                         type: 'POST',
                         dataType: 'json',
                         traditional: 'true',
