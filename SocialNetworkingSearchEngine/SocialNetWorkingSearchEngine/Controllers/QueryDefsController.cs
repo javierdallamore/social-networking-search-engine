@@ -105,7 +105,13 @@ namespace SocialNetWorkingSearchEngine.Controllers
         public ActionResult Delete(int id)
         {
             if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
-            return View(_querydefRepository.GetById(id));
+            var queryDef = _querydefRepository.GetById(id);
+            if (queryDef.Posts.Any())
+            {
+                ModelState.AddModelError("ConPosts","No se puede eliminar el query porque tiene posts Cargados");
+                return View("Index");
+            }
+            return View(queryDef);
         }
 
         //
