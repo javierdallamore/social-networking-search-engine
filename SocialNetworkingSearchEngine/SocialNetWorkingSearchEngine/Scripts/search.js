@@ -1,12 +1,16 @@
 var tagArrays = new Array();
 
+function getPath(relativePath) {
+    return basepath + relativePath;
+}
+
 $(document).ready(function () {
     $.socialNetworkingItemNamespace = {};
     $.socialNetworkingItemNamespace.searchResultsItemShowed = new Array();
 
     //Obtengo los tags
     
-    $.getJSON("Home/GetAllTags", {}, function (json) {
+    $.getJSON(basepath + "Home/GetAllTags", {}, function (json) {
         _.each(json, function (tag) {
             tagArrays.push(tag.Name);
         });
@@ -47,8 +51,8 @@ function onSendEmailItemButtonClick(itemId, urlPost, content, button) {
 
     var urlIconNetwork = window.location.origin + "/" + $("#imgIconFrom" + itemId).attr("src").substr(3);
     var urlIconSentiment = window.location.origin + "/" + $("#imgIconSentiment" + itemId).attr("src").substr(3);
-    
-    $.post("Home/SendPostToMail", { to: destinataries, subject: 'Social networking', content: item.Content, urlPost: item.UrlPost,
+
+    $.post(basepath + "Home/SendPostToMail", { to: destinataries, subject: 'Social networking', content: item.Content, urlPost: item.UrlPost,
         createdAt: item.CreatedAt, usrName: item.UserName, urlUser: item.UrlProfile, urlImgNetwork: urlIconNetwork,
         urlImgProfile: item.ProfileImage, urlImgSentiment: urlIconSentiment
     })
@@ -87,7 +91,7 @@ function onSaveItemButtonClick(itemId, button) {
         item.CurrentTags = _.reduce(itemAssignedTags, function (values, acc) { return acc + "," + values; });
     }
 
-    $.post('Home/SavePost', item).success(function (result) {
+    $.post(basepath + 'Home/SavePost', item).success(function (result) {
         success("Post guardado correctamente", button);
     }).error(function (result) {
         error("Error al guardar post", button);
@@ -192,7 +196,7 @@ function search(parameters, searchEngines, sentiment, socialNetwork, user) {
     }
     var searchEnginesAsString = _.reduce(searchEngines, function (memo, currentItem) { return memo + ',' + currentItem; });
 
-    $.getJSON("Home/SearchResults", { parameters: parameters, searchEngines: searchEnginesAsString, sentiment: sentiment, socialNetworking: socialNetwork, userName: user }, function (json) {
+    $.getJSON(basepath + "Home/SearchResults", { parameters: parameters, searchEngines: searchEnginesAsString, sentiment: sentiment, socialNetworking: socialNetwork, userName: user }, function (json) {
 
         var result_listTag = $("#search_result_list");
         result_listTag.html("");
@@ -222,7 +226,7 @@ function search(parameters, searchEngines, sentiment, socialNetwork, user) {
             item_result += "</select>";
             item_result += "</div>";
             item_result += "<div style=\"float: right\">"; //Save
-            item_result += "<input id=\"btnSave" + socialNetworkingItems.Id + "\" type=\"image\" src=\"Content/Save-icon.png\" style=\"vertical-align: middle; height: 20px;\"/>";
+            item_result += "<input id=\"btnSave" + socialNetworkingItems.Id + "\" type=\"image\" class='dynamicSrc' src=\"Content/Save-icon.png\" style=\"vertical-align: middle; height: 20px;\"/>";
             item_result += "</div>";
             item_result += "</div>";
 
@@ -247,7 +251,7 @@ function search(parameters, searchEngines, sentiment, socialNetwork, user) {
             item_result += "<div id=\"divSendTo" + socialNetworkingItems.Id + "\" style=\"display: none;\" >";
             item_result += "<p style=\"margin: 10px 0px 0px 0px; line-height: 0;\"> Para: </p>";
             item_result += "<input id=\"txtDestinatary" + socialNetworkingItems.Id + "\" type=\"text\" style=\"height: 12px; vertical-align: middle; font-size: 12px\"/>";
-            item_result += "<input id=\"btnSendEmail" + socialNetworkingItems.Id + "\" type=\"image\" src=\"Content/48x48-send_e-mail.png\" style=\"vertical-align: middle; height: 35px;\"/>";
+            item_result += "<input id=\"btnSendEmail" + socialNetworkingItems.Id + "\" type=\"image\" class='dynamicSrc' src=\"Content/48x48-send_e-mail.png\" style=\"vertical-align: middle; height: 35px;\"/>";
             item_result += "</div>";
             item_result += "</div>"; 	//result item
 
@@ -331,5 +335,7 @@ function search(parameters, searchEngines, sentiment, socialNetwork, user) {
             });
         });
         $("#imgLoading").hide();
+
+        $(".dynamicSrc,#imgIconFrom,#imgIconSentiment").each(function (e) { e.src = getPath(e.src); });
     });
 };

@@ -32,11 +32,13 @@
     <%: Html.ValidationMessageFor(model => model.Enabled) %>
 </div>
 
-<div class="editor-label">
+    <%: Html.HiddenFor(model => model.SearchEnginesNames) %>
+
+<%--<div class="editor-label">
     <%: Html.LabelFor(model => model.SearchEnginesNames) %>
 </div>
 <div class="editor-field">
     <%: Html.EditorFor(model => model.SearchEnginesNames) %>
     <%: Html.ValidationMessageFor(model => model.SearchEnginesNames) %>
 </div>
-
+--%>

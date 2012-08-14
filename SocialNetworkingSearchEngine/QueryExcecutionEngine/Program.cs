@@ -6,6 +6,8 @@ using Topshelf;
 
 namespace QueryExcecutionEngine
 {
+    using System.Configuration;
+
     class Program
     {
         static void Main(string[] args)
@@ -14,7 +16,7 @@ namespace QueryExcecutionEngine
             {
                 x.Service<IExcecutionEngineService>(s =>
                 {
-                    s.SetServiceName("socialNetworking.search.Worker");
+                    s.SetServiceName(ConfigurationManager.AppSettings["serviceName"]);
                     s.ConstructUsing(builder =>
                     {
                         var service = new DBQueryExecutionImpl();
@@ -30,8 +32,8 @@ namespace QueryExcecutionEngine
                 x.RunAsLocalSystem();
 
                 //x.SetDescription(Configuration.ServiceDescription);
-                x.SetDisplayName("Social Networking Searche Engine");
-                x.SetServiceName("socialNetworking.search.Worker");
+                x.SetDisplayName(ConfigurationManager.AppSettings["serviceName"]);
+                x.SetServiceName(ConfigurationManager.AppSettings["serviceName"]);
             });
 
             host.Run();

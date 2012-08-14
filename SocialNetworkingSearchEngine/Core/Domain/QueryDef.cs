@@ -6,6 +6,11 @@ namespace Core.Domain
 {
     public class QueryDef
     {
+        public QueryDef()
+        {
+            this.Query = "TwitterSearchEngine;FacebookSearchEngine;GooglePlusSearchEngine";
+        }
+
         public virtual int Id { get; set; }
         public virtual string Query { get; set; }
         public virtual int MinQueueLength { get; set; }

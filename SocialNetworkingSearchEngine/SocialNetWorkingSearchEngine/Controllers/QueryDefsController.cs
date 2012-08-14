@@ -63,6 +63,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
         public ActionResult Create(QueryDef querydef)
         {
             if (!UserHelper.GetCurrent().IsAdmin) return View("AccesoDenegdo");
+            querydef.SearchEnginesNames = "TwitterSearchEngine;FacebookSearchEngine;GooglePlusSearchEngine";
             if (ModelState.IsValid)
             {
                 _querydefRepository.Save(querydef);
@@ -90,7 +91,7 @@ namespace SocialNetWorkingSearchEngine.Controllers
             if (ModelState.IsValid)
             {
                 var entity = _querydefRepository.GetById(querydef.Id);
-                //_mapper.Map<QueryDef>(entity, querydef);
+                querydef.SearchEnginesNames = "TwitterSearchEngine;FacebookSearchEngine;GooglePlusSearchEngine";
                 return RedirectToAction("Index");
             }
             else
