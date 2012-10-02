@@ -38,6 +38,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SearchEnginesImplementatios
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHTests", "NHTests\NHTests.csproj", "{9519E491-988E-4421-AA67-10557C447367}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMonitor", "SocialMonitor\SocialMonitor.csproj", "{B1DFD5BE-4362-42E0-B3F1-0BCE39C18656}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = SocialNetworkingSearchEngine.vsmdi
@@ -181,6 +183,16 @@ Global
 		{9519E491-988E-4421-AA67-10557C447367}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{9519E491-988E-4421-AA67-10557C447367}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9519E491-988E-4421-AA67-10557C447367}.Release|x86.ActiveCfg = Release|Any CPU
+		{B1DFD5BE-4362-42E0-B3F1-0BCE39C18656}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1DFD5BE-4362-42E0-B3F1-0BCE39C18656}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1DFD5BE-4362-42E0-B3F1-0BCE39C18656}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B1DFD5BE-4362-42E0-B3F1-0BCE39C18656}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B1DFD5BE-4362-42E0-B3F1-0BCE39C18656}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B1DFD5BE-4362-42E0-B3F1-0BCE39C18656}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1DFD5BE-4362-42E0-B3F1-0BCE39C18656}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1DFD5BE-4362-42E0-B3F1-0BCE39C18656}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B1DFD5BE-4362-42E0-B3F1-0BCE39C18656}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B1DFD5BE-4362-42E0-B3F1-0BCE39C18656}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

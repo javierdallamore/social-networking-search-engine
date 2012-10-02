@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<style>
+    #api a {
+        display: block;
+    }
+</style>
+<h2>@ViewBag.Message</h2>
+<p>
+    To learn more about ASP.NET MVC visit <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
+</p>
+<div id="api">
+@Html.ActionLink("ProcesarPostsModelSample that, Assign tag Insulto, Assign new Tag, assing sentiment Positive to Posts 1,2,3", "ProcesarPostsModelSample1")
+@Html.ActionLink("GetTags", "GetTags")
+@Html.ActionLink("ProcesarPostsReturnedJsonOnFailure", "ProcesarPostsReturnedJsonOnFailure")
+@Html.ActionLink("ProcesarPostsReturnedJsonOnSuccess", "ProcesarPostsReturnedJsonOnSuccess")
+@Html.ActionLink("GetPostsModelSample1", "GetPostsModelSample1")
+</div>
